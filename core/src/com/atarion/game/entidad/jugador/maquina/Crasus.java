@@ -7,13 +7,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import java.util.HashSet;
+import java.util.Iterator;
 
 public class Crasus extends Maquina
 {
     private boolean colision;
     private boolean colisionbomba;
     private float temporizador;
-    private Bomba bomba;
+    private HashSet<Bomba> bombas;
     
     public Crasus(Batch genesis) 
     {
@@ -22,6 +24,7 @@ public class Crasus extends Maquina
         this.textura = new Texture(Gdx.files.internal("crasus.png"));
         this.colision = false;
         this.temporizador = 0f;
+        bombas = new HashSet<Bomba>();
     }
 
     @Override
@@ -29,19 +32,31 @@ public class Crasus extends Maquina
     {
         super.jugar(camara);
         
-        temporizador += Gdx.graphics.getDeltaTime();
-        if(temporizador >= 1.0f)
+        if(!bombas.isEmpty())
         {
-            if(bomba != null)
+            temporizador += Gdx.graphics.getDeltaTime();
+            if(temporizador >= 1.0f)
             {
-                bomba.cuentaAtras();
+                Iterator<Bomba> i = bombas.iterator();
+                while(i.hasNext())
+                {
+                    i.next().cuentaAtras();
+                }
+                
+                temporizador = 0f;
+            }
             
+            Iterator<Bomba> j = bombas.iterator();
+            while(j.hasNext())
+            {
+                Bomba bomba = j.next();
+                
                 if(bomba.overlaps(enemigo) && bomba.getDureza() > 0)
                 {
                     if(!this.colisionbomba)
                     {
                         enemigo.setVida(enemigo.getVida() - bomba.getDureza());
-                        Gdx.app.log("INFO", "PARA BAILAR ESTO ES UNA BOOMBA.");
+                        Gdx.app.log("INFO", "La bomba te hace 50 puntos de daño. Te quedan " + enemigo.getVida() + " vidas.");
                         this.colisionbomba = true;
                     }
                 }
@@ -50,8 +65,6 @@ public class Crasus extends Maquina
                     this.colisionbomba = false;
                 }
             }
-            
-            temporizador = 0f;
         }
     }
     @Override
@@ -59,9 +72,13 @@ public class Crasus extends Maquina
     {
         super.actualizarEstado();
         
-        if(bomba != null)
+        if(!bombas.isEmpty())
         {
-            bomba.actualizarEstado();
+            Iterator<Bomba> i = bombas.iterator();
+            while(i.hasNext())
+            {
+                i.next().actualizarEstado();
+            }
         }
     }
     
@@ -133,9 +150,6 @@ public class Crasus extends Maquina
             this.vida -= 10;
             Gdx.app.log("INFO: ", "a la bola le quedan " + this.vida + " vidas.");
             this.colision = true;
-            
-            this.x = 800 / 2 - 64 / 2;
-            this.y = 300;
         }
     }
     
@@ -144,25 +158,25 @@ public class Crasus extends Maquina
     {   
         if(this.y < 0) 
         {
-            this.y = 0;
+            this.y = 800 - 150;
             comprobarColision();
             decision = 5;
         } 
         else if(this.y > 800 - 100)
         {
-            this.y = 800 - 100;
+            this.y = 0 + 150;
             comprobarColision();
             decision = 7;
         }
         else if(this.x < 0)
         {
-            this.x = 0;
+            this.x = 1000 - 150;
             comprobarColision();
             decision = 8;
         }
         else if(this.x > 1000 - 100) 
         {
-            this.x = 1000 - 100;
+            this.x = 0 + 150;
             comprobarColision();
             decision = 6;
         }
@@ -178,14 +192,44 @@ public class Crasus extends Maquina
     public void activarEspecial() 
     {
         this.textura = new Texture(Gdx.files.internal("control.png"));
-        ((Humano)this.enemigo).setInvertido(true);
-        bomba = new Bomba(genesis,enemigo.getX(),enemigo.getY());
+        
+        //A veces te amaga y no te invierte los controles 
+        int probabilidad = (int) (Math.random() * 4 + 1);
+        if(probabilidad > 1)
+        {
+            ((Humano)this.enemigo).setInvertido(true);
+        }
+        
+        int posiciones = (int) (Math.random() * 4 + 1);
+        switch(posiciones)
+        {
+            case 1:
+                bombas.add(new Bomba(genesis,0 + 200,800 - 200));
+                bombas.add(new Bomba(genesis,0 + 200,0 + 200));
+                bombas.add(new Bomba(genesis,1000 - 200,800 - 200));
+            break;
+            case 2:
+                bombas.add(new Bomba(genesis,0 + 200,800 - 200));
+                bombas.add(new Bomba(genesis,1000 - 200,0 + 200));
+                bombas.add(new Bomba(genesis,1000 - 200,800 - 200));
+            break;
+            case 3:
+                bombas.add(new Bomba(genesis,0 + 200,800 - 200));
+                bombas.add(new Bomba(genesis,0 + 200,0 + 200));
+                bombas.add(new Bomba(genesis,1000 - 200,0 + 200));
+            break;
+            case 4:
+                bombas.add(new Bomba(genesis,1000 - 200,0 + 200));
+                bombas.add(new Bomba(genesis,0 + 200,0 + 200));
+                bombas.add(new Bomba(genesis,1000 - 200,800 - 200));
+            break;
+        }
     }
     @Override
     public void desactivarEspecial() 
     {
         this.textura = new Texture(Gdx.files.internal("crasus.png"));
         ((Humano)this.enemigo).setInvertido(false);
-        bomba = null;
+        bombas.clear();
     } 
 }

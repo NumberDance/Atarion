@@ -43,6 +43,8 @@ public class Atarion extends Game
                 jugando = false;
                 seleccionado = false;
                 tema.stop();
+                tema = Gdx.audio.newMusic(Gdx.files.internal("victory.mp3"));
+                tema.play();
             }
             else if(escena.getEstado() == 1)
             {
@@ -83,7 +85,7 @@ public class Atarion extends Game
                     batalla = 'A';
                     this.setScreen(new AnalisisCrasus());
                     seleccionado = true;
-                    tema = Gdx.audio.newMusic(Gdx.files.internal("commodus.mp3"));
+                    tema = Gdx.audio.newMusic(Gdx.files.internal("zombies.mp3"));
                     tema.setLooping(true);
                     tema.play();
                 }
@@ -101,7 +103,7 @@ public class Atarion extends Game
                     batalla = 'C';
                     this.setScreen(new AnalisisClaudius());
                     seleccionado = true;
-                    tema = Gdx.audio.newMusic(Gdx.files.internal("commodus.mp3"));
+                    tema = Gdx.audio.newMusic(Gdx.files.internal("finale.mp3"));
                     tema.setLooping(true);
                     tema.play();
                 }
@@ -113,6 +115,5 @@ public class Atarion extends Game
     public void dispose()
     {
         super.dispose();
-        escena.dispose();
     }
 }

@@ -37,8 +37,11 @@ public class Bomba extends Objeto
                 this.textura = new Texture(Gdx.files.internal("bomb1.png"));
             break;
             case 0:
-                this.width += 200;
-                this.height += 200;
+                this.x -= 200;
+                this.y -= 200;
+                
+                this.width += 300;
+                this.height += 300;
                 
                 this.dureza = 100;        
                 this.textura = new Texture(Gdx.files.internal("bomboff.png"));

@@ -28,46 +28,46 @@ public class Templar extends Humano
                 switch (this.direccion) 
                 {
                     case ARRIBA:
-                        jugador.setY(jugador.getY() + 100);
+                        jugador.setY(jugador.getY() + 200);
                     break;
                     case ABAJO:
-                        jugador.setY(jugador.getY() - 100);
+                        jugador.setY(jugador.getY() - 200);
                     break;
                     case DERECHA:
-                        jugador.setX(jugador.getX() + 100);
+                        jugador.setX(jugador.getX() + 200);
                     break;
                     case IZQUIERDA:
-                        jugador.setX(jugador.getX() - 100);
+                        jugador.setX(jugador.getX() - 200);
                     break;
                 }
             break;
             case ARRIBA:
-                jugador.setY(jugador.getY() - 100);
+                jugador.setY(jugador.getY() - 200);
             break;
             case ABAJO:
-                jugador.setY(jugador.getY() + 100);
+                jugador.setY(jugador.getY() + 200);
             break;
             case DERECHA:
-                jugador.setX(jugador.getX() - 100);
+                jugador.setX(jugador.getX() - 200);
             break;
             case IZQUIERDA:
-                jugador.setX(jugador.getX() + 100);
+                jugador.setX(jugador.getX() + 200);
             break;
             case LATERAL_DERECHO_ARRIBA:
-                jugador.setX(jugador.getX() - 100);
-                jugador.setY(jugador.getY() - 100);
+                jugador.setX(jugador.getX() - 200);
+                jugador.setY(jugador.getY() - 200);
             break;
             case LATERAL_DERECHO_ABAJO:
-                jugador.setX(jugador.getX() - 100);
-                jugador.setY(jugador.getY() + 100);
+                jugador.setX(jugador.getX() - 200);
+                jugador.setY(jugador.getY() + 200);
             break;
             case LATERAL_IZQUIERDO_ARRIBA:
-                jugador.setX(jugador.getX() + 100);
-                jugador.setY(jugador.getY() - 100);
+                jugador.setX(jugador.getX() + 200);
+                jugador.setY(jugador.getY() - 200);
             break;
             case LATERAL_IZQUIERDO_ABAJO:
-                jugador.setX(jugador.getX() + 100);
-                jugador.setY(jugador.getY() + 100);
+                jugador.setX(jugador.getX() + 200);
+                jugador.setY(jugador.getY() + 200);
             break;
         }
         
