@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 public class Brutus extends Maquina
 {
     private Proyectil proyectil;
+    private boolean disparando;
     private boolean colisionproyectil;
     
     public Brutus(Batch genesis) 
@@ -17,6 +18,8 @@ public class Brutus extends Maquina
         super(genesis);
         this.textura = new Texture(Gdx.files.internal("brutus.png"));
         this.fuerza *= 2;
+        this.velocidad *= 1.5;
+        disparando = false;
         colisionproyectil = false;
     }
     
@@ -38,6 +41,8 @@ public class Brutus extends Maquina
         
         if(proyectil != null)
         {
+            proyectil.lanzar();
+            
             if(proyectil.overlaps(enemigo))
             {
                 if(!this.colisionproyectil)
@@ -60,16 +65,6 @@ public class Brutus extends Maquina
             {
                 this.colisionproyectil = false;
             }
-            
-            if(proyectil.isDestino())
-            {
-                proyectil.dispose();
-                proyectil = null;
-            }
-            else
-            {
-                proyectil.lanzar();
-            }
         }
     }
     @Override
@@ -80,7 +75,11 @@ public class Brutus extends Maquina
     }
     private void perseguir()
     {
-        if(enemigo.getX() > this.x 
+        if(disparando)
+        {
+            decision = 0;
+        }
+        else if(enemigo.getX() > this.x 
                 && (enemigo.getY() == this.y 
                 || (enemigo.getY() >= 800 - 98 && this.y >= 800 - 98) 
                 || (enemigo.getY() <= 98 && this.y <= 98)))
@@ -112,64 +111,20 @@ public class Brutus extends Maquina
         
         else if(enemigo.getX() > this.x && enemigo.getY() > this.y)
         {
-            /*if(enemigo.getX() - this.getX() > enemigo.getY() - this.getY())
-            {
-                decision = 1;
-            }
-            else if(enemigo.getY() - this.getY() > enemigo.getX() - this.getX())
-            {
-                decision = 3;
-            }
-            else
-            {*/
-                decision = 5;
-            //}
+            decision = 5;
         }
         else if(enemigo.getX() > this.x && enemigo.getY() < this.y)
-        {
-            /*if(enemigo.getX() - this.getX() > enemigo.getY() - this.getY())
-            {
-                decision = 1;
-            }
-            else if(this.getY() - enemigo.getY() > this.getX() - enemigo.getX())
-            {
-                decision = 4;
-            }
-            else
-            {*/       
-                decision = 6;
-            //}
+        {      
+            decision = 6;
         }
         
         else if(enemigo.getX() < this.x && enemigo.getY() > this.y)
         {
-            /*if(this.getX() - enemigo.getX() > this.getY() - enemigo.getY())
-            {
-                decision = 2;
-            }
-            else if(enemigo.getY() - this.getY() > enemigo.getX() - this.getX())
-            {
-                decision = 3;
-            }
-            else
-            {*/
-                decision = 7;
-            //}
+            decision = 7;
         }
         else if(enemigo.getX() < this.x && enemigo.getY() < this.y)
         {
-            /*if(this.getX() - enemigo.getX() > this.getY() - enemigo.getY())
-            {
-                decision = 2;
-            }
-            else if(this.getY() - enemigo.getY() > this.getX() - enemigo.getX())
-            {
-                decision = 4;
-            }
-            else
-            {*/
-                decision = 8;
-            //}
+            decision = 8;
         }
     }
     @Override
@@ -201,13 +156,17 @@ public class Brutus extends Maquina
     public void activarEspecial() 
     {
         this.textura = new Texture(Gdx.files.internal("hunt.png"));
-        this.decision = 0;
+        enemigo.setVelocidad(enemigo.getVelocidad() / 6);
         proyectil = new Proyectil(genesis,this.x + 200,this.y + 200,enemigo.getX(),enemigo.getY());
+        this.disparando = true;
     }
     @Override
     public void desactivarEspecial() 
     {
         this.textura = new Texture(Gdx.files.internal("brutus.png"));
+        enemigo.setVelocidad(enemigo.getVelocidad() * 6);
+        proyectil = null;
+        this.disparando = false;
         this.perseguir();
     } 
 }
