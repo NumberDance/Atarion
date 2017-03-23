@@ -200,28 +200,26 @@ public class Crasus extends Maquina
             ((Humano)this.enemigo).setInvertido(true);
         }
         
-        int posiciones = (int) (Math.random() * 4 + 1);
+        int posiciones = (int) (Math.random() * 2 + 1);
         switch(posiciones)
         {
             case 1:
-                bombas.add(new Bomba(genesis,0 + 200,800 - 200));
-                bombas.add(new Bomba(genesis,0 + 200,0 + 200));
-                bombas.add(new Bomba(genesis,1000 - 200,800 - 200));
+                bombas.add(new Bomba(genesis,0 + 200,800 - 200 + 50));
+                bombas.add(new Bomba(genesis,0 + 200,600 - 200));
+                bombas.add(new Bomba(genesis,0 + 200,0 + 200 - 50));
+                
+                bombas.add(new Bomba(genesis,1000 - 200,800 - 200 + 50));
+                bombas.add(new Bomba(genesis,1000 - 200,600 - 200));
+                bombas.add(new Bomba(genesis,1000 - 200,0 + 200 - 50));
             break;
             case 2:
-                bombas.add(new Bomba(genesis,0 + 200,800 - 200));
-                bombas.add(new Bomba(genesis,1000 - 200,0 + 200));
-                bombas.add(new Bomba(genesis,1000 - 200,800 - 200));
-            break;
-            case 3:
-                bombas.add(new Bomba(genesis,0 + 200,800 - 200));
-                bombas.add(new Bomba(genesis,0 + 200,0 + 200));
-                bombas.add(new Bomba(genesis,1000 - 200,0 + 200));
-            break;
-            case 4:
-                bombas.add(new Bomba(genesis,1000 - 200,0 + 200));
-                bombas.add(new Bomba(genesis,0 + 200,0 + 200));
-                bombas.add(new Bomba(genesis,1000 - 200,800 - 200));
+                bombas.add(new Bomba(genesis,0 + 200,800 - 200 + 50));
+                bombas.add(new Bomba(genesis,700 - 200,800 - 200 + 50));
+                bombas.add(new Bomba(genesis,1000 - 200,800 - 200 + 50));
+                
+                bombas.add(new Bomba(genesis,0 + 200,0 + 200 - 50));
+                bombas.add(new Bomba(genesis,700 - 200,0 + 200 - 50));
+                bombas.add(new Bomba(genesis,1000 - 200,0 + 200 - 50));
             break;
         }
     }

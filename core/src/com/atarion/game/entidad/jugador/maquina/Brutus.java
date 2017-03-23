@@ -74,11 +74,7 @@ public class Brutus extends Maquina
     }
     private void perseguir()
     {
-        if(disparando)
-        {
-            decision = 0;
-        }
-        else if(enemigo.getX() > this.x 
+        if(enemigo.getX() > this.x 
                 && (enemigo.getY() == this.y 
                 || (enemigo.getY() >= 800 - 98 && this.y >= 800 - 98) 
                 || (enemigo.getY() <= 98 && this.y <= 98)))
@@ -155,7 +151,7 @@ public class Brutus extends Maquina
     public void activarEspecial() 
     {
         this.textura = new Texture(Gdx.files.internal("hunt.png"));
-        enemigo.setVelocidad(enemigo.getVelocidad() / 6);
+        enemigo.setVelocidad(enemigo.getVelocidad() / 4);
         proyectil = new Proyectil(genesis,this.x + 200,this.y + 200,enemigo.getX(),enemigo.getY());
         this.disparando = true;
     }
@@ -163,7 +159,7 @@ public class Brutus extends Maquina
     public void desactivarEspecial() 
     {
         this.textura = new Texture(Gdx.files.internal("brutus.png"));
-        enemigo.setVelocidad(enemigo.getVelocidad() * 6);
+        enemigo.setVelocidad(enemigo.getVelocidad() * 4);
         proyectil = null;
         this.disparando = false;
         this.perseguir();
