@@ -1,13 +1,15 @@
 package com.atarion.game.entidad.jugador.humano;
 
+import com.atarion.game.entidad.habilidad.HabilidadTraveler;
 import com.atarion.game.entidad.jugador.Jugador;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Traveler extends Humano 
 {
+    private HabilidadTraveler habilidad = null;
+    
     public Traveler(Batch genesis) 
     {
         super(genesis);
@@ -17,14 +19,20 @@ public class Traveler extends Humano
     }
     
     @Override
+    public void actualizarEstado()
+    {
+       super.actualizarEstado();
+        
+       if(habilidad != null)
+       {
+           habilidad.actualizarEstado();
+       }
+    }
+    
+    @Override
     public void agregarEnemigo(Jugador jugador) 
     {
         this.enemigo = jugador;
-    }
-    @Override
-    public void jugar(Camera camara)
-    {
-        super.jugar(camara);
     }
     @Override
     protected void controlBordes()
@@ -58,7 +66,12 @@ public class Traveler extends Humano
         
         this.x = xenemigo;
         this.y = yenemigo;
+        
+        this.habilidad = new HabilidadTraveler(genesis,this);
     }
     @Override
-    public void desactivarEspecial() {}
+    public void desactivarEspecial() 
+    {
+        this.habilidad = null;
+    }
 }

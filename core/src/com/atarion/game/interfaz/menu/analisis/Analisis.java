@@ -1,9 +1,9 @@
-package com.atarion.game.escena.analisis;
+package com.atarion.game.interfaz.menu.analisis;
 
-import com.atarion.game.escena.menu.Menu;
+import com.atarion.game.interfaz.menu.Menu;
 import com.badlogic.gdx.graphics.Texture;
 
-public class Analisis extends Menu 
+public abstract class Analisis extends Menu 
 {
     protected Texture analisis;
     

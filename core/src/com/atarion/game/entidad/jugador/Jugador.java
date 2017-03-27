@@ -2,9 +2,7 @@ package com.atarion.game.entidad.jugador;
 
 import com.atarion.game.entidad.Entidad;
 import com.atarion.game.entidad.objeto.Objeto;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 public abstract class Jugador extends Entidad

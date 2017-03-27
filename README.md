@@ -5,13 +5,9 @@ Using LibGDX for graphics -> https://github.com/libgdx
 
 Awesome music: 
 
-Pixelated Zombies (Crasus Theme) by Eric Taylor -> http://erictaylormusic.com
+Music Pack by Eric Taylor -> http://erictaylormusic.com
 
 Defying Commodus (Brutus Theme) by Matthew Pablo -> http://www.matthewpablo.com/
-
-Electric Finale (Claudius Theme) by Eric Taylor -> http://erictaylormusic.com
-
-8-Bit Victory by Eric Taylor -> http://erictaylormusic.com
 
 Instrucciones para instalar:
 

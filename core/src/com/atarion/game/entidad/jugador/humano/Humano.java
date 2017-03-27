@@ -163,7 +163,7 @@ public abstract class Humano extends Jugador
             
             cronometro = 0.0f;
         }
-                
+           
         if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
         {
             if(recarga == 0)

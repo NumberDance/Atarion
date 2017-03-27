@@ -1,4 +1,4 @@
-package com.atarion.game.escena;
+package com.atarion.game.interfaz.escena;
 
 import com.atarion.game.entidad.objeto.Escombro;
 import com.atarion.game.entidad.jugador.humano.Guardian;
@@ -11,6 +11,11 @@ public class EscenaClaudius extends Escena
 {
     private LinkedList<Escombro> escombros;
     private LinkedList<Boolean> colisiones;
+
+    public EscenaClaudius() 
+    {
+        super(Gdx.audio.newMusic(Gdx.files.internal("finale.mp3")));
+    }
     
     @Override
     public void show()
@@ -31,7 +36,7 @@ public class EscenaClaudius extends Escena
     {
         super.render(delta);
        
-        int oportunidad = (int) (Math.random() * 200 + 0);
+        int oportunidad = (int) (Math.random() * 150 + 0);
         
         if(oportunidad == 0)
         {
