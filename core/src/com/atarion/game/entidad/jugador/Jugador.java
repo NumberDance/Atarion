@@ -13,7 +13,7 @@ public abstract class Jugador extends Entidad
     private boolean colision;
     protected Jugador enemigo;
     protected Direccion direccion;
-        
+    
     protected int tiempoactivo = 5;
     protected int activo = 5;
     protected int tiemporecarga = 10;

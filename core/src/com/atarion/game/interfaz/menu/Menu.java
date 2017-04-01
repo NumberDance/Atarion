@@ -10,7 +10,7 @@ public abstract class Menu extends Interfaz
         super.render(delta);   
         this.controlarTeclado();
     }
-    
+
     protected abstract void controlarTeclado();
 }
 

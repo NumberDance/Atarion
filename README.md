@@ -15,7 +15,7 @@ Instrucciones para instalar:
 
 2 -> Descargar la utilidad de LibGDX de creación de proyectos. Ejecutarla.
 
-3 -> Seleccionar Desktop, Android e IOS.
+3 -> Seleccionar únicamente Desktop.
 
 4 -> Cambiar el nombre de paquete a com.atarion.game. Ponerle de nombre Atarion.
 

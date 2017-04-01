@@ -13,7 +13,7 @@ public class AnalisisBrutus extends Analisis
         super();
         analisis = new Texture(Gdx.files.internal("brutusanalysis.png"));
     }
-
+    
     @Override
     protected void controlarTeclado() 
     {

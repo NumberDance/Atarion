@@ -1,13 +1,11 @@
 package com.atarion.game;
 
-import com.atarion.game.interfaz.Interfaz;
 import com.atarion.game.interfaz.menu.MenuPrincipal;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
 
 public class Atarion extends Game
 {   
-    private static Atarion atarion = new Atarion();
+    private static final Atarion atarion = new Atarion();
     
     public static Atarion getInstance()
     {
