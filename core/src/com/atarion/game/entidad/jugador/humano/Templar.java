@@ -105,9 +105,9 @@ public class Templar extends Humano
     @Override
     public void desactivarEspecial() 
     {
-        velocidad /= 6;
-        fuerza /= 6;
-        rebote *= 4;
+        velocidad /= 4;
+        fuerza /= 4;
+        rebote /= 4;
         
         this.habilidad = null;
     }

@@ -15,7 +15,7 @@ public abstract class Humano extends Jugador
     public Humano(Batch genesis)
     {
         super(genesis);
-        this.y = 0;
+        this.y = 30;
     }
     
     @Override
@@ -124,6 +124,7 @@ public abstract class Humano extends Jugador
             direccion = Direccion.PARADO;
         }
     }   
+    @Override
     protected void controlEspecial()
     {
         cronometro += Gdx.graphics.getDeltaTime();

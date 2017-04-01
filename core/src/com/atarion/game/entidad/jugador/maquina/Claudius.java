@@ -16,22 +16,29 @@ public class Claudius extends Maquina
     private Laser laser = null;
     private boolean colisionlaser = false;
     private boolean carga = false;
+    private Texture escombros,bordes,el,ninguno;
     
-    private enum TipoLaser 
+    private enum Modo
     {
         ESCOMBROS,
         BORDES,
-        EL
+        EL,
+        NINGUNO
     }
-    private TipoLaser enuso = null;
+    private Modo modo = Modo.NINGUNO;
     
     public Claudius(Batch genesis) 
     {
         super(genesis);
-        this.velocidad *= 2;
+        this.velocidad *= 3;
         this.textura = new Texture(Gdx.files.internal("claudius.png"));
         this.tiempoactivo = 20;
         this.y = 300;
+        
+        this.escombros = new Texture(Gdx.files.internal("endurancedebris.png"));
+        this.bordes = new Texture(Gdx.files.internal("enduranceborders.png"));
+        this.el = new Texture(Gdx.files.internal("endurancehimself.png"));
+        this.ninguno = new Texture(Gdx.files.internal("claudius.png"));
     }
     
     @Override
@@ -64,30 +71,31 @@ public class Claudius extends Maquina
             {
                 this.colisionlaser = false;
             }
-            
-            switch(enuso)
-            {
-                case ESCOMBROS:
-                    ((Guardian)this.enemigo).setInmune(false);
-                break;
-                case BORDES:
-                    if(this.enemigo.getX() == 0
-                            || this.enemigo.getX() == 1000
-                            || this.enemigo.getY() == 0
-                            || this.enemigo.getY() == 800)
-                    {
-                        Gdx.app.log("INFO","De repente, te hiciste vulnerable a los bordes. 100 puntos de daño y te quedan " + this.getVida() + "vidas");
-                        this.enemigo.setVida(this.enemigo.getVida() - 100);
-                    }
-                break;
-                case EL:
-                    if(this.overlaps(this.enemigo))
-                    {
-                        Gdx.app.log("INFO","De repente, te hiciste muy vulnerable a la bola. 100 puntos de daño y te quedan " + this.getVida() + "vidas");
-                        this.enemigo.setVida(this.enemigo.getVida() - 100);
-                    }
-                break;
-            }
+        }
+        
+        switch(modo)
+        {
+            case ESCOMBROS:
+                ((Guardian)this.enemigo).setInmune(false);
+            break;
+            case BORDES:
+                if(this.enemigo.getX() == 0
+                        || this.enemigo.getX() == 1000
+                        || this.enemigo.getY() == 0
+                        || this.enemigo.getY() == 800)
+                {
+                    Gdx.app.log("INFO","De repente, te hiciste vulnerable a los bordes. 100 puntos de daño y te quedan " + this.getVida() + "vidas");
+                    this.enemigo.setVida(this.enemigo.getVida() - 100);
+                }
+            break;
+            case EL:
+                
+                if(this.overlaps(this.enemigo))
+                {
+                    Gdx.app.log("INFO","De repente, te hiciste muy vulnerable a la bola. 100 puntos de daño y te quedan " + this.getVida() + "vidas");
+                    this.enemigo.setVida(this.enemigo.getVida() - 100);
+                }
+            break;
         }
     }
     
@@ -100,7 +108,7 @@ public class Claudius extends Maquina
     public void esquivar(LinkedList<Escombro> escombros)
     {
         if(carga)
-        {
+        {   
             if(enemigo.getX() > this.getX())
             {
                 decision = 1;
@@ -108,6 +116,10 @@ public class Claudius extends Maquina
             else if(enemigo.getX() < this.getX())
             {
                 decision = 2;
+            }
+            else
+            {
+                decision = 0;
             }
         }
         else
@@ -162,49 +174,62 @@ public class Claudius extends Maquina
             this.x = 0;
         }
     }
+    @Override
+    protected void controlEspecial()
+    {
+        if(parada && activado)
+        {
+            this.modo = Modo.NINGUNO;
+            this.textura = this.ninguno;
+        }
+        
+        super.controlEspecial();
+    }
     
     @Override
     public void activarEspecial() 
     {
-        this.textura = new Texture(Gdx.files.internal("endurance.png"));
+        this.carga = true;
         
         int probabilidad = (int) (Math.random() * 3 + 1);
         switch(probabilidad)
         {
             case 1:
+                modo = Modo.ESCOMBROS;
+                
+                this.textura = this.escombros;
                 laser = new Laser(genesis,"laserdebris.png",this);
-                enuso = TipoLaser.ESCOMBROS;
             break;
             case 2:
+                modo = Modo.BORDES;
+                
+                this.textura = this.bordes;
                 laser = new Laser(genesis,"laserborder.png",this);
-                enuso = TipoLaser.BORDES;
             break;
             case 3:
+                modo = Modo.EL;
+                
+                this.textura = this.el;
                 laser = new Laser(genesis,"laserhimself.png",this);
-                enuso = TipoLaser.EL;
             break;
         }
-        
-        this.carga = true;
     }
     @Override
     public void desactivarEspecial() 
-    {
-        this.textura = new Texture(Gdx.files.internal("claudius.png"));
-        
+    {   
+        this.carga = false;
         this.laser = null;
-        if(enuso.equals(TipoLaser.ESCOMBROS))
+        
+        if(!modo.equals(Modo.ESCOMBROS))
         {
             ((Guardian)enemigo).setInmune(true);
         }
-       
-        this.carga = false;
     } 
     
     @Override
     public void setVida(int vida)
     {
-        if(!this.activado)
+        if(this.modo.equals(Modo.NINGUNO))
         {
             super.setVida(vida);
         }
