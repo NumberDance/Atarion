@@ -1,5 +1,6 @@
 package com.atarion.game.entidad.jugador.humano;
 
+import com.atarion.game.entidad.habilidad.Habilidad;
 import com.atarion.game.entidad.objeto.Objeto;
 import com.atarion.game.entidad.jugador.Direccion;
 import com.atarion.game.entidad.jugador.Jugador;
@@ -8,25 +9,38 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-public abstract class Humano extends Jugador 
+public abstract class Humano extends Jugador
 {    
     private boolean invertido = false;
-    
+    protected Habilidad habilidad = null;
+
     
     public Humano(Batch genesis)
     {
         super(genesis);
-        
         this.y = 30;
     }
     
     
     @Override
+    public final void actualizarEstado()
+    {
+       super.actualizarEstado();
+        
+       if(habilidad != null)
+       { habilidad.actualizarEstado(); }
+    }
+    
+    
+    @Override
+    public void agregarEnemigo(Jugador jugador) 
+    { enemigo = jugador; }
+    @Override
     public void jugar(Camera camara) 
     {   
         super.jugar(camara);
         
-        if(Gdx.input.isKeyPressed(Input.Keys.UP)) 
+        if(Gdx.input.isKeyPressed(Input.Keys.UP) && !controlado) 
         {
             if(invertido)
             {
@@ -50,7 +64,7 @@ public abstract class Humano extends Jugador
                 }
             }
         }
-        else if(Gdx.input.isKeyPressed(Input.Keys.DOWN))
+        else if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && !controlado)
         {
             if(invertido)
             {
@@ -74,7 +88,7 @@ public abstract class Humano extends Jugador
                 }
             }
         }      
-        else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+        else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !controlado)
         {
             if(invertido)
             {
@@ -98,7 +112,7 @@ public abstract class Humano extends Jugador
                 }
             }
         }
-        else if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) 
+        else if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && !controlado) 
         {
             if(invertido)
             {
@@ -140,11 +154,11 @@ public abstract class Humano extends Jugador
                     Gdx.app.log("INFO","El modulo se agoto.");
                     activado = false;
                 }
-                else if(parada)
+                else if(parado)
                 {
                     this.desactivarEspecial();
                     
-                    this.parada = false;
+                    this.parado = false;
                     activado = false;
                 }
                 else
@@ -165,7 +179,7 @@ public abstract class Humano extends Jugador
             cronometro = 0.0f;
         }
            
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE) && !controlado)
         {
             if(recarga == 0)
             {
@@ -203,7 +217,7 @@ public abstract class Humano extends Jugador
         Gdx.app.log
         (
             "INFO",
-            "La bola te ha hecho " 
+            "El jugador te ha hecho " 
             + jugador.getFuerza() 
             + " puntos de daño. Te quedan " 
             + vida 

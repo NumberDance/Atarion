@@ -12,8 +12,7 @@ public abstract class Escena extends Interfaz
 {
     protected Humano humano = null;
     protected Maquina maquina = null;
-    private boolean colision = false;
-    private int estado = -1; //-1 en curso, 0 ganado, 1 perdido
+    protected boolean colision = false;
     
     
     protected Escena(Music tema)

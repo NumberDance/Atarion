@@ -1,6 +1,6 @@
 package com.atarion.game.interfaz.escena;
 
-import com.atarion.game.entidad.jugador.humano.Traveler;
+import com.atarion.game.entidad.jugador.humano.wheel.Traveler;
 import com.atarion.game.entidad.jugador.maquina.Brutus;
 import com.badlogic.gdx.Gdx;
 

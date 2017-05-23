@@ -29,47 +29,50 @@ public abstract class Maquina extends Jugador
     {  
         super.jugar(camara);
         
-        switch(decision)
+        if(!controlado)
         {
-            case 0:
-                this.direccion = Direccion.PARADO;
-            break;
-            case 1:
-                this.x += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
-                this.direccion = Direccion.DERECHA;
-            break;
-            case 2:
-                this.x -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
-                this.direccion = Direccion.IZQUIERDA;
-            break;
-            case 3:
-                this.y += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
-                this.direccion = Direccion.ARRIBA;
-            break;
-            case 4:
-                this.y -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
-                this.direccion = Direccion.ABAJO;
-            break;
-            case 5:
-                this.x += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
-                this.y += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
-                this.direccion = Direccion.LATERAL_DERECHO_ARRIBA;
-            break;
-            case 6:
-                this.x += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
-                this.y -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
-                this.direccion = Direccion.LATERAL_DERECHO_ABAJO;
-            break;
-            case 7:
-                this.x -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
-                this.y += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
-                this.direccion = Direccion.LATERAL_IZQUIERDO_ARRIBA;
-            break;
-            case 8:
-                this.x -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
-                this.y -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
-                this.direccion = Direccion.LATERAL_IZQUIERDO_ABAJO;
-            break;
+            switch(decision)
+            {
+                case 0:
+                    this.direccion = Direccion.PARADO;
+                break;
+                case 1:
+                    this.x += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
+                    this.direccion = Direccion.DERECHA;
+                break;
+                case 2:
+                    this.x -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
+                    this.direccion = Direccion.IZQUIERDA;
+                break;
+                case 3:
+                    this.y += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
+                    this.direccion = Direccion.ARRIBA;
+                break;
+                case 4:
+                    this.y -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
+                    this.direccion = Direccion.ABAJO;
+                break;
+                case 5:
+                    this.x += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
+                    this.y += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
+                    this.direccion = Direccion.LATERAL_DERECHO_ARRIBA;
+                break;
+                case 6:
+                    this.x += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
+                    this.y -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
+                    this.direccion = Direccion.LATERAL_DERECHO_ABAJO;
+                break;
+                case 7:
+                    this.x -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
+                    this.y += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
+                    this.direccion = Direccion.LATERAL_IZQUIERDO_ARRIBA;
+                break;
+                case 8:
+                    this.x -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
+                    this.y -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
+                    this.direccion = Direccion.LATERAL_IZQUIERDO_ABAJO;
+                break;
+            }
         }
     }
     
@@ -90,10 +93,10 @@ public abstract class Maquina extends Jugador
                     this.activo = this.tiempoactivo;
                     activado = false;
                 }
-                else if(parada)
+                else if(parado)
                 {
                     this.desactivarEspecial();
-                    this.parada = false;
+                    this.parado = false;
                     activado = false;
                 }
                 else

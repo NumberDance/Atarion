@@ -1,7 +1,7 @@
 package com.atarion.game.interfaz.escena;
 
 import com.atarion.game.entidad.objeto.Escombro;
-import com.atarion.game.entidad.jugador.humano.Guardian;
+import com.atarion.game.entidad.jugador.humano.trench.Guardian;
 import com.atarion.game.entidad.jugador.maquina.Claudius;
 import com.badlogic.gdx.Gdx;
 import java.util.Iterator;

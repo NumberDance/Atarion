@@ -2,7 +2,7 @@ package com.atarion.game.entidad.jugador.maquina;
 
 import com.atarion.game.entidad.objeto.Escombro;
 import com.atarion.game.entidad.jugador.Jugador;
-import com.atarion.game.entidad.jugador.humano.Guardian;
+import com.atarion.game.entidad.jugador.humano.trench.Guardian;
 import com.atarion.game.entidad.objeto.Laser;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -26,7 +26,7 @@ public class Claudius extends Maquina
     {
         super(genesis);
         
-        this.velocidad *= 3;
+        this.velocidad *= 4;
         this.textura = new Texture(Gdx.files.internal("claudius.png"));
         this.tiempoactivo = 20;
         this.y = 300;

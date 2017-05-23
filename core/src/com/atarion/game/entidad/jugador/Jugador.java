@@ -17,7 +17,7 @@ public abstract class Jugador extends Entidad
     
     protected float cronometro = 0f;
     protected int tiempoactivo = 5, activo = 5, tiemporecarga = 10, recarga = 0;
-    protected boolean activado = false, parada = false;
+    protected boolean activado = false, parado = false, controlado = false;
     
     
     protected Jugador(Batch genesis)
@@ -45,7 +45,7 @@ public abstract class Jugador extends Entidad
     protected abstract void controlEspecial();
     public void pararEspecial()
     {
-        this.parada = true;
+        this.parado = true;
         this.desactivarEspecial();
     }
     
@@ -53,19 +53,57 @@ public abstract class Jugador extends Entidad
     public abstract void activarEspecial();
     public abstract void desactivarEspecial();
     
-    
-    public int getFuerza() 
+
+    public boolean isColision()
+    { return colision; }
+    public Jugador getEnemigo()
+    { return enemigo; }
+    public float getCronometro()
+    { return cronometro; }
+    public int getTiempoactivo()
+    { return tiempoactivo; }
+    public int getActivo()
+    { return activo; }
+    public int getTiemporecarga()
+    { return tiemporecarga; }
+    public boolean isParado()
+    { return parado; }
+    public int getRecarga()
+    { return recarga; }
+    public int getFuerza()
     { return fuerza; }
-    public int getVida() 
-    { return vida; }
-    public void setVida(int vida) 
-    { this.vida = vida; }
-    public Direccion getDireccion() 
-    { return direccion; }
-    public float getVelocidad() 
+    public float getVelocidad()
     { return velocidad; }
-    public void setVelocidad(float velocidad) 
+    
+    
+    public void setVida(int vida)
+    { this.vida = vida; }
+    public void setFuerza(int fuerza)
+    { this.fuerza = fuerza; }
+    public void setVelocidad(float velocidad)
     { this.velocidad = velocidad; }
-    public boolean isActivado() 
-    { return activado; }   
+    public void setDireccion(Direccion direccion)
+    { this.direccion = direccion; }
+    public void setColision(boolean colision)
+    { this.colision = colision; }
+    public void setEnemigo(Jugador enemigo)
+    { this.enemigo = enemigo; }
+    public void setCronometro(float cronometro)
+    { this.cronometro = cronometro; }
+    public void setTiempoactivo(int tiempoactivo)
+    { this.tiempoactivo = tiempoactivo; }
+    public void setActivo(int activo)
+    { this.activo = activo; }
+    public void setTiemporecarga(int tiemporecarga)
+    { this.tiemporecarga = tiemporecarga; }
+    public void setRecarga(int recarga)
+    { this.recarga = recarga; }
+    public void setActivado(boolean activado)
+    { this.activado = activado; }
+    public void setParada(boolean parado)
+    { this.parado = parado; }
+    public boolean isControlado()
+    { return controlado; }
+    public void setControlado(boolean controlado)
+    { this.controlado = controlado; }
 }

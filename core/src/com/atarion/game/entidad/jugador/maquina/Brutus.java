@@ -18,7 +18,7 @@ public class Brutus extends Maquina
         super(genesis);
         
         this.textura = new Texture(Gdx.files.internal("brutus.png"));
-        this.fuerza *= 3;
+        this.fuerza *= 4;
     }
     
     

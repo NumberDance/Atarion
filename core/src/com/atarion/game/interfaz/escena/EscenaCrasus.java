@@ -1,6 +1,6 @@
 package com.atarion.game.interfaz.escena;
 
-import com.atarion.game.entidad.jugador.humano.Templar;
+import com.atarion.game.entidad.jugador.humano.cannon.Templar;
 import com.atarion.game.entidad.jugador.maquina.Crasus;
 import com.badlogic.gdx.Gdx;
 

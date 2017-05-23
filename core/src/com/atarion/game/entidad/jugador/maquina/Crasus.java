@@ -20,7 +20,7 @@ public class Crasus extends Maquina
     {
         super(genesis);
         
-        this.vida *= 3;
+        this.vida *= 4;
         this.textura = new Texture(Gdx.files.internal("crasus.png"));
     }
 

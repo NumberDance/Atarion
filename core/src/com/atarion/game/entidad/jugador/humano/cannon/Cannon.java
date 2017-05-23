@@ -1,40 +1,20 @@
-package com.atarion.game.entidad.jugador.humano;
+package com.atarion.game.entidad.jugador.humano.cannon;
 
-import com.atarion.game.entidad.habilidad.HabilidadTemplar;
 import com.atarion.game.entidad.jugador.Jugador;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
+import com.atarion.game.entidad.jugador.humano.Humano;
 
-public class Templar extends Humano
+public abstract class Cannon extends Humano
 {
-    private HabilidadTemplar habilidad = null;
     protected int rebote = 200;
     
-    
-    public Templar(Batch genesis) 
+    public Cannon(Batch genesis)
     {
         super(genesis);
-        this.textura = new Texture(Gdx.files.internal("templar.png"));
-    }
-    
-    
-    @Override
-    public void actualizarEstado()
-    {
-       super.actualizarEstado();
         
-       if(habilidad != null)
-       { habilidad.actualizarEstado(); }
+        this.fuerza *= 2;
+        this.vida /= 2;
     }
-    
-    
-    @Override
-    public void agregarEnemigo(Jugador jugador) 
-    {
-        enemigo = jugador;
-    }
-    
+
     
     @Override
     public void colisionJugador(Jugador jugador)
@@ -91,27 +71,13 @@ public class Templar extends Humano
         Gdx.app.log
         (
             "INFO",
-            "Las barreras de clase Templar no reciben daño de contacto."
+            "Las barreras de clase Canon no reciben daño de contacto."
         );
     }
     
     
     @Override
-    public void activarEspecial() 
-    {
-        velocidad *= 4;
-        fuerza *= 4;
-        rebote *= 4;
-        
-        this.habilidad = new HabilidadTemplar(genesis,this);
-    }
+    public abstract void activarEspecial();
     @Override
-    public void desactivarEspecial() 
-    {
-        velocidad /= 4;
-        fuerza /= 4;
-        rebote /= 4;
-        
-        this.habilidad = null;
-    }
+    public abstract void desactivarEspecial();
 }
