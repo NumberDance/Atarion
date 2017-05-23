@@ -9,6 +9,7 @@ public class Escombro extends Objeto
     private float velocidad;
     protected boolean destino;
     
+    
     public Escombro(Batch genesis) 
     {       
         super(genesis,new Texture(Gdx.files.internal("debris.png")),10);
@@ -21,20 +22,15 @@ public class Escombro extends Objeto
         
         velocidad = 1f;
     }
+    
+    
     public void caer()
     {
         if(this.y == 0 - 100)
-        {
-            destino = true;
-        }
+        { destino = true; }
         else
-        {
-            this.y -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
-        }
+        { this.y -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad; }
     }
-
     public boolean isDestino() 
-    {
-        return destino;
-    }
+    { return destino; }
 }

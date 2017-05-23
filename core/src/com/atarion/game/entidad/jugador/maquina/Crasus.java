@@ -12,21 +12,33 @@ import java.util.Iterator;
 
 public class Crasus extends Maquina
 {
-    private boolean colision;
-    private boolean colisionbomba;
-    private float temporizador;
-    private HashSet<Bomba> bombas;
+    private boolean colision = false, colisionbomba = false;
+    private float temporizador = 0f;
+    private HashSet<Bomba> bombas = new HashSet<Bomba>();
     
     public Crasus(Batch genesis) 
     {
         super(genesis);
+        
         this.vida *= 3;
         this.textura = new Texture(Gdx.files.internal("crasus.png"));
-        this.colision = false;
-        this.temporizador = 0f;
-        bombas = new HashSet<Bomba>();
     }
 
+    
+    @Override
+    public void actualizarEstado()
+    {
+        super.actualizarEstado();
+        
+        if(!bombas.isEmpty())
+        {
+            Iterator<Bomba> i = bombas.iterator();
+            while(i.hasNext())
+            { i.next().actualizarEstado(); }
+        }
+    }
+    
+    
     @Override
     public void jugar(Camera camara)
     {
@@ -39,9 +51,7 @@ public class Crasus extends Maquina
             {
                 Iterator<Bomba> i = bombas.iterator();
                 while(i.hasNext())
-                {
-                    i.next().cuentaAtras();
-                }
+                { i.next().cuentaAtras(); }
                 
                 temporizador = 0f;
             }
@@ -61,26 +71,11 @@ public class Crasus extends Maquina
                     }
                 }
                 else
-                {
-                    this.colisionbomba = false;
-                }
+                { this.colisionbomba = false; }
             }
         }
     }
-    @Override
-    public void actualizarEstado()
-    {
-        super.actualizarEstado();
-        
-        if(!bombas.isEmpty())
-        {
-            Iterator<Bomba> i = bombas.iterator();
-            while(i.hasNext())
-            {
-                i.next().actualizarEstado();
-            }
-        }
-    }
+    
     
     @Override
     public void agregarEnemigo(Jugador jugador) 
@@ -88,59 +83,34 @@ public class Crasus extends Maquina
         this.enemigo = jugador;
         this.huir();
     }
-
     private void huir() 
     {   
         if(x < 0 + 100 + 100)
-        {
-            decision = 1;
-        }
+        { decision = 1; }
         else if(x > 1000 - 100 - 100)
-        {
-            decision = 2;
-        }
+        { decision = 2; }
         else if(y < 0 + 100 + 100)
-        {
-            decision = 3;
-        }
+        { decision = 3; }
         else if(y > 800 - 100 - 100)
-        {
-            decision = 4;
-        }
+        { decision = 4; }
         else
         {
             if(enemigo.getX() > this.x && enemigo.getY() > this.y)
-            {
-                decision = 8;
-            }
+            { decision = 8; }
             else if(enemigo.getX() > this.x && enemigo.getY() > this.y)
-            {
-                decision = 6;
-            }
+            { decision = 6; }
             else if(enemigo.getX() > this.x && enemigo.getY() < this.y)
-            {
-                decision = 7;
-            }
+            { decision = 7; }
             else if(enemigo.getX() < this.x && enemigo.getY() < this.y)
-            {
-                decision = 5;
-            }
+            { decision = 5; }
             else if(enemigo.getX() < this.x)
-            {
-                decision = 1;
-            }
+            { decision = 1; }
             else if(enemigo.getX() > this.x)
-            {
-                decision = 2;
-            }
+            { decision = 2; }
             else if(enemigo.getY() < this.y)
-            {
-                decision = 3;
-            }
+            { decision = 3; }
             else if(enemigo.getY() > this.y)
-            {
-                decision = 4;
-            }
+            { decision = 4; }
         }
     }
     private void comprobarColision()
@@ -152,6 +122,7 @@ public class Crasus extends Maquina
             this.colision = true;
         }
     }
+    
     
     @Override
     public void controlBordes() 
@@ -181,12 +152,11 @@ public class Crasus extends Maquina
             decision = 6;
         }
         else
-        {
-            this.colision = false;
-        }
+        { this.colision = false; }
         
         this.huir();
     }
+    
     
     @Override
     public void activarEspecial() 
@@ -196,9 +166,7 @@ public class Crasus extends Maquina
         //A veces te amaga y no te invierte los controles 
         int probabilidad = (int) (Math.random() * 4 + 1);
         if(probabilidad > 1)
-        {
-            ((Humano)this.enemigo).setInvertido(true);
-        }
+        { ((Humano)this.enemigo).setInvertido(true); }
         
         int posiciones = (int) (Math.random() * 2 + 1);
         switch(posiciones)

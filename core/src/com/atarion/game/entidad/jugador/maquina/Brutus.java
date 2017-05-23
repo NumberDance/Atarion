@@ -10,17 +10,17 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 public class Brutus extends Maquina
 {
     private Proyectil proyectil;
-    private boolean disparando;
-    private boolean colisionproyectil;
+    private boolean disparando = false, colisionproyectil = false;
+    
     
     public Brutus(Batch genesis) 
     {
         super(genesis);
+        
         this.textura = new Texture(Gdx.files.internal("brutus.png"));
         this.fuerza *= 3;
-        disparando = false;
-        colisionproyectil = false;
     }
+    
     
     @Override
     public void actualizarEstado()
@@ -28,11 +28,16 @@ public class Brutus extends Maquina
         super.actualizarEstado();
         
         if(proyectil != null)
-        {
-            proyectil.actualizarEstado();
-        }
+        { proyectil.actualizarEstado(); }
     }
     
+    
+    @Override
+    public void agregarEnemigo(Jugador jugador)
+    {
+        this.enemigo = jugador;
+        this.perseguir();
+    }
     @Override
     public void jugar(Camera camara)
     {
@@ -61,16 +66,8 @@ public class Brutus extends Maquina
                 }
             }
             else
-            {
-                this.colisionproyectil = false;
-            }
+            { this.colisionproyectil = false; }
         }
-    }
-    @Override
-    public void agregarEnemigo(Jugador jugador)
-    {
-        this.enemigo = jugador;
-        this.perseguir();
     }
     private void perseguir()
     {
@@ -78,50 +75,36 @@ public class Brutus extends Maquina
                 && (enemigo.getY() == this.y 
                 || (enemigo.getY() >= 800 - 98 && this.y >= 800 - 98) 
                 || (enemigo.getY() <= 98 && this.y <= 98)))
-        {
-            decision = 1;
-        }
+        { decision = 1; }
         else if(enemigo.getX() < this.x 
                 && (enemigo.getY() == this.y 
                 || (enemigo.getY() >= 800 - 98 && this.y >= 800 - 98) 
                 || (enemigo.getY() <= 98 && this.y <= 98)))
-        {
-            decision = 2;
-        }
+        { decision = 2; }
         
         else if(enemigo.getY() > this.y 
                 && (enemigo.getX() == this.x 
                 || (enemigo.getX() >= 1000 - 98 && this.x >= 1000 - 98) 
                 || (enemigo.getX() <= 98 && this.x <= 98)))
-        {
-            decision = 3;
-        }
+        { decision = 3; }
         else if(enemigo.getY() < this.y 
                 && (enemigo.getX() == this.x 
                 || (enemigo.getX() >= 1000 - 98 && this.x >= 1000 - 98) 
                 || (enemigo.getX() <= 98 && this.x <= 98)))
-        {
-            decision = 4;
-        }
+        { decision = 4; }
         
         else if(enemigo.getX() > this.x && enemigo.getY() > this.y)
-        {
-            decision = 5;
-        }
+        { decision = 5; }
         else if(enemigo.getX() > this.x && enemigo.getY() < this.y)
-        {      
-            decision = 6;
-        }
+        { decision = 6; }
         
         else if(enemigo.getX() < this.x && enemigo.getY() > this.y)
-        {
-            decision = 7;
-        }
+        { decision = 7; }
         else if(enemigo.getX() < this.x && enemigo.getY() < this.y)
-        {
-            decision = 8;
-        }
+        { decision = 8; }
     }
+    
+    
     @Override
     public void controlBordes() 
     {   
@@ -130,16 +113,19 @@ public class Brutus extends Maquina
             this.y = 0;
             this.perseguir();
         }
+        
         if(this.y > 800 - 100)
         {
             this.y = 800 - 100;
             this.perseguir();
         }
+        
         if(this.x < 0)
         {
             this.x = 0;
             this.perseguir();
         }
+        
         if(this.x > 1000 - 100) 
         {
             this.x = 1000 - 100;
@@ -147,6 +133,7 @@ public class Brutus extends Maquina
         }
     }
 
+    
     @Override
     public void activarEspecial() 
     {

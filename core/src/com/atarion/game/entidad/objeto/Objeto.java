@@ -6,7 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public abstract class Objeto extends Entidad 
 {
-    protected int dureza;
+    protected int dureza = 0;
+    
     
     protected Objeto(Batch genesis, Texture textura, int dureza)
     {
@@ -15,8 +16,7 @@ public abstract class Objeto extends Entidad
         this.dureza = dureza;
     }
     
+    
     public int getDureza() 
-    {
-        return dureza;
-    }
+    { return dureza; }
 }

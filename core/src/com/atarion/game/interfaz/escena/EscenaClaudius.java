@@ -12,10 +12,10 @@ public class EscenaClaudius extends Escena
     private LinkedList<Escombro> escombros;
     private LinkedList<Boolean> colisiones;
 
+    
     public EscenaClaudius() 
-    {
-        super(Gdx.audio.newMusic(Gdx.files.internal("finale.mp3")));
-    }
+    { super(Gdx.audio.newMusic(Gdx.files.internal("finale.mp3"))); }
+    
     
     @Override
     public void show()
@@ -96,9 +96,7 @@ public class EscenaClaudius extends Escena
                     }
                 }
                 else
-                {
-                    colisiones.set(m,Boolean.FALSE);
-                }
+                { colisiones.set(m,Boolean.FALSE); }
             }  
         }
     }

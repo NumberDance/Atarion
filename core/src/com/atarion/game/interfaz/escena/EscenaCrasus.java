@@ -7,9 +7,8 @@ import com.badlogic.gdx.Gdx;
 public class EscenaCrasus extends Escena
 {   
     public EscenaCrasus() 
-    {
-        super(Gdx.audio.newMusic(Gdx.files.internal("zombies.mp3")));
-    }
+    { super(Gdx.audio.newMusic(Gdx.files.internal("zombies.mp3"))); }
+    
     
     @Override
     public void show()

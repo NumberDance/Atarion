@@ -15,11 +15,13 @@ public abstract class Escena extends Interfaz
     private boolean colision = false;
     private int estado = -1; //-1 en curso, 0 ganado, 1 perdido
     
+    
     protected Escena(Music tema)
     {
         this.tema = tema;
         tema.setLooping(true);
     }
+    
     
     @Override
     public void render(float delta) 
@@ -44,19 +46,14 @@ public abstract class Escena extends Interfaz
             }
         } 
         else
-        {
-            colision = false;
-        }
+        { colision = false; }
       
         if(humano.getVida() <= 0)
-        {
-            Atarion.getInstance().setScreen(new MenuDerrota());
-        }
+        { Atarion.getInstance().setScreen(new MenuDerrota()); }
         else if(maquina.getVida() <= 0)
-        {
-            Atarion.getInstance().setScreen(new MenuVictoria());
-        }
+        { Atarion.getInstance().setScreen(new MenuVictoria()); }
     }
+    
     
     @Override
     public void dispose() 

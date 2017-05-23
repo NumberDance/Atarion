@@ -14,12 +14,11 @@ public class AnalisisBrutus extends Analisis
         analisis = new Texture(Gdx.files.internal("brutusanalysis.png"));
     }
     
+    
     @Override
     protected void controlarTeclado() 
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY))
-        {
-            Atarion.getInstance().setScreen(new EscenaBrutus());
-        }
+        { Atarion.getInstance().setScreen(new EscenaBrutus()); }
     }
 }

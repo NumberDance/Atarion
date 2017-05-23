@@ -7,25 +7,18 @@ public class Atarion extends Game
 {   
     private static final Atarion atarion = new Atarion();
     
+    
     public static Atarion getInstance()
-    {
-        return atarion;
-    }
+    { return atarion;}
+    
     
     @Override
     public void create() 
-    {   
-        this.setScreen(new MenuPrincipal());
-    }
+    { this.setScreen(new MenuPrincipal()); }
     @Override
     public void render()
-    {
-        super.render();
-    }
-    
+    { super.render(); }
     @Override
     public void dispose()
-    {
-        super.dispose();
-    }
+    { super.dispose(); }
 }

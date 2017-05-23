@@ -12,12 +12,13 @@ public class MenuVictoria extends Menu
 {
     private BitmapFont titulo,texto,volver;
 
+    
     public MenuVictoria() 
     {
-        super();
-        
+        super();    
         tema = Gdx.audio.newMusic(Gdx.files.internal("victory.mp3"));
     }
+    
     
     @Override
     public void render(float delta)
@@ -45,6 +46,7 @@ public class MenuVictoria extends Menu
         genesis.end();
     }
     
+    
     @Override
     public void dispose()
     {
@@ -54,24 +56,17 @@ public class MenuVictoria extends Menu
         texto.dispose();
     }
 
+    
     @Override
     protected void controlarTeclado() 
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.A)) 
-        {
-            Atarion.getInstance().setScreen(new AnalisisCrasus());
-        }
+        { Atarion.getInstance().setScreen(new AnalisisCrasus()); }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.B))
-        {
-            Atarion.getInstance().setScreen(new AnalisisBrutus());
-        }
+        { Atarion.getInstance().setScreen(new AnalisisBrutus()); }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.C))
-        {
-            Atarion.getInstance().setScreen(new AnalisisClaudius());
-        }
+        { Atarion.getInstance().setScreen(new AnalisisClaudius()); }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
-        {
-            Atarion.getInstance().setScreen(new MenuPrincipal());
-        }
+        { Atarion.getInstance().setScreen(new MenuPrincipal()); }
     }
 }

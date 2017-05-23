@@ -11,11 +11,13 @@ public class Templar extends Humano
     private HabilidadTemplar habilidad = null;
     protected int rebote = 200;
     
+    
     public Templar(Batch genesis) 
     {
         super(genesis);
         this.textura = new Texture(Gdx.files.internal("templar.png"));
     }
+    
     
     @Override
     public void actualizarEstado()
@@ -23,16 +25,16 @@ public class Templar extends Humano
        super.actualizarEstado();
         
        if(habilidad != null)
-       {
-           habilidad.actualizarEstado();
-       }
+       { habilidad.actualizarEstado(); }
     }
+    
     
     @Override
     public void agregarEnemigo(Jugador jugador) 
     {
         enemigo = jugador;
     }
+    
     
     @Override
     public void colisionJugador(Jugador jugador)
@@ -88,10 +90,11 @@ public class Templar extends Humano
         
         Gdx.app.log
         (
-                "INFO",
-                "Las barreras de clase Templar no reciben daño de contacto."
+            "INFO",
+            "Las barreras de clase Templar no reciben daño de contacto."
         );
     }
+    
     
     @Override
     public void activarEspecial() 

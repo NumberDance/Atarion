@@ -14,12 +14,11 @@ public class AnalisisClaudius extends Analisis
         analisis = new Texture(Gdx.files.internal("claudiusanalysis.png"));
     }    
     
+    
     @Override
     protected void controlarTeclado() 
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY))
-        {
-            Atarion.getInstance().setScreen(new EscenaClaudius());
-        }
+        { Atarion.getInstance().setScreen(new EscenaClaudius()); }
     }
 }

@@ -9,7 +9,7 @@ public class HabilidadGuardian extends Habilidad
 { 
     public HabilidadGuardian(Batch genesis, Jugador jugador) 
     {
-        super(genesis, jugador);
+        super(genesis,jugador);
         this.textura = new Texture(Gdx.files.internal("guardianlock.png"));
     }
 }

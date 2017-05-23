@@ -8,6 +8,7 @@ public class Bomba extends Objeto
 {
     private int cuenta = 3;
     
+    
     public Bomba(Batch genesis, float x, float y) 
     {
         super(genesis,new Texture(Gdx.files.internal("bomb3.png")),10);
@@ -20,6 +21,7 @@ public class Bomba extends Objeto
         this.width = 100;
         this.height = 100;
     }
+    
     
     public void cuentaAtras()
     {

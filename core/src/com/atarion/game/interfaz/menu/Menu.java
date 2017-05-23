@@ -11,6 +11,7 @@ public abstract class Menu extends Interfaz
         this.controlarTeclado();
     }
 
+    
     protected abstract void controlarTeclado();
 }
 

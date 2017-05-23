@@ -12,13 +12,16 @@ public class Guardian extends Humano
     private HabilidadGuardian habilidad = null;
     private boolean inmune;
     
+    
     public Guardian(Batch genesis) 
     {
         super(genesis);
+        
         this.textura = new Texture(Gdx.files.internal("guardian.png"));
         this.vida = 200;
         this.inmune = true;
     }
+    
     
     @Override
     public void actualizarEstado()
@@ -26,24 +29,20 @@ public class Guardian extends Humano
        super.actualizarEstado();
         
        if(habilidad != null)
-       {
-           habilidad.actualizarEstado();
-       }
+       { habilidad.actualizarEstado(); }
     }
+    
     
     @Override
     public void agregarEnemigo(Jugador jugador) 
-    {
-        enemigo = jugador;
-    }
+    { enemigo = jugador; }
+    
     
     @Override
     public void colisionObjeto(Objeto objeto)
     {
         if(this.inmune)
-        {
-            Gdx.app.log("INFO","Las barreras de la clase Guardian pueden atravesar objetos.");
-        }
+        { Gdx.app.log("INFO","Las barreras de la clase Guardian pueden atravesar objetos."); }
         else
         {
             Gdx.app.log("INFO","De repente, te hiciste vulnerable a los objetos. 100 puntos de daño y te quedan " + this.getVida() + "vidas");
@@ -51,13 +50,12 @@ public class Guardian extends Humano
         }
     }
     
+    
     @Override
     public void activarEspecial() 
     {
         if(enemigo.isActivado())
-        {
-            enemigo.pararEspecial();
-        }
+        { enemigo.pararEspecial(); }
         else
         {
             Gdx.app.log("ERROR","No hay un módulo activado que cancelar.");
@@ -68,12 +66,9 @@ public class Guardian extends Humano
     }
     @Override
     public void desactivarEspecial() 
-    {
-        this.habilidad = null;
-    }
+    { this.habilidad = null; }
 
+    
     public void setInmune(boolean inmune) 
-    {
-        this.inmune = inmune;
-    }
+    { this.inmune = inmune; }
 }

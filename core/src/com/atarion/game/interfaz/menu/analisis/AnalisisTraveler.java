@@ -16,16 +16,13 @@ public class AnalisisTraveler extends Analisis
         tema.setLooping(true);
     }
 
+    
     @Override
     protected void controlarTeclado() 
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT))
-        {
-            Atarion.getInstance().setScreen(new AnalisisGuardian());
-        }
+        { Atarion.getInstance().setScreen(new AnalisisGuardian()); }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT))
-        {
-            Atarion.getInstance().setScreen(new AnalisisTemplar());
-        }
+        { Atarion.getInstance().setScreen(new AnalisisTemplar()); }
     }
 }

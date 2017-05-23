@@ -12,11 +12,14 @@ public abstract class Humano extends Jugador
 {    
     private boolean invertido = false;
     
+    
     public Humano(Batch genesis)
     {
         super(genesis);
+        
         this.y = 30;
     }
+    
     
     @Override
     public void jugar(Camera camara) 
@@ -120,9 +123,7 @@ public abstract class Humano extends Jugador
             }
         }
         else
-        {
-            direccion = Direccion.PARADO;
-        }
+        { direccion = Direccion.PARADO; }
     }   
     @Override
     protected void controlEspecial()
@@ -142,6 +143,7 @@ public abstract class Humano extends Jugador
                 else if(parada)
                 {
                     this.desactivarEspecial();
+                    
                     this.parada = false;
                     activado = false;
                 }
@@ -158,9 +160,7 @@ public abstract class Humano extends Jugador
                 Gdx.app.log("INFO","El modulo estara disponible en " + recarga + " segundos.");
             }
             else
-            {
-                Gdx.app.log("INFO","El modulo ya esta disponible.");
-            }
+            { Gdx.app.log("INFO","El modulo ya esta disponible."); }
             
             cronometro = 0.0f;
         }
@@ -170,6 +170,7 @@ public abstract class Humano extends Jugador
             if(recarga == 0)
             {
                 activarEspecial();
+                
                 recarga = tiemporecarga;
                 activado = true;
             }
@@ -178,25 +179,22 @@ public abstract class Humano extends Jugador
     protected void controlBordes()
     {
         if(this.y < 0) 
-        {
-            this.y = 0;
-        }
+        { this.y = 0; }
+        
         if(this.y > 800 - 20)
-        {
-            this.y = 800 - 20;
-        }
+        { this.y = 800 - 20; }
+        
         if(this.x < 0)
-        {
-            this.x = 0;
-        }
+        { this.x = 0; }
+        
         if(this.x > 1000 - 80) 
-        {
-            this.x = 1000 - 80;
-        }
+        { this.x = 1000 - 80; }
     }
     
+    
     @Override
-    public void colisionObjeto(Objeto objeto) {}
+    public void colisionObjeto(Objeto objeto) 
+    {}
     @Override
     public void colisionJugador(Jugador jugador) 
     {
@@ -204,17 +202,16 @@ public abstract class Humano extends Jugador
         
         Gdx.app.log
         (
-                "INFO",
-                "La bola te ha hecho " 
-                        + jugador.getFuerza() 
-                        + " puntos de daño. Te quedan " 
-                        + vida 
-                        + " vidas."
+            "INFO",
+            "La bola te ha hecho " 
+            + jugador.getFuerza() 
+            + " puntos de daño. Te quedan " 
+            + vida 
+            + " vidas."
         );
     }
 
+    
     public void setInvertido(boolean invertido) 
-    {
-        this.invertido = invertido;
-    }
+    { this.invertido = invertido; }
 }

@@ -9,14 +9,16 @@ public class Laser extends Objeto
 {
     private Jugador jugador = null;
     
+    
     public Laser(Batch genesis,String texture,Jugador jugador) 
     {
         super(genesis,new Texture(Gdx.files.internal(texture)),20);
-        this.jugador = jugador;       
         
         this.width = 50;
         this.height = 800;
+        this.jugador = jugador;       
     }
+    
     
     @Override
     public void actualizarEstado()
@@ -26,9 +28,7 @@ public class Laser extends Objeto
         for(int i = 0; i < 800; i += 50)
         {
             if(i > jugador.getY() + 50 || i < jugador.getY())
-            {
-                genesis.draw(textura, x, i);
-            }
+            { genesis.draw(textura, x, i); }
         }
     }
 }

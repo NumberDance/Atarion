@@ -9,7 +9,7 @@ public class HabilidadTraveler extends Habilidad
 {  
     public HabilidadTraveler(Batch genesis, Jugador jugador) 
     {
-        super(genesis, jugador);
+        super(genesis,jugador);
         this.textura = new Texture(Gdx.files.internal("travelerengine.png"));
     }
 }

@@ -11,6 +11,7 @@ public class MenuTeclas extends Menu
     private BitmapFont controles;
     private BitmapFont volver;
     
+    
     public MenuTeclas()
     {
         super();
@@ -18,6 +19,7 @@ public class MenuTeclas extends Menu
         tema = Gdx.audio.newMusic(Gdx.files.internal("pirates.mp3"));
         tema.setLooping(true);
     }
+    
     
     @Override
     public void render(float delta)
@@ -40,20 +42,19 @@ public class MenuTeclas extends Menu
         genesis.end();
     }
     
+    
     @Override
     public void dispose()
     {
-        super.dispose();
-        
+        super.dispose();    
         controles.dispose();
     }
 
+    
     @Override
     protected void controlarTeclado() 
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT))
-        {
-            Atarion.getInstance().setScreen(new AnalisisTemplar());
-        }
+        { Atarion.getInstance().setScreen(new AnalisisTemplar()); }
     }
 }

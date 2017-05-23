@@ -14,12 +14,11 @@ public class AnalisisCrasus extends Analisis
         analisis = new Texture(Gdx.files.internal("crasusanalysis.png"));
     }    
     
+    
     @Override
     protected void controlarTeclado() 
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY))
-        {
-            Atarion.getInstance().setScreen(new EscenaCrasus());
-        }
+        { Atarion.getInstance().setScreen(new EscenaCrasus()); }
     }
 }

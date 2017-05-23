@@ -14,22 +14,18 @@ import java.util.LinkedList;
 public class Claudius extends Maquina
 {
     private Laser laser = null;
-    private boolean colisionlaser = false;
-    private boolean carga = false;
-    private Texture escombros,bordes,el,ninguno;
+    private boolean carga = false, colisionlaser = false;
+    private Texture escombros, bordes, el, ninguno;
     
     private enum Modo
-    {
-        ESCOMBROS,
-        BORDES,
-        EL,
-        NINGUNO
-    }
+    { ESCOMBROS,BORDES,EL,NINGUNO }
     private Modo modo = Modo.NINGUNO;
+    
     
     public Claudius(Batch genesis) 
     {
         super(genesis);
+        
         this.velocidad *= 3;
         this.textura = new Texture(Gdx.files.internal("claudius.png"));
         this.tiempoactivo = 20;
@@ -41,15 +37,14 @@ public class Claudius extends Maquina
         this.ninguno = new Texture(Gdx.files.internal("claudius.png"));
     }
     
+    
     @Override
     public void actualizarEstado()
     {
         super.actualizarEstado();
         
         if(laser != null)
-        {
-            laser.actualizarEstado();
-        }
+        { laser.actualizarEstado(); }
     }
     @Override
     public void jugar(Camera camara)
@@ -68,9 +63,7 @@ public class Claudius extends Maquina
                 }
             }
             else
-            {
-                this.colisionlaser = false;
-            }
+            { this.colisionlaser = false; }
         }
         
         switch(modo)
@@ -99,28 +92,22 @@ public class Claudius extends Maquina
         }
     }
     
+    
     @Override
     public void agregarEnemigo(Jugador jugador) 
-    {
-        this.enemigo = jugador;
-    }
+    { this.enemigo = jugador; }
+    
     
     public void esquivar(LinkedList<Escombro> escombros)
     {
         if(carga)
         {   
             if(enemigo.getX() > this.getX())
-            {
-                decision = 1;
-            }
+            { decision = 1; }
             else if(enemigo.getX() < this.getX())
-            {
-                decision = 2;
-            }
+            { decision = 2; }
             else
-            {
-                decision = 0;
-            }
+            { decision = 0; }
         }
         else
         {
@@ -131,48 +118,36 @@ public class Claudius extends Maquina
             
                 if(escombro.getX() == this.x
                         && escombro.getY() - this.y <= 150 )
-                {
-                    decision = 1;
-                }
+                { decision = 1; }
                 else if(escombro.getX() > this.x 
                         && escombro.getX() - this.x <= 150 
                         && escombro.getY() - this.y <= 150 ) 
-                {
-                    decision = 2;
-                }
+                { decision = 2; }
                 else if(escombro.getX() < this.x 
                         && this.x - escombro.getX() <= 150 
                         && escombro.getY() - this.y <= 150)
-                {
-                    decision = 1;
-                }
+                { decision = 1; }
                 else
-                {
-                    decision = 0;
-                }
+                { decision = 0; }
             }
         }
     }
+    
     
     @Override
     protected void controlBordes() 
     {
         if(this.y < 0) 
-        {
-            this.y = 800 - 20;
-        }
+        { this.y = 800 - 20; }
+        
         if(this.y > 800 - 20)
-        {
-            this.y = 0;
-        }
+        { this.y = 0; }
+        
         if(this.x < 0)
-        {
-            this.x = 1000 - 80;
-        }
+        { this.x = 1000 - 80; }
+        
         if(this.x > 1000 - 80) 
-        {
-            this.x = 0;
-        }
+        { this.x = 0; }
     }
     @Override
     protected void controlEspecial()
@@ -185,6 +160,7 @@ public class Claudius extends Maquina
         
         super.controlEspecial();
     }
+    
     
     @Override
     public void activarEspecial() 
@@ -221,17 +197,14 @@ public class Claudius extends Maquina
         this.laser = null;
         
         if(!modo.equals(Modo.ESCOMBROS))
-        {
-            ((Guardian)enemigo).setInmune(true);
-        }
+        { ((Guardian)enemigo).setInmune(true); }
     } 
+    
     
     @Override
     public void setVida(int vida)
     {
         if(this.modo.equals(Modo.NINGUNO))
-        {
-            super.setVida(vida);
-        }
+        { super.setVida(vida); }
     }
 }

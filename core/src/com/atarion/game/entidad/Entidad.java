@@ -9,13 +9,9 @@ public abstract class Entidad extends Rectangle
     protected Batch genesis;
     protected Texture textura;
     
-    public void actualizarEstado()
-    {
-        genesis.draw(textura,x,y);
-    }
     
+    public void actualizarEstado()
+    { genesis.draw(textura,x,y); }
     public void dispose()
-    {
-        textura.dispose();
-    }
+    { textura.dispose(); }
 }

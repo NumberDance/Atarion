@@ -12,6 +12,7 @@ public class MenuPrincipal extends Menu
 {
     private BitmapFont titulo,descripcion,texto;
 
+    
     public MenuPrincipal() 
     {
         super();
@@ -19,6 +20,7 @@ public class MenuPrincipal extends Menu
         tema = Gdx.audio.newMusic(Gdx.files.internal("exploring.mp3"));
         tema.setLooping(true);
     }
+    
     
     @Override
     public void render(float delta)
@@ -46,34 +48,26 @@ public class MenuPrincipal extends Menu
         genesis.end();
     }
     
+    
     @Override
     public void dispose()
     {
-        //super.dispose();
-        
         titulo.dispose();
         descripcion.dispose();
         texto.dispose();
     }
 
+    
     @Override
     protected void controlarTeclado() 
     {
         if(Gdx.input.isKeyPressed(Input.Keys.A)) 
-        {
-            Atarion.getInstance().setScreen(new AnalisisCrasus());
-        }
+        { Atarion.getInstance().setScreen(new AnalisisCrasus()); }
         else if(Gdx.input.isKeyPressed(Input.Keys.B))
-        {
-            Atarion.getInstance().setScreen(new AnalisisBrutus());
-        }
+        { Atarion.getInstance().setScreen(new AnalisisBrutus()); }
         else if(Gdx.input.isKeyPressed(Input.Keys.C))
-        {
-            Atarion.getInstance().setScreen(new AnalisisClaudius());
-        }
+        { Atarion.getInstance().setScreen(new AnalisisClaudius()); }
         else if(Gdx.input.isKeyPressed(Input.Keys.X))
-        {
-            Atarion.getInstance().setScreen(new MenuTeclas());
-        }
+        { Atarion.getInstance().setScreen(new MenuTeclas()); }
     }
 }

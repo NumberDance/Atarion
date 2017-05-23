@@ -8,15 +8,15 @@ public abstract class Habilidad extends Entidad
 {
     private Jugador jugador = null;
     
+    
     public Habilidad(Batch genesis,Jugador jugador)
     {
         this.jugador = jugador;
         this.genesis = genesis;
     }
     
+    
     @Override
     public void actualizarEstado()
-    {
-        genesis.draw(textura, jugador.getX(), jugador.getY() - 30);
-    }
+    { genesis.draw(textura,jugador.getX(),jugador.getY() - 30); }
 }

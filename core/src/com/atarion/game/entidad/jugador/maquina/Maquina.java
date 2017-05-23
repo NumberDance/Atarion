@@ -11,6 +11,7 @@ public abstract class Maquina extends Jugador
 {
     protected int decision = 0;
     
+    
     public Maquina(Batch genesis) 
     {
         super(genesis);
@@ -21,6 +22,7 @@ public abstract class Maquina extends Jugador
         this.width = 100;
         this.height = 100;
     }
+    
     
     @Override
     public void jugar(Camera camara) 
@@ -70,6 +72,8 @@ public abstract class Maquina extends Jugador
             break;
         }
     }
+    
+    
     @Override
     protected abstract void controlBordes();
     @Override
@@ -93,15 +97,11 @@ public abstract class Maquina extends Jugador
                     activado = false;
                 }
                 else
-                {
-                    activo--;
-                } 
+                { activo--; } 
             }
             
             if(recarga > 0)
-            {
-                recarga--;
-            }
+            { recarga--; }
             else if(recarga == 0)
             {
                 activarEspecial();
@@ -113,8 +113,11 @@ public abstract class Maquina extends Jugador
         }
     }
     
+    
     @Override
-    public void colisionObjeto(Objeto objeto) {}
+    public void colisionObjeto(Objeto objeto) 
+    {}
     @Override
-    public void colisionJugador(Jugador objeto) {}
+    public void colisionJugador(Jugador objeto) 
+    {}
 }
