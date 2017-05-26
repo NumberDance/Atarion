@@ -1,6 +1,7 @@
 package com.atarion.game.interfaz.menu;
 
 import com.atarion.game.Atarion;
+import com.atarion.game.interfaz.escena.tutorial.TutorialTemplar;
 import com.atarion.game.interfaz.menu.analisis.AnalisisTemplar;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -55,6 +56,6 @@ public class MenuTeclas extends Menu
     protected void controlarTeclado() 
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT))
-        { Atarion.getInstance().setScreen(new AnalisisTemplar()); }
+        { Atarion.getInstance().setScreen(new TutorialTemplar()); }
     }
 }
