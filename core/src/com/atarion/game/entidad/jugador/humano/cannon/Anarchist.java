@@ -2,6 +2,11 @@ package com.atarion.game.entidad.jugador.humano.cannon;
 
 import com.atarion.game.entidad.jugador.Direccion;
 import com.atarion.game.entidad.jugador.Jugador;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Anarchist extends Cannon
 {
@@ -9,7 +14,10 @@ public class Anarchist extends Cannon
     
     
     public Anarchist(Batch genesis)
-    { super(genesis); }
+    { 
+        super(genesis); 
+        this.textura = new Texture(Gdx.files.internal("anarchist.png"));
+    }
 
     
     @Override
@@ -22,69 +30,70 @@ public class Anarchist extends Cannon
     }   
     private void controlarJugador()
     {
-        this.actualizarEstado();
+        this.controlEspecial();
+        this.controlBordes();
         
         if(Gdx.input.isKeyPressed(Input.Keys.UP)) 
         {
-            enemigo.setY(enemigo.getY() += 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
+            enemigo.setY(enemigo.getY() + 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
             enemigo.setDireccion(Direccion.ARRIBA);
                 
             if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
             {
-                enemigo.setX(enemigo.getX() += 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
+                enemigo.setX(enemigo.getX() + 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
                 enemigo.setDireccion(Direccion.LATERAL_DERECHO_ARRIBA);
             }
             else if(Gdx.input.isKeyPressed(Input.Keys.LEFT))
             {
-                enemigo.setX(enemigo.getX() -= 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
+                enemigo.setX(enemigo.getX() - 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
                 enemigo.setDireccion(Direccion.LATERAL_IZQUIERDO_ARRIBA);
             }
         }
         else if(Gdx.input.isKeyPressed(Input.Keys.DOWN))
         {
-            enemigo.setY(enemigo.getY() -= 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
+            enemigo.setY(enemigo.getY() - 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
             enemigo.setDireccion(Direccion.ABAJO);
                 
             if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
             {
-                enemigo.setX(enemigo.getX() += 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
+                enemigo.setX(enemigo.getX() + 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
                 enemigo.setDireccion(Direccion.LATERAL_DERECHO_ABAJO);
             }
             else if(Gdx.input.isKeyPressed(Input.Keys.LEFT))
             {
-                enemigo.setX(enemigo.getX() -= 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
+                enemigo.setX(enemigo.getX() - 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
                 enemigo.setDireccion(Direccion.LATERAL_IZQUIERDO_ABAJO);
             }
         }      
         else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
         {
-            enemigo.setX(enemigo.getX() += 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
+            enemigo.setX(enemigo.getX() + 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
             enemigo.setDireccion(Direccion.DERECHA);
             
             if(Gdx.input.isKeyPressed(Input.Keys.UP))
             {
-                enemigo.setY(enemigo.getY() += 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
+                enemigo.setY(enemigo.getY() + 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
                 enemigo.setDireccion(Direccion.LATERAL_DERECHO_ARRIBA);
             }
             else if(Gdx.input.isKeyPressed(Input.Keys.DOWN))
             {
-                enemigo.setY(enemigo.getY() -= 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
+                enemigo.setY(enemigo.getY() - 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
                 enemigo.setDireccion(Direccion.LATERAL_DERECHO_ABAJO);
             }
         }
         else if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) 
         {
-            enemigo.setX(enemigo.getX() -= 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
+            enemigo.setX(enemigo.getX() - 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
             enemigo.setDireccion(Direccion.IZQUIERDA);
             
             if(Gdx.input.isKeyPressed(Input.Keys.UP))
             {
-                enemigo.setY(enemigo.getY() += 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
+                enemigo.setY(enemigo.getY() + 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
                 enemigo.setDireccion(Direccion.LATERAL_IZQUIERDO_ARRIBA);
             }
             else if(Gdx.input.isKeyPressed(Input.Keys.DOWN))
             {
-                enemigo.setY(enemigo.getY() -= 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
+                enemigo.setY(enemigo.getY() - 200 * Gdx.graphics.getDeltaTime() * enemigo.getVelocidad());
                 enemigo.setDireccion(Direccion.LATERAL_IZQUIERDO_ABAJO);
             }
         }

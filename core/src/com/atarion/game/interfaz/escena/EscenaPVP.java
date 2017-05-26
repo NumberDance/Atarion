@@ -7,6 +7,7 @@ import com.atarion.game.entidad.jugador.humano.trench.Guardian;
 import com.atarion.game.entidad.jugador.maquina.Crasus;
 import com.atarion.game.interfaz.menu.MenuDerrota;
 import com.atarion.game.interfaz.menu.MenuVictoria;
+import com.badlogic.gdx.audio.Music;
 
 public class EscenaPVP extends Escena
 {

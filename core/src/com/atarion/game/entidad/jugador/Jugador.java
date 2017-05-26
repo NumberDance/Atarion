@@ -17,7 +17,7 @@ public abstract class Jugador extends Entidad
     
     protected float cronometro = 0f;
     protected int tiempoactivo = 5, activo = 5, tiemporecarga = 10, recarga = 0;
-    protected boolean activado = false, parado = false, controlado = false;
+    protected boolean activado = false, parado = false, controlado = false, inmune = false;
     
     
     protected Jugador(Batch genesis)
@@ -74,6 +74,13 @@ public abstract class Jugador extends Entidad
     { return fuerza; }
     public float getVelocidad()
     { return velocidad; }
+    public int getVida()
+    { return vida; }
+    public Direccion getDireccion()
+    { return direccion; }
+    public boolean isActivado()
+    { return activado; }
+    
     
     
     public void setVida(int vida)
@@ -106,4 +113,6 @@ public abstract class Jugador extends Entidad
     { return controlado; }
     public void setControlado(boolean controlado)
     { this.controlado = controlado; }
+    public void setInmune(boolean inmune) 
+    { this.inmune = inmune; }
 }

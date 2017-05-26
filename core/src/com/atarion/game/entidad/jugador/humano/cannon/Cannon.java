@@ -2,6 +2,8 @@ package com.atarion.game.entidad.jugador.humano.cannon;
 
 import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.jugador.humano.Humano;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
 
 public abstract class Cannon extends Humano
 {

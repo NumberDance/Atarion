@@ -105,7 +105,7 @@ public abstract class Maquina extends Jugador
             
             if(recarga > 0)
             { recarga--; }
-            else if(recarga == 0)
+            else if(recarga == 0 && !controlado)
             {
                 activarEspecial();
                 recarga = tiemporecarga;

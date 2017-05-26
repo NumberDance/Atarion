@@ -69,7 +69,7 @@ public class Claudius extends Maquina
         switch(modo)
         {
             case ESCOMBROS:
-                ((Guardian)this.enemigo).setInmune(false);
+                this.enemigo.setInmune(false);
             break;
             case BORDES:
                 if(this.enemigo.getX() == 0
@@ -152,7 +152,7 @@ public class Claudius extends Maquina
     @Override
     protected void controlEspecial()
     {
-        if(parada && activado)
+        if(parado && activado)
         {
             this.modo = Modo.NINGUNO;
             this.textura = this.ninguno;
@@ -197,7 +197,7 @@ public class Claudius extends Maquina
         this.laser = null;
         
         if(!modo.equals(Modo.ESCOMBROS))
-        { ((Guardian)enemigo).setInmune(true); }
+        { enemigo.setInmune(true); }
     } 
     
     
