@@ -1,14 +1,18 @@
 package com.atarion.game.entidad.jugador.maquina;
 
 import com.atarion.game.entidad.jugador.Jugador;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Dummy extends Maquina
 {
     public Dummy(Batch genesis) 
     {
         super(genesis);
+        this.y = 400;
         
-        this.textura = new Texture(Gdx.files.internal("brutus.png"));
+        this.textura = new Texture(Gdx.files.internal("dummy.png"));
         this.vida = 999999999;
         this.fuerza = 0;
     }

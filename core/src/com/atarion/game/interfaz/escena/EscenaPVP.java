@@ -7,6 +7,7 @@ import com.atarion.game.entidad.jugador.humano.trench.Guardian;
 import com.atarion.game.entidad.jugador.maquina.Crasus;
 import com.atarion.game.interfaz.menu.MenuDerrota;
 import com.atarion.game.interfaz.menu.MenuVictoria;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
 public class EscenaPVP extends Escena
@@ -14,27 +15,28 @@ public class EscenaPVP extends Escena
     private Humano oponente;
     private boolean colision1 = false, colision2 = false, colision3 = false;
     
-    public EscenaPVP(Music tema)
+    public EscenaPVP()
     { 
-        super(tema);
+        super(Gdx.audio.newMusic(Gdx.files.internal("finale.mp3")));
         
         this.humano = new Templar(genesis);
         this.oponente = new Guardian(genesis);
         this.maquina = new Crasus(genesis);
         
         humano.agregarEnemigo(oponente);
+        humano.agregarEnemigo(maquina);
+        
         oponente.agregarEnemigo(humano);
+        oponente.agregarEnemigo(maquina);
     }
     
     @Override
     public void render(float delta) 
-    {
+    { 
         super.render(delta);
-      
+        
         genesis.begin();
-        humano.actualizarEstado();
         oponente.actualizarEstado();
-        maquina.actualizarEstado();
         genesis.end();
       
         humano.jugar(camara);
