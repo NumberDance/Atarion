@@ -11,14 +11,8 @@ Defying Commodus (Brutus Theme) by Matthew Pablo -> http://www.matthewpablo.com/
 
 Instrucciones para instalar:
 
-1 -> Descargar el ZIP del proyecto. Extraerlo.
+1 -> Clonarlo en tu directorio local.
 
-2 -> Descargar la utilidad de LibGDX de creación de proyectos. Ejecutarla.
+2 -> Usar la herramienta de tu IDE de abrir proyecto. Lo importará como proyecto Gradle.
 
-3 -> Seleccionar únicamente Desktop.
-
-4 -> Cambiar el nombre de paquete a com.atarion.game. Ponerle de nombre Atarion.
-
-5 -> Importarlo a Netbeans como un Proyecto Gradle.
-
-6 -> Insertar los contenidos del ZIP en sus respectivas rutas y ejecutar.
+3 -> Procesar las dependencias (gradle build) y ejecutarlo.
