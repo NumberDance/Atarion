@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 public class Brutus extends Maquina
 {
     private Proyectil proyectil;
-    private boolean disparando = false, colisionproyectil = false;
+    private boolean colisionproyectil = false;
     
     
     public Brutus(Batch genesis) 
@@ -139,8 +139,7 @@ public class Brutus extends Maquina
     {
         this.textura = new Texture(Gdx.files.internal("hunt.png"));
         enemigo.setVelocidad(enemigo.getVelocidad() / 4);
-        proyectil = new Proyectil(genesis,this.x + 200,this.y + 200,enemigo.getX(),enemigo.getY());
-        this.disparando = true;
+        proyectil = new Proyectil(genesis,50,50,enemigo.getX(),enemigo.getY());
     }
     @Override
     public void desactivarEspecial() 
@@ -148,7 +147,6 @@ public class Brutus extends Maquina
         this.textura = new Texture(Gdx.files.internal("brutus.png"));
         enemigo.setVelocidad(enemigo.getVelocidad() * 4);
         proyectil = null;
-        this.disparando = false;
         this.perseguir();
     } 
 }

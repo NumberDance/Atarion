@@ -86,15 +86,6 @@ public class EscenaClaudius extends Escena
                         colisiones.set(m,Boolean.TRUE);
                     }
                 }
-                else if(escombro.overlaps(maquina))
-                {
-                    if(colisiones.get(m).equals(Boolean.FALSE))
-                    {
-                        maquina.setVida(maquina.getVida() - escombro.getDureza());
-                        Gdx.app.log("INFO", "La bola ha sido vilmente golpeada por un pedrusco. Le quedan " + maquina.getVida() + " vidas.");
-                        colisiones.set(m,Boolean.TRUE);
-                    }
-                }
                 else
                 { colisiones.set(m,Boolean.FALSE); }
             }  

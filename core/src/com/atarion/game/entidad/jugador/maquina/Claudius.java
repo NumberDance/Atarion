@@ -2,7 +2,6 @@ package com.atarion.game.entidad.jugador.maquina;
 
 import com.atarion.game.entidad.objeto.Escombro;
 import com.atarion.game.entidad.jugador.Jugador;
-import com.atarion.game.entidad.jugador.humano.trench.Guardian;
 import com.atarion.game.entidad.objeto.Laser;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -58,7 +57,7 @@ public class Claudius extends Maquina
                 if(!this.colisionlaser)
                 {
                     this.enemigo.setVida(this.enemigo.getVida() - 20);
-                    Gdx.app.log("INFO", "Has recibido 20 del proyectil. Te quedan " + enemigo.getVida() + " vidas.");
+                    Gdx.app.log("INFO", "Has recibido 50 del proyectil. Te quedan " + enemigo.getVida() + " vidas.");
                     this.colisionlaser = true;
                 }
             }
@@ -77,16 +76,16 @@ public class Claudius extends Maquina
                         || this.enemigo.getY() == 0
                         || this.enemigo.getY() == 800)
                 {
-                    Gdx.app.log("INFO","De repente, te hiciste vulnerable a los bordes. 100 puntos de daño y te quedan " + this.getVida() + "vidas");
-                    this.enemigo.setVida(this.enemigo.getVida() - 100);
+                    Gdx.app.log("INFO","De repente, te hiciste vulnerable a los bordes. 200 puntos de daño y te quedan " + this.getVida() + "vidas");
+                    this.enemigo.setVida(this.enemigo.getVida() - 200);
                 }
             break;
             case EL:
                 
                 if(this.overlaps(this.enemigo))
                 {
-                    Gdx.app.log("INFO","De repente, te hiciste muy vulnerable a la bola. 100 puntos de daño y te quedan " + this.getVida() + "vidas");
-                    this.enemigo.setVida(this.enemigo.getVida() - 100);
+                    Gdx.app.log("INFO","De repente, te hiciste muy vulnerable a la bola. 200 puntos de daño y te quedan " + this.getVida() + "vidas");
+                    this.enemigo.setVida(this.enemigo.getVida() - 200);
                 }
             break;
         }
@@ -167,25 +166,19 @@ public class Claudius extends Maquina
     {
         this.carga = true;
         
+        this.modo = Modo.NINGUNO;
+        this.textura = this.ninguno;
+        
         int probabilidad = (int) (Math.random() * 3 + 1);
         switch(probabilidad)
         {
             case 1:
-                modo = Modo.ESCOMBROS;
-                
-                this.textura = this.escombros;
                 laser = new Laser(genesis,"laserdebris.png",this);
             break;
             case 2:
-                modo = Modo.BORDES;
-                
-                this.textura = this.bordes;
                 laser = new Laser(genesis,"laserborder.png",this);
             break;
             case 3:
-                modo = Modo.EL;
-                
-                this.textura = this.el;
                 laser = new Laser(genesis,"laserhimself.png",this);
             break;
         }
@@ -195,6 +188,23 @@ public class Claudius extends Maquina
     {   
         this.carga = false;
         this.laser = null;
+        
+        int probabilidad = (int) (Math.random() * 3 + 1);
+        switch(probabilidad)
+        {
+            case 1:
+                modo = Modo.ESCOMBROS;
+                this.textura = this.escombros;
+            break;
+            case 2:
+                modo = Modo.BORDES;
+                this.textura = this.bordes;
+            break;
+            case 3:
+                modo = Modo.EL;
+                this.textura = this.el;
+            break;
+        }
         
         if(!modo.equals(Modo.ESCOMBROS))
         { enemigo.setInmune(true); }

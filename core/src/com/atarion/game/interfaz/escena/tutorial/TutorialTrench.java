@@ -16,7 +16,8 @@ public class TutorialTrench extends Tutorial
         
         this.insignia = new Texture(Gdx.files.internal("trenchinsignia.png"));
         this.textotitulo = "Trench";
-        this.textodescripcion = "Clase con gran resistencia pero de escasa velocidad. Capaz de atravesar objetos.\n";
+        this.textodescripcion = "Clase con gran resistencia pero de escasa velocidad. Pulsa RIGHT ALT para disparar, "
+        + "usa UP,DOWN,RIGHT,LEFT para dirigir el proyectil.\n";
         this.textodescripcion += "Rompen obstáculos para crear rutas de escape para sus compañeros de equipo.";
         this.textosiguiente = "PULSA  ENTER  PARA  SALTAR  AL  MENU  PRINCIPAL";
         

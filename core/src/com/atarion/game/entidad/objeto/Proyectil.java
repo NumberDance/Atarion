@@ -6,22 +6,21 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Proyectil extends Objeto
 {
-    protected float posicionx, posiciony;
     protected float direccionx, direcciony;
     
     protected boolean destino = false;
     protected float velocidad = 1f;
     
     
-    public Proyectil(Batch genesis, float posicionx, float posiciony, float direccionx, float direcciony)
+    public Proyectil(Batch genesis, float x, float y, float direccionx, float direcciony)
     {
         super(genesis,new Texture(Gdx.files.internal("proyectile.png")),10);
         
         this.width = 100;
         this.height = 100;
         
-        this.posicionx = posicionx;
-        this.posiciony = posiciony;
+        this.x = x;
+        this.y = y;
         this.direccionx = direccionx;
         this.direcciony = direcciony;
     }

@@ -12,7 +12,7 @@ public class Laser extends Objeto
     
     public Laser(Batch genesis,String texture,Jugador jugador) 
     {
-        super(genesis,new Texture(Gdx.files.internal(texture)),20);
+        super(genesis,new Texture(Gdx.files.internal(texture)),50);
         
         this.width = 50;
         this.height = 800;

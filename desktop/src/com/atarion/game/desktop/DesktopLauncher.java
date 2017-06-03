@@ -12,6 +12,6 @@ public class DesktopLauncher
         config.title = "Atarion";
         config.width = 1000;
         config.height = 800;
-        new LwjglApplication(Atarion.getInstance(), config);
+        new LwjglApplication(Atarion.getInstance(),config);
     }
 }

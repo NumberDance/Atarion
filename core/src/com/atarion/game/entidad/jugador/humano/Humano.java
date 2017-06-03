@@ -23,7 +23,7 @@ public abstract class Humano extends Jugador
     
     
     @Override
-    public final void actualizarEstado()
+    public void actualizarEstado()
     {
        super.actualizarEstado();
         
