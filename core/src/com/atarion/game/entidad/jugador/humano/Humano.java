@@ -11,14 +11,16 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public abstract class Humano extends Jugador
 {    
-    private boolean invertido = false;
+    private boolean tu = false;
     protected Habilidad habilidad = null;
 
     
-    public Humano(Batch genesis)
+    public Humano(Batch genesis, boolean tu)
     {
         super(genesis);
+        
         this.y = 30;
+        this.tu = tu;
     }
     
     
@@ -38,9 +40,15 @@ public abstract class Humano extends Jugador
     @Override
     public void jugar(Camera camara) 
     {   
-        super.jugar(camara);
-        
-        if(Gdx.input.isKeyPressed(Input.Keys.UP) && !controlado) 
+        if(tu)
+        { super.jugar(camara); }
+    }   
+    
+    
+    @Override
+    protected final void controlMovimiento()
+    {
+        if(Gdx.input.isKeyPressed(Input.Keys.UP)) 
         {
             if(invertido)
             {
@@ -64,7 +72,7 @@ public abstract class Humano extends Jugador
                 }
             }
         }
-        else if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && !controlado)
+        else if(Gdx.input.isKeyPressed(Input.Keys.DOWN))
         {
             if(invertido)
             {
@@ -88,7 +96,7 @@ public abstract class Humano extends Jugador
                 }
             }
         }      
-        else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !controlado)
+        else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
         {
             if(invertido)
             {
@@ -112,7 +120,7 @@ public abstract class Humano extends Jugador
                 }
             }
         }
-        else if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && !controlado) 
+        else if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) 
         {
             if(invertido)
             {
@@ -137,8 +145,8 @@ public abstract class Humano extends Jugador
             }
         }
         else
-        { direccion = Direccion.PARADO; }
-    }   
+        { direccion = Direccion.PARADO; }       
+    }
     @Override
     protected void controlEspecial()
     {
@@ -190,6 +198,7 @@ public abstract class Humano extends Jugador
             }
         }
     }
+    @Override
     protected void controlBordes()
     {
         if(this.y < 0) 

@@ -5,9 +5,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public abstract class Wheel extends Humano
 {
-    public Wheel(Batch genesis)
+    public Wheel(Batch genesis,boolean tu)
     {
-        super(genesis);
+        super(genesis,tu);
         
         this.velocidad *= 2;
         this.fuerza /= 2;

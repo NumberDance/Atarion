@@ -7,9 +7,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Fanatic extends Cannon
 {   
-    public Fanatic(Batch genesis)
+    public Fanatic(Batch genesis,boolean tu)
     {
-        super(genesis);
+        super(genesis,tu);
         this.textura = new Texture(Gdx.files.internal("fanatic.png"));
     }
 

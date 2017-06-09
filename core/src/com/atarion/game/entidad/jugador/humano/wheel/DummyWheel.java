@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class DummyWheel extends Wheel
 {
-    public DummyWheel(Batch genesis)
+    public DummyWheel(Batch genesis,boolean tu)
     {
-        super(genesis);
+        super(genesis,tu);
         this.textura = new Texture(Gdx.files.internal("dummywheel.png"));
         
         this.vida = 999999999;

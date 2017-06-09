@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Traveler extends Wheel
 {   
-    public Traveler(Batch genesis) 
+    public Traveler(Batch genesis,boolean tu) 
     {
-        super(genesis);
+        super(genesis,tu);
         this.textura = new Texture(Gdx.files.internal("traveler.png"));
     }
 

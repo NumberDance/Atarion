@@ -17,7 +17,7 @@ public abstract class Jugador extends Entidad
     
     protected float cronometro = 0f;
     protected int tiempoactivo = 5, activo = 5, tiemporecarga = 10, recarga = 0;
-    protected boolean activado = false, parado = false, controlado = false, inmune = false;
+    protected boolean activado = false, parado = false, controlado = false, inmune = false, invertido = false;
     
     
     protected Jugador(Batch genesis)
@@ -32,8 +32,12 @@ public abstract class Jugador extends Entidad
     public abstract void agregarEnemigo(Jugador jugador);
     protected void jugar(Camera camara)
     {
-        this.controlEspecial();
-        this.controlBordes();
+        if(!controlado)
+        {
+            this.controlMovimiento();
+            this.controlEspecial();
+            this.controlBordes();
+        }
     }
     
     
@@ -41,6 +45,7 @@ public abstract class Jugador extends Entidad
     protected abstract void colisionJugador(Jugador jugador);
     
     
+    protected abstract void controlMovimiento();
     protected abstract void controlBordes();
     protected abstract void controlEspecial();
     public void pararEspecial()

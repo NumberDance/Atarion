@@ -4,9 +4,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Visionary extends Wheel
 {
-    public Visionary(Batch genesis)
+    public Visionary(Batch genesis,boolean tu)
     {
-        super(genesis);
+        super(genesis,tu);
     }
 
 

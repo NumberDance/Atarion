@@ -9,9 +9,9 @@ public abstract class Cannon extends Humano
 {
     protected int rebote = 200;
     
-    public Cannon(Batch genesis)
+    public Cannon(Batch genesis,boolean tu)
     {
-        super(genesis);
+        super(genesis,tu);
         
         this.fuerza *= 2;
         this.vida /= 2;

@@ -17,7 +17,7 @@ public class EscenaBrutus extends Escena
     {
         super.show();
         
-        humano = new Traveler(genesis);
+        humano = new Traveler(genesis,true);
         maquina = new Brutus(genesis);
         
         humano.agregarEnemigo(maquina);

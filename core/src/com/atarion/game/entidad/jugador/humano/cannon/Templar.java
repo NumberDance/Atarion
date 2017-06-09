@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Templar extends Cannon
 {   
-    public Templar(Batch genesis) 
+    public Templar(Batch genesis,boolean tu) 
     {
-        super(genesis);
+        super(genesis,tu);
         this.textura = new Texture(Gdx.files.internal("templar.png"));
     }
     
