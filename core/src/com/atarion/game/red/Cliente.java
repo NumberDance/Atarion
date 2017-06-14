@@ -6,5 +6,8 @@ public class Cliente
 {
     private Socket cliente;
     
-    
+    public Cliente()
+    {
+        
+    }
 }

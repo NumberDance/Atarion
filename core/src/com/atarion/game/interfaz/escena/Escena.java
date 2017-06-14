@@ -10,9 +10,9 @@ import com.badlogic.gdx.audio.Music;
 
 public abstract class Escena extends Interfaz
 {
-    protected Humano humano = null, oponente = null;
+    protected Humano humano = null, humano2 = null;
     protected Maquina maquina = null;
-    protected boolean cmaquinahumano = false, coponentehumano = false, cmaquinaoponente = false;
+    protected boolean cmaquinahumano = false, chumano2humano = false, cmaquinahumano2 = false;
     
     
     protected Escena(Music tema)
@@ -30,16 +30,16 @@ public abstract class Escena extends Interfaz
         genesis.begin();
         
         humano.actualizarEstado();
-        if(oponente != null)
-        { oponente.actualizarEstado(); }
+        if(humano2 != null)
+        { humano2.actualizarEstado(); }
         if(maquina != null)
         { maquina.actualizarEstado(); }
         
         genesis.end();
       
         humano.jugar(camara);
-        if(oponente != null)
-        { oponente.jugar(camara); }
+        if(humano2 != null)
+        { humano2.jugar(camara); }
         if(maquina != null)
         { maquina.jugar(camara); }
 
@@ -64,36 +64,36 @@ public abstract class Escena extends Interfaz
             { cmaquinahumano = false; }
         }
         
-        if(oponente != null)
+        if(humano2 != null)
         {
-            if(oponente.overlaps(humano))
+            if(humano2.overlaps(humano))
             {
-                if(!coponentehumano)
+                if(!chumano2humano)
                 {
-                    humano.colisionJugador(oponente);
-                    oponente.colisionJugador(humano);
+                    humano.colisionJugador(humano2);
+                    humano2.colisionJugador(humano);
                 
-                    coponentehumano = true;
+                    chumano2humano = true;
                 }
             }       
             else
-            { this.coponentehumano = false; }
+            { this.chumano2humano = false; }
         }
         
-        if(oponente != null && maquina != null)
+        if(humano2 != null && maquina != null)
         {
-            if(oponente.overlaps(maquina))
+            if(humano2.overlaps(maquina))
             {
-                if(!cmaquinaoponente)
+                if(!cmaquinahumano2)
                 {
-                    maquina.colisionJugador(oponente);
-                    oponente.colisionJugador(maquina);
+                    maquina.colisionJugador(humano2);
+                    humano2.colisionJugador(maquina);
                 
-                    cmaquinaoponente = true;
+                    cmaquinahumano2 = true;
                 }
             }       
             else
-            { this.cmaquinaoponente = false; }
+            { this.cmaquinahumano2 = false; }
         }
     }
     private void controlResultado()

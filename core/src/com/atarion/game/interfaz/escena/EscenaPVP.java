@@ -17,15 +17,20 @@ public class EscenaPVP extends Escena
     {
         super.show();
         
-        humano = new Traveler(genesis,true);
-        humano.setX(800 / 2 - 64 / 2);
-        humano.setY(60);
-        
-        oponente = new Guardian(genesis,false);
-        oponente.setX(800 / 2 - 64 / 2);
-        oponente.setY(30);
-        
-        humano.agregarEnemigo(oponente);
-        oponente.agregarEnemigo(humano);
+        if(humano != null)
+        {
+            humano = new Guardian(genesis,true);
+            humano.setX(800 / 2 - 64 / 2);
+            humano.setY(60);
+        }
+        else
+        {
+            humano2 = new Guardian(genesis,true);
+            humano2.setX(800 / 2 - 64 / 2);
+            humano2.setY(30);
+            
+            humano.agregarEnemigo(humano2);
+            humano2.agregarEnemigo(humano);
+        }
     }
 }
