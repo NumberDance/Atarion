@@ -46,6 +46,7 @@ project(":desktop")
         compile project(":core")
         compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+        compile 'com.google.code.gson:gson:1.7.2'
     }
 }
 

@@ -2,3 +2,6 @@
 /gradle.properties
 /gradlew
 /gradlew.bat
+/.nb-gradle/
+/core/build/
+/desktop/build/

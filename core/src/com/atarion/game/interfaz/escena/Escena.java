@@ -18,7 +18,9 @@ public abstract class Escena extends Interfaz
     protected Escena(Music tema)
     {
         this.tema = tema;
-        tema.setLooping(true);
+        
+        if(tema != null)
+        { tema.setLooping(true); }
     }
     
     

@@ -4,7 +4,7 @@ import com.atarion.game.Atarion;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-public class DesktopLauncher 
+public class ClientLauncher 
 {   
     private static boolean server = false;
     
@@ -21,5 +21,5 @@ public class DesktopLauncher
     }
 
     public static void setServer(boolean server)
-    { DesktopLauncher.server = server; }
+    { ClientLauncher.server = server; }
 }
