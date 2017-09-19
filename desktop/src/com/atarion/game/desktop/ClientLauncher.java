@@ -15,11 +15,5 @@ public class ClientLauncher
         config.width = 1000;
         config.height = 800;
         new LwjglApplication(Atarion.getInstance(),config);
-        
-        if(server)
-        {}
     }
-
-    public static void setServer(boolean server)
-    { ClientLauncher.server = server; }
 }

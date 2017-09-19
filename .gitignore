@@ -5,3 +5,4 @@
 /.nb-gradle/
 /core/build/
 /desktop/build/
+/.nb-gradle-properties

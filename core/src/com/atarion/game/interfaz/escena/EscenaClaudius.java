@@ -33,7 +33,7 @@ public class EscenaClaudius extends Escena
     } 
     @Override
     public void render(float delta)
-    {
+    {   
         super.render(delta);
        
         int oportunidad = (int) (Math.random() * 150 + 0);
@@ -46,15 +46,8 @@ public class EscenaClaudius extends Escena
         
         if(!escombros.isEmpty())
         {
-            genesis.begin();
-            
-            Iterator<Escombro> i = escombros.iterator();
-            while(i.hasNext())
-            {
-                Escombro escombro = i.next();
-                escombro.actualizarEstado();
-            }
-            
+            genesis.begin();  
+            escombros.forEach(escombro -> escombro.actualizarEstado());
             genesis.end();
             
             Iterator <Escombro> j = escombros.iterator();
