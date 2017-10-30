@@ -10,6 +10,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MenuPrincipal extends Menu
 {
@@ -63,7 +67,17 @@ public class MenuPrincipal extends Menu
         else if(Gdx.input.isKeyPressed(Input.Keys.C))
         { Atarion.getInstance().setScreen(new AnalisisClaudius()); }
         else if(Gdx.input.isKeyPressed(Input.Keys.D))
-        { Atarion.getInstance().setScreen(new EscenaPVP()); }
+        { 
+            try 
+            {
+                EscenaPVP pvp = new EscenaPVP();
+                pvp.montarCliente(new Socket("192.168.1.101",20595));
+                
+                Atarion.getInstance().setScreen(pvp);
+            } 
+            catch (IOException ex) 
+            {}
+        }
         else if(Gdx.input.isKeyPressed(Input.Keys.X))
         { Atarion.getInstance().setScreen(new TutorialTeclas()); }
     }

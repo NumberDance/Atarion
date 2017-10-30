@@ -16,7 +16,7 @@ public abstract class Maquina extends Jugador
     {
         super(genesis);
         this.y = 600;
-        velocidad = 2.0f;
+        velocidad = 1.5f;
         this.tiemporecarga = 20;
         
         this.width = 100;

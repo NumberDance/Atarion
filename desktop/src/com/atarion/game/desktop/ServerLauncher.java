@@ -11,10 +11,7 @@ public class ServerLauncher
         System.out.println("SERVER MODE");
         
         try
-        {
-            ServerSocket servidor = new ServerSocket(20595);
-            new EscenaPVP(servidor).arrancarPartidaCliente();
-        } 
+        { new EscenaPVP().montarServidor(new ServerSocket(20595)); } 
         catch (IOException ex)
         {}
     }

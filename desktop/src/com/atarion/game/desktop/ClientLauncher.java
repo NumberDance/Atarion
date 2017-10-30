@@ -11,7 +11,7 @@ public class ClientLauncher
     public static void main (String[] args) 
     {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        config.title = "Atarion";
+        config.title = "Atarion"; 
         config.width = 1000;
         config.height = 800;
         new LwjglApplication(Atarion.getInstance(),config);
