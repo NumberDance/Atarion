@@ -29,12 +29,15 @@ public abstract class EscenaOnline extends Escena
         
         try
         {
-            System.out.println("Esperando clientes");
+            for(;;)
+            {
+                System.out.println("Esperando clientes");
             
-            Socket cliente = this.servidor.accept();
-            clientes.add(cliente);
+                Socket cliente = this.servidor.accept();
+                clientes.add(cliente);
             
-            System.out.println("Cliente conectado: " + cliente.getInetAddress());
+                System.out.println("Cliente conectado: " + cliente.getInetAddress());
+            }
         } 
         catch (IOException ex) 
         {}
