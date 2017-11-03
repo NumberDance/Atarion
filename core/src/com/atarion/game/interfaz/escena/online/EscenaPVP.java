@@ -1,13 +1,11 @@
 package com.atarion.game.interfaz.escena.online;
 
 import com.atarion.game.entidad.jugador.humano.trench.Guardian;
-import com.badlogic.gdx.Gdx;
-import java.net.ServerSocket;
 
 public class EscenaPVP extends EscenaOnline
 {   
     public EscenaPVP() 
-    { super(Gdx.audio.newMusic(Gdx.files.internal("commodus.mp3"))); }
+    { super(null); }
     
     
     @Override

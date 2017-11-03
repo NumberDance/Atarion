@@ -29,15 +29,12 @@ public abstract class EscenaOnline extends Escena
         
         try
         {
+            System.out.println("Esperando clientes");
+            
             Socket cliente = this.servidor.accept();
             clientes.add(cliente);
-        
-            ObjectInputStream salida = new ObjectInputStream(cliente.getInputStream());
             
-            while(salida.available() > 0)
-            {   
-                InputStreamReader reader = new InputStreamReader(cliente.getInputStream());
-            }
+            System.out.println("Cliente conectado: " + cliente.getInetAddress());
         } 
         catch (IOException ex) 
         {}
@@ -45,12 +42,5 @@ public abstract class EscenaOnline extends Escena
     public void montarCliente(Socket cliente)
     {
         this.cliente = cliente;
-        
-        try
-        {
-            OutputStreamWriter entrada = new OutputStreamWriter(cliente.getOutputStream());
-        } 
-        catch (IOException ex)
-        {}
     }
 }
