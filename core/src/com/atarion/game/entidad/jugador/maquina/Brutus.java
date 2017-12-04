@@ -19,6 +19,7 @@ public class Brutus extends Maquina
         
         this.textura = new Texture(Gdx.files.internal("brutus.png"));
         this.fuerza *= 4;
+        this.velocidad /= 2;
     }
     
     
@@ -138,14 +139,14 @@ public class Brutus extends Maquina
     public void activarEspecial() 
     {
         this.textura = new Texture(Gdx.files.internal("hunt.png"));
-        enemigo.setVelocidad(enemigo.getVelocidad() / 4);
+        enemigo.setVelocidad(enemigo.getVelocidad() / 2);
         proyectil = new Proyectil(genesis,50,50,enemigo.getX(),enemigo.getY());
     }
     @Override
     public void desactivarEspecial() 
     {
         this.textura = new Texture(Gdx.files.internal("brutus.png"));
-        enemigo.setVelocidad(enemigo.getVelocidad() * 4);
+        enemigo.setVelocidad(enemigo.getVelocidad() * 2);
         proyectil = null;
         this.perseguir();
     } 
