@@ -24,17 +24,18 @@ public class EscenaCliente extends Escena
         {}
     }
 
+    
     @Override
     public void show()
     {
         super.show();
-        
         humano = new Traveler(genesis,true);
     }
-    
     @Override
     public void render(float delta)
     {
+        super.render(delta);
+        
         try
         { new PrintWriter(cliente.getOutputStream()).write(this.humano.getDireccion().toString()); } 
         catch (IOException ex)
