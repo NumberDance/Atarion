@@ -7,6 +7,6 @@ public class ServerLauncher
     public static void main(String [] args)
     {   
         System.out.println("SERVER MODE");
-        ServidorEscenas servidor = new ServidorEscenas();
+        new ServidorEscenas().run();
     }
 }

@@ -3,14 +3,12 @@ package com.atarion.game.interfaz.escena.online;
 import com.atarion.game.entidad.jugador.humano.wheel.Traveler;
 import com.atarion.game.interfaz.escena.Escena;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Net.Protocol;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.net.Socket;
-import com.badlogic.gdx.net.SocketHints;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.Socket;
 
 public class EscenaCliente extends Escena
 {
@@ -22,8 +20,12 @@ public class EscenaCliente extends Escena
     { 
         super(tema);
         
-        SocketHints hints = new SocketHints();
-        cliente = Gdx.net.newClientSocket(Protocol.TCP,"192.168.1.100",20595,hints);
+        try
+        {
+            cliente = new Socket("192.168.1.100",20595);
+        } 
+        catch (IOException ex)
+        {}
     }
 
     
@@ -37,15 +39,6 @@ public class EscenaCliente extends Escena
     public void render(float delta)
     {
         super.render(delta);
-        
-        try
-        { 
-            cliente.getOutputStream().write("PING\n".getBytes()); 
-            
-            String response = new BufferedReader(new InputStreamReader(cliente.getInputStream())).readLine();
-            Gdx.app.log("INFO","El server responde: " + response);
-        }
-        catch (IOException ex)
-        {}
+        new HiloEstado(cliente,false).run();
     }
 }

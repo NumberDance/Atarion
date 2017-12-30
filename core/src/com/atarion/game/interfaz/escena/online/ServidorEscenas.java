@@ -1,37 +1,41 @@
 package com.atarion.game.interfaz.escena.online;
 
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Net.Protocol;
-import com.badlogic.gdx.net.ServerSocket;
-import com.badlogic.gdx.net.ServerSocketHints;
-import com.badlogic.gdx.net.Socket;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.HashMap;
 
 
-public final class ServidorEscenas 
+public final class ServidorEscenas implements Runnable
 {
-    private ServerSocket servidor;
     private HashMap<Integer,Socket> clientes = new HashMap<Integer,Socket>();
     private Integer cuenta = 0, capacidad = 1;
     
     
-    public ServidorEscenas()
-    {
-        ServerSocketHints hints = new ServerSocketHints();
-        servidor = Gdx.net.newServerSocket(Protocol.TCP,20595,hints);
-            
-        while(cuenta < capacidad)
-        {
-            System.out.println("Esperando clientes...");
-            cuenta++;
-                
-            clientes.put(cuenta,servidor.accept(null));
-            System.out.println("Cliente conectado: " + clientes.get(cuenta).getRemoteAddress());
-        }
-            
-        this.iniciarPartida();
-    }
     private void iniciarPartida()
-    { clientes.entrySet().forEach(cliente -> { new HiloEstado(cliente.getValue()).run(); }); }
+    { clientes.entrySet().forEach(cliente -> { new HiloEstado(cliente.getValue(),true).run(); }); }
+
+    
+    @Override
+    public void run()
+    {
+        try
+        {
+            ServerSocket servidor = new ServerSocket(20595);
+            
+            while(cuenta < capacidad)
+            {
+                System.out.println("Esperando clientes...");
+                cuenta++;
+                
+                clientes.put(cuenta,servidor.accept());
+                System.out.println("Cliente conectado: " + clientes.get(cuenta).getInetAddress());
+            }
+            
+            this.iniciarPartida();
+        } 
+        catch (IOException ex)
+        {}
+    }
 }
