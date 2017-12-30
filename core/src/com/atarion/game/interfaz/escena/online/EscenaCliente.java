@@ -15,7 +15,7 @@ public class EscenaCliente extends Escena
     private Gson conversor = new Gson();
     
     
-    protected EscenaCliente(Music tema)
+    public EscenaCliente(Music tema)
     { 
         super(tema);
         
