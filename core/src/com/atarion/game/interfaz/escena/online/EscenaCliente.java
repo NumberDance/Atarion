@@ -1,14 +1,13 @@
 package com.atarion.game.interfaz.escena.online;
 
+
 import com.atarion.game.entidad.jugador.humano.wheel.Traveler;
 import com.atarion.game.interfaz.escena.Escena;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+
 
 public class EscenaCliente extends Escena
 {
@@ -39,6 +38,6 @@ public class EscenaCliente extends Escena
     public void render(float delta)
     {
         super.render(delta);
-        new HiloEstado(cliente,false).run();
+        new HiloEstado(cliente,false,humano).run();
     }
 }

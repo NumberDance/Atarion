@@ -29,7 +29,7 @@ public final class ServidorEscenas implements Runnable
                 System.out.println("Cliente conectado: " + clientes.get(cuenta).getInetAddress());
             }
             
-            clientes.entrySet().forEach(cliente -> { new HiloEstado(cliente.getValue(),true).run(); });
+            clientes.entrySet().forEach(cliente -> { new HiloEstado(cliente.getValue(),true,null).run(); });
         } 
         catch (IOException ex)
         {}
