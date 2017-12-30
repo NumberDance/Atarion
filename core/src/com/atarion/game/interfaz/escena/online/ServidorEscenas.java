@@ -1,17 +1,11 @@
 package com.atarion.game.interfaz.escena.online;
 
-import com.badlogic.gdx.Gdx;
-import com.google.gson.Gson;
-import java.io.BufferedReader;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.commons.io.IOUtils;
+
 
 public final class ServidorEscenas 
 {
@@ -40,27 +34,6 @@ public final class ServidorEscenas
         catch (IOException ex)
         {}
     }
-
     private void iniciarPartida()
-    {   
-        for(;;)
-        {
-            clientes.entrySet().forEach
-            (
-                cliente ->
-                {
-                    try
-                    {
-                        InputStream entrada = cliente.getValue().getInputStream();
-                        String serializado = IOUtils.toString(new BufferedReader(new InputStreamReader(entrada)));
-                            
-                        System.out.println("____________________");
-                        System.out.println(serializado);
-                    }   
-                    catch (IOException ex)
-                    {}
-                }
-            );
-        }
-    }
+    { clientes.entrySet().forEach(cliente -> { new HiloEstado(cliente.getValue()).run(); }); }
 }
