@@ -1,13 +1,10 @@
 package com.atarion.game.interfaz.escena.online;
 
+import com.badlogic.gdx.net.Socket;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.commons.io.IOUtils;
+
 
 public class HiloEstado implements Runnable 
 {
@@ -25,13 +22,11 @@ public class HiloEstado implements Runnable
         {
             
             try
-            {
-                InputStream entrada = cliente.getInputStream();
-                String serializado = IOUtils.toString(new BufferedReader(new InputStreamReader(entrada)));
+            {    
+                BufferedReader entrada = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
+                System.out.println(entrada.readLine());
                 
-                System.out.println("____________________");
-                System.out.println(serializado);
-                
+                System.out.println(entrada.readLine() + "\n");
                 entrada.close();
             } 
             catch (IOException ex)

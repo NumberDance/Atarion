@@ -1,9 +1,9 @@
 package com.atarion.game.interfaz.escena.online;
 
 
+import com.badlogic.gdx.net.Socket;
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.HashMap;
 
 
@@ -25,8 +25,8 @@ public final class ServidorEscenas
                 System.out.println("Esperando clientes...");
                 cuenta++;
                 
-                clientes.put(cuenta,servidor.accept());
-                System.out.println("Cliente conectado: " + clientes.get(cuenta).getInetAddress());
+                clientes.put(cuenta,(Socket)servidor.accept());
+                System.out.println("Cliente conectado: " + clientes.get(cuenta).getRemoteAddress());
             }
             
             this.iniciarPartida();
