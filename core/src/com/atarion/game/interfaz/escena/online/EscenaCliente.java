@@ -3,7 +3,6 @@ package com.atarion.game.interfaz.escena.online;
 import com.atarion.game.entidad.jugador.humano.wheel.Traveler;
 import com.atarion.game.interfaz.escena.Escena;
 import com.badlogic.gdx.audio.Music;
-import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -39,5 +38,6 @@ public class EscenaCliente extends Escena
     {
         super.render(delta);
         this.salida.write("Hola");
+        this.salida.flush();
     }
 }
