@@ -38,6 +38,6 @@ public class EscenaCliente extends Escena
     public void render(float delta)
     {
         super.render(delta);
-        this.salida.write(this.humano.getDireccion().toString());
+        this.salida.write("Hola");
     }
 }
