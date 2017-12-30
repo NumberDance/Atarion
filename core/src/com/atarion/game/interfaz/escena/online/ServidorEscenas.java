@@ -55,7 +55,9 @@ public final class ServidorEscenas
                         if(entrada.available() > 0)
                         {
                             String serializado = IOUtils.toString(new BufferedReader(new InputStreamReader(entrada)));
-                            Gdx.app.log("INFO",serializado);
+                            
+                            System.out.println("____________________");
+                            System.out.println(serializado);
                         }
                     }   
                     catch (IOException ex)
