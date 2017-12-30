@@ -11,7 +11,7 @@ import java.net.Socket;
 public class EscenaCliente extends Escena
 {
     private Socket cliente;
-    private Gson conversor = new Gson();
+    private PrintWriter salida; 
     
     
     public EscenaCliente(Music tema)
@@ -19,7 +19,10 @@ public class EscenaCliente extends Escena
         super(tema);
         
         try
-        { this.cliente = new Socket("192.168.1.100",20595); } 
+        { 
+            this.cliente = new Socket("192.168.1.100",20595); 
+            this.salida = new PrintWriter(cliente.getOutputStream());
+        } 
         catch (IOException ex)
         {}
     }
@@ -35,10 +38,6 @@ public class EscenaCliente extends Escena
     public void render(float delta)
     {
         super.render(delta);
-        
-        try
-        { new PrintWriter(cliente.getOutputStream()).write(this.humano.getDireccion().toString()); } 
-        catch (IOException ex)
-        {}
+        this.salida.write(this.humano.getDireccion().toString());
     }
 }

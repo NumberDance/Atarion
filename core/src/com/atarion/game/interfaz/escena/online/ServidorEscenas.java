@@ -18,7 +18,6 @@ public final class ServidorEscenas
     private ServerSocket servidor;
     private HashMap<Integer,Socket> clientes = new HashMap<Integer,Socket>();
     private Integer cuenta = 0, capacidad = 1;
-    private Gson conversor = new Gson();
     
     
     public ServidorEscenas()
@@ -30,7 +29,9 @@ public final class ServidorEscenas
             while(cuenta < capacidad)
             {
                 System.out.println("Esperando clientes...");
-                clientes.put(cuenta++,servidor.accept());
+                cuenta++;
+                
+                clientes.put(cuenta,servidor.accept());
                 System.out.println("Cliente conectado: " + clientes.get(cuenta).getInetAddress());
             }
             
@@ -51,14 +52,10 @@ public final class ServidorEscenas
                     try
                     {
                         InputStream entrada = cliente.getValue().getInputStream();
-                        
-                        if(entrada.available() > 0)
-                        {
-                            String serializado = IOUtils.toString(new BufferedReader(new InputStreamReader(entrada)));
+                        String serializado = IOUtils.toString(new BufferedReader(new InputStreamReader(entrada)));
                             
-                            System.out.println("____________________");
-                            System.out.println(serializado);
-                        }
+                        System.out.println("____________________");
+                        System.out.println(serializado);
                     }   
                     catch (IOException ex)
                     {}
