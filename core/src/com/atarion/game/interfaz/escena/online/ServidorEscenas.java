@@ -11,10 +11,6 @@ public final class ServidorEscenas implements Runnable
 {
     private HashMap<Integer,Socket> clientes = new HashMap<Integer,Socket>();
     private Integer cuenta = 0, capacidad = 1;
-    
-    
-    private void iniciarPartida()
-    { clientes.entrySet().forEach(cliente -> { new HiloEstado(cliente.getValue(),true).run(); }); }
 
     
     @Override
@@ -33,7 +29,7 @@ public final class ServidorEscenas implements Runnable
                 System.out.println("Cliente conectado: " + clientes.get(cuenta).getInetAddress());
             }
             
-            this.iniciarPartida();
+            clientes.entrySet().forEach(cliente -> { new HiloEstado(cliente.getValue(),true).run(); });
         } 
         catch (IOException ex)
         {}
