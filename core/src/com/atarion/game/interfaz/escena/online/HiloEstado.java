@@ -41,18 +41,15 @@ public class HiloEstado implements Runnable
         }
         else
         {
-            for(;;)
+            try
             {
-                try
-                {
-                    cliente.getOutputStream().write("PING\n".getBytes());
+                cliente.getOutputStream().write("PING\n".getBytes());
                     
-                    String response = new BufferedReader(new InputStreamReader(cliente.getInputStream())).readLine();
-                    Gdx.app.log("INFO","El server responde: " + response);
-                } 
-                catch (IOException ex)
-                {}
-            }
+                String response = new BufferedReader(new InputStreamReader(cliente.getInputStream())).readLine();
+                Gdx.app.log("INFO","El server responde: " + response);
+            } 
+            catch (IOException ex)
+            {}
         }
     }
 }
