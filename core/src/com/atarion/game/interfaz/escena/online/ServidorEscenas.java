@@ -29,9 +29,9 @@ public final class ServidorEscenas
             
             while(cuenta < capacidad)
             {
-                Gdx.app.log("INFO","Esperando clientes...");
+                System.out.println("Esperando clientes...");
                 clientes.put(cuenta++,servidor.accept());
-                Gdx.app.log("INFO","Cliente conectado: " + clientes.get(cuenta).getInetAddress());
+                System.out.println("Cliente conectado: " + clientes.get(cuenta).getInetAddress());
             }
             
             this.iniciarPartida();
