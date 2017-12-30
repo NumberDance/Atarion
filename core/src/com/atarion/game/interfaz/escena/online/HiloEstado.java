@@ -2,6 +2,7 @@ package com.atarion.game.interfaz.escena.online;
 
 
 import com.atarion.game.entidad.Entidad;
+import com.atarion.game.entidad.jugador.Jugador;
 import com.badlogic.gdx.Gdx;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
@@ -14,11 +15,11 @@ public class HiloEstado implements Runnable
 {
     private Socket cliente = null;
     private boolean servidor = true;
-    private Entidad estado = null;
+    private Jugador estado = null;
     private Gson conversor = new Gson();
     
     
-    public HiloEstado(Socket cliente,boolean servidor,Entidad estado)
+    public HiloEstado(Socket cliente,boolean servidor,Jugador estado)
     { 
         this.cliente = cliente;
         this.servidor = servidor;
@@ -48,7 +49,7 @@ public class HiloEstado implements Runnable
         {
             try
             {
-                cliente.getOutputStream().write(conversor.toJson(estado).getBytes());
+                cliente.getOutputStream().write(estado.getDireccion().toString().getBytes());
                     
                 String response = new BufferedReader(new InputStreamReader(cliente.getInputStream())).readLine();
                 Gdx.app.log("INFO","El server responde: " + response);
