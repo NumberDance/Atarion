@@ -67,9 +67,7 @@ public class MenuPrincipal extends Menu
         else if(Gdx.input.isKeyPressed(Input.Keys.C))
         { Atarion.getInstance().setScreen(new AnalisisClaudius()); }
         else if(Gdx.input.isKeyPressed(Input.Keys.D))
-        { 
-            Atarion.getInstance().setScreen(new EscenaCliente(null));
-        }
+        { Atarion.getInstance().setScreen(new EscenaCliente(null)); }
         else if(Gdx.input.isKeyPressed(Input.Keys.X))
         { Atarion.getInstance().setScreen(new TutorialTeclas()); }
     }

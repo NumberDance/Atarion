@@ -28,7 +28,7 @@ public class EscenaCliente extends Escena
     @Override
     public void render(float delta)
     {
-        super.render(delta);
+        //super.render(delta);
         
         String serializado = this.conversor.toJson(this);
         
