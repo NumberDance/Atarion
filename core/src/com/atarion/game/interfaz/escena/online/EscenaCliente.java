@@ -1,15 +1,12 @@
 package com.atarion.game.interfaz.escena.online;
 
 import com.atarion.game.entidad.jugador.humano.wheel.Traveler;
-import com.atarion.game.entidad.jugador.maquina.Brutus;
 import com.atarion.game.interfaz.escena.Escena;
 import com.badlogic.gdx.audio.Music;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class EscenaCliente extends Escena
 {
@@ -38,12 +35,8 @@ public class EscenaCliente extends Escena
     @Override
     public void render(float delta)
     {
-        //super.render(delta);
-        
-        String serializado = this.conversor.toJson(humano);
-        
         try
-        { new PrintWriter(cliente.getOutputStream()).write(serializado); } 
+        { new PrintWriter(cliente.getOutputStream()).write(this.humano.getDireccion().toString()); } 
         catch (IOException ex)
         {}
     }
