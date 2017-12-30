@@ -18,7 +18,8 @@ public final class ServidorEscenas
     
     public ServidorEscenas()
     {
-        servidor = Gdx.net.newServerSocket(Protocol.TCP,20595,new ServerSocketHints());
+        ServerSocketHints hints = new ServerSocketHints();
+        servidor = Gdx.net.newServerSocket(Protocol.TCP,20595,hints);
             
         while(cuenta < capacidad)
         {

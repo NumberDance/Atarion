@@ -21,7 +21,9 @@ public class EscenaCliente extends Escena
     public EscenaCliente(Music tema)
     { 
         super(tema);
-        cliente = Gdx.net.newClientSocket(Protocol.TCP,"192.168.1.100",20595,new SocketHints());
+        
+        SocketHints hints = new SocketHints();
+        cliente = Gdx.net.newClientSocket(Protocol.TCP,"192.168.1.100",20595,hints);
     }
 
     
