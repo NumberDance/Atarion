@@ -1,5 +1,7 @@
 package com.atarion.game.interfaz.escena.online;
 
+import com.atarion.game.entidad.jugador.humano.wheel.Traveler;
+import com.atarion.game.entidad.jugador.maquina.Brutus;
 import com.atarion.game.interfaz.escena.Escena;
 import com.badlogic.gdx.audio.Music;
 import com.google.gson.Gson;
@@ -26,11 +28,19 @@ public class EscenaCliente extends Escena
     }
 
     @Override
+    public void show()
+    {
+        super.show();
+        
+        humano = new Traveler(genesis,true);
+    }
+    
+    @Override
     public void render(float delta)
     {
         //super.render(delta);
         
-        String serializado = this.conversor.toJson(this);
+        String serializado = this.conversor.toJson(humano);
         
         try
         { new PrintWriter(cliente.getOutputStream()).write(serializado); } 
