@@ -1,7 +1,6 @@
 package com.atarion.game.interfaz.menu;
 
 import com.atarion.game.Atarion;
-import com.atarion.game.interfaz.escena.online.EscenaPVP;
 import com.atarion.game.interfaz.escena.tutorial.TutorialTeclas;
 import com.atarion.game.interfaz.menu.analisis.AnalisisBrutus;
 import com.atarion.game.interfaz.menu.analisis.AnalisisClaudius;
@@ -68,15 +67,7 @@ public class MenuPrincipal extends Menu
         { Atarion.getInstance().setScreen(new AnalisisClaudius()); }
         else if(Gdx.input.isKeyPressed(Input.Keys.D))
         { 
-            try 
-            {
-                EscenaPVP pvp = new EscenaPVP();
-                pvp.montarCliente(new Socket("192.168.1.101",20595));
-                
-                Atarion.getInstance().setScreen(pvp);
-            } 
-            catch (IOException ex) 
-            {}
+
         }
         else if(Gdx.input.isKeyPressed(Input.Keys.X))
         { Atarion.getInstance().setScreen(new TutorialTeclas()); }
