@@ -1,7 +1,7 @@
 package com.atarion.game.interfaz.menu;
 
 import com.atarion.game.Atarion;
-import com.atarion.game.interfaz.escena.online.EscenaCliente;
+import com.atarion.game.interfaz.escena.online.cliente.EscenaCliente;
 import com.atarion.game.interfaz.escena.tutorial.TutorialTeclas;
 import com.atarion.game.interfaz.menu.analisis.AnalisisBrutus;
 import com.atarion.game.interfaz.menu.analisis.AnalisisClaudius;

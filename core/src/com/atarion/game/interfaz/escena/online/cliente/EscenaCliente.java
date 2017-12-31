@@ -1,4 +1,4 @@
-package com.atarion.game.interfaz.escena.online;
+package com.atarion.game.interfaz.escena.online.cliente;
 
 
 import com.atarion.game.entidad.jugador.humano.wheel.Traveler;
@@ -38,6 +38,6 @@ public class EscenaCliente extends Escena
     public void render(float delta)
     {
         super.render(delta);
-        new HiloEstado(cliente,false,humano).run();
+        new HiloCliente(cliente,humano).run();
     }
 }
