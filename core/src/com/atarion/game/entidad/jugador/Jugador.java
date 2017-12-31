@@ -50,7 +50,7 @@ public abstract class Jugador extends Entidad
         estado.append("'parado':").append("'").append(this.parado).append("'").append(",");
         estado.append("'controlado':").append("'").append(this.controlado).append("'").append(",");
         estado.append("'inmune':").append("'").append(this.inmune).append("'").append(",");
-        estado.append("'invertido':").append("'").append(this.invertido).append("'").append(",");
+        estado.append("'invertido':").append("'").append(this.invertido).append("'");
         return estado;
     }
     public void recibirEstado(String estado)
