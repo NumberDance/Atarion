@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public abstract class Jugador extends Entidad
 {
-    protected int vida = 100, fuerza = 10;
+    protected int vida = 100, fuerza = 10, identificador = 0;
     
     protected float velocidad = 1f;
     protected Direccion direccion;
@@ -27,6 +27,34 @@ public abstract class Jugador extends Entidad
         this.height = 20;
         this.genesis = genesis;
     }
+    
+    
+    public StringBuilder volcarEstado()
+    {
+        StringBuilder estado = new StringBuilder();
+        estado.append("{").append("'Jugador':").append("{");
+        estado.append("'x':").append("'").append(this.x).append("'").append(",");
+        estado.append("'y':").append("'").append(this.y).append("'").append(",");
+        estado.append("'vida':").append("'").append(this.vida).append("'").append(",");
+        estado.append("'fuerza':").append("'").append(this.fuerza).append("'").append(",");
+        estado.append("'velocidad':").append("'").append(this.velocidad).append("'").append(",");
+        estado.append("'direccion':").append("'").append(this.direccion).append("'").append(",");
+        estado.append("'colision':").append("'").append(this.colision).append("'").append(",");
+        estado.append("'enemigo':").append("'").append(this.enemigo.identificador).append("'").append(",");
+        estado.append("'cronometro':").append("'").append(this.cronometro).append("'").append(",");
+        estado.append("'tiempoactivo':").append("'").append(this.tiempoactivo).append("'").append(",");
+        estado.append("'activo':").append("'").append(this.activo).append("'").append(",");
+        estado.append("'tiemporecarga':").append("'").append(this.tiemporecarga).append("'").append(",");
+        estado.append("'recarga':").append("'").append(this.recarga).append("'").append(",");
+        estado.append("'activado':").append("'").append(this.activado).append("'").append(",");
+        estado.append("'parado':").append("'").append(this.parado).append("'").append(",");
+        estado.append("'controlado':").append("'").append(this.controlado).append("'").append(",");
+        estado.append("'inmune':").append("'").append(this.inmune).append("'").append(",");
+        estado.append("'invertido':").append("'").append(this.invertido).append("'").append(",");
+        return estado;
+    }
+    public void recibirEstado(String estado)
+    {}
     
     
     public abstract void agregarEnemigo(Jugador jugador);
@@ -85,7 +113,8 @@ public abstract class Jugador extends Entidad
     { return direccion; }
     public boolean isActivado()
     { return activado; }
-    
+    public int getIdentificador()
+    { return identificador; }
     
     
     public void setVida(int vida)
@@ -120,4 +149,6 @@ public abstract class Jugador extends Entidad
     { this.controlado = controlado; }
     public void setInmune(boolean inmune) 
     { this.inmune = inmune; }
+    public void setIdentificador(int identificador)
+    { this.identificador = identificador; }
 }

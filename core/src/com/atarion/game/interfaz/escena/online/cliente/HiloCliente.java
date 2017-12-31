@@ -12,14 +12,14 @@ import java.net.Socket;
 public class HiloCliente implements Runnable
 {
     private Socket cliente = null;
-    private Jugador estado = null;
+    private Jugador jugador = null;
     private Json conversor = new Json(); 
     
     
-    public HiloCliente(Socket cliente,Jugador estado)
+    public HiloCliente(Socket cliente,Jugador jugador)
     { 
         this.cliente = cliente;
-        this.estado = estado;
+        this.jugador = jugador;
         
         this.conversor.setTypeName(null);
         this.conversor.setUsePrototypes(false);
@@ -33,7 +33,7 @@ public class HiloCliente implements Runnable
     {
         try
         {
-            cliente.getOutputStream().write(this.conversor.toJson(estado).concat("\n").getBytes());
+            cliente.getOutputStream().write(jugador.volcarEstado().toString().concat("\n").getBytes());
             
             String response = new BufferedReader(new InputStreamReader(cliente.getInputStream())).readLine();
             Gdx.app.log("INFO","El server responde: " + response);

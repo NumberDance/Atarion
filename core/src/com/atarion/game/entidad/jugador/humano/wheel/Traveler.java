@@ -17,7 +17,7 @@ public class Traveler extends Wheel
     
     @Override
     public StringBuilder volcarEstado()
-    { return new StringBuilder(); }
+    { return super.volcarEstado().append("}").append("}"); }
     @Override
     public void recibirEstado(String estado)
     {}
