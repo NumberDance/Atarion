@@ -13,13 +13,15 @@ public class HiloCliente implements Runnable
 {
     private Socket cliente = null;
     private Jugador jugador = null;
+    private EscenaCliente escena = null;
     private Json conversor = new Json(); 
     
     
-    public HiloCliente(Socket cliente,Jugador jugador)
+    public HiloCliente(Socket cliente,Jugador jugador,EscenaCliente escena)
     { 
         this.cliente = cliente;
         this.jugador = jugador;
+        this.escena = escena;
         
         this.conversor.setTypeName(null);
         this.conversor.setUsePrototypes(false);
@@ -36,6 +38,8 @@ public class HiloCliente implements Runnable
             cliente.getOutputStream().write(jugador.volcarEstado().toString().concat("\n").getBytes());
             
             String response = new BufferedReader(new InputStreamReader(cliente.getInputStream())).readLine();
+            escena.updateGlobalStates(response);
+            
             Gdx.app.log("INFO","El server responde: " + response);
         } 
         catch (IOException ex)

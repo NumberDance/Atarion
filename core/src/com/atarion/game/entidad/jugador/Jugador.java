@@ -56,8 +56,11 @@ public abstract class Jugador extends Entidad
         estado.append("'invertido':").append("'").append(this.invertido).append("'");
         return estado;
     }
+    @Override
     public void recibirEstado(String estado)
-    {}
+    {
+        
+    }
     
     
     public abstract void agregarEnemigo(Jugador jugador);

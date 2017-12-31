@@ -39,7 +39,6 @@ public class HiloServidor implements Runnable
                 String estado = lector.readLine();
                 System.out.println("Got client message: " + estado);
                 
-                cliente.getOutputStream().write(estado.concat("\n").getBytes());
                 notificadores.forEach
                 (
                     (identificador,notificador) -> 

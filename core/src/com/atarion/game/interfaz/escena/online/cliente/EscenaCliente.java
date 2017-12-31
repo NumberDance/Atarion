@@ -5,6 +5,7 @@ import com.atarion.game.entidad.jugador.humano.Humano;
 import com.atarion.game.entidad.jugador.humano.wheel.Traveler;
 import com.atarion.game.interfaz.escena.Escena;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.utils.Json;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -17,6 +18,7 @@ public class EscenaCliente extends Escena
     private PrintWriter salida; 
     private HashSet<Humano> enemigos = new HashSet<Humano>();
     private HashSet<Humano> aliados = new HashSet<Humano>();
+    private Json conversor = new Json();
     
     
     public EscenaCliente(Music tema)
@@ -42,6 +44,16 @@ public class EscenaCliente extends Escena
     public void render(float delta)
     {
         super.render(delta);
-        new HiloCliente(cliente,humano).run();
+        new HiloCliente(cliente,humano,this).run();
+    }
+    
+    
+    public void updateGlobalStates(String states)
+    {
+        /*if(this.humano2 == null)
+        { humano2 = new Traveler(genesis,false); }*/
+        
+        humano2 = this.conversor.fromJson(Traveler.class,states);
+        //humano2.recibirEstado(states);
     }
 }
