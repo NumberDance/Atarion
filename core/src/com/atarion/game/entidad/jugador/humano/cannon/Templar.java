@@ -7,10 +7,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Templar extends Cannon
-{   
-    public Templar(Batch genesis,boolean tu) 
+{
+    public Templar() 
     {
-        super(genesis,tu);
+        super();
+        this.textura = new Texture(Gdx.files.internal("templar.png"));
+    }
+    public Templar(Batch genesis) 
+    {
+        super(genesis);
         this.textura = new Texture(Gdx.files.internal("templar.png"));
     }
     

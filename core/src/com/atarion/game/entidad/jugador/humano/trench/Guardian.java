@@ -8,9 +8,14 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Guardian extends Trench
 {
-    public Guardian(Batch genesis,boolean tu) 
+    public Guardian() 
     {
-        super(genesis,tu);
+        super();
+        this.textura = new Texture(Gdx.files.internal("guardian.png"));
+    }
+    public Guardian(Batch genesis) 
+    {
+        super(genesis);
         this.textura = new Texture(Gdx.files.internal("guardian.png"));
     }
     

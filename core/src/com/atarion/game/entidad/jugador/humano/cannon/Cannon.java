@@ -8,10 +8,18 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 public abstract class Cannon extends Humano
 {
     protected int rebote = 200;
-    
-    public Cannon(Batch genesis,boolean tu)
+
+
+    public Cannon()
     {
-        super(genesis,tu);
+        super();
+        
+        this.fuerza *= 2;
+        this.vida /= 2;
+    }    
+    public Cannon(Batch genesis)
+    {
+        super(genesis);
         
         this.fuerza *= 2;
         this.vida /= 2;

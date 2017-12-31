@@ -28,7 +28,7 @@ public class TutorialCannon extends Tutorial
     {
         super.show();
         
-        humano = new DummyCannon(genesis,true);
+        humano = new DummyCannon(genesis);
         maquina = new Dummy(genesis);
         
         humano.agregarEnemigo(maquina);

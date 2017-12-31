@@ -20,6 +20,12 @@ public abstract class Jugador extends Entidad
     protected boolean activado = false, parado = false, controlado = false, inmune = false, invertido = false;
     
     
+    protected Jugador()
+    {
+        this.x = 800 / 2 - 64 / 2;
+        this.width = 80;
+        this.height = 20;   
+    }
     protected Jugador(Batch genesis)
     {
         this.x = 800 / 2 - 64 / 2;

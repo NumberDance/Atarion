@@ -38,7 +38,7 @@ public class EscenaCliente extends Escena
     public void show()
     {
         super.show();
-        humano = new Traveler(genesis,true);
+        humano = new Traveler(genesis);
     }
     @Override
     public void render(float delta)
@@ -54,6 +54,7 @@ public class EscenaCliente extends Escena
         { humano2 = new Traveler(genesis,false); }*/
         
         humano2 = this.conversor.fromJson(Traveler.class,states);
+        humano2.setGenesis(genesis);
         //humano2.recibirEstado(states);
     }
 }

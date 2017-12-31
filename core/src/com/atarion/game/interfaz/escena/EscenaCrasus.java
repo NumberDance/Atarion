@@ -15,7 +15,7 @@ public class EscenaCrasus extends Escena
     {
         super.show();
         
-        humano = new Templar(genesis,true);
+        humano = new Templar(genesis);
         maquina = new Crasus(genesis);
         
         humano.agregarEnemigo(maquina);

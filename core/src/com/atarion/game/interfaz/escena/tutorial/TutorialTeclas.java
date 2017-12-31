@@ -24,7 +24,7 @@ public class TutorialTeclas extends Tutorial
     public void show()
     {
         super.show();
-        humano = new DummyGeneric(genesis,true);
+        humano = new DummyGeneric(genesis);
         maquina = new Dummy(genesis);
         
         humano.agregarEnemigo(maquina);

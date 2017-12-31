@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class DummyCannon extends Cannon
 {
-    public DummyCannon(Batch genesis,boolean tu)
+    public DummyCannon(Batch genesis)
     {
-        super(genesis,tu);
+        super(genesis);
         this.textura = new Texture(Gdx.files.internal("dummycannon.png"));
         
         this.vida = 999999999;

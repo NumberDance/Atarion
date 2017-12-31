@@ -7,10 +7,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Traveler extends Wheel
-{   
-    public Traveler(Batch genesis,boolean tu) 
+{
+    public Traveler() 
     {
-        super(genesis,tu);
+        super();
+        this.textura = new Texture(Gdx.files.internal("traveler.png"));
+    }
+    public Traveler(Batch genesis) 
+    {
+        super(genesis);
         this.textura = new Texture(Gdx.files.internal("traveler.png"));
     }
 

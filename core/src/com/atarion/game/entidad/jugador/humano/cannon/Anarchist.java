@@ -12,10 +12,15 @@ public class Anarchist extends Cannon
 {
     private Jugador controlado = null;
     
-    
-    public Anarchist(Batch genesis,boolean tu)
+
+    public Anarchist()
     { 
-        super(genesis,tu); 
+        super(); 
+        this.textura = new Texture(Gdx.files.internal("anarchist.png"));
+    }
+    public Anarchist(Batch genesis)
+    { 
+        super(genesis); 
         this.textura = new Texture(Gdx.files.internal("anarchist.png"));
     }
 

@@ -22,7 +22,7 @@ public class EscenaClaudius extends Escena
     {
         super.show();
         
-        humano = new Guardian(genesis,true);
+        humano = new Guardian(genesis);
         maquina = new Claudius(genesis);
         
         humano.agregarEnemigo(maquina);

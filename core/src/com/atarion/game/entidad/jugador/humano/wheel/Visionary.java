@@ -4,10 +4,10 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Visionary extends Wheel
 {
-    public Visionary(Batch genesis,boolean tu)
-    {
-        super(genesis,tu);
-    }
+    public Visionary()
+    { super(); }
+    public Visionary(Batch genesis)
+    { super(genesis); }
 
     
     @Override
