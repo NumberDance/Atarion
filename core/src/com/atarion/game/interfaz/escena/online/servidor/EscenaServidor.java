@@ -29,7 +29,7 @@ public final class EscenaServidor implements Runnable
                 System.out.println("Cliente conectado: " + clientes.get(cuenta).getInetAddress());
             }
             
-            clientes.entrySet().forEach(cliente -> { new HiloServidor(cliente.getValue()).run(); });
+            clientes.entrySet().forEach(cliente -> { new HiloServidor(cliente.getValue(),cliente.getKey(),clientes).run(); } );
         } 
         catch (IOException ex)
         {}
