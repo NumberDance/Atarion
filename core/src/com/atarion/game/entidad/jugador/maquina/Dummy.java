@@ -16,6 +16,15 @@ public class Dummy extends Maquina
         this.vida = 999999999;
         this.fuerza = 0;
     }
+    
+    
+    @Override
+    public StringBuilder volcarEstado()
+    { return new StringBuilder(); }
+    @Override
+    public void recibirEstado(String estado)
+    {}
+    
 
     @Override
     protected void controlBordes()

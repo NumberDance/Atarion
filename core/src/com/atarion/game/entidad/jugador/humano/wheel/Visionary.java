@@ -9,6 +9,14 @@ public class Visionary extends Wheel
         super(genesis,tu);
     }
 
+    
+    @Override
+    public StringBuilder volcarEstado()
+    { return new StringBuilder(); }
+    @Override
+    public void recibirEstado(String estado)
+    {}
+    
 
     @Override
     public void activarEspecial()

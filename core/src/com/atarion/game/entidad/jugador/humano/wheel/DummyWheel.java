@@ -15,6 +15,15 @@ public class DummyWheel extends Wheel
         this.fuerza = 0;
     }
 
+    
+    @Override
+    public StringBuilder volcarEstado()
+    { return new StringBuilder(); }
+    @Override
+    public void recibirEstado(String estado)
+    {}
+    
+    
     @Override
     public void activarEspecial()
     {}

@@ -26,6 +26,14 @@ public class Crasus extends Maquina
 
     
     @Override
+    public StringBuilder volcarEstado()
+    { return new StringBuilder(); }
+    @Override
+    public void recibirEstado(String estado)
+    {}
+    
+    
+    @Override
     public void actualizarEstado()
     {
         super.actualizarEstado();

@@ -11,6 +11,14 @@ public class Benefactor extends Trench
 
 
     @Override
+    public StringBuilder volcarEstado()
+    { return new StringBuilder(); }
+    @Override
+    public void recibirEstado(String estado)
+    {}
+    
+    
+    @Override
     public void activarEspecial()
     {}
     @Override

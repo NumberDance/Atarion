@@ -14,7 +14,16 @@ public class DummyTrench extends Trench
         this.vida = 999999999;
         this.fuerza = 0;
     }
+    
+    
+    @Override
+    public StringBuilder volcarEstado()
+    { return new StringBuilder(); }
+    @Override
+    public void recibirEstado(String estado)
+    {}
 
+    
     @Override
     public void activarEspecial()
     {}

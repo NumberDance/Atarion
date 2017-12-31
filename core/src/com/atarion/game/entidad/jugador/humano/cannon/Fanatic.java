@@ -13,6 +13,14 @@ public class Fanatic extends Cannon
         this.textura = new Texture(Gdx.files.internal("fanatic.png"));
     }
 
+    
+    @Override
+    public StringBuilder volcarEstado()
+    { return new StringBuilder(); }
+    @Override
+    public void recibirEstado(String estado)
+    {}
+    
 
     @Override
     public void activarEspecial()

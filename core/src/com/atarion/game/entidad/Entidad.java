@@ -14,10 +14,10 @@ public abstract class Entidad extends Rectangle
     { genesis.draw(textura,x,y); }
     public void dispose()
     { textura.dispose(); }
-
     
-    public Texture getTextura()
-    { return textura; }
+    
+    protected abstract StringBuilder volcarEstado();
+    protected abstract void recibirEstado(String estado);
     
     
     public void setGenesis(Batch genesis)

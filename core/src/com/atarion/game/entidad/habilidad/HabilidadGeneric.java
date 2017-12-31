@@ -12,4 +12,12 @@ public class HabilidadGeneric extends Habilidad
         super(genesis, jugador);
         this.textura = new Texture(Gdx.files.internal("genericspecial.png"));
     }
+    
+    
+    @Override
+    public StringBuilder volcarEstado()
+    { return new StringBuilder(); }
+    @Override
+    public void recibirEstado(String estado)
+    {}
 }

@@ -24,6 +24,14 @@ public class Escombro extends Objeto
     }
     
     
+    @Override
+    public StringBuilder volcarEstado()
+    { return new StringBuilder(); }
+    @Override
+    public void recibirEstado(String estado)
+    {}
+    
+    
     public void caer()
     {
         if(this.y == 0 - 100)

@@ -12,4 +12,12 @@ public class HabilidadTemplar extends Habilidad
         super(genesis,jugador);
         this.textura = new Texture(Gdx.files.internal("templarsword.png"));
     }
+    
+    
+    @Override
+    public StringBuilder volcarEstado()
+    { return new StringBuilder(); }
+    @Override
+    public void recibirEstado(String estado)
+    {}
 }

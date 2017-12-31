@@ -12,4 +12,11 @@ public class HabilidadAnarchist extends Habilidad
         super(genesis, jugador);
         this.enemigo = enemigo;
     }
+    
+    @Override
+    public StringBuilder volcarEstado()
+    { return new StringBuilder(); }
+    @Override
+    public void recibirEstado(String estado)
+    {}
 }

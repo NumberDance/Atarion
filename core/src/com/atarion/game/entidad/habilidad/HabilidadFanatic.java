@@ -15,6 +15,15 @@ public class HabilidadFanatic extends Habilidad
         jugador.setFuerza(150);
     }
     
+    
+    @Override
+    public StringBuilder volcarEstado()
+    { return new StringBuilder(); }
+    @Override
+    public void recibirEstado(String estado)
+    {}
+    
+    
     @Override
     public void actualizarEstado()
     { genesis.draw(textura,jugador.getX() - 110,jugador.getY() - 110); }

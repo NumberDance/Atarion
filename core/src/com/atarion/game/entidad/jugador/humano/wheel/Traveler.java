@@ -16,6 +16,14 @@ public class Traveler extends Wheel
 
     
     @Override
+    public StringBuilder volcarEstado()
+    { return new StringBuilder(); }
+    @Override
+    public void recibirEstado(String estado)
+    {}
+    
+    
+    @Override
     public void activarEspecial() 
     {
         float xenemigo = enemigo.getX();

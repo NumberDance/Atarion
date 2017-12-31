@@ -26,6 +26,14 @@ public class Proyectil extends Objeto
     }
     
     
+    @Override
+    public StringBuilder volcarEstado()
+    { return new StringBuilder(); }
+    @Override
+    public void recibirEstado(String estado)
+    {}
+    
+    
     public void lanzar()
     {
         if(this.x > 1000 + 100 || this.x < 0 - 100 || this.y > 800 + 100 || this.y < 0 - 100)
