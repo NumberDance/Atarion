@@ -33,6 +33,10 @@ public abstract class Jugador extends Entidad
     {
         StringBuilder estado = new StringBuilder();
         estado.append("{").append("'Jugador':").append("{");
+        
+        if(this.enemigo != null)
+        { estado.append("'enemigo':").append("'").append(this.enemigo.identificador).append("'").append(","); }
+        
         estado.append("'x':").append("'").append(this.x).append("'").append(",");
         estado.append("'y':").append("'").append(this.y).append("'").append(",");
         estado.append("'vida':").append("'").append(this.vida).append("'").append(",");
@@ -40,7 +44,6 @@ public abstract class Jugador extends Entidad
         estado.append("'velocidad':").append("'").append(this.velocidad).append("'").append(",");
         estado.append("'direccion':").append("'").append(this.direccion).append("'").append(",");
         estado.append("'colision':").append("'").append(this.colision).append("'").append(",");
-        estado.append("'enemigo':").append("'").append(this.enemigo.identificador).append("'").append(",");
         estado.append("'cronometro':").append("'").append(this.cronometro).append("'").append(",");
         estado.append("'tiempoactivo':").append("'").append(this.tiempoactivo).append("'").append(",");
         estado.append("'activo':").append("'").append(this.activo).append("'").append(",");
