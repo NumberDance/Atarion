@@ -2,7 +2,6 @@ package com.atarion.game.interfaz.escena.online.servidor;
 
 
 import com.atarion.game.entidad.jugador.Jugador;
-import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,7 +13,6 @@ public class HiloServidor implements Runnable
 {
     private Socket cliente = null;
     private HashSet<Jugador> estados = new HashSet<Jugador>();
-    private Gson conversor = new Gson();
     
     
     public HiloServidor(Socket cliente)
