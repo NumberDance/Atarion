@@ -14,4 +14,14 @@ public abstract class Entidad extends Rectangle
     { genesis.draw(textura,x,y); }
     public void dispose()
     { textura.dispose(); }
+
+    
+    public Texture getTextura()
+    { return textura; }
+    
+    
+    public void setGenesis(Batch genesis)
+    { this.genesis = genesis; }
+    public void setTextura(Texture textura)
+    { this.textura = textura; }
 }
