@@ -39,7 +39,7 @@ public class HiloCliente implements Runnable
             datos.append(",'x':'").append(estado.getX()).append("'");
             datos.append(",'y':'").append(estado.getY()).append("'");
             datos.append("} }");
-            cliente.getOutputStream().write(datos.toString().getBytes());
+            cliente.getOutputStream().write(datos.toString().concat("\n").getBytes());
             
             String response = new BufferedReader(new InputStreamReader(cliente.getInputStream())).readLine();
             Gdx.app.log("INFO","El server responde: " + response);
