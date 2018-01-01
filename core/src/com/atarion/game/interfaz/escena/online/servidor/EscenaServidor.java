@@ -10,7 +10,7 @@ import java.util.HashMap;
 public final class EscenaServidor implements Runnable
 {
     private HashMap<Integer,Socket> clientes = new HashMap<Integer,Socket>();
-    private Integer cuenta = 0, capacidad = 2;
+    private Integer cuenta = 0, capacidad = 1;
 
     
     @Override

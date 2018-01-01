@@ -38,7 +38,7 @@ public class HiloCliente implements Runnable
             cliente.getOutputStream().write(jugador.volcarEstado().toString().concat("\n").getBytes());
             
             String response = new BufferedReader(new InputStreamReader(cliente.getInputStream())).readLine();
-            escena.updateGlobalStates(response);
+            //escena.updateGlobalStates(response);
             
             Gdx.app.log("INFO","El server responde: " + response);
         } 

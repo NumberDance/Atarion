@@ -1,8 +1,10 @@
 package com.atarion.game.desktop;
 
+
 import com.atarion.game.Atarion;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+
 
 public class ClientLauncher 
 {   
