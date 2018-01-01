@@ -4,7 +4,9 @@ import com.atarion.game.entidad.Entidad;
 import com.atarion.game.entidad.objeto.Objeto;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 public abstract class Jugador extends Entidad
 {
@@ -66,7 +68,7 @@ public abstract class Jugador extends Entidad
     @Override
     public void recibirEstado(String estado)
     {
-        JSONObject objeto = new JSONObject(estado);
+        JSONObject objeto = new JSONObject(new JSONTokener(estado));
         this.x = objeto.getFloat("x");
         this.y = objeto.getFloat("y");
         this.vida = objeto.getInt("vida");

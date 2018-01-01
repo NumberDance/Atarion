@@ -9,8 +9,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.HashSet;
+import jdk.nashorn.internal.parser.JSONParser;
 
 
+import org.json.JSONArray;
+import org.json.JSONTokener;
 public class EscenaCliente extends Escena
 {
     private Socket cliente;
@@ -42,7 +45,7 @@ public class EscenaCliente extends Escena
     public void render(float delta)
     {
         super.render(delta);
-        new HiloCliente(cliente,humano,this).run();
+        new HiloCliente(cliente,humano,this).start();
     }
     
     

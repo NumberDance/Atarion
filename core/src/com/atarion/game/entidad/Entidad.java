@@ -1,8 +1,11 @@
 package com.atarion.game.entidad;
 
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
+import org.json.JSONArray;
+
 
 public abstract class Entidad extends Rectangle
 {
