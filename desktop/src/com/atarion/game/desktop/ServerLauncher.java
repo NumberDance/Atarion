@@ -9,6 +9,6 @@ public class ServerLauncher
     public static void main(String [] args)
     {   
         System.out.println("SERVER MODE");
-        new EscenaServidor().run();
+        new EscenaServidor().start();
     }
 }
