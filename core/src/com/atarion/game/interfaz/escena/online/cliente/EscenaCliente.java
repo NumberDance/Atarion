@@ -10,15 +10,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.HashSet;
+import jdk.nashorn.internal.parser.JSONParser;
 
 
+import org.json.JSONArray;
+import org.json.JSONTokener;
 public class EscenaCliente extends Escena
 {
     private Socket cliente;
     private PrintWriter salida; 
     private HashSet<Humano> enemigos = new HashSet<Humano>();
     private HashSet<Humano> aliados = new HashSet<Humano>();
-    private Json conversor = new Json();
     
     
     public EscenaCliente(Music tema)
@@ -44,7 +46,7 @@ public class EscenaCliente extends Escena
     public void render(float delta)
     {
         super.render(delta);
-        new HiloCliente(cliente,humano,this).run();
+        new HiloCliente(cliente,humano,this).start();
     }
     
     

@@ -5,6 +5,7 @@ import com.atarion.game.entidad.habilidad.HabilidadTraveler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import org.json.JSONArray;
 
 public class Traveler extends Wheel
 {
