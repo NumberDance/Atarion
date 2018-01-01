@@ -4,6 +4,7 @@ import com.atarion.game.entidad.Entidad;
 import com.atarion.game.entidad.objeto.Objeto;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import org.json.JSONObject;
 
 public abstract class Jugador extends Entidad
 {
@@ -65,7 +66,24 @@ public abstract class Jugador extends Entidad
     @Override
     public void recibirEstado(String estado)
     {
-        
+        JSONObject objeto = new JSONObject(estado);
+        this.x = objeto.getFloat("x");
+        this.y = objeto.getFloat("y");
+        this.vida = objeto.getInt("vida");
+        this.fuerza = objeto.getInt("fuerza");
+        this.velocidad = objeto.getFloat("velocidad");
+        this.direccion = Direccion.valueOf(objeto.getString("direccion"));
+        this.colision = objeto.getBoolean("colision");
+        this.cronometro = objeto.getFloat("cronometro");
+        this.tiempoactivo = objeto.getInt("tiempoactivo");
+        this.activo = objeto.getInt("activo");
+        this.tiemporecarga = objeto.getInt("tiemporecarga");
+        this.recarga = objeto.getInt("recarga");
+        this.activado = objeto.getBoolean("activado");
+        this.parado = objeto.getBoolean("parado");
+        this.controlado = objeto.getBoolean("controlado");
+        this.inmune = objeto.getBoolean("inmune");
+        this.invertido = objeto.getBoolean("invertido");
     }
     
     

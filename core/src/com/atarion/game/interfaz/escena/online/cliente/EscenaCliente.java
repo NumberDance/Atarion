@@ -50,11 +50,12 @@ public class EscenaCliente extends Escena
     
     public void updateGlobalStates(String states)
     {
-        /*if(this.humano2 == null)
-        { humano2 = new Traveler(genesis,false); }*/
+        if(this.humano2 == null)
+        { 
+            humano2 = new Traveler();
+            humano2.setGenesis(genesis);
+        }
         
-        humano2 = this.conversor.fromJson(Traveler.class,states);
-        humano2.setGenesis(genesis);
-        //humano2.recibirEstado(states);
+        humano2.recibirEstado(states);
     }
 }
