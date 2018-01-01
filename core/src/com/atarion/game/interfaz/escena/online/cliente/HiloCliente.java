@@ -40,7 +40,7 @@ public class HiloCliente extends Thread
             String response = new BufferedReader(new InputStreamReader(cliente.getInputStream())).readLine();
             Gdx.app.log("INFO","El server responde: " + response);
             
-            //escena.updateGlobalStates(response);
+            escena.updateGlobalStates(response);
         } 
         catch (IOException ex)
         {}
