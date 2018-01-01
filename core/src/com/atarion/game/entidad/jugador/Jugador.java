@@ -39,7 +39,7 @@ public abstract class Jugador extends Entidad
     public StringBuilder volcarEstado()
     {
         StringBuilder estado = new StringBuilder();
-        estado.append("{").append("'Jugador':").append("{");
+        estado.append("{");
         
         if(this.enemigo != null)
         { estado.append("'enemigo':").append("'").append(this.enemigo.identificador).append("'").append(","); }
