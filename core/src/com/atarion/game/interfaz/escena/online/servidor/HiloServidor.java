@@ -6,21 +6,26 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
-public class HiloServidor implements Runnable
+public class HiloServidor extends Thread
 {
-    private Socket cliente = null;
-    private Integer clave = 0;
-    private HashMap<Integer,Socket> clientes = null;
+    private Integer identificador = 0;
+    private Socket socket = null;
+    private EscenaServidor escena = null;
     
     
-    public HiloServidor(Socket cliente,Integer clave,HashMap<Integer,Socket> clientes)
+    public HiloServidor(Entry<Integer,SimpleEntry<Socket,String>> cliente, EscenaServidor escena)
     { 
-        this.cliente = cliente; 
-        this.clientes = clientes;
-        this.clave = clave;
+        this.identificador = cliente.getKey();
+        this.socket = cliente.getValue().getKey();
+        
+        this.escena = escena;
     }
     
     
@@ -29,26 +34,33 @@ public class HiloServidor implements Runnable
     {
         try
         {  
-            BufferedReader lector = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
-            
-            HashMap<Integer,Socket> notificadores = clientes;
-            notificadores.remove(clave);
+            BufferedReader lector = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         
-            while(!cliente.isClosed())
+            while(!socket.isClosed())
             {
-                String estado = lector.readLine();
-                System.out.println("Got client message: " + estado);
+                try
+                {
+                    escena.getSemaforo().acquire();
                 
-                notificadores.forEach
-                (
-                    (identificador,notificador) -> 
-                    {  
-                        try
-                        { notificador.getOutputStream().write(estado.concat("\n").getBytes()); } 
-                        catch (IOException ex)
-                        {}
-                    }
-                );
+                    escena.getClientes().replace(identificador,new SimpleEntry(socket,lector.readLine()));
+                    System.out.println("Recibido estado del cliente nº" + this.identificador + "|" + escena.getClientes().get(identificador).getValue());
+                
+                    StringBuilder respuesta = new StringBuilder("");
+                    escena.getClientes().forEach
+                    (
+                        (clave,valor) -> 
+                        {    
+                            if(!clave.equals(identificador) && !valor.getKey().isClosed())
+                            { respuesta.append(valor.getValue()); } 
+                        }
+                    );
+                    respuesta.append("\n");
+                    socket.getOutputStream().write(respuesta.toString().getBytes());
+                
+                    escena.getSemaforo().release();
+                } 
+                catch (InterruptedException ex)
+                {}
             }
         } 
         catch (IOException ex)
