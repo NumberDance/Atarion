@@ -7,6 +7,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 public abstract class Trench extends Humano
 {   
@@ -30,6 +32,36 @@ public abstract class Trench extends Humano
         this.velocidad /= 2;
         this.inmune = true;
     }
+    
+    
+    @Override
+    public StringBuilder volcarEstado()
+    { 
+        StringBuilder estado = super.volcarEstado();
+        estado.append(",");
+        if(this.proyectil != null)
+        { estado.append("'proyectil':").append("'").append(this.proyectil.volcarEstado()).append("'").append(","); }
+        else
+        { estado.append("'proyectil':").append("'null'").append(","); }
+        estado.append("'colisionproyectil':").append("'").append(this.colisionproyectil).append("'");
+        return estado; 
+    }
+    @Override
+    public void recibirEstado(String estado)
+    { 
+        super.recibirEstado(estado); 
+        
+        JSONObject objeto = new JSONObject(new JSONTokener(estado));
+        if(objeto.getString("proyectil").equals("null"))
+        { this.proyectil = null; }
+        else
+        {
+            if(this.proyectil != null)
+            { this.proyectil = new ProyectilTrench(genesis,objeto.getString("proyectil")); }
+        }
+        this.colisionproyectil = objeto.getBoolean("colisionproyectil");
+    }
+    
     
     @Override
     public void actualizarEstado()

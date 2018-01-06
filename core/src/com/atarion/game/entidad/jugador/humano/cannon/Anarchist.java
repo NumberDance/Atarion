@@ -7,6 +7,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 public class Anarchist extends Cannon
 {
@@ -27,10 +29,21 @@ public class Anarchist extends Cannon
     
     @Override
     public StringBuilder volcarEstado()
-    { return new StringBuilder(); }
+    { 
+        StringBuilder estado = super.volcarEstado();
+        estado.append(",");
+        estado.append("'controlado':").append("'").append(this.controlado.volcarEstado()).append("'");
+        estado.append("}");
+        return estado; 
+    }
     @Override
     public void recibirEstado(String estado)
-    {}
+    { 
+        super.recibirEstado(estado); 
+        
+        JSONObject objeto = new JSONObject(new JSONTokener(estado));
+        //TODO
+    }
     
     
     @Override

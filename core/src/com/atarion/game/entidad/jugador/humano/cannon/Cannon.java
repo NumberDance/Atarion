@@ -4,6 +4,8 @@ import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.jugador.humano.Humano;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 public abstract class Cannon extends Humano
 {
@@ -23,6 +25,24 @@ public abstract class Cannon extends Humano
         
         this.fuerza *= 2;
         this.vida /= 2;
+    }
+
+
+    @Override
+    public StringBuilder volcarEstado()
+    { 
+        StringBuilder estado = super.volcarEstado();
+        estado.append(",");
+        estado.append("'rebote':").append("'").append(this.rebote).append("'");
+        return estado; 
+    }
+    @Override
+    public void recibirEstado(String estado)
+    { 
+        super.recibirEstado(estado); 
+        
+        JSONObject objeto = new JSONObject(new JSONTokener(estado));
+        this.rebote = objeto.getInt("rebote");
     }
 
     

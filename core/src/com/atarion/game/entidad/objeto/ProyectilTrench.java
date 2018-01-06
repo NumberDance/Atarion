@@ -9,7 +9,15 @@ public class ProyectilTrench extends Proyectil
     public ProyectilTrench(Batch genesis, float x, float y, float direccionx, float direcciony)
     {
         super(genesis, x, y, direccionx, direcciony);
-        
+        this.parametrosIniciales();
+    }
+    public ProyectilTrench(Batch genesis, String estado)
+    { 
+        super(genesis,estado); 
+        this.parametrosIniciales();
+    }
+    private void parametrosIniciales()
+    {
         this.textura = new Texture(Gdx.files.internal("proyectiletrench.png"));
         this.dureza = 5;
         this.velocidad *= 2;
@@ -17,4 +25,9 @@ public class ProyectilTrench extends Proyectil
         this.width = 50;
         this.height = 50;
     }
+    
+    
+    @Override
+    public StringBuilder volcarEstado()
+    { return super.volcarEstado().append("}"); }
 }
