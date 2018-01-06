@@ -8,6 +8,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class HiloCliente extends Thread
 {
@@ -15,18 +17,25 @@ public class HiloCliente extends Thread
     private Jugador jugador = null;
     private EscenaCliente escena = null;
     private Json conversor = new Json(); 
+    private BufferedReader lector = null;
     
     
     public HiloCliente(Socket cliente,Jugador jugador,EscenaCliente escena)
     { 
-        this.cliente = cliente;
-        this.jugador = jugador;
-        this.escena = escena;
-        
-        this.conversor.setTypeName(null);
-        this.conversor.setUsePrototypes(false);
-        this.conversor.setIgnoreUnknownFields(true);
-        this.conversor.setOutputType(JsonWriter.OutputType.json);
+        try
+        {
+            this.cliente = cliente;
+            this.jugador = jugador;
+            this.escena = escena;
+            
+            this.conversor.setTypeName(null);
+            this.conversor.setUsePrototypes(false);
+            this.conversor.setIgnoreUnknownFields(true);
+            this.conversor.setOutputType(JsonWriter.OutputType.json);
+            this.lector = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
+        } 
+        catch (IOException ex)
+        {}
     }
     
     
@@ -37,7 +46,7 @@ public class HiloCliente extends Thread
         {
             cliente.getOutputStream().write(jugador.volcarEstado().toString().concat("\n").getBytes());
             
-            String response = new BufferedReader(new InputStreamReader(cliente.getInputStream())).readLine();
+            String response = this.lector.readLine();
             Gdx.app.log("INFO","El server responde: " + response);
             
             escena.updateGlobalStates(response);

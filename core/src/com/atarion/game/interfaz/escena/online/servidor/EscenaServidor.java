@@ -28,7 +28,7 @@ public final class EscenaServidor extends Thread
                 System.out.println("Esperando clientes...");
                 cuenta++;
                 
-                clientes.put(cuenta,new SimpleEntry<>(servidor.accept(),"{}"));
+                clientes.put(cuenta,new SimpleEntry<>(servidor.accept(),""));
                 System.out.println("Cliente conectado: " + clientes.get(cuenta).getKey().getInetAddress());
             }
             

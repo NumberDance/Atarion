@@ -22,10 +22,10 @@ public class Laser extends Objeto
     
     @Override
     public StringBuilder volcarEstado()
-    { return new StringBuilder(); }
+    { return super.volcarEstado().append("}"); }
     @Override
     public void recibirEstado(String estado)
-    {}
+    { super.recibirEstado(estado); }
     
     
     @Override

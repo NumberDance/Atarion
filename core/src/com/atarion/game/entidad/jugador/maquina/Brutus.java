@@ -1,15 +1,20 @@
 package com.atarion.game.entidad.jugador.maquina;
 
-import com.atarion.game.entidad.objeto.Proyectil;
+
 import com.atarion.game.entidad.jugador.Jugador;
+import com.atarion.game.entidad.objeto.ProyectilBrutus;
+import com.atarion.game.entidad.objeto.ProyectilTrench;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 
 public class Brutus extends Maquina
 {
-    private Proyectil proyectil;
+    private ProyectilBrutus proyectil;
     private boolean colisionproyectil = false;
     
     
@@ -25,10 +30,32 @@ public class Brutus extends Maquina
     
     @Override
     public StringBuilder volcarEstado()
-    { return new StringBuilder(); }
+    { 
+        StringBuilder estado = super.volcarEstado();
+        estado.append(",");
+        if(this.proyectil != null)
+        { estado.append("'proyectil':").append("'").append(this.proyectil.volcarEstado()).append("'").append(","); }
+        else
+        { estado.append("'proyectil':").append("'null'").append(","); }
+        estado.append("'colisionproyectil':").append("'").append(this.colisionproyectil).append("'");
+        estado.append("}");
+        return estado; 
+    }
     @Override
     public void recibirEstado(String estado)
-    {}
+    { 
+        super.recibirEstado(estado); 
+        
+        JSONObject objeto = new JSONObject(new JSONTokener(estado));
+        if(objeto.getString("proyectil").equals("null"))
+        { this.proyectil = null; }
+        else
+        {
+            if(this.proyectil != null)
+            { this.proyectil = new ProyectilBrutus(genesis,objeto.getString("proyectil")); }
+        }
+        this.colisionproyectil = objeto.getBoolean("colisionproyectil");
+    }
     
     
     @Override
@@ -148,7 +175,7 @@ public class Brutus extends Maquina
     {
         this.textura = new Texture(Gdx.files.internal("hunt.png"));
         enemigo.setVelocidad(enemigo.getVelocidad() / 2);
-        proyectil = new Proyectil(genesis,50,50,enemigo.getX(),enemigo.getY());
+        proyectil = new ProyectilBrutus(genesis,50,50,enemigo.getX(),enemigo.getY());
     }
     @Override
     public void desactivarEspecial() 

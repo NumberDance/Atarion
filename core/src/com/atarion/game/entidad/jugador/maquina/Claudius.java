@@ -3,12 +3,15 @@ package com.atarion.game.entidad.jugador.maquina;
 import com.atarion.game.entidad.objeto.Escombro;
 import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.objeto.Laser;
+import com.atarion.game.entidad.objeto.ProyectilTrench;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import java.util.Iterator;
 import java.util.LinkedList;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 public class Claudius extends Maquina
 {
@@ -39,10 +42,34 @@ public class Claudius extends Maquina
     
     @Override
     public StringBuilder volcarEstado()
-    { return new StringBuilder(); }
+    { 
+        StringBuilder estado = super.volcarEstado();
+        estado.append(",");
+        if(this.laser != null)
+        { estado.append("'laser':").append("'").append(this.laser.volcarEstado()).append("'").append(","); }
+        else
+        { estado.append("'laser':").append("'null'").append(","); }
+        estado.append("'carga':").append("'").append(this.carga).append("'").append(",");
+        estado.append("'colisionlaser':").append("'").append(this.colisionlaser).append("'").append(",");
+        estado.append("'modo':").append("'").append(this.modo.toString()).append("'");
+        estado.append("}");
+        return estado; 
+    }
     @Override
     public void recibirEstado(String estado)
-    {}
+    { 
+        /*super.recibirEstado(estado); 
+        
+        JSONObject objeto = new JSONObject(new JSONTokener(estado));
+        if(objeto.getString("laser").equals("null"))
+        { this.laser = null; }
+        else
+        {
+            if(this.laser != null)
+            { this.laser = new Laser(genesis,objeto.getString("proyectil")); }
+        }
+        this.colisionlaser = objeto.getBoolean("colisionlaser");*/
+    }
     
     
     @Override

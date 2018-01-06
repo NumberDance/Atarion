@@ -40,14 +40,11 @@ public abstract class Jugador extends Entidad
     
     public StringBuilder volcarEstado()
     {
-        StringBuilder estado = new StringBuilder();
-        estado.append("{");
+        StringBuilder estado = super.volcarEstado();
         
+        estado.append(",");
         if(this.enemigo != null)
         { estado.append("'enemigo':").append("'").append(this.enemigo.identificador).append("'").append(","); }
-        
-        estado.append("'x':").append("'").append(this.x).append("'").append(",");
-        estado.append("'y':").append("'").append(this.y).append("'").append(",");
         estado.append("'vida':").append("'").append(this.vida).append("'").append(",");
         estado.append("'fuerza':").append("'").append(this.fuerza).append("'").append(",");
         estado.append("'velocidad':").append("'").append(this.velocidad).append("'").append(",");
@@ -68,9 +65,9 @@ public abstract class Jugador extends Entidad
     @Override
     public void recibirEstado(String estado)
     {
+        super.recibirEstado(estado);
+        
         JSONObject objeto = new JSONObject(new JSONTokener(estado));
-        this.x = objeto.getFloat("x");
-        this.y = objeto.getFloat("y");
         this.vida = objeto.getInt("vida");
         this.fuerza = objeto.getInt("fuerza");
         this.velocidad = objeto.getFloat("velocidad");

@@ -1,13 +1,16 @@
 package com.atarion.game.entidad.objeto;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
-public class Proyectil extends Objeto
+
+public abstract class Proyectil extends Objeto
 {
     protected float direccionx, direcciony;
-    
     protected boolean destino = false;
     protected float velocidad = 1f;
     
@@ -24,14 +27,31 @@ public class Proyectil extends Objeto
         this.direccionx = direccionx;
         this.direcciony = direcciony;
     }
+    public Proyectil(Batch genesis, String estado)
+    {
+        super(genesis,new Texture(Gdx.files.internal("proyectile.png")),10);
+        
+        JSONObject objeto = new JSONObject(new JSONTokener(estado));
+        this.x = objeto.getFloat("x");
+        this.y = objeto.getFloat("y");
+        this.direccionx = objeto.getFloat("direccionx");
+        this.direcciony = objeto.getFloat("direcciony");
+        this.destino = objeto.getBoolean("destino");
+        this.velocidad = objeto.getFloat("velocidad");
+    }
     
     
-    @Override
-    public StringBuilder volcarEstado()
-    { return new StringBuilder(); }
     @Override
     public void recibirEstado(String estado)
-    {}
+    { 
+        super.recibirEstado(estado); 
+        
+        JSONObject objeto = new JSONObject(new JSONTokener(estado));
+        this.direccionx = objeto.getFloat("direccionx");
+        this.direcciony = objeto.getFloat("direcciony");
+        this.destino = objeto.getBoolean("destino");
+        this.velocidad = objeto.getFloat("velocidad");
+    }
     
     
     public void lanzar()

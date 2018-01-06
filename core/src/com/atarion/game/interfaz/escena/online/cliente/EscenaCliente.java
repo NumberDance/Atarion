@@ -2,18 +2,25 @@ package com.atarion.game.interfaz.escena.online.cliente;
 
 
 import com.atarion.game.entidad.jugador.humano.Humano;
+import com.atarion.game.entidad.jugador.humano.cannon.Anarchist;
+import com.atarion.game.entidad.jugador.humano.cannon.Fanatic;
+import com.atarion.game.entidad.jugador.humano.cannon.Templar;
+import com.atarion.game.entidad.jugador.humano.trench.Avenger;
+import com.atarion.game.entidad.jugador.humano.trench.Benefactor;
+import com.atarion.game.entidad.jugador.humano.trench.Guardian;
+import com.atarion.game.entidad.jugador.humano.wheel.Merchant;
 import com.atarion.game.entidad.jugador.humano.wheel.Traveler;
+import com.atarion.game.entidad.jugador.humano.wheel.Visionary;
 import com.atarion.game.interfaz.escena.Escena;
 import com.badlogic.gdx.audio.Music;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.HashSet;
-import jdk.nashorn.internal.parser.JSONParser;
 
 
-import org.json.JSONArray;
-import org.json.JSONTokener;
 public class EscenaCliente extends Escena
 {
     private Socket cliente;
@@ -36,10 +43,50 @@ public class EscenaCliente extends Escena
     @Override
     public void show()
     {
-        super.show();
-        humano = new Traveler(genesis);
-        humano2 = new Traveler();
-        humano2.setGenesis(genesis);
+        /*try
+        {*/
+            super.show();
+            
+            humano = new Traveler(genesis);
+            /*cliente.getOutputStream().write("Traveler".concat("\n").getBytes());
+            
+            String inicial = new BufferedReader(new InputStreamReader(cliente.getInputStream())).readLine();
+            switch(inicial)
+            {
+                case "Anarchist":
+                    humano2 = new Anarchist();
+                break;
+                case "Fanatic":
+                    humano2 = new Fanatic();
+                break;
+                case "Templar":
+                    humano2 = new Templar();
+                break;
+                
+                case "Avenger":
+                    humano2 = new Avenger();
+                break;
+                case "Benefactor":
+                    humano2 = new Benefactor();
+                break;
+                case "Guardian":
+                    humano2 = new Guardian();
+                break;
+                
+                case "Merchant":
+                    humano2 = new Merchant();
+                break;
+                case "Traveler":*/
+                    humano2 = new Traveler();
+                /*break;
+                case "Visionary":
+                    humano2 = new Visionary();
+                break;
+            }*/
+            humano2.setGenesis(genesis);
+        /*} 
+        catch (IOException ex)
+        {}*/
     }
     @Override
     public void render(float delta)

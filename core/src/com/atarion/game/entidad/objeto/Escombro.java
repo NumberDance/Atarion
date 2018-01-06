@@ -26,10 +26,10 @@ public class Escombro extends Objeto
     
     @Override
     public StringBuilder volcarEstado()
-    { return new StringBuilder(); }
+    { return super.volcarEstado().append("}"); }
     @Override
     public void recibirEstado(String estado)
-    {}
+    { super.recibirEstado(estado); }
     
     
     public void caer()
