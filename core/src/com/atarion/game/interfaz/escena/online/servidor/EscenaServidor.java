@@ -13,7 +13,7 @@ public final class EscenaServidor extends Thread
 {
     private HashMap<Integer,SimpleEntry<Socket,String>> clientes = new HashMap<Integer,SimpleEntry<Socket,String>>();
     private Integer cuenta = 0, capacidad = 2;
-    private Semaphore semaforo = new Semaphore(1,true);
+    private final Semaphore semaforo = new Semaphore(1,true);
 
     
     @Override

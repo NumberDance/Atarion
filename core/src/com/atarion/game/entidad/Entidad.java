@@ -33,6 +33,7 @@ public abstract class Entidad extends Rectangle
     protected void recibirEstado(String estado)
     {
         JSONObject objeto = new JSONObject(new JSONTokener(estado));
+        this.identificador = objeto.getString("identificador");
         this.x = objeto.getFloat("x");
         this.y = objeto.getFloat("y");
     }
