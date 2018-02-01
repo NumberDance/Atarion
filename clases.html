@@ -14,11 +14,22 @@
             <div class="rcorners3"><a href="capturas.html"><h2>Capturas</h2></a></div>
         </div>
         <div class="rcorners2">
+            <h1>Versión alfa: Va a haber muchos más subtipos en el futuro.</h1>
+            <h3>Pasa el ratón por las barras para ver sus habilidades, pon el ratón sobre el texto para volver.</h3>
+        </div>
+        <div class="rcorners2">
             <div class="rcorners3">
-                <img src="core/assets/cannoninsignia.png">
-                <img class="mecanica" src="core/assets/atari.png">
+                <div class="rcorners3">
+                    <img src="core/assets/cannoninsignia.png">
+                    <img class="mecanica" src="core/assets/atari.png">
+                </div>
+                <div class="rcorners3">
+                    <img src="core/assets/templar.png" onmouseover="changecannon('templar')">
+                    <img src="core/assets/fanatic.png" onmouseover="changecannon('fanatic')">
+                    <img src="core/assets/anarchist.png" onmouseover="changecannon('anarchist')">
+                </div>
             </div>
-            <div class="rcorners3">
+            <div class="rcorners3" id="cannondiv" onmouseover="restorecannon()">
                 <h2>Cannon</h2>
                 <h3>¿Te gusta ir agresivo y empezar a hacer daños descomunales? ¿Cojer el toro por los cuernos? 
                 ¿O sencillamente eres un máquina del Atari?</h3>
@@ -30,10 +41,17 @@
             </div>
             
             <div class="rcorners3">
-                <img src="core/assets/wheelinsignia.png">
-                <img class="mecanica" src="core/assets/spyvsspy.png">
+                <div class="rcorners3">
+                    <img src="core/assets/wheelinsignia.png">
+                    <img class="mecanica" src="core/assets/spyvsspy.png">
+                </div>
+                <div class="rcorners3">
+                    <img src="core/assets/traveler.png" onmouseover="changewheel('traveler')">
+                    <img src="core/assets/merchant.png" onmouseover="changewheel('merchant')">
+                    <img src="core/assets/visionary.png" onmouseover="changewheel('visionary')">
+                </div>
             </div>
-            <div class="rcorners3">
+            <div class="rcorners3" id="wheeldiv" onmouseover="restorewheel()">
                 <h2>Wheel</h2>
                 <h3>Las batallas en éste juego las dominan los daños, pero las victorias las suelen decidir aquéllos 
                 que son capaces de decidir qué recibe daño, qué no, quién ocupa esa posición, quién no.</h3>
@@ -44,10 +62,17 @@
             </div>
             
             <div class="rcorners3">
-                <img src="core/assets/trenchinsignia.png">
-                <img class="mecanica" src="core/assets/spaceinvaders.jpg">
+                <div class="rcorners3">
+                    <img src="core/assets/trenchinsignia.png">
+                    <img class="mecanica" src="core/assets/spaceinvaders.jpg">
+                </div>
+                <div class="rcorners3">
+                    <img src="core/assets/guardian.png" onmouseover="changetrench('guardian')">
+                    <img src="core/assets/benefactor.png" onmouseover="changetrench('benefactor')">
+                    <img src="core/assets/avenger.png" onmouseover="changetrench('avenger')">
+                </div>
             </div>
-            <div class="rcorners3">
+            <div class="rcorners3" id="trenchdiv" onmouseover="restoretrench()">
                 <h2>Trench</h2>
                 <h3>¿Disparos a marcianos te parecen divertidos? Espera a ver las risas que te vas a echar cuando un enemigo
                 esté enfrascado en la batalla sin prestar atención al soporte de allá y de repente se coma un disparo de la nada.</h3>
@@ -64,5 +89,75 @@
             <div class="rcorners3"><a href="https://www.linkedin.com/in/javier-god%C3%A1s-vi%C3%A9itez-034249144/"><h2>LinkedIn</h2></a></div>
             <div class="rcorners3"><a href="https://www.facebook.com/javier.godasvieitez.9"><h2>Facebook</h2></a></div>
         </div>
+        
+        <script type="text/javascript">
+            var initialcannon = document.getElementById("cannondiv").innerHTML;
+            var initialwheel = document.getElementById("wheeldiv").innerHTML;
+            var initialtrench = document.getElementById("trenchdiv").innerHTML;
+            
+            function restorecannon()
+            { document.getElementById("cannondiv").innerHTML = initialcannon; }
+            function changecannon(name)
+            {
+                switch(name)
+                {
+                    case "templar":
+                        document.getElementById("cannondiv").innerHTML =
+                        "<h2>Templar</h2><h3>Habilidad especial: Cuadruplica distancia de rebote, velocidad y daño</h3>";
+                    break;
+                    case "fanatic":
+                        document.getElementById("cannondiv").innerHTML =
+                        "<h2>Fanatic</h2><h3>Habilidad especial: Se autodestruye y causa enormes daños con 50% de probabilidad de sobrevivir</h3>";
+                    break;
+                    case "anarchist":
+                        document.getElementById("cannondiv").innerHTML =
+                        "<h2>Anarchist</h2><h3>Habilidad especial: Gana el control de un enemigo</h3>";
+                    break;
+                }
+            }
+            
+            function restorewheel()
+            { document.getElementById("wheeldiv").innerHTML = initialwheel; }
+            function changewheel(name)
+            {
+                switch(name)
+                {
+                    case "traveler":
+                        document.getElementById("wheeldiv").innerHTML =
+                        "<h2>Traveler</h2><h3>Habilidad especial: Intercambia posiciones con un objeto o un jugador</h3>";
+                    break;
+                    case "merchant":
+                        document.getElementById("wheeldiv").innerHTML =
+                        "<h2>Merchant</h2><h3>Habilidad especial: Cambia dos jugadores de equipo</h3>";
+                    break;
+                    case "visionary":
+                        document.getElementById("wheeldiv").innerHTML =
+                        "<h2>Visionary</h2><h3>Habilidad especial: Retrocede la partida a un punto anterior en el tiempo</h3>";
+                    break;
+                }
+            }
+            
+            function restoretrench()
+            { document.getElementById("trenchdiv").innerHTML = initialtrench; }
+            function changetrench(name)
+            {
+                switch(name)
+                {
+                    case "guardian":
+                        document.getElementById("trenchdiv").innerHTML =
+                        "<h2>Guardian</h2><h3>Habilidad especial: Desactiva la habilidad de un enemigo</h3>";
+                    break;
+                    case "benefactor":
+                        document.getElementById("trenchdiv").innerHTML =
+                        "<h2>Benefactor</h2><h3>Habilidad especial: Revive a un aliado</h3>";
+                    break;
+                    case "avenger":
+                        document.getElementById("trenchdiv").innerHTML =
+                        "<h2>Avenger</h2><h3>Habilidad especial: Pasiva; es inmortal, no puede disparar y es inmune a habilidades. \n\
+                        Activa; hace daño a todos los enemigos por cada aliado caído</h3>";
+                    break;                 
+                }
+            }
+        </script>
     </body>
 </html>
