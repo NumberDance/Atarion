@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class Interfaz implements Screen
@@ -14,6 +15,7 @@ public abstract class Interfaz implements Screen
     protected SpriteBatch genesis = null;
     protected Music tema = null;
     protected Interfaz control = null;
+    protected Texture fondo = new Texture(Gdx.files.internal("fondo.jpg"));
 
     
     @Override
@@ -55,6 +57,10 @@ public abstract class Interfaz implements Screen
       
         camara.update();
         genesis.setProjectionMatrix(camara.combined);
+
+        genesis.begin();
+        genesis.draw(fondo,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        genesis.end();
     }
     @Override
     public void resize(int width, int height) 

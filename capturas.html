@@ -1,8 +1,8 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="estiloweb.css">
-        <link rel="import" href="cabecera.html">
         <title>Atarion</title>
+        <link rel="import" href="cabecera.html">
     </head> 
     <body>
         <div class="rcorners2">
@@ -14,19 +14,11 @@
             <div class="rcorners3"><a href="capturas.html"><h2>Capturas</h2></a></div>
         </div>
         <div class="rcorners2">
-            <h1>"All VS. The Monster" MMORPG game</h1>
-            
-            <h3>Estás en coma, has perdido tus recuerdos y tus sentidos se han apagado.</h3>
-            
-            <h3>Vagas por el submundo de Atarion buscando una salida, pero ganarse el despertar no será fácil.
-            Las extrañas fuerzas conocidas como los Carceleros te persiguen, confiscando tus memorias y distorsionando tus sentidos para retenerte enternamente.</h3>
-            
-            <h3>No tienes ninguna posibilidad, no tienes armas, tan sólo un fragmento de tus recuerdos y un extraño sentido resultado de los poderes de los Carceleros</h3>
-            
-            <h3>Estás desamparado y asustado, pero no eres el único.</h3>
-            
-            <h3> Atarion es un juego que mezcla mecánicas de la vieja escuela como Atari Breakout, Space Invaders o Spy vs Spy
-            y les añade elementos de MMORPG actuales para crear un gameplay único.</h3>
+            <h1>Versión alfa: No representa el gameplay definitivo</h1>
+        </div>
+        <div class="rcorners2">
+            <h2>Click para ver siguiente</h2>
+            <img id="galeria" onclick="next()" src="core/assets/Preview1.png">
         </div>
         <div class="rcorners3">
             <h2>Sígueme en: </h2>
@@ -34,5 +26,22 @@
             <div class="rcorners3"><a href="https://www.linkedin.com/in/javier-god%C3%A1s-vi%C3%A9itez-034249144/"><h2>LinkedIn</h2></a></div>
             <div class="rcorners3"><a href="https://www.facebook.com/javier.godasvieitez.9"><h2>Facebook</h2></a></div>
         </div>
+        
+        <script type="text/javascript">
+            var count = 1;
+            
+            function next()
+            {
+                count++;
+                
+                if(count < 7)
+                { document.getElementById("galeria").src = "core/assets/Preview" + count + ".png"; }
+                else
+                { 
+                    document.getElementById("galeria").src = "core/assets/Preview1.png"; 
+                    count = 1;
+                }
+            }
+        </script>
     </body>
 </html>
