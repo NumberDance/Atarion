@@ -3,7 +3,7 @@ body
     background-color: black;
     align-content: center;
     text-align: center;
-    background-image: url("core/assets/fondo.jpg");
+    background-image: url("../core/assets/fondo.jpg");
     background-repeat: repeat-y;
     background-size: 100%;
     font-family: Neuropol;
