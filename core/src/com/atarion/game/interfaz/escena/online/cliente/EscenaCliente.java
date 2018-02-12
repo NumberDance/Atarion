@@ -2,42 +2,27 @@ package com.atarion.game.interfaz.escena.online.cliente;
 
 
 import com.atarion.game.entidad.jugador.humano.Humano;
-import com.atarion.game.entidad.jugador.humano.cannon.Anarchist;
-import com.atarion.game.entidad.jugador.humano.cannon.Fanatic;
-import com.atarion.game.entidad.jugador.humano.cannon.Templar;
-import com.atarion.game.entidad.jugador.humano.trench.Avenger;
-import com.atarion.game.entidad.jugador.humano.trench.Benefactor;
-import com.atarion.game.entidad.jugador.humano.trench.Guardian;
-import com.atarion.game.entidad.jugador.humano.wheel.Merchant;
 import com.atarion.game.entidad.jugador.humano.wheel.Traveler;
-import com.atarion.game.entidad.jugador.humano.wheel.Visionary;
 import com.atarion.game.interfaz.escena.Escena;
-import com.badlogic.gdx.audio.Music;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import java.io.PrintWriter;
-import java.net.Socket;
 import java.util.HashSet;
 
 
 public class EscenaCliente extends Escena
 {
-    private Socket cliente;
     private PrintWriter salida; 
     private HashSet<Humano> enemigos = new HashSet<Humano>();
     private HashSet<Humano> aliados = new HashSet<Humano>();
+    private String idhumano;
+    private BitmapFont texto;
+    private boolean listo = false;
+    private HiloCliente hilo;
     
     
-    public EscenaCliente(Music tema)
-    { 
-        super(tema);
-        
-        try
-        { cliente = new Socket("192.168.1.100",20595); } 
-        catch (IOException ex)
-        {}
-    }
+    public EscenaCliente()
+    { super(null); }
 
     
     @Override
@@ -47,7 +32,10 @@ public class EscenaCliente extends Escena
         {*/
             super.show();
             
+            this.hilo = new HiloCliente(humano,this);
+            
             humano = new Traveler(genesis);
+            humano.setIdentificador(idhumano);
             /*cliente.getOutputStream().write("Traveler".concat("\n").getBytes());
             
             String inicial = new BufferedReader(new InputStreamReader(cliente.getInputStream())).readLine();
@@ -92,10 +80,18 @@ public class EscenaCliente extends Escena
     public void render(float delta)
     {
         super.render(delta);
-        new HiloCliente(cliente,humano,this).start();
+        hilo.start();
     }
     
     
     public void updateGlobalStates(String states)
     { humano2.recibirEstado(states); }
+    public void comenzarPartida(String identificador, String estado)
+    { 
+        this.idhumano = identificador; 
+        this.listo = true;
+        
+        Gdx.app.log("INFO","Asignado identificador: " + this.idhumano);
+        Gdx.app.log("INFO","Estado inicial de la partida: " + estado);
+    }
 }

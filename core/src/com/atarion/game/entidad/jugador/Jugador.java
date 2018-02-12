@@ -4,13 +4,12 @@ import com.atarion.game.entidad.Entidad;
 import com.atarion.game.entidad.objeto.Objeto;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 public abstract class Jugador extends Entidad
 {
-    protected int vida = 100, fuerza = 10, identificador = 0;
+    protected int vida = 100, fuerza = 10;
     
     protected float velocidad = 1f;
     protected Direccion direccion;
@@ -44,7 +43,7 @@ public abstract class Jugador extends Entidad
         
         estado.append(",");
         if(this.enemigo != null)
-        { estado.append("'enemigo':").append("'").append(this.enemigo.identificador).append("'").append(","); }
+        { estado.append("'enemigo':").append("'").append(this.enemigo.getIdentificador()).append("'").append(","); }
         estado.append("'vida':").append("'").append(this.vida).append("'").append(",");
         estado.append("'fuerza':").append("'").append(this.fuerza).append("'").append(",");
         estado.append("'velocidad':").append("'").append(this.velocidad).append("'").append(",");
@@ -142,8 +141,6 @@ public abstract class Jugador extends Entidad
     { return direccion; }
     public boolean isActivado()
     { return activado; }
-    public int getIdentificador()
-    { return identificador; }
     
     
     public void setVida(int vida)
@@ -178,6 +175,4 @@ public abstract class Jugador extends Entidad
     { this.controlado = controlado; }
     public void setInmune(boolean inmune) 
     { this.inmune = inmune; }
-    public void setIdentificador(int identificador)
-    { this.identificador = identificador; }
 }

@@ -1,5 +1,6 @@
 package com.atarion.game.interfaz.menu;
 
+
 import com.atarion.game.Atarion;
 import com.atarion.game.interfaz.escena.online.cliente.EscenaCliente;
 import com.atarion.game.interfaz.escena.tutorial.TutorialTeclas;
@@ -10,10 +11,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import java.io.IOException;
-import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class MenuPrincipal extends Menu
 {
@@ -25,9 +23,10 @@ public class MenuPrincipal extends Menu
     {
         super();
         
-        tema = Gdx.audio.newMusic(Gdx.files.internal("exploring.mp3"));
+        tema = null;//Gdx.audio.newMusic(Gdx.files.internal("exploring.mp3"));
+        //tema.setLooping(true);
+                
         logo = new Texture(Gdx.files.internal("logo.png"));
-        tema.setLooping(true);
     }
     
     
@@ -67,7 +66,7 @@ public class MenuPrincipal extends Menu
         else if(Gdx.input.isKeyPressed(Input.Keys.C))
         { Atarion.getInstance().setScreen(new AnalisisClaudius()); }
         else if(Gdx.input.isKeyPressed(Input.Keys.D))
-        { Atarion.getInstance().setScreen(new EscenaCliente(null)); }
+        { Atarion.getInstance().setScreen(new EscenaCliente()); }
         else if(Gdx.input.isKeyPressed(Input.Keys.X))
         { Atarion.getInstance().setScreen(new TutorialTeclas()); }
     }

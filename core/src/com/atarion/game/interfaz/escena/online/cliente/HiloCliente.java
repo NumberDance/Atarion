@@ -8,23 +8,23 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class HiloCliente extends Thread
 {
-    private Socket cliente = null;
-    private Jugador jugador = null;
-    private EscenaCliente escena = null;
+    private Socket cliente;
+    private Jugador jugador;
+    private EscenaCliente escena;
     private Json conversor = new Json(); 
-    private BufferedReader lector = null;
+    private BufferedReader lector;
     
     
-    public HiloCliente(Socket cliente,Jugador jugador,EscenaCliente escena)
+    public HiloCliente(Jugador jugador,EscenaCliente escena)
     { 
         try
         {
-            this.cliente = cliente;
+            cliente = new Socket("192.168.1.100",20595);
+            this.lector = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
+            
             this.jugador = jugador;
             this.escena = escena;
             
@@ -32,7 +32,8 @@ public class HiloCliente extends Thread
             this.conversor.setUsePrototypes(false);
             this.conversor.setIgnoreUnknownFields(true);
             this.conversor.setOutputType(JsonWriter.OutputType.json);
-            this.lector = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
+            
+            escena.comenzarPartida(this.lector.readLine(),this.lector.readLine());
         } 
         catch (IOException ex)
         {}

@@ -37,6 +37,10 @@ public abstract class Entidad extends Rectangle
         this.x = objeto.getFloat("x");
         this.y = objeto.getFloat("y");
     }
+
+    
+    public String getIdentificador()
+    { return identificador; }
     
     
     public void setGenesis(Batch genesis)

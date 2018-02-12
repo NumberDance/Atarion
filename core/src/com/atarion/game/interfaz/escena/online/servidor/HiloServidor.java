@@ -1,7 +1,6 @@
 package com.atarion.game.interfaz.escena.online.servidor;
 
 
-import com.atarion.game.entidad.jugador.Jugador;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,12 +11,12 @@ import java.util.Map.Entry;
 
 public class HiloServidor extends Thread
 {
-    private Integer identificador = 0;
+    private String identificador;
     private Socket socket = null;
     private EscenaServidor escena = null;
     
     
-    public HiloServidor(Entry<Integer,SimpleEntry<Socket,String>> cliente, EscenaServidor escena)
+    public HiloServidor(Entry<String,SimpleEntry<Socket,String>> cliente, EscenaServidor escena)
     { 
         this.identificador = cliente.getKey();
         this.socket = cliente.getValue().getKey();
@@ -37,10 +36,13 @@ public class HiloServidor extends Thread
             {
                 try
                 {
+                    //Asigna la ID del jugador para que el cliente pueda generar la escena
+                    socket.getOutputStream().write(this.identificador.getBytes());
+                    
                     escena.getSemaforo().acquire();
                 
                     escena.getClientes().replace(identificador,new SimpleEntry<Socket,String>(socket,lector.readLine()));
-                    System.out.println("Recibido estado del cliente nº" + this.identificador + "|" + escena.getClientes().get(identificador).getValue());
+                    System.out.println("Recibido estado del cliente " + this.identificador + " -> " + escena.getClientes().get(identificador).getValue());
                 
                     StringBuilder respuesta = new StringBuilder("");
                     escena.getClientes().forEach
