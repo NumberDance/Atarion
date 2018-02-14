@@ -1,5 +1,5 @@
 # Atarion
-"All VS. The Monster" MMORPG game, with ball-bar concepts from the original Atari.
+"All VS. The Monster" Psyche World MMORPG, mixed with old-school game mechanics.
 
 Using LibGDX for graphics -> https://github.com/libgdx
 
