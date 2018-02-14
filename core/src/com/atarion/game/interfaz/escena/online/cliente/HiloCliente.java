@@ -12,31 +12,24 @@ import java.net.Socket;
 public class HiloCliente extends Thread
 {
     private Socket cliente;
+    private BufferedReader lector;
     private Jugador jugador;
     private EscenaCliente escena;
     private Json conversor = new Json(); 
-    private BufferedReader lector;
     
     
-    public HiloCliente(Jugador jugador,EscenaCliente escena)
-    { 
-        try
-        {
-            cliente = new Socket("192.168.1.100",20595);
-            this.lector = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
+    public HiloCliente(EscenaCliente escena)
+    {
+        this.cliente = escena.getCliente();
+        this.lector = escena.getLector();
             
-            this.jugador = jugador;
-            this.escena = escena;
+        this.jugador = escena.getHumano();
+        this.escena = escena;
             
-            this.conversor.setTypeName(null);
-            this.conversor.setUsePrototypes(false);
-            this.conversor.setIgnoreUnknownFields(true);
-            this.conversor.setOutputType(JsonWriter.OutputType.json);
-            
-            escena.comenzarPartida(this.lector.readLine(),this.lector.readLine());
-        } 
-        catch (IOException ex)
-        {}
+        this.conversor.setTypeName(null);
+        this.conversor.setUsePrototypes(false);
+        this.conversor.setIgnoreUnknownFields(true);
+        this.conversor.setOutputType(JsonWriter.OutputType.json);
     }
     
     

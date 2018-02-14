@@ -6,23 +6,40 @@ import com.atarion.game.entidad.jugador.humano.wheel.Traveler;
 import com.atarion.game.interfaz.escena.Escena;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.HashSet;
 
 
 public class EscenaCliente extends Escena
 {
+    private Socket cliente;
     private PrintWriter salida; 
     private HashSet<Humano> enemigos = new HashSet<Humano>();
     private HashSet<Humano> aliados = new HashSet<Humano>();
-    private String idhumano;
-    private BitmapFont texto;
-    private boolean listo = false;
-    private HiloCliente hilo;
+    private String idhumano, inicial;
+    private BufferedReader lector;
     
     
     public EscenaCliente()
-    { super(null); }
+    {
+        super(null);
+        
+        try
+        { 
+            this.cliente = new Socket("192.168.1.102",20595); 
+            this.lector = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
+            
+            Gdx.app.log("Info","Obteniendo credenciales...");
+            this.idhumano = this.lector.readLine(); 
+            this.inicial = this.lector.readLine();
+        } 
+        catch (IOException ex)
+        {}
+    }
 
     
     @Override
@@ -31,8 +48,6 @@ public class EscenaCliente extends Escena
         /*try
         {*/
             super.show();
-            
-            this.hilo = new HiloCliente(humano,this);
             
             humano = new Traveler(genesis);
             humano.setIdentificador(idhumano);
@@ -80,18 +95,16 @@ public class EscenaCliente extends Escena
     public void render(float delta)
     {
         super.render(delta);
-        hilo.start();
+        new HiloCliente(this).start();
     }
-    
-    
     public void updateGlobalStates(String states)
     { humano2.recibirEstado(states); }
-    public void comenzarPartida(String identificador, String estado)
-    { 
-        this.idhumano = identificador; 
-        this.listo = true;
-        
-        Gdx.app.log("INFO","Asignado identificador: " + this.idhumano);
-        Gdx.app.log("INFO","Estado inicial de la partida: " + estado);
-    }
+
+    
+    public Socket getCliente()
+    { return cliente; }
+    public Humano getHumano()
+    { return humano; }
+    public BufferedReader getLector()
+    { return lector; }
 }
