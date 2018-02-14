@@ -16,6 +16,7 @@ public final class EscenaServidor extends Thread
     private HashMap<String,SimpleEntry<Socket,String>> clientes = new HashMap<String,SimpleEntry<Socket,String>>();
     private Integer cuenta = 0, capacidad = 2;
     private final Semaphore semaforo = new Semaphore(1,true);
+    private boolean listo = false;
 
     
     @Override
@@ -31,20 +32,9 @@ public final class EscenaServidor extends Thread
                 cuenta++;
                 
                 clientes.put("Jugador|" + cuenta,new SimpleEntry<>(servidor.accept(),""));
-                System.out.println("Cliente conectado: " + clientes.get(cuenta).getKey().getInetAddress());
+                System.out.println("Cliente conectado: " + clientes.get("Jugador|" + cuenta).getKey().getInetAddress());
             }
-            
-            clientes.entrySet().forEach(cliente -> { new HiloServidor(cliente,this).start(); } );
-            clientes.forEach
-            (
-                (clave,valor) -> 
-                {
-                    try
-                    { valor.getKey().getOutputStream().write(("{ 'Partida' : 'comenzada' }").getBytes()); } 
-                    catch (IOException ex)
-                    {}
-                }
-            );
+            clientes.entrySet().forEach(cliente -> { new HiloServidor(cliente,this).start(); });
         } 
         catch (IOException ex)
         {}

@@ -32,13 +32,13 @@ public class HiloServidor extends Thread
         {  
             BufferedReader lector = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         
+            socket.getOutputStream().write(this.identificador.concat("\n").getBytes());
+            socket.getOutputStream().write(this.identificador.concat("\n").getBytes());
+            
             while(!socket.isClosed())
             {
                 try
-                {
-                    //Asigna la ID del jugador para que el cliente pueda generar la escena
-                    socket.getOutputStream().write(this.identificador.getBytes());
-                    
+                {   
                     escena.getSemaforo().acquire();
                 
                     escena.getClientes().replace(identificador,new SimpleEntry<Socket,String>(socket,lector.readLine()));
