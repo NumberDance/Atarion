@@ -2,6 +2,8 @@ package com.atarion.game.entidad.jugador.humano.cannon;
 
 import com.atarion.game.entidad.jugador.Direccion;
 import com.atarion.game.entidad.jugador.Jugador;
+import com.atarion.game.interfaz.escena.online.MensajeJSON;
+import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
@@ -28,14 +30,8 @@ public class Anarchist extends Cannon
 
     
     @Override
-    public StringBuilder volcarEstado()
-    { 
-        StringBuilder estado = super.volcarEstado();
-        estado.append(",");
-        estado.append("'controlado':").append("'").append(this.controlado.volcarEstado()).append("'");
-        estado.append("}");
-        return estado; 
-    }
+    public MensajeJSON enviarEstado()
+    { return super.enviarEstado().escribirAtributo("controlado","" + this.controlado,ParteMensaje.FINAL); }
     @Override
     public void recibirEstado(String estado)
     { 

@@ -1,5 +1,7 @@
 package com.atarion.game.entidad.objeto;
 
+import com.atarion.game.interfaz.escena.online.MensajeJSON;
+import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -25,8 +27,14 @@ public class Escombro extends Objeto
     
     
     @Override
-    public StringBuilder volcarEstado()
-    { return super.volcarEstado().append("}"); }
+    public MensajeJSON enviarEstado()
+    { 
+        MensajeJSON estado = new MensajeJSON();
+        estado.escribirAtributo("velocidad","" + this.velocidad,ParteMensaje.CUERPO);
+        estado.escribirAtributo("destino","" + this.destino,ParteMensaje.FINAL);
+        
+        return estado; 
+    }
     @Override
     public void recibirEstado(String estado)
     { super.recibirEstado(estado); }

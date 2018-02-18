@@ -1,6 +1,8 @@
 package com.atarion.game.entidad.objeto;
 
 import com.atarion.game.entidad.Entidad;
+import com.atarion.game.interfaz.escena.online.MensajeJSON;
+import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
@@ -15,6 +17,11 @@ public abstract class Objeto extends Entidad
         this.textura = textura;
         this.dureza = dureza;
     }
+    
+    
+    @Override
+    public MensajeJSON enviarEstado()
+    { return super.enviarEstado().escribirAtributo("dureza","" + this.dureza,ParteMensaje.CUERPO); }
     
     
     public int getDureza() 

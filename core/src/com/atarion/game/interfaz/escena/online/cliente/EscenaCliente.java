@@ -5,7 +5,6 @@ import com.atarion.game.entidad.jugador.humano.Humano;
 import com.atarion.game.entidad.jugador.humano.wheel.Traveler;
 import com.atarion.game.interfaz.escena.Escena;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

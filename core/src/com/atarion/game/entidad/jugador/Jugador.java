@@ -2,6 +2,8 @@ package com.atarion.game.entidad.jugador;
 
 import com.atarion.game.entidad.Entidad;
 import com.atarion.game.entidad.objeto.Objeto;
+import com.atarion.game.interfaz.escena.online.MensajeJSON;
+import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import org.json.JSONObject;
@@ -37,28 +39,29 @@ public abstract class Jugador extends Entidad
     }
     
     
-    public StringBuilder volcarEstado()
+    @Override
+    public MensajeJSON enviarEstado()
     {
-        StringBuilder estado = super.volcarEstado();
+        MensajeJSON estado = super.enviarEstado();
+        estado.escribirAtributo("vida","" + vida,ParteMensaje.CUERPO);
+        estado.escribirAtributo("fuerza","" + fuerza,ParteMensaje.CUERPO);
+        estado.escribirAtributo("velocidad","" + velocidad,ParteMensaje.CUERPO);
+        estado.escribirAtributo("direccion","" + direccion,ParteMensaje.CUERPO);
+        estado.escribirAtributo("colision","" + colision,ParteMensaje.CUERPO);
+        estado.escribirAtributo("cronometro","" + cronometro,ParteMensaje.CUERPO);
+        estado.escribirAtributo("tiempoactivo","" + tiempoactivo,ParteMensaje.CUERPO);
+        estado.escribirAtributo("activo","" + activo,ParteMensaje.CUERPO);
+        estado.escribirAtributo("tiemporecarga","" + tiemporecarga,ParteMensaje.CUERPO);
+        estado.escribirAtributo("recarga","" + recarga,ParteMensaje.CUERPO);
+        estado.escribirAtributo("activado","" + activado,ParteMensaje.CUERPO);
+        estado.escribirAtributo("parado","" + parado,ParteMensaje.CUERPO);
+        estado.escribirAtributo("controlado","" + controlado,ParteMensaje.CUERPO);
+        estado.escribirAtributo("inmune","" + inmune,ParteMensaje.CUERPO);
+        estado.escribirAtributo("invertido","" + invertido,ParteMensaje.CUERPO);
         
-        estado.append(",");
         if(this.enemigo != null)
-        { estado.append("'enemigo':").append("'").append(this.enemigo.getIdentificador()).append("'").append(","); }
-        estado.append("'vida':").append("'").append(this.vida).append("'").append(",");
-        estado.append("'fuerza':").append("'").append(this.fuerza).append("'").append(",");
-        estado.append("'velocidad':").append("'").append(this.velocidad).append("'").append(",");
-        estado.append("'direccion':").append("'").append(this.direccion).append("'").append(",");
-        estado.append("'colision':").append("'").append(this.colision).append("'").append(",");
-        estado.append("'cronometro':").append("'").append(this.cronometro).append("'").append(",");
-        estado.append("'tiempoactivo':").append("'").append(this.tiempoactivo).append("'").append(",");
-        estado.append("'activo':").append("'").append(this.activo).append("'").append(",");
-        estado.append("'tiemporecarga':").append("'").append(this.tiemporecarga).append("'").append(",");
-        estado.append("'recarga':").append("'").append(this.recarga).append("'").append(",");
-        estado.append("'activado':").append("'").append(this.activado).append("'").append(",");
-        estado.append("'parado':").append("'").append(this.parado).append("'").append(",");
-        estado.append("'controlado':").append("'").append(this.controlado).append("'").append(",");
-        estado.append("'inmune':").append("'").append(this.inmune).append("'").append(",");
-        estado.append("'invertido':").append("'").append(this.invertido).append("'");
+        { estado.escribirAtributo("enemigo",enemigo.getIdentificador(),ParteMensaje.CUERPO); }
+        
         return estado;
     }
     @Override

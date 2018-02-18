@@ -3,6 +3,8 @@ package com.atarion.game.entidad.jugador.maquina;
 import com.atarion.game.entidad.objeto.Objeto;
 import com.atarion.game.entidad.jugador.Direccion;
 import com.atarion.game.entidad.jugador.Jugador;
+import com.atarion.game.interfaz.escena.online.MensajeJSON;
+import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -126,4 +128,8 @@ public abstract class Maquina extends Jugador
     @Override
     public void colisionJugador(Jugador objeto) 
     {}
+    
+    @Override
+    public MensajeJSON enviarEstado()
+    { return super.enviarEstado().escribirAtributo("decision","" + this.decision,ParteMensaje.CUERPO); }
 }

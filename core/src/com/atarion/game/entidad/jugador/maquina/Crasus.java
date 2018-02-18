@@ -1,8 +1,11 @@
 package com.atarion.game.entidad.jugador.maquina;
 
+import com.atarion.game.entidad.Entidad;
 import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.jugador.humano.Humano;
 import com.atarion.game.entidad.objeto.Bomba;
+import com.atarion.game.interfaz.escena.online.MensajeJSON;
+import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,7 +17,7 @@ public class Crasus extends Maquina
 {
     private boolean colision = false, colisionbomba = false;
     private float temporizador = 0f;
-    private HashSet<Bomba> bombas = new HashSet<Bomba>();
+    private HashSet<Entidad> bombas = new HashSet<Entidad>();
     
     public Crasus(Batch genesis) 
     {
@@ -26,8 +29,16 @@ public class Crasus extends Maquina
 
     
     @Override
-    public StringBuilder volcarEstado()
-    { return super.volcarEstado().append("}"); }
+    public MensajeJSON enviarEstado()
+    { 
+        MensajeJSON estado = super.enviarEstado();
+        estado.escribirAtributo("colision","" + this.colision,ParteMensaje.CUERPO);
+        estado.escribirAtributo("colisionbomba","" + this.colisionbomba,ParteMensaje.CUERPO);
+        estado.escribirAtributo("temporizador","" + this.temporizador,ParteMensaje.CUERPO);
+        estado.escribirArray("bombas",this.bombas,ParteMensaje.FINAL);
+        
+        return estado;
+    }
     @Override
     public void recibirEstado(String estado)
     { super.recibirEstado(estado); }
@@ -40,7 +51,7 @@ public class Crasus extends Maquina
         
         if(!bombas.isEmpty())
         {
-            Iterator<Bomba> i = bombas.iterator();
+            Iterator<Entidad> i = bombas.iterator();
             while(i.hasNext())
             { i.next().actualizarEstado(); }
         }
@@ -57,17 +68,17 @@ public class Crasus extends Maquina
             temporizador += Gdx.graphics.getDeltaTime();
             if(temporizador >= 1.0f)
             {
-                Iterator<Bomba> i = bombas.iterator();
+                Iterator<Entidad> i = bombas.iterator();
                 while(i.hasNext())
-                { i.next().cuentaAtras(); }
+                { ((Bomba)i.next()).cuentaAtras(); }
                 
                 temporizador = 0f;
             }
             
-            Iterator<Bomba> j = bombas.iterator();
+            Iterator<Entidad> j = bombas.iterator();
             while(j.hasNext())
             {
-                Bomba bomba = j.next();
+                Bomba bomba = (Bomba)j.next();
                 
                 if(bomba.overlaps(enemigo) && bomba.getDureza() > 0)
                 {

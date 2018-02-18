@@ -1,6 +1,8 @@
 package com.atarion.game.entidad;
 
 
+import com.atarion.game.interfaz.escena.online.MensajeJSON;
+import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
@@ -21,13 +23,12 @@ public abstract class Entidad extends Rectangle
     { textura.dispose(); }
     
     
-    protected StringBuilder volcarEstado()
+    public MensajeJSON enviarEstado()
     {
-        StringBuilder estado = new StringBuilder();
-        estado.append("{");
-        estado.append("'identificador':").append("'").append(this.identificador).append("'").append(",");
-        estado.append("'x':").append("'").append(this.x).append("'").append(",");
-        estado.append("'y':").append("'").append(this.y).append("'");
+        MensajeJSON estado = new MensajeJSON();
+        estado.escribirAtributo("identificador",this.identificador, ParteMensaje.PRINCIPIO);
+        estado.escribirAtributo("x","" + this.x,ParteMensaje.CUERPO);
+        estado.escribirAtributo("y","" + this.y,ParteMensaje.CUERPO);
         return estado;
     }
     protected void recibirEstado(String estado)

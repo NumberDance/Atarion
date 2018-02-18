@@ -2,6 +2,8 @@ package com.atarion.game.entidad.jugador.humano.cannon;
 
 import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.jugador.humano.Humano;
+import com.atarion.game.interfaz.escena.online.MensajeJSON;
+import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import org.json.JSONObject;
@@ -29,13 +31,8 @@ public abstract class Cannon extends Humano
 
 
     @Override
-    public StringBuilder volcarEstado()
-    { 
-        StringBuilder estado = super.volcarEstado();
-        estado.append(",");
-        estado.append("'rebote':").append("'").append(this.rebote).append("'");
-        return estado; 
-    }
+    public MensajeJSON enviarEstado()
+    { return super.enviarEstado().escribirAtributo("rebote","" + this.rebote,ParteMensaje.CUERPO); }
     @Override
     public void recibirEstado(String estado)
     { 

@@ -7,8 +7,6 @@ import java.net.Socket;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.HashMap;
 import java.util.concurrent.Semaphore;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public final class EscenaServidor extends Thread

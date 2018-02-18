@@ -3,15 +3,14 @@ package com.atarion.game.entidad.jugador.maquina;
 import com.atarion.game.entidad.objeto.Escombro;
 import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.objeto.Laser;
-import com.atarion.game.entidad.objeto.ProyectilTrench;
+import com.atarion.game.interfaz.escena.online.MensajeJSON;
+import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import java.util.Iterator;
 import java.util.LinkedList;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
 public class Claudius extends Maquina
 {
@@ -41,18 +40,18 @@ public class Claudius extends Maquina
     
     
     @Override
-    public StringBuilder volcarEstado()
+    public MensajeJSON enviarEstado()
     { 
-        StringBuilder estado = super.volcarEstado();
-        estado.append(",");
-        if(this.laser != null)
-        { estado.append("'laser':").append("'").append(this.laser.volcarEstado()).append("'").append(","); }
+        MensajeJSON estado = super.enviarEstado();
+        estado.escribirAtributo("carga","" + this.carga,ParteMensaje.CUERPO);
+        estado.escribirAtributo("colisionlaser","" + this.colisionlaser,ParteMensaje.CUERPO);
+        estado.escribirAtributo("modo",this.modo.toString(),ParteMensaje.CUERPO);
+
+        if(this.laser == null)
+        { estado.escribirAtributo("laser","null",ParteMensaje.FINAL); }
         else
-        { estado.append("'laser':").append("'null'").append(","); }
-        estado.append("'carga':").append("'").append(this.carga).append("'").append(",");
-        estado.append("'colisionlaser':").append("'").append(this.colisionlaser).append("'").append(",");
-        estado.append("'modo':").append("'").append(this.modo.toString()).append("'");
-        estado.append("}");
+        { estado.escribirAtributo("laser",this.laser.enviarEstado().getMensaje().toString(),ParteMensaje.FINAL); }
+        
         return estado; 
     }
     @Override

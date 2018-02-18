@@ -1,5 +1,7 @@
 package com.atarion.game.entidad.jugador.humano.trench;
 
+import com.atarion.game.interfaz.escena.online.MensajeJSON;
+import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -17,8 +19,8 @@ public class DummyTrench extends Trench
     
     
     @Override
-    public StringBuilder volcarEstado()
-    { return new StringBuilder(); }
+    public MensajeJSON enviarEstado()
+    { return super.enviarEstado().escribirAtributo(null,null,ParteMensaje.FINAL); }
     @Override
     public void recibirEstado(String estado)
     {}

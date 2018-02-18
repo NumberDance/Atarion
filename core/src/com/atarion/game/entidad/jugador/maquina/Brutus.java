@@ -3,7 +3,8 @@ package com.atarion.game.entidad.jugador.maquina;
 
 import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.objeto.ProyectilBrutus;
-import com.atarion.game.entidad.objeto.ProyectilTrench;
+import com.atarion.game.interfaz.escena.online.MensajeJSON;
+import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
@@ -29,16 +30,16 @@ public class Brutus extends Maquina
     
     
     @Override
-    public StringBuilder volcarEstado()
+    public MensajeJSON enviarEstado()
     { 
-        StringBuilder estado = super.volcarEstado();
-        estado.append(",");
+        MensajeJSON estado = super.enviarEstado();
+        estado.escribirAtributo("colisionproyectil","" + this.colisionproyectil,ParteMensaje.CUERPO);
+        
         if(this.proyectil != null)
-        { estado.append("'proyectil':").append("'").append(this.proyectil.volcarEstado()).append("'").append(","); }
+        { estado.escribirAtributo("proyectil",this.proyectil.enviarEstado().getMensaje().toString(),ParteMensaje.FINAL); }
         else
-        { estado.append("'proyectil':").append("'null'").append(","); }
-        estado.append("'colisionproyectil':").append("'").append(this.colisionproyectil).append("'");
-        estado.append("}");
+        { estado.escribirAtributo("proyectil","null",ParteMensaje.FINAL); }
+        
         return estado; 
     }
     @Override

@@ -1,6 +1,8 @@
 package com.atarion.game.entidad.jugador.maquina;
 
 import com.atarion.game.entidad.jugador.Jugador;
+import com.atarion.game.interfaz.escena.online.MensajeJSON;
+import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -19,8 +21,8 @@ public class Dummy extends Maquina
     
     
     @Override
-    public StringBuilder volcarEstado()
-    { return super.volcarEstado().append("}"); }
+    public MensajeJSON enviarEstado()
+    { return super.enviarEstado().escribirAtributo(null,null,ParteMensaje.FINAL); }
     @Override
     public void recibirEstado(String estado)
     { super.recibirEstado(estado); }
