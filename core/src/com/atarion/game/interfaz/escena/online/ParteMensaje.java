@@ -5,5 +5,6 @@ public enum ParteMensaje
 {
     PRINCIPIO,
     CUERPO,
-    FINAL
+    FINAL,
+    SINGULAR
 }

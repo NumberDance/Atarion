@@ -1,6 +1,8 @@
 package com.atarion.game.interfaz.escena.online.servidor;
 
 
+import com.atarion.game.interfaz.escena.online.MensajeJSON;
+import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -32,6 +34,7 @@ public final class EscenaServidor extends Thread
                 clientes.put("Jugador|" + cuenta,new SimpleEntry<>(servidor.accept(),""));
                 System.out.println("Cliente conectado: " + clientes.get("Jugador|" + cuenta).getKey().getInetAddress());
             }
+            
             clientes.entrySet().forEach(cliente -> { new HiloServidor(cliente,this).start(); });
         } 
         catch (IOException ex)

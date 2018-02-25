@@ -15,13 +15,21 @@ public class HiloServidor extends Thread
 {
     private String identificador;
     private Socket socket = null;
+    private BufferedReader lector = null;
     private EscenaServidor escena = null;
     
     
     public HiloServidor(Entry<String,SimpleEntry<Socket,String>> cliente, EscenaServidor escena)
     { 
         this.identificador = cliente.getKey();
-        this.socket = cliente.getValue().getKey();
+        
+        try
+        {
+            this.socket = cliente.getValue().getKey();
+            this.lector = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        }
+        catch(IOException ex)
+        {}
         
         this.escena = escena;
     }
@@ -32,15 +40,17 @@ public class HiloServidor extends Thread
     {
         try
         {  
-            BufferedReader lector = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        
-            socket.getOutputStream().write(this.identificador.concat("\n").getBytes());
+            MensajeJSON id = new MensajeJSON().escribirAtributo("identificador",this.identificador,ParteMensaje.SINGULAR);
+            id.enviar(this.socket.getOutputStream());
+            
+            MensajeJSON jugador = new MensajeJSON().recibir(lector);
+            String tipo = jugador.getJson().getString("tipo");
             
             MensajeJSON inicial = new MensajeJSON();
             inicial.escribirAtributo("Maquina|0","Brutus", ParteMensaje.PRINCIPIO);
             inicial.escribirAtributo("Jugador|1","Brutus", ParteMensaje.CUERPO);
             inicial.escribirAtributo("Jugador|2","Brutus", ParteMensaje.FINAL);
-            socket.getOutputStream().write(this.identificador.concat("\n").getBytes());
+            inicial.enviar(this.socket.getOutputStream());
             
             while(!socket.isClosed())
             {

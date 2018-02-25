@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashSet;
-import java.util.Set;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -32,6 +31,11 @@ public class MensajeJSON
                 this.agregarCampo(nombre,valor);
                 this.mensaje.append("}");
             break;
+            case SINGULAR:
+                this.mensaje = new StringBuilder("");
+                this.mensaje.append("{");
+                this.agregarCampo(nombre,valor);
+                this.mensaje.append("}");
         }
         
         return this;
@@ -96,12 +100,14 @@ public class MensajeJSON
         catch (IOException ex)
         {}
     }
-    public void recibir(BufferedReader lector)
+    public MensajeJSON recibir(BufferedReader lector)
     {
         try 
         { this.json = new JSONObject(new JSONTokener(lector.readLine())); } 
         catch (IOException ex)
         {}
+        
+        return this;
     }
 
     
