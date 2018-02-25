@@ -44,7 +44,6 @@ public class HiloServidor extends Thread
             id.enviar(this.socket.getOutputStream());
             
             MensajeJSON jugador = new MensajeJSON().recibir(lector);
-            String tipo = jugador.getJson().getString("tipo");
             
             MensajeJSON inicial = new MensajeJSON();
             inicial.escribirAtributo("Maquina|0","Brutus", ParteMensaje.PRINCIPIO);

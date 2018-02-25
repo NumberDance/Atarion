@@ -13,6 +13,7 @@ import com.atarion.game.entidad.jugador.humano.wheel.Traveler;
 import com.atarion.game.entidad.jugador.humano.wheel.Visionary;
 import com.atarion.game.interfaz.escena.Escena;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
+import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.atarion.game.interfaz.escena.online.servidor.Clase;
 import com.badlogic.gdx.Gdx;
 import java.io.BufferedReader;
@@ -46,11 +47,9 @@ public class EscenaCliente extends Escena
             this.lector = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
             this.clase = clase;
             
-            MensajeJSON mensajes = new MensajeJSON();
-            this.idhumano = mensajes.recibir(lector).getJson().getString("identificador");
-            
-            humano.enviarEstado().enviar(cliente.getOutputStream());
-            this.inicial = mensajes.recibir(lector).getJson();
+            this.idhumano = new MensajeJSON().recibir(lector).getJson().getString("identificador");
+            new MensajeJSON().escribirAtributo("tipo",this.clase.toString(),ParteMensaje.SINGULAR).enviar(this.cliente.getOutputStream());
+            this.inicial = new MensajeJSON().recibir(lector).getJson();
         } 
         catch (IOException ex)
         {}
