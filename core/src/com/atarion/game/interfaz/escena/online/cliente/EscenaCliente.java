@@ -64,36 +64,36 @@ public class EscenaCliente extends Escena
         switch(this.clase)
         {
             case ANARCHIST:
-                humano2 = new Anarchist();
+                humano = new Anarchist();
             break;
             case FANATIC:
-                humano2 = new Fanatic();
+                humano = new Fanatic();
             break;
             case TEMPLAR:
-                humano2 = new Templar();
+                humano = new Templar();
             break;
                 
             case AVENGER:
-                humano2 = new Avenger();
+                humano = new Avenger();
             break;
             case BENEFACTOR:
-                humano2 = new Benefactor();
+                humano = new Benefactor();
             break;
             case GUARDIAN:
-                humano2 = new Guardian();
+                humano = new Guardian();
             break;
                 
             case MERCHANT:
-                humano2 = new Merchant();
+                humano = new Merchant();
             break;
             case TRAVELER:
-                humano2 = new Traveler();
+                humano = new Traveler();
             break;
             case VISIONARY:
-                humano2 = new Visionary();
+                humano = new Visionary();
             break;
         }
-        humano2.setGenesis(genesis);
+        humano2 = new Traveler(genesis);
 
         humano.agregarEnemigo(humano2);
         humano2.agregarEnemigo(humano);
