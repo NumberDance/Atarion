@@ -12,7 +12,7 @@ public class HiloCliente extends Thread
 {
     private Socket cliente;
     private BufferedReader lector;
-    private Jugador jugador;
+    private Jugador jugador, jugador2;
     private EscenaCliente escena;
     private Json conversor = new Json(); 
     
@@ -23,6 +23,7 @@ public class HiloCliente extends Thread
         this.lector = escena.getLector();
             
         this.jugador = escena.getHumano();
+        this.jugador2 = escena.getHumano2();
         this.escena = escena;
             
         this.conversor.setTypeName(null);
@@ -38,11 +39,12 @@ public class HiloCliente extends Thread
         try
         {
             jugador.enviarEstado().enviar(cliente.getOutputStream());
+            jugador2.enviarEstado().enviar(cliente.getOutputStream());
             
-            String response = this.lector.readLine();
-            Gdx.app.log("INFO","El server responde: " + response);
+            String respuesta = this.lector.readLine();
+            Gdx.app.log("INFO","El server responde: " + respuesta);
             
-            escena.updateGlobalStates(response);
+            escena.actualizarPartida(respuesta);
         } 
         catch (IOException ex)
         {}

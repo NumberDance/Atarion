@@ -24,7 +24,7 @@ public class Guardian extends Trench
     
     @Override
     public MensajeJSON enviarEstado()
-    { return super.enviarEstado().escribirAtributo(null,null,ParteMensaje.FINAL); }
+    { return super.enviarEstado().escribirAtributo("tipo","Guardian",ParteMensaje.FINAL); }
     @Override
     public void recibirEstado(String estado)
     { super.recibirEstado(estado); }

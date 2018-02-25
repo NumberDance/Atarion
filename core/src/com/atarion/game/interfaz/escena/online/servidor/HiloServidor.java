@@ -1,6 +1,8 @@
 package com.atarion.game.interfaz.escena.online.servidor;
 
 
+import com.atarion.game.interfaz.escena.online.MensajeJSON;
+import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,6 +35,11 @@ public class HiloServidor extends Thread
             BufferedReader lector = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         
             socket.getOutputStream().write(this.identificador.concat("\n").getBytes());
+            
+            MensajeJSON inicial = new MensajeJSON();
+            inicial.escribirAtributo("Maquina|0","Brutus", ParteMensaje.PRINCIPIO);
+            inicial.escribirAtributo("Jugador|1","Brutus", ParteMensaje.CUERPO);
+            inicial.escribirAtributo("Jugador|2","Brutus", ParteMensaje.FINAL);
             socket.getOutputStream().write(this.identificador.concat("\n").getBytes());
             
             while(!socket.isClosed())

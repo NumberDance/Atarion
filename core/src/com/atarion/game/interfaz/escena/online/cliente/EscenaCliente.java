@@ -4,6 +4,7 @@ package com.atarion.game.interfaz.escena.online.cliente;
 import com.atarion.game.entidad.jugador.humano.Humano;
 import com.atarion.game.entidad.jugador.humano.wheel.Traveler;
 import com.atarion.game.interfaz.escena.Escena;
+import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.badlogic.gdx.Gdx;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,8 +33,9 @@ public class EscenaCliente extends Escena
             this.cliente = new Socket("192.168.1.102",20595); 
             this.lector = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
             
-            Gdx.app.log("Info","Obteniendo credenciales...");
-            this.idhumano = this.lector.readLine(); 
+            this.idhumano = this.lector.readLine();
+            humano = new Traveler(genesis);
+            humano.enviarEstado().enviar(cliente.getOutputStream());
             this.inicial = this.lector.readLine();
         } 
         catch (IOException ex)
@@ -47,8 +49,7 @@ public class EscenaCliente extends Escena
         /*try
         {*/
             super.show();
-            
-            humano = new Traveler(genesis);
+  
             humano.setIdentificador(idhumano);
             /*cliente.getOutputStream().write("Traveler".concat("\n").getBytes());
             
@@ -89,6 +90,8 @@ public class EscenaCliente extends Escena
         /*} 
         catch (IOException ex)
         {}*/
+        humano.agregarEnemigo(humano2);
+        humano2.agregarEnemigo(humano);
     }
     @Override
     public void render(float delta)
@@ -96,8 +99,18 @@ public class EscenaCliente extends Escena
         super.render(delta);
         new HiloCliente(this).start();
     }
-    public void updateGlobalStates(String states)
-    { humano2.recibirEstado(states); }
+    public void actualizarPartida(String estado)
+    { 
+        MensajeJSON mensaje = new MensajeJSON();
+        mensaje.recibir(lector);
+            
+        if(mensaje.getJson().getString("identificador").equals(this.humano.getIdentificador()))
+        { humano.recibirEstado(estado); }
+        else if(mensaje.getJson().getString("identificador").equals(this.humano2.getIdentificador()))
+        { humano2.recibirEstado(estado); }
+        else if(mensaje.getJson().getString("identificador").equals(this.maquina.getIdentificador()))
+        { maquina.recibirEstado(estado); }
+    }
 
     
     public Socket getCliente()
@@ -106,4 +119,6 @@ public class EscenaCliente extends Escena
     { return humano; }
     public BufferedReader getLector()
     { return lector; }
+    public Humano getHumano2()
+    { return humano2; }
 }
