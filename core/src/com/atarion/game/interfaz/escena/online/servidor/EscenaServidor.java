@@ -1,8 +1,6 @@
 package com.atarion.game.interfaz.escena.online.servidor;
 
 
-import com.atarion.game.interfaz.escena.online.MensajeJSON;
-import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -13,8 +11,8 @@ import java.util.concurrent.Semaphore;
 
 public final class EscenaServidor extends Thread
 {
-    private HashMap<String,SimpleEntry<Socket,String>> clientes = new HashMap<String,SimpleEntry<Socket,String>>();
-    private Integer cuenta = 0, capacidad = 2;
+    private HashMap<String,SimpleEntry<Socket,String>> clientes = new HashMap<>();
+    private Integer cuenta = 0, capacidad = 1;
     private final Semaphore semaforo = new Semaphore(1,true);
     private boolean listo = false;
 

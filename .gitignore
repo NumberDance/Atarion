@@ -6,3 +6,4 @@
 /core/build/
 /desktop/build/
 /.nb-gradle-properties
+/core/nbproject/project.properties

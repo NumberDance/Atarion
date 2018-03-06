@@ -1,5 +1,6 @@
 package com.atarion.game.interfaz.escena.online.cliente;
 
+
 import com.atarion.game.entidad.jugador.Jugador;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
@@ -7,6 +8,7 @@ import com.badlogic.gdx.utils.JsonWriter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.Socket;
+
 
 public class HiloCliente extends Thread
 {

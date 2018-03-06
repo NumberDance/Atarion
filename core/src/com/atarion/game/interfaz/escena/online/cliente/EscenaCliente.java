@@ -15,7 +15,6 @@ import com.atarion.game.interfaz.escena.Escena;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.atarion.game.interfaz.escena.online.servidor.Clase;
-import com.badlogic.gdx.Gdx;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,8 +28,8 @@ public class EscenaCliente extends Escena
 {
     private Socket cliente;
     private PrintWriter salida; 
-    private HashSet<Humano> enemigos = new HashSet<Humano>();
-    private HashSet<Humano> aliados = new HashSet<Humano>();
+    private HashSet<Humano> enemigos = new HashSet<>();
+    private HashSet<Humano> aliados = new HashSet<>();
     private String idhumano;
     private Clase clase = null;
     private JSONObject inicial = null;
@@ -43,7 +42,7 @@ public class EscenaCliente extends Escena
         
         try
         { 
-            this.cliente = new Socket("192.168.1.104",20595); 
+            this.cliente = new Socket("localhost",20595); 
             this.lector = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
             this.clase = clase;
             
@@ -64,33 +63,33 @@ public class EscenaCliente extends Escena
         switch(this.clase)
         {
             case ANARCHIST:
-                humano = new Anarchist();
+                humano = new Anarchist(this.genesis);
             break;
             case FANATIC:
-                humano = new Fanatic();
+                humano = new Fanatic(this.genesis);
             break;
             case TEMPLAR:
-                humano = new Templar();
+                humano = new Templar(this.genesis);
             break;
                 
             case AVENGER:
-                humano = new Avenger();
+                humano = new Avenger(this.genesis);
             break;
             case BENEFACTOR:
-                humano = new Benefactor();
+                humano = new Benefactor(this.genesis);
             break;
             case GUARDIAN:
-                humano = new Guardian();
+                humano = new Guardian(this.genesis);
             break;
                 
             case MERCHANT:
-                humano = new Merchant();
+                humano = new Merchant(this.genesis);
             break;
             case TRAVELER:
-                humano = new Traveler();
+                humano = new Traveler(this.genesis);
             break;
             case VISIONARY:
-                humano = new Visionary();
+                humano = new Visionary(this.genesis);
             break;
         }
         humano2 = new Traveler(genesis);
