@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class DummyGeneric extends Humano 
 {
-    public DummyGeneric(Batch genesis)
+    public DummyGeneric(Batch genesis,boolean tu)
     {
-        super(genesis);
+        super(genesis,true);
         this.textura = new Texture(Gdx.files.internal("dummygeneric.png"));
         
         this.vida = 999999999;

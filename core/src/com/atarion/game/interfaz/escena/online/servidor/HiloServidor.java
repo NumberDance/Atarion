@@ -57,7 +57,7 @@ public class HiloServidor extends Thread
                 {   
                     escena.getSemaforo().acquire();
                 
-                    escena.getClientes().replace(identificador,new SimpleEntry<Socket,String>(socket,lector.readLine()));
+                    escena.getClientes().replace(identificador,new SimpleEntry<>(socket,lector.readLine()));
                     System.out.println("Recibido estado del cliente " + this.identificador + " -> " + escena.getClientes().get(identificador).getValue());
                 
                     StringBuilder respuesta = new StringBuilder("");

@@ -28,7 +28,7 @@ public class TutorialWheel extends Tutorial
     {
         super.show();
         
-        humano = new DummyWheel(genesis);
+        humano = new DummyWheel(genesis,true);
         maquina = new Dummy(genesis);
         
         humano.agregarEnemigo(maquina);

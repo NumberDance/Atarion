@@ -6,10 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Avenger extends Trench
 {
-    public Avenger()
-    { super(); }
-    public Avenger(Batch genesis)
-    { super(genesis); }
+    public Avenger(Batch genesis,boolean tu)
+    { super(genesis,tu); }
 
     
     @Override

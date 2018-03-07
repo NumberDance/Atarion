@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class DummyTrench extends Trench
 {
-    public DummyTrench(Batch genesis)
+    public DummyTrench(Batch genesis,boolean tu)
     {
-        super(genesis);
+        super(genesis,tu);
         this.textura = new Texture(Gdx.files.internal("dummytrench.png"));
         
         this.vida = 999999999;

@@ -6,10 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Merchant extends Wheel
 {
-    public Merchant()
-    { super(); }
-    public Merchant(Batch genesis)
-    { super(genesis); }
+    public Merchant(Batch genesis,boolean tu)
+    { super(genesis,tu); }
 
     
     @Override

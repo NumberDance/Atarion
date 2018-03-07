@@ -41,12 +41,9 @@ public class HiloCliente extends Thread
         try
         {
             jugador.enviarEstado().enviar(cliente.getOutputStream());
-            jugador2.enviarEstado().enviar(cliente.getOutputStream());
+            //jugador2.enviarEstado().enviar(cliente.getOutputStream());
             
-            String respuesta = this.lector.readLine();
-            Gdx.app.log("INFO","El server responde: " + respuesta);
-            
-            escena.actualizarPartida(respuesta);
+            escena.actualizarPartida(this.lector.readLine());
         } 
         catch (IOException ex)
         {}

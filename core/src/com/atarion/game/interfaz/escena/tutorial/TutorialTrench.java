@@ -31,7 +31,7 @@ public class TutorialTrench extends Tutorial
     {
         super.show();
         
-        humano = new DummyTrench(genesis);
+        humano = new DummyTrench(genesis,true);
         maquina = new Dummy(genesis);
         
         humano.agregarEnemigo(maquina);

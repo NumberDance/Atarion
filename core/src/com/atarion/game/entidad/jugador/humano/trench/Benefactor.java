@@ -6,10 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Benefactor extends Trench
 {
-    public Benefactor()
-    { super(); }
-    public Benefactor(Batch genesis)
-    { super(genesis); }
+    public Benefactor(Batch genesis,boolean tu)
+    { super(genesis,tu); }
 
 
     @Override

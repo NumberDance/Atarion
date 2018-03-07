@@ -103,7 +103,14 @@ public class MensajeJSON
     public MensajeJSON recibir(BufferedReader lector)
     {
         try 
-        { this.json = new JSONObject(new JSONTokener(lector.readLine())); } 
+        {
+            String estado = lector.readLine();
+            
+            if(estado.equals(""))
+            { this.json = null; }
+            else
+            { this.json = new JSONObject(new JSONTokener(estado)); } 
+        }
         catch (IOException ex)
         {}
         

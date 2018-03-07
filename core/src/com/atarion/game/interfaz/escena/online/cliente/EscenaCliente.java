@@ -15,6 +15,7 @@ import com.atarion.game.interfaz.escena.Escena;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.atarion.game.interfaz.escena.online.servidor.Clase;
+import com.badlogic.gdx.Gdx;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -47,6 +48,7 @@ public class EscenaCliente extends Escena
             this.clase = clase;
             
             this.idhumano = new MensajeJSON().recibir(lector).getJson().getString("identificador");
+            Gdx.app.log("INFO","Mi ID es: " + this.idhumano);
             new MensajeJSON().escribirAtributo("tipo",this.clase.toString(),ParteMensaje.SINGULAR).enviar(this.cliente.getOutputStream());
             this.inicial = new MensajeJSON().recibir(lector).getJson();
         } 
@@ -63,39 +65,40 @@ public class EscenaCliente extends Escena
         switch(this.clase)
         {
             case ANARCHIST:
-                humano = new Anarchist(this.genesis);
+                humano = new Anarchist(this.genesis,true);
             break;
             case FANATIC:
-                humano = new Fanatic(this.genesis);
+                humano = new Fanatic(this.genesis,true);
             break;
             case TEMPLAR:
-                humano = new Templar(this.genesis);
+                humano = new Templar(this.genesis,true);
             break;
                 
             case AVENGER:
-                humano = new Avenger(this.genesis);
+                humano = new Avenger(this.genesis,true);
             break;
             case BENEFACTOR:
-                humano = new Benefactor(this.genesis);
+                humano = new Benefactor(this.genesis,true);
             break;
             case GUARDIAN:
-                humano = new Guardian(this.genesis);
+                humano = new Guardian(this.genesis,true);
             break;
                 
             case MERCHANT:
-                humano = new Merchant(this.genesis);
+                humano = new Merchant(this.genesis,true);
             break;
             case TRAVELER:
-                humano = new Traveler(this.genesis);
+                humano = new Traveler(this.genesis,true);
             break;
             case VISIONARY:
-                humano = new Visionary(this.genesis);
+                humano = new Visionary(this.genesis,true);
             break;
         }
-        humano2 = new Traveler(genesis);
+        this.humano.setIdentificador(this.idhumano);
+        this.humano2 = new Traveler(this.genesis,false);
 
-        humano.agregarEnemigo(humano2);
-        humano2.agregarEnemigo(humano);
+        this.humano.agregarEnemigo(this.humano2);
+        this.humano2.agregarEnemigo(this.humano);
     }
     @Override
     public void render(float delta)
@@ -105,15 +108,19 @@ public class EscenaCliente extends Escena
     }
     public void actualizarPartida(String estado)
     { 
-        MensajeJSON mensaje = new MensajeJSON();
-        mensaje.recibir(lector);
+        //MensajeJSON mensaje = new MensajeJSON().recibir(lector);
             
-        if(mensaje.getJson().getString("identificador").equals(this.humano.getIdentificador()))
-        { humano.recibirEstado(estado); }
-        else if(mensaje.getJson().getString("identificador").equals(this.humano2.getIdentificador()))
-        { humano2.recibirEstado(estado); }
-        else if(mensaje.getJson().getString("identificador").equals(this.maquina.getIdentificador()))
-        { maquina.recibirEstado(estado); }
+        if(!estado.equals(""))//if(mensaje.getJson() != null)
+        {
+            /*if(mensaje.getJson().getString("identificador").equals(this.humano.getIdentificador()))
+            { humano.recibirEstado(estado); }*/
+            //else if(mensaje.getJson().getString("identificador").equals(this.humano2.getIdentificador()))
+            /*{*/ humano2.recibirEstado(estado); /*}*/
+            /*else if(mensaje.getJson().getString("identificador").equals(this.maquina.getIdentificador()))
+            { maquina.recibirEstado(estado); }*/
+            
+            Gdx.app.log("INFO","El server responde: " + estado);
+        }
     }
 
     

@@ -7,15 +7,16 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
 
 public class ClientLauncher 
-{   
-    private static boolean server = false;
-    
-    public static void main (String[] args) 
+{
+    /*TODO: Hacer que soporte todas las resoluciones, ahora si se cambia la
+    resolución el sistema de coordenadas PETA, config.resizeable = false por ahora*/
+    public static void main(String [] args) 
     {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.title = "Atarion"; 
         config.width = 1000;
         config.height = 800;
-        new LwjglApplication(Atarion.getInstance(),config);
+        config.resizable = false;
+        LwjglApplication aplicacion = new LwjglApplication(Atarion.getInstance(),config);
     }
 }

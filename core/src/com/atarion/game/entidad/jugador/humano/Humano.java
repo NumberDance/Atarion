@@ -15,14 +15,12 @@ public abstract class Humano extends Jugador
     protected Habilidad habilidad = null;
 
     
-    public Humano()
-    { super(); }
-    public Humano(Batch genesis)
+    public Humano(Batch genesis,boolean tu)
     {
         super(genesis);
         
         this.y = 30;
-        this.tu = true;
+        this.tu = tu;
     }
     
     
