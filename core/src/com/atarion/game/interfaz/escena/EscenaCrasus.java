@@ -1,8 +1,9 @@
 package com.atarion.game.interfaz.escena;
 
-import com.atarion.game.entidad.jugador.humano.cannon.Templar;
+
 import com.atarion.game.entidad.jugador.maquina.Crasus;
 import com.badlogic.gdx.Gdx;
+
 
 public class EscenaCrasus extends Escena
 {   
@@ -14,8 +15,6 @@ public class EscenaCrasus extends Escena
     public void show()
     {
         super.show();
-        
-        humano = new Templar(genesis,true);
         maquina = new Crasus(genesis);
         
         humano.agregarEnemigo(maquina);

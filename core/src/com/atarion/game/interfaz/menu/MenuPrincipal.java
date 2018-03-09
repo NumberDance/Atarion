@@ -2,12 +2,11 @@ package com.atarion.game.interfaz.menu;
 
 
 import com.atarion.game.Atarion;
+import com.atarion.game.interfaz.escena.EscenaBrutus;
+import com.atarion.game.interfaz.escena.EscenaClaudius;
+import com.atarion.game.interfaz.escena.EscenaCrasus;
 import com.atarion.game.interfaz.escena.online.cliente.EscenaCliente;
-import com.atarion.game.interfaz.escena.online.servidor.Clase;
 import com.atarion.game.interfaz.escena.tutorial.TutorialTeclas;
-import com.atarion.game.interfaz.menu.analisis.AnalisisBrutus;
-import com.atarion.game.interfaz.menu.analisis.AnalisisClaudius;
-import com.atarion.game.interfaz.menu.analisis.AnalisisCrasus;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
@@ -28,6 +27,7 @@ public class MenuPrincipal extends Menu
         //tema.setLooping(true);
                 
         logo = new Texture(Gdx.files.internal("logo.png"));
+        texto = new BitmapFont();
     }
     
     
@@ -35,8 +35,6 @@ public class MenuPrincipal extends Menu
     public void render(float delta)
     {
         super.render(delta);
-        
-        texto = new BitmapFont();
         
         genesis.begin();
         
@@ -61,14 +59,31 @@ public class MenuPrincipal extends Menu
     protected void controlarTeclado() 
     {
         if(Gdx.input.isKeyPressed(Input.Keys.A)) 
-        { Atarion.getInstance().setScreen(new AnalisisCrasus()); }
+        {
+            Texture analisis = new Texture(Gdx.files.internal("crasusanalysis.png"));
+            Atarion.getInstance().setScreen(new MenuSeleccion(new EscenaCrasus(),analisis)); 
+        }
         else if(Gdx.input.isKeyPressed(Input.Keys.B))
-        { Atarion.getInstance().setScreen(new AnalisisBrutus()); }
+        {
+            Texture analisis = new Texture(Gdx.files.internal("brutusanalysis.png"));
+            Atarion.getInstance().setScreen(new MenuSeleccion(new EscenaBrutus(),analisis)); 
+        }
         else if(Gdx.input.isKeyPressed(Input.Keys.C))
-        { Atarion.getInstance().setScreen(new AnalisisClaudius()); }
+        {
+            Texture analisis = new Texture(Gdx.files.internal("claudiusanalysis.png"));
+            Atarion.getInstance().setScreen(new MenuSeleccion(new EscenaClaudius(),analisis)); 
+        }
         else if(Gdx.input.isKeyPressed(Input.Keys.D))
-        { Atarion.getInstance().setScreen(new EscenaCliente(Clase.TRAVELER)); }
+        { 
+            Texture analisis = new Texture(Gdx.files.internal("logo.png"));
+            Atarion.getInstance().setScreen(new MenuSeleccion(new EscenaCliente(),analisis)); 
+        }
         else if(Gdx.input.isKeyPressed(Input.Keys.X))
         { Atarion.getInstance().setScreen(new TutorialTeclas()); }
+        else if(Gdx.input.isKeyPressed(Input.Keys.Z))
+        { 
+            Texture analisis = new Texture(Gdx.files.internal("claudiusanalysis.png"));
+            Atarion.getInstance().setScreen(new MenuSeleccion(null,analisis)); 
+        }
     }
 }

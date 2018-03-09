@@ -32,12 +32,11 @@ public class EscenaCliente extends Escena
     private HashSet<Humano> enemigos = new HashSet<>();
     private HashSet<Humano> aliados = new HashSet<>();
     private String idhumano;
-    private Clase clase = null;
     private JSONObject inicial = null;
     private BufferedReader lector;
     
     
-    public EscenaCliente(Clase clase)
+    public EscenaCliente()
     {
         super(null);
         
@@ -45,7 +44,6 @@ public class EscenaCliente extends Escena
         { 
             this.cliente = new Socket("localhost",20595); 
             this.lector = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
-            this.clase = clase;
             
             this.idhumano = new MensajeJSON().recibir(lector).getJson().getString("identificador");
             Gdx.app.log("INFO","Mi ID es: " + this.idhumano);
@@ -62,38 +60,6 @@ public class EscenaCliente extends Escena
     {
         super.show();
             
-        switch(this.clase)
-        {
-            case ANARCHIST:
-                humano = new Anarchist(this.genesis,true);
-            break;
-            case FANATIC:
-                humano = new Fanatic(this.genesis,true);
-            break;
-            case TEMPLAR:
-                humano = new Templar(this.genesis,true);
-            break;
-                
-            case AVENGER:
-                humano = new Avenger(this.genesis,true);
-            break;
-            case BENEFACTOR:
-                humano = new Benefactor(this.genesis,true);
-            break;
-            case GUARDIAN:
-                humano = new Guardian(this.genesis,true);
-            break;
-                
-            case MERCHANT:
-                humano = new Merchant(this.genesis,true);
-            break;
-            case TRAVELER:
-                humano = new Traveler(this.genesis,true);
-            break;
-            case VISIONARY:
-                humano = new Visionary(this.genesis,true);
-            break;
-        }
         this.humano.setIdentificador(this.idhumano);
         this.humano2 = new Traveler(this.genesis,false);
 

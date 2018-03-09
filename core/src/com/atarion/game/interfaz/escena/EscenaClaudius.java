@@ -21,15 +21,13 @@ public class EscenaClaudius extends Escena
     public void show()
     {
         super.show();
-        
-        humano = new Guardian(genesis,true);
         maquina = new Claudius(genesis);
         
         humano.agregarEnemigo(maquina);
         maquina.agregarEnemigo(humano);
         
-        escombros = new LinkedList<Escombro>();
-        colisiones = new LinkedList<Boolean>();
+        escombros = new LinkedList<>();
+        colisiones = new LinkedList<>();
     } 
     @Override
     public void render(float delta)
