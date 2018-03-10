@@ -2,6 +2,7 @@ package com.atarion.game.interfaz.menu;
 
 
 import com.atarion.game.Atarion;
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.interfaz.escena.EscenaBrutus;
 import com.atarion.game.interfaz.escena.EscenaClaudius;
 import com.atarion.game.interfaz.escena.EscenaCrasus;
@@ -41,7 +42,15 @@ public class MenuPrincipal extends Menu
         genesis.draw(logo, 300, 650);
         texto.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         texto.getData().setScale(2f);
-        texto.draw(genesis, "A: Batalla de fuerza. \nB: Batalla de velocidad.\nC: Batalla de resistencia. \nX: Tutorial.", 370, 550);
+        
+        StringBuilder menu = new StringBuilder();
+        menu.append("A -> Campaña: Region Occipital.").append("\n");
+        menu.append("B -> Campaña: Región Central.").append("\n");
+        menu.append("C -> Campaña: Región Parietal.").append("\n");
+        menu.append("D -> PVP online.").append("\n");
+        menu.append("X -> Tutorial.").append("\n");
+        
+        texto.draw(genesis,menu.toString(),300,550);
         
         genesis.end();
     }
@@ -76,14 +85,9 @@ public class MenuPrincipal extends Menu
         else if(Gdx.input.isKeyPressed(Input.Keys.D))
         { 
             Texture analisis = new Texture(Gdx.files.internal("logo.png"));
-            Atarion.getInstance().setScreen(new MenuSeleccion(new EscenaCliente(),analisis)); 
+            /*Atarion.getInstance().setScreen(new MenuSeleccion(*/new EscenaCliente().entrar(ClaseHumano.TRAVELER);/*,analisis));*/
         }
         else if(Gdx.input.isKeyPressed(Input.Keys.X))
-        { Atarion.getInstance().setScreen(new TutorialTeclas()); }
-        else if(Gdx.input.isKeyPressed(Input.Keys.Z))
-        { 
-            Texture analisis = new Texture(Gdx.files.internal("claudiusanalysis.png"));
-            Atarion.getInstance().setScreen(new MenuSeleccion(null,analisis)); 
-        }
+        { new TutorialTeclas().entrar(ClaseHumano.DUMMYGENERIC); }
     }
 }

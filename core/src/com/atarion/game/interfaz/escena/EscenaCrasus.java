@@ -2,13 +2,15 @@ package com.atarion.game.interfaz.escena;
 
 
 import com.atarion.game.entidad.jugador.maquina.Crasus;
-import com.badlogic.gdx.Gdx;
 
 
 public class EscenaCrasus extends Escena
 {   
     public EscenaCrasus() 
-    { super(Gdx.audio.newMusic(Gdx.files.internal("zombies.mp3"))); }
+    { 
+        super();
+        super.musica("zombies.mp3"); 
+    }
     
     
     @Override

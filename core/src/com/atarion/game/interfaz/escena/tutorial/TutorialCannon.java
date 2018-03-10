@@ -1,6 +1,7 @@
 package com.atarion.game.interfaz.escena.tutorial;
 
 import com.atarion.game.Atarion;
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.entidad.jugador.humano.cannon.DummyCannon;
 import com.atarion.game.entidad.jugador.maquina.Dummy;
 import com.badlogic.gdx.Gdx;
@@ -19,7 +20,6 @@ public class TutorialCannon extends Tutorial
         this.textodescripcion += "Hacen rebotar en la dirección opuesta, lo que permite proteger posiciones estratégicas.";
         
         this.titulo.setColor(255,0,0,255);
-        this.descripcion.setColor(255,0,0,255);
     }
     
     
@@ -40,6 +40,6 @@ public class TutorialCannon extends Tutorial
     public void controlarTeclado()
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) 
-        { Atarion.getInstance().setScreen(new TutorialWheel()); }
+        { new TutorialWheel().entrar(ClaseHumano.DUMMYWHEEL); }
     }
 }

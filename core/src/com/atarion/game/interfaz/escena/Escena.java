@@ -1,42 +1,40 @@
 package com.atarion.game.interfaz.escena;
 
+
 import com.atarion.game.Atarion;
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
+import com.atarion.game.entidad.jugador.humano.DummyGeneric;
 import com.atarion.game.entidad.jugador.humano.Humano;
 import com.atarion.game.entidad.jugador.humano.cannon.Anarchist;
+import com.atarion.game.entidad.jugador.humano.cannon.DummyCannon;
 import com.atarion.game.entidad.jugador.humano.cannon.Fanatic;
 import com.atarion.game.entidad.jugador.humano.cannon.Templar;
 import com.atarion.game.entidad.jugador.humano.trench.Avenger;
 import com.atarion.game.entidad.jugador.humano.trench.Benefactor;
+import com.atarion.game.entidad.jugador.humano.trench.DummyTrench;
 import com.atarion.game.entidad.jugador.humano.trench.Guardian;
+import com.atarion.game.entidad.jugador.humano.wheel.DummyWheel;
 import com.atarion.game.entidad.jugador.humano.wheel.Merchant;
 import com.atarion.game.entidad.jugador.humano.wheel.Traveler;
 import com.atarion.game.entidad.jugador.humano.wheel.Visionary;
 import com.atarion.game.entidad.jugador.maquina.Maquina;
 import com.atarion.game.interfaz.Interfaz;
-import com.atarion.game.interfaz.escena.online.servidor.Clase;
 import com.atarion.game.interfaz.menu.MenuDerrota;
 import com.atarion.game.interfaz.menu.MenuVictoria;
-import com.badlogic.gdx.audio.Music;
+
 
 public abstract class Escena extends Interfaz
 {
     protected Humano humano = null, humano2 = null;
     protected Maquina maquina = null;
     protected boolean cmaquinahumano = false, chumano2humano = false, cmaquinahumano2 = false;
-    protected Clase clase = null;
+    protected ClaseHumano clase = null;
     
     
-    protected Escena(Music tema)
-    {
-        this.tema = tema;
-        
-        if(tema != null)
-        { tema.setLooping(true); }
-    }
-    public void entrar(Clase clase)
-    {
+    public void entrar(ClaseHumano clase)
+    { 
         this.clase = clase;
-        Atarion.getInstance().setScreen(this);
+        Atarion.getInstance().setScreen(this); 
     }
     
     
@@ -75,6 +73,19 @@ public abstract class Escena extends Interfaz
             break;
             case VISIONARY:
                 humano = new Visionary(this.genesis,true);
+            break;
+            
+            case DUMMYGENERIC:
+                humano = new DummyGeneric(this.genesis,true);
+            break;
+            case DUMMYCANNON:
+                humano = new DummyCannon(this.genesis,true);
+            break;
+            case DUMMYWHEEL:
+                humano = new DummyWheel(this.genesis,true);
+            break;
+            case DUMMYTRENCH:
+                humano = new DummyTrench(this.genesis,true);
             break;
         } 
     }

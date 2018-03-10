@@ -22,7 +22,6 @@ public class TutorialTrench extends Tutorial
         this.textosiguiente = "PULSA  ENTER  PARA  SALTAR  AL  MENU  PRINCIPAL";
         
         this.titulo.setColor(0,255,0,255);
-        this.descripcion.setColor(0,255,0,255);
     }
     
     
@@ -43,6 +42,6 @@ public class TutorialTrench extends Tutorial
     public void controlarTeclado()
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) 
-        { Atarion.getInstance().setScreen(new MenuPrincipal()); }
+        { new MenuPrincipal().mostrar(); }
     }
 }

@@ -1,11 +1,11 @@
 package com.atarion.game.interfaz.escena;
 
+
 import com.atarion.game.entidad.objeto.Escombro;
-import com.atarion.game.entidad.jugador.humano.trench.Guardian;
 import com.atarion.game.entidad.jugador.maquina.Claudius;
-import com.badlogic.gdx.Gdx;
 import java.util.Iterator;
 import java.util.LinkedList;
+
 
 public class EscenaClaudius extends Escena
 {
@@ -14,7 +14,10 @@ public class EscenaClaudius extends Escena
 
     
     public EscenaClaudius() 
-    { super(Gdx.audio.newMusic(Gdx.files.internal("finale.mp3"))); }
+    {
+        super();
+        super.musica("finale.mp3"); 
+    }
     
     
     @Override

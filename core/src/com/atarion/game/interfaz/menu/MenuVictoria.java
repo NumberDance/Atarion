@@ -1,11 +1,12 @@
 package com.atarion.game.interfaz.menu;
 
 import com.atarion.game.Atarion;
-import com.atarion.game.interfaz.menu.analisis.AnalisisBrutus;
-import com.atarion.game.interfaz.menu.analisis.AnalisisClaudius;
-import com.atarion.game.interfaz.menu.analisis.AnalisisCrasus;
+import com.atarion.game.interfaz.escena.EscenaBrutus;
+import com.atarion.game.interfaz.escena.EscenaClaudius;
+import com.atarion.game.interfaz.escena.EscenaCrasus;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public class MenuVictoria extends Menu
@@ -16,7 +17,7 @@ public class MenuVictoria extends Menu
     public MenuVictoria() 
     {
         super();    
-        tema = Gdx.audio.newMusic(Gdx.files.internal("victory.mp3"));
+        super.musica("victory.mp3");
     }
     
     
@@ -60,13 +61,22 @@ public class MenuVictoria extends Menu
     @Override
     protected void controlarTeclado() 
     {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.A)) 
-        { Atarion.getInstance().setScreen(new AnalisisCrasus()); }
-        else if(Gdx.input.isKeyJustPressed(Input.Keys.B))
-        { Atarion.getInstance().setScreen(new AnalisisBrutus()); }
-        else if(Gdx.input.isKeyJustPressed(Input.Keys.C))
-        { Atarion.getInstance().setScreen(new AnalisisClaudius()); }
+        if(Gdx.input.isKeyPressed(Input.Keys.A)) 
+        {
+            Texture analisis = new Texture(Gdx.files.internal("crasusanalysis.png"));
+            Atarion.getInstance().setScreen(new MenuSeleccion(new EscenaCrasus(),analisis)); 
+        }
+        else if(Gdx.input.isKeyPressed(Input.Keys.B))
+        {
+            Texture analisis = new Texture(Gdx.files.internal("brutusanalysis.png"));
+            Atarion.getInstance().setScreen(new MenuSeleccion(new EscenaBrutus(),analisis)); 
+        }
+        else if(Gdx.input.isKeyPressed(Input.Keys.C))
+        {
+            Texture analisis = new Texture(Gdx.files.internal("claudiusanalysis.png"));
+            Atarion.getInstance().setScreen(new MenuSeleccion(new EscenaClaudius(),analisis)); 
+        }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
-        { Atarion.getInstance().setScreen(new MenuPrincipal()); }
+        { new MenuPrincipal().mostrar(); }
     }
 }

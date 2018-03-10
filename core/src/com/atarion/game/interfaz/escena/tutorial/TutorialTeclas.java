@@ -1,6 +1,7 @@
 package com.atarion.game.interfaz.escena.tutorial;
 
 import com.atarion.game.Atarion;
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.entidad.jugador.humano.DummyGeneric;
 import com.atarion.game.entidad.jugador.maquina.Dummy;
 import com.badlogic.gdx.Gdx;
@@ -36,6 +37,6 @@ public class TutorialTeclas extends Tutorial
     public void controlarTeclado()
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) 
-        { Atarion.getInstance().setScreen(new TutorialCannon()); }
+        { new TutorialCannon().entrar(ClaseHumano.DUMMYCANNON); }
     }
 }

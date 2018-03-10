@@ -13,7 +13,8 @@ public abstract class Tutorial extends Escena
     
     protected Tutorial()
     {
-        super(Gdx.audio.newMusic(Gdx.files.internal("pirates.mp3")));
+        super();
+        super.musica("pirates.mp3");
         
         titulo.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         titulo.getData().setScale(2f);

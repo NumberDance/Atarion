@@ -1,10 +1,9 @@
 package com.atarion.game.interfaz.menu;
 
 import com.atarion.game.Atarion;
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.entidad.jugador.humano.Humano;
 import com.atarion.game.interfaz.escena.Escena;
-import com.atarion.game.interfaz.escena.online.servidor.Clase;
-import com.atarion.game.interfaz.menu.analisis.AnalisisCrasus;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
@@ -82,22 +81,22 @@ public class MenuSeleccion extends Menu
     protected void controlarTeclado()
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1))
-        { escena.entrar(Clase.TEMPLAR); }
+        { escena.entrar(ClaseHumano.TEMPLAR); }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) 
-        { escena.entrar(Clase.FANATIC); }
+        { escena.entrar(ClaseHumano.FANATIC); }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) 
-        { escena.entrar(Clase.ANARCHIST); }
+        { escena.entrar(ClaseHumano.ANARCHIST); }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) 
-        { escena.entrar(Clase.TRAVELER); }
+        { escena.entrar(ClaseHumano.TRAVELER); }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_5)) 
-        { escena.entrar(Clase.MERCHANT); }
+        { escena.entrar(ClaseHumano.MERCHANT); }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_6)) 
-        { escena.entrar(Clase.VISIONARY); }
+        { escena.entrar(ClaseHumano.VISIONARY); }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_7)) 
-        { escena.entrar(Clase.GUARDIAN); }
+        { escena.entrar(ClaseHumano.GUARDIAN); }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_8)) 
-        { escena.entrar(Clase.BENEFACTOR); }
+        { escena.entrar(ClaseHumano.BENEFACTOR); }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_9)) 
-        { escena.entrar(Clase.AVENGER); }
+        { escena.entrar(ClaseHumano.AVENGER); }
     }  
 }

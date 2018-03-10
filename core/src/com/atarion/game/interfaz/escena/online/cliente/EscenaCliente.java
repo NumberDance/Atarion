@@ -14,7 +14,6 @@ import com.atarion.game.entidad.jugador.humano.wheel.Visionary;
 import com.atarion.game.interfaz.escena.Escena;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.atarion.game.interfaz.escena.online.ParteMensaje;
-import com.atarion.game.interfaz.escena.online.servidor.Clase;
 import com.badlogic.gdx.Gdx;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,7 +37,7 @@ public class EscenaCliente extends Escena
     
     public EscenaCliente()
     {
-        super(null);
+        super();
         
         try
         { 
@@ -46,9 +45,6 @@ public class EscenaCliente extends Escena
             this.lector = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
             
             this.idhumano = new MensajeJSON().recibir(lector).getJson().getString("identificador");
-            Gdx.app.log("INFO","Mi ID es: " + this.idhumano);
-            new MensajeJSON().escribirAtributo("tipo",this.clase.toString(),ParteMensaje.SINGULAR).enviar(this.cliente.getOutputStream());
-            this.inicial = new MensajeJSON().recibir(lector).getJson();
         } 
         catch (IOException ex)
         {}
@@ -59,6 +55,18 @@ public class EscenaCliente extends Escena
     public void show()
     {
         super.show();
+        
+        try
+        { 
+            MensajeJSON estado = new MensajeJSON();
+            estado.escribirAtributo("identificador",this.clase.toString(),ParteMensaje.PRINCIPIO);
+            estado.escribirAtributo("tipo",this.clase.toString(),ParteMensaje.FINAL);
+            estado.enviar(this.cliente.getOutputStream());
+            
+            this.inicial = new MensajeJSON().recibir(lector).getJson();
+        } 
+        catch (IOException ex)
+        {}
             
         this.humano.setIdentificador(this.idhumano);
         this.humano2 = new Traveler(this.genesis,false);

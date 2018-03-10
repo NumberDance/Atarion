@@ -1,6 +1,7 @@
 package com.atarion.game.interfaz.escena.tutorial;
 
 import com.atarion.game.Atarion;
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.entidad.jugador.humano.wheel.DummyWheel;
 import com.atarion.game.entidad.jugador.maquina.Dummy;
 import com.badlogic.gdx.Gdx;
@@ -19,7 +20,6 @@ public class TutorialWheel extends Tutorial
         this.textodescripcion += "Su superior velocidad y esquiva les permite desviar la atención del enemigo de compañeros vulnerables.";
         
         this.titulo.setColor(0,0,255,255);
-        this.descripcion.setColor(0,0,255,255);
     }
     
     
@@ -40,6 +40,6 @@ public class TutorialWheel extends Tutorial
     public void controlarTeclado()
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) 
-        { Atarion.getInstance().setScreen(new TutorialTrench()); }
+        { new TutorialTrench().entrar(ClaseHumano.DUMMYTRENCH); }
     }
 }
