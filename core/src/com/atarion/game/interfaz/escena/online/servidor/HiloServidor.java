@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.AbstractMap.SimpleEntry;
+import java.util.HashSet;
 import java.util.Map.Entry;
 
 
@@ -43,14 +44,16 @@ public class HiloServidor extends Thread
             MensajeJSON id = new MensajeJSON().escribirAtributo("identificador",this.identificador,ParteMensaje.SINGULAR);
             id.enviar(this.socket.getOutputStream());
             
-            MensajeJSON estado = new MensajeJSON().recibir(lector);
+            //Espera a que todos los clientes hayan enviado sus estados iniciales.
+            this.escena.agregarEstadoInicial(new MensajeJSON().recibir(lector));
+            while(this.escena.getIniciales().size() != this.escena.getClientes().size())
+            {}
             
+            HashSet<String> estados = new HashSet<>();
+            this.escena.getIniciales().forEach(inicial -> { estados.add(inicial.getJson().toString()); });
             
-            MensajeJSON inicial = new MensajeJSON();
-            inicial.escribirAtributo("Maquina|0","Brutus", ParteMensaje.PRINCIPIO);
-            inicial.escribirAtributo("Jugador|1","Brutus", ParteMensaje.CUERPO);
-            inicial.escribirAtributo("Jugador|2","Brutus", ParteMensaje.FINAL);
-            inicial.enviar(this.socket.getOutputStream());
+            MensajeJSON iniciales = new MensajeJSON().escribirArray("iniciales",estados,ParteMensaje.SINGULAR);
+            iniciales.enviar(this.socket.getOutputStream());
             
             this.correrHilo();
         } 

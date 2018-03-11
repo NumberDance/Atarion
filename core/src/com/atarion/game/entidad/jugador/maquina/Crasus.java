@@ -35,7 +35,7 @@ public class Crasus extends Maquina
         estado.escribirAtributo("colision","" + this.colision,ParteMensaje.CUERPO);
         estado.escribirAtributo("colisionbomba","" + this.colisionbomba,ParteMensaje.CUERPO);
         estado.escribirAtributo("temporizador","" + this.temporizador,ParteMensaje.CUERPO);
-        estado.escribirArray("bombas",this.bombas,ParteMensaje.FINAL);
+        //estado.escribirArray("bombas",this.bombas,ParteMensaje.FINAL);
         
         return estado;
     }

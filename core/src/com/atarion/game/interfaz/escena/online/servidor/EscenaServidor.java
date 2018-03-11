@@ -1,11 +1,13 @@
 package com.atarion.game.interfaz.escena.online.servidor;
 
 
+import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.concurrent.Semaphore;
 
 
@@ -15,6 +17,7 @@ public final class EscenaServidor extends Thread
     private Integer cuenta = 0, capacidad = 2;
     private final Semaphore semaforo = new Semaphore(1,true);
     private boolean listo = false;
+    private HashSet<MensajeJSON> iniciales = new HashSet<>();
 
     
     @Override
@@ -40,8 +43,14 @@ public final class EscenaServidor extends Thread
     }
 
     
+    public void agregarEstadoInicial(MensajeJSON estado)
+    { this.iniciales.add(estado); }
+        
+    
     public HashMap<String, SimpleEntry<Socket, String>> getClientes()
     { return clientes; }
     public Semaphore getSemaforo()
     { return semaforo; }
+    public HashSet<MensajeJSON> getIniciales()
+    { return iniciales; }
 }

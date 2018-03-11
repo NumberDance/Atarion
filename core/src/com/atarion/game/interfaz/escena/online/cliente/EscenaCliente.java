@@ -2,15 +2,7 @@ package com.atarion.game.interfaz.escena.online.cliente;
 
 
 import com.atarion.game.entidad.jugador.humano.Humano;
-import com.atarion.game.entidad.jugador.humano.cannon.Anarchist;
-import com.atarion.game.entidad.jugador.humano.cannon.Fanatic;
-import com.atarion.game.entidad.jugador.humano.cannon.Templar;
-import com.atarion.game.entidad.jugador.humano.trench.Avenger;
-import com.atarion.game.entidad.jugador.humano.trench.Benefactor;
-import com.atarion.game.entidad.jugador.humano.trench.Guardian;
-import com.atarion.game.entidad.jugador.humano.wheel.Merchant;
 import com.atarion.game.entidad.jugador.humano.wheel.Traveler;
-import com.atarion.game.entidad.jugador.humano.wheel.Visionary;
 import com.atarion.game.interfaz.escena.Escena;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.atarion.game.interfaz.escena.online.ParteMensaje;
@@ -31,7 +23,7 @@ public class EscenaCliente extends Escena
     private HashSet<Humano> enemigos = new HashSet<>();
     private HashSet<Humano> aliados = new HashSet<>();
     private String idhumano;
-    private JSONObject inicial = null;
+    private JSONObject iniciales = null;
     private BufferedReader lector;
     
     
@@ -55,20 +47,21 @@ public class EscenaCliente extends Escena
     public void show()
     {
         super.show();
+        this.humano.setIdentificador(this.idhumano);
         
         try
         { 
             MensajeJSON estado = new MensajeJSON();
-            estado.escribirAtributo("identificador",this.clase.toString(),ParteMensaje.PRINCIPIO);
+            estado.escribirAtributo("identificador",this.idhumano,ParteMensaje.PRINCIPIO);
             estado.escribirAtributo("tipo",this.clase.toString(),ParteMensaje.FINAL);
             estado.enviar(this.cliente.getOutputStream());
             
-            this.inicial = new MensajeJSON().recibir(lector).getJson();
+            this.iniciales = new MensajeJSON().recibir(lector).getJson();
+            Gdx.app.log("INFO",this.iniciales.toString());
         } 
         catch (IOException ex)
         {}
             
-        this.humano.setIdentificador(this.idhumano);
         this.humano2 = new Traveler(this.genesis,false);
 
         this.humano.agregarEnemigo(this.humano2);

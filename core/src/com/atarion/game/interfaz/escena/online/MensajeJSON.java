@@ -14,7 +14,7 @@ public class MensajeJSON
 {
     private StringBuilder mensaje;
     private JSONObject json;
-    
+        
     
     public MensajeJSON escribirAtributo(String nombre, String valor, ParteMensaje parte)
     {
@@ -36,11 +36,12 @@ public class MensajeJSON
                 this.mensaje.append("{");
                 this.agregarCampo(nombre,valor);
                 this.mensaje.append("}");
+            break;
         }
         
         return this;
     }
-    public MensajeJSON escribirArray(String nombre, HashSet<Entidad> coleccion, ParteMensaje parte)
+    public MensajeJSON escribirArray(String nombre, HashSet<String> coleccion, ParteMensaje parte)
     {
         switch(parte)
         {
@@ -52,6 +53,12 @@ public class MensajeJSON
                 this.mensaje.append(",");
             break;
             case FINAL:
+                this.agregarArray(nombre,coleccion);
+                this.mensaje.append("}");
+            break;
+            case SINGULAR:
+                this.mensaje = new StringBuilder("");
+                this.mensaje.append("{");
                 this.agregarArray(nombre,coleccion);
                 this.mensaje.append("}");
             break;
@@ -69,21 +76,21 @@ public class MensajeJSON
             this.mensaje.append("'").append(valor).append("'");
         }
     }
-    private void agregarArray(String nombre, HashSet<Entidad> coleccion)
+    private void agregarArray(String nombre, HashSet<String> coleccion)
     {
         this.mensaje.append("'").append(nombre).append("'");
         this.mensaje.append(":");
         this.mensaje.append("[");
         
         boolean primero = true;
-        for(Entidad entidad : coleccion)
-        {
+        for(String elemento : coleccion)
+        {    
             if(primero)
             { primero = false; }
             else
             { this.mensaje.append(","); }
             
-            this.mensaje.append(entidad.enviarEstado().getMensaje().toString());
+            this.mensaje.append(elemento);
         }
         
         this.mensaje.append("]");
@@ -105,22 +112,36 @@ public class MensajeJSON
         try 
         {
             String estado = lector.readLine();
-            
-            if(estado.equals(""))
-            { this.json = null; }
-            else
-            { this.json = new JSONObject(new JSONTokener(estado)); } 
+            this.generarJSON(estado);
         }
         catch (IOException ex)
         {}
         
         return this;
     }
+    public MensajeJSON recibir(String estado)
+    {
+        this.generarJSON(estado); 
+        return this;
+    }
 
     
-    
+    private void generarJSON(String estado)
+    {
+        if(estado.equals(""))
+        { this.json = null; }
+        else
+        { this.json = new JSONObject(new JSONTokener(estado)); } 
+    }
     public JSONObject getJson()
-    { return json; }
+    {
+        if(json == null)
+        { this.generarJSON(this.mensaje.toString()); }
+        
+        return json; 
+    }
+    
+    
     public StringBuilder getMensaje()
     { return mensaje; }
 }
