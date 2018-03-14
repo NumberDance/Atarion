@@ -1,13 +1,19 @@
 package com.atarion.game.entidad.jugador.humano.wheel;
 
+
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
+
 public class Visionary extends Wheel
 {
-    public Visionary(Batch genesis,boolean tu)
-    { super(genesis,tu); }
+    public Visionary(boolean tu)
+    { 
+        super(tu); 
+        this.clase = ClaseHumano.VISIONARY;
+    }
 
     
     @Override

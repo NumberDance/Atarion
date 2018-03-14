@@ -8,7 +8,6 @@ import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -19,9 +18,9 @@ public class Brutus extends Maquina
     private boolean colisionproyectil = false;
     
     
-    public Brutus(Batch genesis) 
+    public Brutus() 
     {
-        super(genesis);
+        super();
         
         this.textura = new Texture(Gdx.files.internal("brutus.png"));
         this.fuerza *= 4;

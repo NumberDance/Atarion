@@ -19,9 +19,9 @@ public class Crasus extends Maquina
     private float temporizador = 0f;
     private HashSet<Entidad> bombas = new HashSet<Entidad>();
     
-    public Crasus(Batch genesis) 
+    public Crasus() 
     {
-        super(genesis);
+        super();
         
         this.vida *= 4;
         this.textura = new Texture(Gdx.files.internal("crasus.png"));

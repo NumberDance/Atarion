@@ -1,13 +1,19 @@
 package com.atarion.game.entidad.jugador.humano.trench;
 
+
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
+
 public class Benefactor extends Trench
 {
-    public Benefactor(Batch genesis,boolean tu)
-    { super(genesis,tu); }
+    public Benefactor(boolean tu)
+    { 
+        super(tu); 
+        this.clase = ClaseHumano.BENEFACTOR;
+    }
 
 
     @Override

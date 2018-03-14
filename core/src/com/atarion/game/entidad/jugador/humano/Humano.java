@@ -1,5 +1,6 @@
 package com.atarion.game.entidad.jugador.humano;
 
+
 import com.atarion.game.entidad.habilidad.Habilidad;
 import com.atarion.game.entidad.objeto.Objeto;
 import com.atarion.game.entidad.jugador.Direccion;
@@ -7,17 +8,18 @@ import com.atarion.game.entidad.jugador.Jugador;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.g2d.Batch;
+
 
 public abstract class Humano extends Jugador
 {    
     private boolean tu = false;
     protected Habilidad habilidad = null;
+    protected ClaseHumano clase = null;
 
     
-    public Humano(Batch genesis,boolean tu)
+    public Humano(boolean tu)
     {
-        super(genesis);
+        super();
         
         this.y = 30;
         this.tu = tu;
@@ -237,4 +239,8 @@ public abstract class Humano extends Jugador
     
     public void setInvertido(boolean invertido) 
     { this.invertido = invertido; }
+
+    
+    public ClaseHumano getClase()
+    { return clase; } 
 }

@@ -1,13 +1,19 @@
 package com.atarion.game.entidad.jugador.humano.wheel;
 
+
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
+
 public class Merchant extends Wheel
 {
-    public Merchant(Batch genesis,boolean tu)
-    { super(genesis,tu); }
+    public Merchant(boolean tu)
+    { 
+        super(tu); 
+        this.clase = ClaseHumano.MERCHANT;
+    }
 
     
     @Override

@@ -17,7 +17,7 @@ public final class EscenaServidor extends Thread
     private Integer cuenta = 0, capacidad = 2;
     private final Semaphore semaforo = new Semaphore(1,true);
     private boolean listo = false;
-    private HashSet<MensajeJSON> iniciales = new HashSet<>();
+    private final HashSet<MensajeJSON> iniciales = new HashSet<>();
 
     
     @Override

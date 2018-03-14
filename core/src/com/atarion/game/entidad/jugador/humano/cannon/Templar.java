@@ -1,18 +1,22 @@
 package com.atarion.game.entidad.jugador.humano.cannon;
 
-import com.atarion.game.entidad.jugador.humano.cannon.Cannon;
+
 import com.atarion.game.entidad.habilidad.HabilidadTemplar;
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
+
 public class Templar extends Cannon
 {
-    public Templar(Batch genesis,boolean tu) 
+    public Templar(boolean tu) 
     {
-        super(genesis,tu);
+        super(tu);
+        
+        this.clase = ClaseHumano.TEMPLAR;
         this.textura = new Texture(Gdx.files.internal("templar.png"));
     }
     

@@ -1,7 +1,9 @@
 package com.atarion.game.entidad.jugador.humano.cannon;
 
+
 import com.atarion.game.entidad.jugador.Direccion;
 import com.atarion.game.entidad.jugador.Jugador;
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
@@ -12,14 +14,17 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+
 public class Anarchist extends Cannon
 {
     private Jugador controlado = null;
     
 
-    public Anarchist(Batch genesis,boolean tu)
+    public Anarchist(boolean tu)
     { 
-        super(genesis,tu); 
+        super(tu); 
+        
+        this.clase = ClaseHumano.ANARCHIST;
         this.textura = new Texture(Gdx.files.internal("anarchist.png"));
     }
 

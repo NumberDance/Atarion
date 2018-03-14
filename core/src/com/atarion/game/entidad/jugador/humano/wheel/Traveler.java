@@ -2,6 +2,7 @@ package com.atarion.game.entidad.jugador.humano.wheel;
 
 
 import com.atarion.game.entidad.habilidad.HabilidadTraveler;
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
@@ -11,9 +12,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Traveler extends Wheel
 {
-    public Traveler(Batch genesis,boolean tu) 
+    public Traveler(boolean tu) 
     {
-        super(genesis,tu);
+        super(tu);
+        
+        this.clase = ClaseHumano.TRAVELER;
         this.textura = new Texture(Gdx.files.internal("traveler.png"));
     }
 

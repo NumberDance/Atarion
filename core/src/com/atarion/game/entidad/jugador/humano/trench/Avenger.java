@@ -1,13 +1,19 @@
 package com.atarion.game.entidad.jugador.humano.trench;
 
+
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
+
 public class Avenger extends Trench
 {
-    public Avenger(Batch genesis,boolean tu)
-    { super(genesis,tu); }
+    public Avenger(boolean tu)
+    { 
+        super(tu); 
+        this.clase = ClaseHumano.AVENGER;
+    }
 
     
     @Override

@@ -44,8 +44,8 @@ public abstract class Entidad extends Rectangle
     { return identificador; }
     
     
-    public void setGenesis(Batch genesis)
-    { this.genesis = genesis; }
+    public void asignarGenesis(Batch genesis)
+    {  this.genesis = genesis; }
     public void setTextura(Texture textura)
     { this.textura = textura; }
     public void setIdentificador(String identificador)

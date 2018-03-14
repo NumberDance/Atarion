@@ -1,5 +1,8 @@
 package com.atarion.game.interfaz.escena.tutorial;
 
+import com.atarion.game.Atarion;
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
+import com.atarion.game.entidad.jugador.maquina.Dummy;
 import com.atarion.game.interfaz.escena.Escena;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,7 +17,7 @@ public abstract class Tutorial extends Escena
     protected Tutorial()
     {
         super();
-        super.musica("pirates.mp3");
+        //super.musica("pirates.mp3");
         
         titulo.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         titulo.getData().setScale(2f);
@@ -25,6 +28,20 @@ public abstract class Tutorial extends Escena
         siguiente.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         siguiente.getData().setScale(1f);
     }
+    
+    
+    @Override
+    public void entrar(ClaseHumano clase)
+    {
+        super.entrar(clase);
+        maquina = new Dummy();
+        
+        humano.agregarEnemigo(maquina);
+        maquina.agregarEnemigo(humano);
+        
+        Atarion.getInstance().setScreen(this);
+    }
+    
     
     @Override
     public void render(float delta)

@@ -21,19 +21,6 @@ public class TutorialCannon extends Tutorial
         
         this.titulo.setColor(255,0,0,255);
     }
-    
-    
-    @Override
-    public void show()
-    {
-        super.show();
-        
-        humano = new DummyCannon(genesis,true);
-        maquina = new Dummy(genesis);
-        
-        humano.agregarEnemigo(maquina);
-        maquina.agregarEnemigo(humano);
-    }
 
     
     @Override

@@ -1,16 +1,21 @@
 package com.atarion.game.entidad.jugador.humano.trench;
 
+
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
+
 public class DummyTrench extends Trench
 {
-    public DummyTrench(Batch genesis,boolean tu)
+    public DummyTrench(boolean tu)
     {
-        super(genesis,tu);
+        super(tu);
+        
+        this.clase = ClaseHumano.DUMMYTRENCH;
         this.textura = new Texture(Gdx.files.internal("dummytrench.png"));
         
         this.vida = 999999999;

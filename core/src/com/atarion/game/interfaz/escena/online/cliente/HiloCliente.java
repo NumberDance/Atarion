@@ -2,7 +2,6 @@ package com.atarion.game.interfaz.escena.online.cliente;
 
 
 import com.atarion.game.entidad.jugador.Jugador;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter;
 import java.io.BufferedReader;

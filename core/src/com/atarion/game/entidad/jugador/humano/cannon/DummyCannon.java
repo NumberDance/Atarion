@@ -1,16 +1,21 @@
 package com.atarion.game.entidad.jugador.humano.cannon;
 
+
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
+
 public class DummyCannon extends Cannon
 {
-    public DummyCannon(Batch genesis,boolean tu)
+    public DummyCannon(boolean tu)
     {
-        super(genesis,tu);
+        super(tu);
+        
+        this.clase = ClaseHumano.DUMMYCANNON;
         this.textura = new Texture(Gdx.files.internal("dummycannon.png"));
         
         this.vida = 999999999;

@@ -18,9 +18,9 @@ public abstract class Trench extends Humano
     protected boolean colisionproyectil = false;
     
     
-    public Trench(Batch genesis,boolean tu)
+    public Trench(boolean tu)
     {
-        super(genesis,tu);
+        super(tu);
         
         this.vida *= 2;
         this.velocidad /= 2;

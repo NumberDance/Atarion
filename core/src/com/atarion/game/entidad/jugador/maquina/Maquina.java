@@ -14,9 +14,9 @@ public abstract class Maquina extends Jugador
     protected int decision = 0;
     
     
-    public Maquina(Batch genesis) 
+    public Maquina() 
     {
-        super(genesis);
+        super();
         this.y = 600;
         velocidad = 1.5f;
         this.tiemporecarga = 20;

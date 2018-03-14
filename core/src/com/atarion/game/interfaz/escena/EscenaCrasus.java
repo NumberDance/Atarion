@@ -1,6 +1,7 @@
 package com.atarion.game.interfaz.escena;
 
 
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.entidad.jugador.maquina.Crasus;
 
 
@@ -9,17 +10,16 @@ public class EscenaCrasus extends Escena
     public EscenaCrasus() 
     { 
         super();
-        super.musica("zombies.mp3"); 
+        //super.musica("zombies.mp3"); 
     }
     
     
     @Override
-    public void show()
+    public void entrar(ClaseHumano clase)
     {
-        super.show();
-        maquina = new Crasus(genesis);
+        this.humano = this.asignarClase(humano,clase,true);
+        this.maquina = new Crasus();
         
-        humano.agregarEnemigo(maquina);
-        maquina.agregarEnemigo(humano);
-    }   
+        super.entrar(clase);
+    }
 }

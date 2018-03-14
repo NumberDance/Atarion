@@ -14,9 +14,9 @@ public abstract class Cannon extends Humano
     protected int rebote = 200;
 
    
-    public Cannon(Batch genesis,boolean tu)
+    public Cannon(boolean tu)
     {
-        super(genesis,tu);
+        super(tu);
         
         this.fuerza *= 2;
         this.vida /= 2;
@@ -42,7 +42,7 @@ public abstract class Cannon extends Humano
         switch(jugador.getDireccion())
         {
             case PARADO:
-                switch (this.direccion) 
+                switch(this.direccion) 
                 {
                     case ARRIBA:
                         jugador.setY(jugador.getY() + this.rebote);

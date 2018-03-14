@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Dummy extends Maquina
 {
-    public Dummy(Batch genesis) 
+    public Dummy() 
     {
-        super(genesis);
+        super();
         this.y = 400;
         
         this.textura = new Texture(Gdx.files.internal("dummy.png"));

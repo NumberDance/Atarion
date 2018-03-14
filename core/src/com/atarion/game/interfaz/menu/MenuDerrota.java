@@ -17,7 +17,7 @@ public class MenuDerrota extends Menu
     public MenuDerrota() 
     {
         super();    
-        super.musica("grabbed.mp3");
+        //super.musica("grabbed.mp3");
     }
     
     

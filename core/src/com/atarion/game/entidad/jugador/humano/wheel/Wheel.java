@@ -1,13 +1,14 @@
 package com.atarion.game.entidad.jugador.humano.wheel;
 
+
 import com.atarion.game.entidad.jugador.humano.Humano;
-import com.badlogic.gdx.graphics.g2d.Batch;
+
 
 public abstract class Wheel extends Humano
 {
-    public Wheel(Batch genesis,boolean tu)
+    public Wheel(boolean tu)
     {
-        super(genesis,tu);
+        super(tu);
         
         this.velocidad *= 2;
         this.fuerza /= 2;

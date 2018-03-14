@@ -1,26 +1,25 @@
 package com.atarion.game.interfaz.escena;
 
+
 import com.atarion.game.entidad.jugador.humano.ClaseHumano;
-import com.atarion.game.entidad.jugador.humano.wheel.Traveler;
 import com.atarion.game.entidad.jugador.maquina.Brutus;
-import com.badlogic.gdx.Gdx;
+
 
 public class EscenaBrutus extends Escena
 {
     public EscenaBrutus() 
     { 
         super();
-        super.musica("commodus.mp3"); 
+        //super.musica("commodus.mp3"); 
     }
     
     
     @Override
-    public void show()
+    public void entrar(ClaseHumano clase)
     {
-        super.show();
-        maquina = new Brutus(genesis);
+        this.humano = this.asignarClase(humano,clase,true);
+        this.maquina = new Brutus();
         
-        humano.agregarEnemigo(maquina);
-        maquina.agregarEnemigo(humano);
+        super.entrar(clase);
     }
 }

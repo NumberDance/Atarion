@@ -16,8 +16,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public class MenuPrincipal extends Menu
 {
-    private Texture logo;
-    private BitmapFont texto;
+    private Texture logo = null;
+    private BitmapFont texto = null;
 
     
     public MenuPrincipal() 
@@ -85,7 +85,7 @@ public class MenuPrincipal extends Menu
         else if(Gdx.input.isKeyPressed(Input.Keys.D))
         { 
             Texture analisis = new Texture(Gdx.files.internal("logo.png"));
-            /*Atarion.getInstance().setScreen(new MenuSeleccion(*/new EscenaCliente().entrar(ClaseHumano.TRAVELER);/*,analisis));*/
+            Atarion.getInstance().setScreen(new MenuSeleccion(new EscenaCliente(),analisis));
         }
         else if(Gdx.input.isKeyPressed(Input.Keys.X))
         { new TutorialTeclas().entrar(ClaseHumano.DUMMYGENERIC); }

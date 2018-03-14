@@ -2,6 +2,7 @@ package com.atarion.game.interfaz.escena;
 
 
 import com.atarion.game.Atarion;
+import com.atarion.game.entidad.Entidad;
 import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.entidad.jugador.humano.DummyGeneric;
 import com.atarion.game.entidad.jugador.humano.Humano;
@@ -28,66 +29,86 @@ public abstract class Escena extends Interfaz
     protected Humano humano = null, humano2 = null;
     protected Maquina maquina = null;
     protected boolean cmaquinahumano = false, chumano2humano = false, cmaquinahumano2 = false;
-    protected ClaseHumano clase = null;
     
     
     public void entrar(ClaseHumano clase)
     { 
-        this.clase = clase;
-        Atarion.getInstance().setScreen(this); 
+        if(this.humano2 != null)
+        {
+            this.humano.agregarEnemigo(this.humano2);
+            this.humano2.agregarEnemigo(this.humano);
+        }
+        if(this.maquina != null)
+        {
+            humano.agregarEnemigo(maquina);
+            maquina.agregarEnemigo(humano);
+        }
+        
+        Atarion.getInstance().setScreen(this);
+    }
+    protected Humano asignarClase(Humano jugador,ClaseHumano clase,boolean tu)
+    {
+        switch(clase)
+        {
+            case ANARCHIST:
+                jugador = new Anarchist(tu);
+            break;
+            case FANATIC:
+                jugador = new Fanatic(tu);
+            break;
+            case TEMPLAR:
+                jugador = new Templar(tu);
+            break;
+                
+            case AVENGER:
+                jugador = new Avenger(tu);
+            break;
+            case BENEFACTOR:
+                jugador = new Benefactor(tu);
+            break;
+            case GUARDIAN:
+                jugador = new Guardian(tu);
+            break;
+                
+            case MERCHANT:
+                jugador = new Merchant(tu);
+            break;
+            case TRAVELER:
+                jugador = new Traveler(tu);
+            break;
+            case VISIONARY:
+                jugador = new Visionary(tu);
+            break;
+            
+            case DUMMYGENERIC:
+                jugador = new DummyGeneric(tu);
+            break;
+            case DUMMYCANNON:
+                jugador = new DummyCannon(tu);
+            break;
+            case DUMMYWHEEL:
+                jugador = new DummyWheel(tu);
+            break;
+            case DUMMYTRENCH:
+                jugador = new DummyTrench(tu);
+            break;
+        } 
+        
+        return jugador;
     }
     
     
     @Override
     public void show()
-    {
-        super.show();
+    { 
+        super.show(); 
+
+        humano.asignarGenesis(genesis);
         
-        switch(this.clase)
-        {
-            case ANARCHIST:
-                humano = new Anarchist(this.genesis,true);
-            break;
-            case FANATIC:
-                humano = new Fanatic(this.genesis,true);
-            break;
-            case TEMPLAR:
-                humano = new Templar(this.genesis,true);
-            break;
-                
-            case AVENGER:
-                humano = new Avenger(this.genesis,true);
-            break;
-            case BENEFACTOR:
-                humano = new Benefactor(this.genesis,true);
-            break;
-            case GUARDIAN:
-                humano = new Guardian(this.genesis,true);
-            break;
-                
-            case MERCHANT:
-                humano = new Merchant(this.genesis,true);
-            break;
-            case TRAVELER:
-                humano = new Traveler(this.genesis,true);
-            break;
-            case VISIONARY:
-                humano = new Visionary(this.genesis,true);
-            break;
-            
-            case DUMMYGENERIC:
-                humano = new DummyGeneric(this.genesis,true);
-            break;
-            case DUMMYCANNON:
-                humano = new DummyCannon(this.genesis,true);
-            break;
-            case DUMMYWHEEL:
-                humano = new DummyWheel(this.genesis,true);
-            break;
-            case DUMMYTRENCH:
-                humano = new DummyTrench(this.genesis,true);
-            break;
-        } 
+        if(humano2 != null)
+        { humano2.asignarGenesis(genesis); }
+        if(maquina != null)
+        { maquina.asignarGenesis(genesis); }
     }
     @Override
     public void render(float delta) 

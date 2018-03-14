@@ -4,6 +4,7 @@ import com.atarion.game.entidad.Entidad;
 import com.atarion.game.entidad.objeto.Objeto;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.atarion.game.interfaz.escena.online.ParteMensaje;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import org.json.JSONObject;
@@ -14,7 +15,7 @@ public abstract class Jugador extends Entidad
     protected int vida = 100, fuerza = 10;
     
     protected float velocidad = 1f;
-    protected Direccion direccion;
+    protected Direccion direccion = Direccion.PARADO;
     
     private boolean colision = false;
     protected Jugador enemigo;
@@ -29,13 +30,6 @@ public abstract class Jugador extends Entidad
         this.x = 800 / 2 - 64 / 2;
         this.width = 80;
         this.height = 20;   
-    }
-    protected Jugador(Batch genesis)
-    {
-        this.x = 800 / 2 - 64 / 2;
-        this.width = 80;
-        this.height = 20;
-        this.genesis = genesis;
     }
     
     

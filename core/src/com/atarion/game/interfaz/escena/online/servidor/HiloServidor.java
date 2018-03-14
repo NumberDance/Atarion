@@ -44,18 +44,29 @@ public class HiloServidor extends Thread
             MensajeJSON id = new MensajeJSON().escribirAtributo("identificador",this.identificador,ParteMensaje.SINGULAR);
             id.enviar(this.socket.getOutputStream());
             
-            //Espera a que todos los clientes hayan enviado sus estados iniciales.
-            this.escena.agregarEstadoInicial(new MensajeJSON().recibir(lector));
-            while(this.escena.getIniciales().size() != this.escena.getClientes().size())
+            try
+            { 
+                this.escena.getSemaforo().acquire();
+                
+                this.escena.agregarEstadoInicial(new MensajeJSON().recibir(lector));
+                
+                //Espera a que todos los clientes hayan enviado sus estados iniciales.
+                this.escena.getSemaforo().release();
+                this.escena.getSemaforo().acquire();
+                
+                HashSet<String> estados = new HashSet<>();
+                this.escena.getIniciales().forEach(inicial -> 
+                { estados.add(inicial.getJson().toString()); });
+            
+                MensajeJSON iniciales = new MensajeJSON().escribirArray("iniciales",estados,ParteMensaje.SINGULAR);
+                iniciales.enviar(this.socket.getOutputStream());
+                
+                this.escena.getSemaforo().release();
+            
+                this.correrHilo();
+            } 
+            catch (InterruptedException ex)
             {}
-            
-            HashSet<String> estados = new HashSet<>();
-            this.escena.getIniciales().forEach(inicial -> { estados.add(inicial.getJson().toString()); });
-            
-            MensajeJSON iniciales = new MensajeJSON().escribirArray("iniciales",estados,ParteMensaje.SINGULAR);
-            iniciales.enviar(this.socket.getOutputStream());
-            
-            this.correrHilo();
         } 
         catch (IOException ex)
         {} 

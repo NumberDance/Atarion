@@ -1,6 +1,7 @@
 package com.atarion.game.interfaz.escena;
 
 
+import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.entidad.objeto.Escombro;
 import com.atarion.game.entidad.jugador.maquina.Claudius;
 import java.util.Iterator;
@@ -16,22 +17,23 @@ public class EscenaClaudius extends Escena
     public EscenaClaudius() 
     {
         super();
-        super.musica("finale.mp3"); 
+        //super.musica("finale.mp3"); 
     }
     
     
     @Override
-    public void show()
+    public void entrar(ClaseHumano clase)
     {
-        super.show();
-        maquina = new Claudius(genesis);
+        this.humano = this.asignarClase(humano,clase,true);
+        this.maquina = new Claudius();
         
-        humano.agregarEnemigo(maquina);
-        maquina.agregarEnemigo(humano);
+        this.escombros = new LinkedList<>();
+        this.colisiones = new LinkedList<>();
         
-        escombros = new LinkedList<>();
-        colisiones = new LinkedList<>();
-    } 
+        super.entrar(clase);
+    }
+    
+    
     @Override
     public void render(float delta)
     {   
