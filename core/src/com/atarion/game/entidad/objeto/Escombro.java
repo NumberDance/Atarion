@@ -1,10 +1,11 @@
 package com.atarion.game.entidad.objeto;
 
+
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
-import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+
 
 public class Escombro extends Objeto 
 {
@@ -30,8 +31,8 @@ public class Escombro extends Objeto
     public MensajeJSON enviarEstado()
     { 
         MensajeJSON estado = new MensajeJSON();
-        estado.escribirAtributo("velocidad","" + this.velocidad,ParteMensaje.CUERPO);
-        estado.escribirAtributo("destino","" + this.destino,ParteMensaje.FINAL);
+        estado.escribirAtributo("velocidad","" + this.velocidad);
+        estado.escribirAtributo("destino","" + this.destino);
         
         return estado; 
     }

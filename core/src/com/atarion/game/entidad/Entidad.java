@@ -2,7 +2,6 @@ package com.atarion.game.entidad;
 
 
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
-import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
@@ -14,7 +13,9 @@ public abstract class Entidad extends Rectangle
 {
     protected Batch genesis;
     protected Texture textura;
+    
     protected String identificador = "NONE";
+    protected boolean interaccion = false;
     
     
     public void actualizarEstado()
@@ -26,9 +27,9 @@ public abstract class Entidad extends Rectangle
     public MensajeJSON enviarEstado()
     {
         MensajeJSON estado = new MensajeJSON();
-        estado.escribirAtributo("identificador",this.identificador, ParteMensaje.PRINCIPIO);
-        estado.escribirAtributo("x","" + this.x,ParteMensaje.CUERPO);
-        estado.escribirAtributo("y","" + this.y,ParteMensaje.CUERPO);
+        estado.escribirAtributo("identificador",this.identificador);
+        estado.escribirAtributo("x","" + this.x);
+        estado.escribirAtributo("y","" + this.y);
         return estado;
     }
     protected void recibirEstado(String estado)
@@ -42,12 +43,16 @@ public abstract class Entidad extends Rectangle
     
     public String getIdentificador()
     { return identificador; }
+    public boolean isInteraccion()
+    { return interaccion; } 
     
     
-    public void asignarGenesis(Batch genesis)
+    public void setGenesis(Batch genesis)
     {  this.genesis = genesis; }
     public void setTextura(Texture textura)
     { this.textura = textura; }
     public void setIdentificador(String identificador)
     { this.identificador = identificador; }
+    public void setInteraccion(boolean interaccion)
+    { this.interaccion = interaccion; }   
 }

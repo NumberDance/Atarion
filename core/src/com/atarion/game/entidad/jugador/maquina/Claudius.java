@@ -1,16 +1,16 @@
 package com.atarion.game.entidad.jugador.maquina;
 
+
 import com.atarion.game.entidad.objeto.Escombro;
 import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.objeto.Laser;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
-import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import java.util.Iterator;
 import java.util.LinkedList;
+
 
 public class Claudius extends Maquina
 {
@@ -43,14 +43,14 @@ public class Claudius extends Maquina
     public MensajeJSON enviarEstado()
     { 
         MensajeJSON estado = super.enviarEstado();
-        estado.escribirAtributo("carga","" + this.carga,ParteMensaje.CUERPO);
-        estado.escribirAtributo("colisionlaser","" + this.colisionlaser,ParteMensaje.CUERPO);
-        estado.escribirAtributo("modo",this.modo.toString(),ParteMensaje.CUERPO);
+        estado.escribirAtributo("carga","" + this.carga);
+        estado.escribirAtributo("colisionlaser","" + this.colisionlaser);
+        estado.escribirAtributo("modo",this.modo.toString());
 
         if(this.laser == null)
-        { estado.escribirAtributo("laser","null",ParteMensaje.FINAL); }
+        { estado.escribirAtributo("laser","null"); }
         else
-        { estado.escribirAtributo("laser",this.laser.enviarEstado().getMensaje().toString(),ParteMensaje.FINAL); }
+        { estado.escribirAtributo("laser",this.laser.enviarEstado().getMensaje().toString()); }
         
         return estado; 
     }

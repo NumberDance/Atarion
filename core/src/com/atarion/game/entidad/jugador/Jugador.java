@@ -1,14 +1,13 @@
 package com.atarion.game.entidad.jugador;
 
+
 import com.atarion.game.entidad.Entidad;
 import com.atarion.game.entidad.objeto.Objeto;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
-import com.atarion.game.interfaz.escena.online.ParteMensaje;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+
 
 public abstract class Jugador extends Entidad
 {
@@ -22,7 +21,8 @@ public abstract class Jugador extends Entidad
     
     protected float cronometro = 0f;
     protected int tiempoactivo = 5, activo = 5, tiemporecarga = 10, recarga = 0;
-    protected boolean activado = false, parado = false, controlado = false, inmune = false, invertido = false;
+    protected boolean activado = false, inmune = false;
+    protected boolean parado = false, controlado = false, invertido = false;
     
     
     protected Jugador()
@@ -37,24 +37,24 @@ public abstract class Jugador extends Entidad
     public MensajeJSON enviarEstado()
     {
         MensajeJSON estado = super.enviarEstado();
-        estado.escribirAtributo("vida","" + vida,ParteMensaje.CUERPO);
-        estado.escribirAtributo("fuerza","" + fuerza,ParteMensaje.CUERPO);
-        estado.escribirAtributo("velocidad","" + velocidad,ParteMensaje.CUERPO);
-        estado.escribirAtributo("direccion","" + direccion,ParteMensaje.CUERPO);
-        estado.escribirAtributo("colision","" + colision,ParteMensaje.CUERPO);
-        estado.escribirAtributo("cronometro","" + cronometro,ParteMensaje.CUERPO);
-        estado.escribirAtributo("tiempoactivo","" + tiempoactivo,ParteMensaje.CUERPO);
-        estado.escribirAtributo("activo","" + activo,ParteMensaje.CUERPO);
-        estado.escribirAtributo("tiemporecarga","" + tiemporecarga,ParteMensaje.CUERPO);
-        estado.escribirAtributo("recarga","" + recarga,ParteMensaje.CUERPO);
-        estado.escribirAtributo("activado","" + activado,ParteMensaje.CUERPO);
-        estado.escribirAtributo("parado","" + parado,ParteMensaje.CUERPO);
-        estado.escribirAtributo("controlado","" + controlado,ParteMensaje.CUERPO);
-        estado.escribirAtributo("inmune","" + inmune,ParteMensaje.CUERPO);
-        estado.escribirAtributo("invertido","" + invertido,ParteMensaje.CUERPO);
+        estado.escribirAtributo("vida","" + vida);
+        estado.escribirAtributo("fuerza","" + fuerza);
+        estado.escribirAtributo("velocidad","" + velocidad);
+        estado.escribirAtributo("direccion","" + direccion);
+        estado.escribirAtributo("colision","" + colision);
+        estado.escribirAtributo("cronometro","" + cronometro);
+        estado.escribirAtributo("tiempoactivo","" + tiempoactivo);
+        estado.escribirAtributo("activo","" + activo);
+        estado.escribirAtributo("tiemporecarga","" + tiemporecarga);
+        estado.escribirAtributo("recarga","" + recarga);
+        estado.escribirAtributo("activado","" + activado);
+        estado.escribirAtributo("parado","" + parado);
+        estado.escribirAtributo("controlado","" + controlado);
+        estado.escribirAtributo("inmune","" + inmune);
+        estado.escribirAtributo("invertido","" + invertido);
         
         if(this.enemigo != null)
-        { estado.escribirAtributo("enemigo",enemigo.getIdentificador(),ParteMensaje.CUERPO); }
+        { estado.escribirAtributo("enemigo",enemigo.getIdentificador()); }
         
         return estado;
     }
@@ -74,7 +74,12 @@ public abstract class Jugador extends Entidad
         this.activo = objeto.getInt("activo");
         this.tiemporecarga = objeto.getInt("tiemporecarga");
         this.recarga = objeto.getInt("recarga");
-        this.activado = objeto.getBoolean("activado");
+        
+        boolean act = objeto.getBoolean("activado");
+        if(act && !this.activado)
+        { this.activarEspecial(); }
+        this.activado = act;
+        
         this.parado = objeto.getBoolean("parado");
         this.controlado = objeto.getBoolean("controlado");
         this.inmune = objeto.getBoolean("inmune");

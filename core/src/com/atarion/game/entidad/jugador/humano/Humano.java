@@ -225,15 +225,8 @@ public abstract class Humano extends Jugador
     {
         vida -= jugador.getFuerza();
         
-        Gdx.app.log
-        (
-            "INFO",
-            "El jugador te ha hecho " 
-            + jugador.getFuerza() 
-            + " puntos de daño. Te quedan " 
-            + vida 
-            + " vidas."
-        );
+        Gdx.app.log("COLISION",jugador.getIdentificador() + " te ha hecho " + jugador.getFuerza() + " puntos de daño.");
+        Gdx.app.log("COLISION","Te quedan " + vida + " vidas.");
     }
 
     

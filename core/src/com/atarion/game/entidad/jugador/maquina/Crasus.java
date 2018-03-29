@@ -1,17 +1,17 @@
 package com.atarion.game.entidad.jugador.maquina;
 
+
 import com.atarion.game.entidad.Entidad;
 import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.jugador.humano.Humano;
 import com.atarion.game.entidad.objeto.Bomba;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
-import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import java.util.HashSet;
 import java.util.Iterator;
+
 
 public class Crasus extends Maquina
 {
@@ -32,9 +32,9 @@ public class Crasus extends Maquina
     public MensajeJSON enviarEstado()
     { 
         MensajeJSON estado = super.enviarEstado();
-        estado.escribirAtributo("colision","" + this.colision,ParteMensaje.CUERPO);
-        estado.escribirAtributo("colisionbomba","" + this.colisionbomba,ParteMensaje.CUERPO);
-        estado.escribirAtributo("temporizador","" + this.temporizador,ParteMensaje.CUERPO);
+        estado.escribirAtributo("colision","" + this.colision);
+        estado.escribirAtributo("colisionbomba","" + this.colisionbomba);
+        estado.escribirAtributo("temporizador","" + this.temporizador);
         //estado.escribirArray("bombas",this.bombas,ParteMensaje.FINAL);
         
         return estado;

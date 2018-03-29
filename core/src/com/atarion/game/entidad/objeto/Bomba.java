@@ -1,10 +1,11 @@
 package com.atarion.game.entidad.objeto;
 
+
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
-import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+
 
 public class Bomba extends Objeto
 {
@@ -27,7 +28,7 @@ public class Bomba extends Objeto
     
     @Override
     public MensajeJSON enviarEstado()
-    { return super.enviarEstado().escribirAtributo("cuenta","" + this.cuenta,ParteMensaje.FINAL); }
+    { return super.enviarEstado().escribirAtributo("cuenta","" + this.cuenta); }
     @Override
     public void recibirEstado(String estado)
     { super.recibirEstado(estado); }

@@ -5,12 +5,10 @@ import com.atarion.game.entidad.jugador.Direccion;
 import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
-import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -31,7 +29,7 @@ public class Anarchist extends Cannon
     
     @Override
     public MensajeJSON enviarEstado()
-    { return super.enviarEstado().escribirAtributo("controlado","" + this.controlado,ParteMensaje.FINAL); }
+    { return super.enviarEstado().escribirAtributo("controlado","" + this.controlado); }
     @Override
     public void recibirEstado(String estado)
     { 
@@ -48,7 +46,10 @@ public class Anarchist extends Cannon
         if(controlado == null)
         { super.jugar(camara); }
         else
-        { this.controlarJugador(); }
+        { 
+            this.controlarJugador(); 
+            enemigo.setInteraccion(true);
+        }
     }   
     private void controlarJugador()
     {

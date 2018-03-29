@@ -1,11 +1,12 @@
 package com.atarion.game.entidad.objeto;
 
+
 import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
-import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+
 
 public class Laser extends Objeto
 {
@@ -24,7 +25,7 @@ public class Laser extends Objeto
     
     @Override
     public MensajeJSON enviarEstado()
-    { return super.enviarEstado().escribirAtributo("jugador",this.jugador.getIdentificador(),ParteMensaje.FINAL); }
+    { return super.enviarEstado().escribirAtributo("jugador",this.jugador.getIdentificador()); }
     @Override
     public void recibirEstado(String estado)
     { super.recibirEstado(estado); }

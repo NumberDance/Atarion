@@ -103,12 +103,12 @@ public abstract class Escena extends Interfaz
     { 
         super.show(); 
 
-        humano.asignarGenesis(genesis);
+        humano.setGenesis(genesis);
         
         if(humano2 != null)
-        { humano2.asignarGenesis(genesis); }
+        { humano2.setGenesis(genesis); }
         if(maquina != null)
-        { maquina.asignarGenesis(genesis); }
+        { maquina.setGenesis(genesis); }
     }
     @Override
     public void render(float delta) 

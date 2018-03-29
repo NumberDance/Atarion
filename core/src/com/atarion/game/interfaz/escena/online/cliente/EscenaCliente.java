@@ -5,7 +5,6 @@ import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.entidad.jugador.humano.Humano;
 import com.atarion.game.interfaz.escena.Escena;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
-import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,12 +40,13 @@ public class EscenaCliente extends Escena
         try
         { 
             MensajeJSON estado = new MensajeJSON();
-            estado.escribirAtributo("identificador",this.humano.getIdentificador(),ParteMensaje.PRINCIPIO);
-            estado.escribirAtributo("tipo",this.humano.getClase().toString(),ParteMensaje.FINAL);
+            estado.escribirAtributo("identificador",this.humano.getIdentificador());
+            estado.escribirAtributo("tipo",this.humano.getClase().toString());
             estado.enviar(this.cliente.getOutputStream());
             
             this.iniciales = new MensajeJSON().recibir(lector);
-            Gdx.app.log("INFO",this.iniciales.getJson().toString());
+            Gdx.app.log("INFO",this.iniciales.getMensaje());
+            
             this.iniciales.getJson().getJSONArray("iniciales").forEach
             (
                 inicial ->
@@ -83,16 +83,21 @@ public class EscenaCliente extends Escena
     public void actualizarPartida(String estado)
     { 
         MensajeJSON mensaje = new MensajeJSON().recibir(lector);
+         
+        mensaje.getJson().getJSONArray("estados").forEach
+        (
+            elemento ->
+            {
+                MensajeJSON valor = new MensajeJSON().recibir(elemento.toString());
+                    
+                if(valor.getJson().getString("identificador").equals(this.humano.getIdentificador()))
+                { humano.recibirEstado(valor.getMensaje()); }
+                else if(valor.getJson().getString("identificador").equals(this.humano2.getIdentificador()))
+                { humano2.recibirEstado(valor.getMensaje()); }
             
-        if(mensaje.getJson() != null)
-        {
-            if(mensaje.getJson().getString("identificador").equals(this.humano.getIdentificador()))
-            { humano.recibirEstado(estado); }
-            else if(mensaje.getJson().getString("identificador").equals(this.humano2.getIdentificador()))
-            { humano2.recibirEstado(estado); }
-            
-            Gdx.app.log("INFO","El server responde: " + estado);
-        }
+                Gdx.app.log("INFO","El server responde: " + valor.getMensaje());
+            }   
+        );
     }
 
     

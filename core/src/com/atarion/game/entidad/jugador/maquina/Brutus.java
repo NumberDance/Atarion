@@ -4,7 +4,6 @@ package com.atarion.game.entidad.jugador.maquina;
 import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.objeto.ProyectilBrutus;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
-import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
@@ -32,12 +31,12 @@ public class Brutus extends Maquina
     public MensajeJSON enviarEstado()
     { 
         MensajeJSON estado = super.enviarEstado();
-        estado.escribirAtributo("colisionproyectil","" + this.colisionproyectil,ParteMensaje.CUERPO);
+        estado.escribirAtributo("colisionproyectil","" + this.colisionproyectil);
         
         if(this.proyectil != null)
-        { estado.escribirAtributo("proyectil",this.proyectil.enviarEstado().getMensaje().toString(),ParteMensaje.FINAL); }
+        { estado.escribirAtributo("proyectil",this.proyectil.enviarEstado().getMensaje().toString()); }
         else
-        { estado.escribirAtributo("proyectil","null",ParteMensaje.FINAL); }
+        { estado.escribirAtributo("proyectil","null"); }
         
         return estado; 
     }

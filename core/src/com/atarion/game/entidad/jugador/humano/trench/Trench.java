@@ -1,16 +1,16 @@
 package com.atarion.game.entidad.jugador.humano.trench;
 
+
 import com.atarion.game.entidad.jugador.humano.Humano;
 import com.atarion.game.entidad.objeto.Objeto;
 import com.atarion.game.entidad.objeto.ProyectilTrench;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
-import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+
 
 public abstract class Trench extends Humano
 {   
@@ -32,12 +32,12 @@ public abstract class Trench extends Humano
     public MensajeJSON enviarEstado()
     { 
         MensajeJSON estado = super.enviarEstado();
-        estado.escribirAtributo("colisionproyectil","" + this.colisionproyectil,ParteMensaje.CUERPO);
+        estado.escribirAtributo("colisionproyectil","" + this.colisionproyectil);
         
         if(this.proyectil != null)
-        { estado.escribirAtributo("proyectil",this.proyectil.enviarEstado().getMensaje().toString(),ParteMensaje.CUERPO); }
+        { estado.escribirAtributo("proyectil",this.proyectil.enviarEstado().getMensaje().toString()); }
         else
-        { estado.escribirAtributo("proyectil","null",ParteMensaje.CUERPO); }
+        { estado.escribirAtributo("proyectil","null"); }
         
         return estado; 
     }

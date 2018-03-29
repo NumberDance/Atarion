@@ -2,6 +2,7 @@ package com.atarion.game.interfaz.escena.online.cliente;
 
 
 import com.atarion.game.entidad.jugador.Jugador;
+import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter;
 import java.io.BufferedReader;
@@ -39,9 +40,16 @@ public class HiloCliente extends Thread
     {
         try
         {
-            jugador.enviarEstado().enviar(cliente.getOutputStream());
-            //jugador2.enviarEstado().enviar(cliente.getOutputStream());
+            MensajeJSON estados = new MensajeJSON();
             
+            estados.concatenar(jugador.enviarEstado(),"estados");
+            if(jugador2.isInteraccion())
+            { 
+                estados.concatenar(jugador2.enviarEstado(),"estados"); 
+                jugador.setInteraccion(false);
+            }
+            
+            estados.enviar(cliente.getOutputStream());
             escena.actualizarPartida(this.lector.readLine());
         } 
         catch (IOException ex)

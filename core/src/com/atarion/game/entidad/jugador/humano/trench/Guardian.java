@@ -4,10 +4,9 @@ package com.atarion.game.entidad.jugador.humano.trench;
 import com.atarion.game.entidad.habilidad.HabilidadGuardian;
 import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
-import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
+
 
 public class Guardian extends Trench
 {
@@ -22,7 +21,7 @@ public class Guardian extends Trench
     
     @Override
     public MensajeJSON enviarEstado()
-    { return super.enviarEstado().escribirAtributo("tipo","Guardian",ParteMensaje.FINAL); }
+    { return super.enviarEstado().escribirAtributo("tipo","Guardian"); }
     @Override
     public void recibirEstado(String estado)
     { super.recibirEstado(estado); }
@@ -32,7 +31,10 @@ public class Guardian extends Trench
     public void activarEspecial() 
     {
         if(enemigo.isActivado())
-        { enemigo.pararEspecial(); }
+        { 
+            enemigo.pararEspecial(); 
+            enemigo.setInteraccion(true);
+        }
         else
         {
             Gdx.app.log("ERROR","No hay un módulo activado que cancelar.");

@@ -4,10 +4,8 @@ package com.atarion.game.entidad.jugador.humano.cannon;
 import com.atarion.game.entidad.habilidad.HabilidadTemplar;
 import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
-import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 
 
 public class Templar extends Cannon
@@ -23,7 +21,7 @@ public class Templar extends Cannon
     
     @Override
     public MensajeJSON enviarEstado()
-    { return super.enviarEstado().escribirAtributo("tipo","Templar",ParteMensaje.FINAL); }
+    { return super.enviarEstado().escribirAtributo("tipo","Templar"); }
     @Override
     public void recibirEstado(String estado)
     { super.recibirEstado(estado); }

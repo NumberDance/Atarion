@@ -1,7 +1,6 @@
 package com.atarion.game.entidad.objeto;
 
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
-import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -31,5 +30,5 @@ public class ProyectilTrench extends Proyectil
     
     @Override
     public MensajeJSON enviarEstado()
-    { return super.enviarEstado().escribirAtributo(null,null,ParteMensaje.FINAL); }
+    { return super.enviarEstado().escribirAtributo(null,null); }
 }

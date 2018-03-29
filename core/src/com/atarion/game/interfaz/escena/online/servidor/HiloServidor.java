@@ -2,13 +2,11 @@ package com.atarion.game.interfaz.escena.online.servidor;
 
 
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
-import com.atarion.game.interfaz.escena.online.ParteMensaje;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.AbstractMap.SimpleEntry;
-import java.util.HashSet;
 import java.util.Map.Entry;
 
 
@@ -41,7 +39,7 @@ public class HiloServidor extends Thread
     {
         try
         {  
-            MensajeJSON id = new MensajeJSON().escribirAtributo("identificador",this.identificador,ParteMensaje.SINGULAR);
+            MensajeJSON id = new MensajeJSON().escribirAtributo("identificador",this.identificador);
             id.enviar(this.socket.getOutputStream());
             
             try
@@ -54,11 +52,8 @@ public class HiloServidor extends Thread
                 this.escena.getSemaforo().release();
                 this.escena.getSemaforo().acquire();
                 
-                HashSet<String> estados = new HashSet<>();
-                this.escena.getIniciales().forEach(inicial -> 
-                { estados.add(inicial.getJson().toString()); });
-            
-                MensajeJSON iniciales = new MensajeJSON().escribirArray("iniciales",estados,ParteMensaje.SINGULAR);
+                MensajeJSON iniciales = new MensajeJSON();
+                this.escena.getIniciales().forEach(inicial -> { iniciales.concatenar(inicial,"iniciales"); });
                 iniciales.enviar(this.socket.getOutputStream());
                 
                 this.escena.getSemaforo().release();

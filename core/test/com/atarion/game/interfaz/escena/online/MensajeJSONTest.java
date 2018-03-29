@@ -1,8 +1,6 @@
 package com.atarion.game.interfaz.escena.online;
 
 
-import java.util.HashSet;
-import org.json.JSONObject;
 import org.junit.Test;
 
 
@@ -11,24 +9,25 @@ public class MensajeJSONTest
     @Test
     public void testEscribirArray()
     {   
-        HashSet<String> coleccion = new HashSet<>();
-        coleccion.add("{ 'atributo' : 'Hola' }");
-        coleccion.add("{ 'atributo' : 'Muy' }");
-        coleccion.add("{ 'atributo' : 'Buenas' }");
-        coleccion.add("{ 'atributo' : 'Adios' }");
-        
         MensajeJSON mensaje = new MensajeJSON();
-        mensaje.escribirArray("datos",coleccion,ParteMensaje.SINGULAR);
         
-        System.out.println(mensaje.getMensaje().toString());
+        MensajeJSON mensaje2 = new MensajeJSON();
+        mensaje2.escribirAtributo("id","Adios");
         
-        JSONObject objeto = mensaje.getJson();
-        objeto.getJSONArray("datos").forEach
+        MensajeJSON mensaje3 = new MensajeJSON();
+        mensaje3.escribirAtributo("id","Buenas");
+        
+        mensaje.concatenar(mensaje2,"iniciales");
+        mensaje.concatenar(mensaje3,"iniciales");
+        
+        System.out.println(mensaje.getMensaje());
+        
+        mensaje.getJson().getJSONArray("iniciales").forEach
         (
-            dato ->
-            {
-                MensajeJSON elemento = new MensajeJSON().recibir(dato.toString());
-                System.out.println(elemento.getJson().getString("atributo"));
+            entrada -> 
+            { 
+                MensajeJSON linea = new MensajeJSON().recibir(entrada.toString());
+                System.out.println(linea.getJson().getString("id"));
             }
         );
     }    
