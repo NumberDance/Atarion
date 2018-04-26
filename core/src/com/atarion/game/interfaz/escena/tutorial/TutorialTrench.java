@@ -23,19 +23,6 @@ public class TutorialTrench extends Tutorial
         
         this.titulo.setColor(0,255,0,255);
     }
-    
-    
-    @Override
-    public void show()
-    {
-        super.show();
-        
-        humano = new DummyTrench(true);
-        maquina = new Dummy();
-        
-        humano.agregarEnemigo(maquina);
-        maquina.agregarEnemigo(humano);
-    }
 
     
     @Override

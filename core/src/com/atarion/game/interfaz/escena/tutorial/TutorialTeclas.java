@@ -22,18 +22,6 @@ public class TutorialTeclas extends Tutorial
     
     
     @Override
-    public void show()
-    {
-        super.show();
-        humano = new DummyGeneric(true);
-        maquina = new Dummy();
-        
-        humano.agregarEnemigo(maquina);
-        maquina.agregarEnemigo(humano);
-    }
-    
-    
-    @Override
     public void controlarTeclado()
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) 

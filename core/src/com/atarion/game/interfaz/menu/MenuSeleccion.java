@@ -21,8 +21,7 @@ public class MenuSeleccion extends Menu
     
     public MenuSeleccion(Escena escena,Texture vista) 
     {
-        super();    
-        tema = Gdx.audio.newMusic(Gdx.files.internal("grabbed.mp3"));
+        super();
         this.escena = escena;
         this.vista = vista;
         

@@ -3,12 +3,6 @@
 
 Using LibGDX for graphics -> https://github.com/libgdx
 
-Awesome music: 
-
-Music Pack by Eric Taylor -> http://erictaylormusic.com
-
-Defying Commodus (Brutus Theme) by Matthew Pablo -> http://www.matthewpablo.com/
-
 Instrucciones para instalar:
 
 1 -> Clonarlo en tu directorio local.

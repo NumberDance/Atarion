@@ -1,6 +1,7 @@
 package com.atarion.game.interfaz.escena.online.cliente;
 
 
+import com.atarion.game.Atarion;
 import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.entidad.jugador.humano.Humano;
 import com.atarion.game.interfaz.escena.Escena;
@@ -67,7 +68,18 @@ public class EscenaCliente extends Escena
         catch (IOException ex)
         {}
         
-        super.entrar(clase);
+        if(this.humano2 != null)
+        {
+            this.humano.agregarEnemigo(this.humano2);
+            this.humano2.agregarEnemigo(this.humano);
+        }
+        if(this.maquina != null)
+        {
+            humano.agregarEnemigo(maquina);
+            maquina.agregarEnemigo(humano);
+        }
+        
+        Atarion.getInstance().setScreen(this);
     }
 
     
@@ -89,17 +101,27 @@ public class EscenaCliente extends Escena
             elemento ->
             {
                 MensajeJSON valor = new MensajeJSON().recibir(elemento.toString());
-                    
+                Gdx.app.log("INFO","El server responde: " + valor.getMensaje());    
+                
                 if(valor.getJson().getString("identificador").equals(this.humano.getIdentificador()))
                 { humano.recibirEstado(valor.getMensaje()); }
                 else if(valor.getJson().getString("identificador").equals(this.humano2.getIdentificador()))
                 { humano2.recibirEstado(valor.getMensaje()); }
-            
-                Gdx.app.log("INFO","El server responde: " + valor.getMensaje());
             }   
         );
     }
-
+    @Override
+    public void dispose()
+    {
+        try
+        { 
+            super.dispose();
+            cliente.close();
+        } 
+        catch (IOException ex)
+        {}
+    }
+    
     
     public Socket getCliente()
     { return cliente; }

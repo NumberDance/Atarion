@@ -1,12 +1,12 @@
 package com.atarion.game.interfaz.escena.tutorial;
 
-import com.atarion.game.Atarion;
+
 import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.entidad.jugador.maquina.Dummy;
 import com.atarion.game.interfaz.escena.Escena;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+
 
 public abstract class Tutorial extends Escena
 {
@@ -33,13 +33,8 @@ public abstract class Tutorial extends Escena
     @Override
     public void entrar(ClaseHumano clase)
     {
-        super.entrar(clase);
         maquina = new Dummy();
-        
-        humano.agregarEnemigo(maquina);
-        maquina.agregarEnemigo(humano);
-        
-        Atarion.getInstance().setScreen(this);
+        super.entrar(clase);
     }
     
     

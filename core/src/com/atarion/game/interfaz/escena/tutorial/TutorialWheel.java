@@ -21,19 +21,6 @@ public class TutorialWheel extends Tutorial
         
         this.titulo.setColor(0,0,255,255);
     }
-    
-    
-    @Override
-    public void show()
-    {
-        super.show();
-        
-        humano = new DummyWheel(true);
-        maquina = new Dummy();
-        
-        humano.agregarEnemigo(maquina);
-        maquina.agregarEnemigo(humano);
-    }
 
     
     @Override

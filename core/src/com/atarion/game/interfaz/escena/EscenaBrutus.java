@@ -17,9 +17,7 @@ public class EscenaBrutus extends Escena
     @Override
     public void entrar(ClaseHumano clase)
     {
-        this.humano = this.asignarClase(humano,clase,true);
         this.maquina = new Brutus();
-        
         super.entrar(clase);
     }
 }

@@ -92,7 +92,7 @@ public class HiloServidor extends Thread
                 escena.getSemaforo().release();
             } 
             catch (InterruptedException ex)
-            {}
+            { escena.getSemaforo().release(); }
         }
     }
 }

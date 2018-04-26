@@ -24,7 +24,6 @@ public class EscenaClaudius extends Escena
     @Override
     public void entrar(ClaseHumano clase)
     {
-        this.humano = this.asignarClase(humano,clase,true);
         this.maquina = new Claudius();
         
         this.escombros = new LinkedList<>();

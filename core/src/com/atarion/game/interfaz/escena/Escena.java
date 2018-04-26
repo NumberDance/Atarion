@@ -2,7 +2,6 @@ package com.atarion.game.interfaz.escena;
 
 
 import com.atarion.game.Atarion;
-import com.atarion.game.entidad.Entidad;
 import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.entidad.jugador.humano.DummyGeneric;
 import com.atarion.game.entidad.jugador.humano.Humano;
@@ -33,6 +32,8 @@ public abstract class Escena extends Interfaz
     
     public void entrar(ClaseHumano clase)
     { 
+        this.humano = this.asignarClase(humano,clase,true);
+        
         if(this.humano2 != null)
         {
             this.humano.agregarEnemigo(this.humano2);
@@ -189,9 +190,9 @@ public abstract class Escena extends Interfaz
     private void controlResultado()
     {
         if(humano.getVida() <= 0)
-        { Atarion.getInstance().setScreen(new MenuDerrota()); }
+        { new MenuDerrota().mostrar(); }
         else if(maquina != null && maquina.getVida() <= 0)
-        { Atarion.getInstance().setScreen(new MenuVictoria()); }
+        { new MenuVictoria().mostrar(); }
     }
     @Override
     public void dispose() 
