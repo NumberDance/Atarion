@@ -1,0 +1,51 @@
+{
+    "historias" : 
+    [
+        {
+            "nombre" : "La tragedia de Isaac",
+            "recuerdos" : 
+            [
+                {
+                    "identificador" : "IS0",
+                    "espacio" : "1",
+                    "tiempo" : "1",
+                    "historia" : "Vivo en una casa que financié con el dinero de un prestamista que no devolví"
+                },
+                {
+                    "identificador" : "IS1",
+                    "espacio" : "1",
+                    "tiempo" : "1",
+                    "historia" : "Hoy recibí una email que me decía que mis padres estaban en mala salud"
+                },
+                {
+                    "identificador" : "IS2",
+                    "espacio" : "2",
+                    "tiempo" : "2",
+                    "historia" : "Regresé a casa de mis padres"
+                },
+                {
+                    "identificador" : "IS3",
+                    "espacio" : "2",
+                    "tiempo" : "3",
+                    "historia" : "No había nadie en casa"
+                },
+                {
+                    "identificador" : "IS4",
+                    "espacio" : "2",
+                    "tiempo" : "4",
+                    "historia" : "Era una trampa. El prestamista me estaba esperando, había secuestrado a mis padres"
+                },
+                {
+                    "identificador" : "IS5",
+                    "espacio" : "3",
+                    "tiempo" : "5",
+                    "historia" : "Me llevó a un descampado y me disparó"
+                }
+            ],
+            "verdad" : "Despierto, y el médico me dice que la bala estuvo cerca de matarme, mis padres habían sido encontrados muertos en el mismo descampado",
+            "delirio" : "Despierto y veo a mis padres, que han venido a verme. Les abrazo y les prometo que usaré el arnés en la próxima obra en la que trabaje",
+            "locura" : "Soy dios, tengo el poder de estar en dos lugares a la vez y regresar de los muertos, veo a un vasallo que me recibe",
+            "ignorancia" : "Quién soy? Qué es éste lugar? Quién es éste señor?"
+        }
+    ]
+}
