@@ -57,6 +57,7 @@ project(":core")
     {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile group: 'org.json', name: 'json', version: '20171018'
+        compile 'org.projectlombok:lombok:1.18.4'
     }
 }
 

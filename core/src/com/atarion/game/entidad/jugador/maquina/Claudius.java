@@ -251,4 +251,33 @@ public class Claudius extends Maquina
         if(this.modo.equals(Modo.NINGUNO))
         { super.setVida(vida); }
     }
+    
+    
+    @Override
+    protected void faseDos()
+    {}
+    @Override
+    protected void faseTres()
+    {}
+    @Override
+    protected void faseCuatro()
+    {}
+    @Override
+    protected void faseCinco()
+    {}
+    @Override
+    protected void faseSeis()
+    {}
+    @Override
+    protected void faseSiete()
+    {}
+    @Override
+    protected void faseOcho()
+    {}
+    @Override
+    protected void faseNueve()
+    {}
+    @Override
+    protected void faseDiez()
+    {}
 }

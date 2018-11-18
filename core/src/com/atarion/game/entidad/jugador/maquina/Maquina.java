@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.Camera;
 
 public abstract class Maquina extends Jugador
 {
-    protected int decision = 0;
+    protected int decision = 0, fase = 1;
     
     
     public Maquina() 
@@ -132,4 +132,68 @@ public abstract class Maquina extends Jugador
     @Override
     public MensajeJSON enviarEstado()
     { return super.enviarEstado().escribirAtributo("decision","" + this.decision); }
+    
+    @Override
+    public void setVida(int vida)
+    {
+        super.setVida(vida);
+        
+        if(vida == (vidainicial * 9 / 10))
+        {
+            this.fase = 2;
+            this.faseDos(); 
+        }
+        else if(vida == (vidainicial * 8 / 10))
+        { 
+            this.fase = 3;
+            this.faseTres(); 
+        }
+        else if(vida == (vidainicial * 7 / 10))
+        {
+            this.fase = 4;
+            this.faseCuatro(); 
+        }
+        else if(vida == (vidainicial * 6 / 10))
+        { 
+            this.fase = 5;
+            this.faseCinco(); 
+        }
+        else if(vida == (vidainicial * 5 / 10))
+        {
+            this.fase = 6;
+            this.faseSeis(); 
+        }
+        else if(vida == (vidainicial * 4 / 10))
+        { 
+            this.fase = 7;
+            this.faseSiete(); 
+        }
+        else if(vida == (vidainicial * 3 / 10))
+        { 
+            this.fase = 8;
+            this.faseOcho(); 
+        }
+        else if(vida == (vidainicial * 2 / 10))
+        { 
+            this.fase = 9;
+            this.faseNueve(); 
+        }  
+        else if(vida == (vidainicial * 1 / 10))
+        { 
+            this.fase = 10;
+            this.faseDiez(); 
+        }
+        
+        Gdx.app.log("FASE","El carcelero esta en fase " + this.fase);
+    }     
+    
+    protected abstract void faseDos();
+    protected abstract void faseTres();
+    protected abstract void faseCuatro();
+    protected abstract void faseCinco();
+    protected abstract void faseSeis();
+    protected abstract void faseSiete();
+    protected abstract void faseOcho();
+    protected abstract void faseNueve();
+    protected abstract void faseDiez();
 }

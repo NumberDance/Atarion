@@ -4,11 +4,12 @@ package com.atarion.game.interfaz.escena.online;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.OutputStream;
+import lombok.Getter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-
+@Getter
 public class MensajeJSON 
 {
     private String mensaje = "";
@@ -89,10 +90,4 @@ public class MensajeJSON
         else
         { this.json = new JSONObject(new JSONTokener(mensaje)); } 
     }
-    
-    
-    public JSONObject getJson() 
-    { return this.json; }
-    public String getMensaje()
-    { return this.mensaje; }
 }

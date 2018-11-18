@@ -5,10 +5,13 @@ import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
+import lombok.Getter;
+import lombok.Setter;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-
+@Getter
+@Setter
 public abstract class Entidad extends Rectangle
 {
     protected Batch genesis;
@@ -39,20 +42,4 @@ public abstract class Entidad extends Rectangle
         this.x = objeto.getFloat("x");
         this.y = objeto.getFloat("y");
     }
-
-    
-    public String getIdentificador()
-    { return identificador; }
-    public boolean isInteraccion()
-    { return interaccion; } 
-    
-    
-    public void setGenesis(Batch genesis)
-    {  this.genesis = genesis; }
-    public void setTextura(Texture textura)
-    { this.textura = textura; }
-    public void setIdentificador(String identificador)
-    { this.identificador = identificador; }
-    public void setInteraccion(boolean interaccion)
-    { this.interaccion = interaccion; }   
 }

@@ -48,4 +48,33 @@ public class Dummy extends Maquina
     @Override
     public void desactivarEspecial()
     {}
+    
+    
+    @Override
+    protected void faseDos()
+    {}
+    @Override
+    protected void faseTres()
+    {}
+    @Override
+    protected void faseCuatro()
+    {}
+    @Override
+    protected void faseCinco()
+    {}
+    @Override
+    protected void faseSeis()
+    {}
+    @Override
+    protected void faseSiete()
+    {}
+    @Override
+    protected void faseOcho()
+    {}
+    @Override
+    protected void faseNueve()
+    {}
+    @Override
+    protected void faseDiez()
+    {}
 }

@@ -23,7 +23,9 @@ public class Crasus extends Maquina
     {
         super();
         
-        this.vida *= 4;
+        this.vidainicial *= 4;
+        this.vida *= this.vidainicial;
+        
         this.textura = new Texture(Gdx.files.internal("crasus.png"));
     }
 
@@ -217,4 +219,33 @@ public class Crasus extends Maquina
         ((Humano)this.enemigo).setInvertido(false);
         bombas.clear();
     } 
+    
+    
+    @Override
+    protected void faseDos()
+    {}
+    @Override
+    protected void faseTres()
+    {}
+    @Override
+    protected void faseCuatro()
+    {}
+    @Override
+    protected void faseCinco()
+    {}
+    @Override
+    protected void faseSeis()
+    {}
+    @Override
+    protected void faseSiete()
+    {}
+    @Override
+    protected void faseOcho()
+    {}
+    @Override
+    protected void faseNueve()
+    {}
+    @Override
+    protected void faseDiez()
+    {}
 }

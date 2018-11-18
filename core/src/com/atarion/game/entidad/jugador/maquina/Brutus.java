@@ -95,7 +95,7 @@ public class Brutus extends Maquina
             {
                 if(!this.colisionproyectil)
                 {
-                    this.vida -= proyectil.getDureza();
+                    this.setVida(this.vida - proyectil.getDureza());
                     Gdx.app.log("INFO", "La bola ha recibido 10 de su medicina. Le quedan " + vida + " vidas.");
                     this.colisionproyectil = true;
                 }
@@ -184,4 +184,38 @@ public class Brutus extends Maquina
         proyectil = null;
         this.perseguir();
     } 
+
+    
+    @Override
+    protected void faseDos()
+    { this.drenarVelocidad(); }
+    @Override
+    protected void faseTres()
+    { this.drenarVelocidad(); }
+    @Override
+    protected void faseCuatro()
+    { this.drenarVelocidad(); }
+    @Override
+    protected void faseCinco()
+    { this.drenarVelocidad(); }
+    @Override
+    protected void faseSeis()
+    { this.drenarVelocidad(); }
+    @Override
+    protected void faseSiete()
+    { this.drenarVelocidad(); }
+    @Override
+    protected void faseOcho()
+    { this.drenarVelocidad(); }
+    @Override
+    protected void faseNueve()
+    { this.drenarVelocidad(); }
+    @Override
+    protected void faseDiez()
+    { this.drenarVelocidad(); }
+    private void drenarVelocidad()
+    {
+        this.velocidad = this.velocidad + (3 * (this.enemigo.getVida() / 1000));
+        this.enemigo.setVelocidad(this.enemigo.getVelocidad() - (3 * ((this.enemigo.getVida() / 1000))));
+    }
 }

@@ -5,13 +5,17 @@ import com.atarion.game.entidad.Entidad;
 import com.atarion.game.entidad.objeto.Objeto;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.badlogic.gdx.graphics.Camera;
+import lombok.Getter;
+import lombok.Setter;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 
+@Getter
+@Setter
 public abstract class Jugador extends Entidad
 {
-    protected int vida = 100, fuerza = 10;
+    protected int vidainicial = 100, vida = 100, fuerza = 10;
     
     protected float velocidad = 1f;
     protected Direccion direccion = Direccion.PARADO;
@@ -115,66 +119,4 @@ public abstract class Jugador extends Entidad
     
     public abstract void activarEspecial();
     public abstract void desactivarEspecial();
-    
-
-    public boolean isColision()
-    { return colision; }
-    public Jugador getEnemigo()
-    { return enemigo; }
-    public float getCronometro()
-    { return cronometro; }
-    public int getTiempoactivo()
-    { return tiempoactivo; }
-    public int getActivo()
-    { return activo; }
-    public int getTiemporecarga()
-    { return tiemporecarga; }
-    public boolean isParado()
-    { return parado; }
-    public int getRecarga()
-    { return recarga; }
-    public int getFuerza()
-    { return fuerza; }
-    public float getVelocidad()
-    { return velocidad; }
-    public int getVida()
-    { return vida; }
-    public Direccion getDireccion()
-    { return direccion; }
-    public boolean isActivado()
-    { return activado; }
-    
-    
-    public void setVida(int vida)
-    { this.vida = vida; }
-    public void setFuerza(int fuerza)
-    { this.fuerza = fuerza; }
-    public void setVelocidad(float velocidad)
-    { this.velocidad = velocidad; }
-    public void setDireccion(Direccion direccion)
-    { this.direccion = direccion; }
-    public void setColision(boolean colision)
-    { this.colision = colision; }
-    public void setEnemigo(Jugador enemigo)
-    { this.enemigo = enemigo; }
-    public void setCronometro(float cronometro)
-    { this.cronometro = cronometro; }
-    public void setTiempoactivo(int tiempoactivo)
-    { this.tiempoactivo = tiempoactivo; }
-    public void setActivo(int activo)
-    { this.activo = activo; }
-    public void setTiemporecarga(int tiemporecarga)
-    { this.tiemporecarga = tiemporecarga; }
-    public void setRecarga(int recarga)
-    { this.recarga = recarga; }
-    public void setActivado(boolean activado)
-    { this.activado = activado; }
-    public void setParada(boolean parado)
-    { this.parado = parado; }
-    public boolean isControlado()
-    { return controlado; }
-    public void setControlado(boolean controlado)
-    { this.controlado = controlado; }
-    public void setInmune(boolean inmune) 
-    { this.inmune = inmune; }
 }
