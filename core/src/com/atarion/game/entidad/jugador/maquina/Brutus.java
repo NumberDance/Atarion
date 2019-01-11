@@ -97,7 +97,9 @@ public class Brutus extends Maquina
                 {
                     this.setVida(this.vida - proyectil.getDureza());
                     Gdx.app.log("INFO", "La bola ha recibido 10 de su medicina. Le quedan " + vida + " vidas.");
+                    
                     this.colisionproyectil = true;
+                    this.perseguir();
                 }
             }
             else
@@ -106,37 +108,87 @@ public class Brutus extends Maquina
     }
     private void perseguir()
     {
-        if(enemigo.getX() > this.x 
-                && (enemigo.getY() == this.y 
-                || (enemigo.getY() >= 800 - 98 && this.y >= 800 - 98) 
-                || (enemigo.getY() <= 98 && this.y <= 98)))
-        { decision = 1; }
-        else if(enemigo.getX() < this.x 
-                && (enemigo.getY() == this.y 
-                || (enemigo.getY() >= 800 - 98 && this.y >= 800 - 98) 
-                || (enemigo.getY() <= 98 && this.y <= 98)))
-        { decision = 2; }
+        float ccentrox = this.getX() - (this.enemigo.getWidth() / 2);
+        float ccentroy = this.getY() - (this.enemigo.getHeight() / 2);
         
-        else if(enemigo.getY() > this.y 
-                && (enemigo.getX() == this.x 
-                || (enemigo.getX() >= 1000 - 98 && this.x >= 1000 - 98) 
-                || (enemigo.getX() <= 98 && this.x <= 98)))
-        { decision = 3; }
-        else if(enemigo.getY() < this.y 
-                && (enemigo.getX() == this.x 
-                || (enemigo.getX() >= 1000 - 98 && this.x >= 1000 - 98) 
-                || (enemigo.getX() <= 98 && this.x <= 98)))
-        { decision = 4; }
+        float ecentrox = this.enemigo.getX() - (this.enemigo.getWidth() / 2);
+        float ecentroy = this.enemigo.getY() - (this.enemigo.getHeight() / 2);
         
-        else if(enemigo.getX() > this.x && enemigo.getY() > this.y)
+        /*if (Math.abs(ccentroy - ecentroy) < this.enemigo.getWidth()
+                && Math.abs(ccentrox - ecentrox) < this.enemigo.getHeight())
+        {
+            if(enemigo.getX() > this.x && enemigo.getY() > this.y)
+            { decision = 5; }
+            else if(enemigo.getX() > this.x && enemigo.getY() < this.y)
+            { decision = 6; }
+            else if(enemigo.getX() < this.x && enemigo.getY() > this.y)
+            { decision = 7; }
+            else if(enemigo.getX() < this.x && enemigo.getY() < this.y)
+            { decision = 8; }
+        }
+        else if(Math.abs(ccentroy - ecentroy) < this.enemigo.getWidth())
+        {
+            if(enemigo.getX() > this.x)
+            { 
+                if(this.proyectil != null
+                        && (Math.abs(this.getY() - this.proyectil.getY()) < this.proyectil.getHeight())
+                        && (this.proyectil.getX() < this.enemigo.getX())
+                        && (this.proyectil.getX() > this.getX()))
+                { decision = 2; }
+                else
+                { decision = 1; }
+            
+            }
+            else if(enemigo.getX() < this.x)
+            { 
+                if(this.proyectil != null
+                        && (Math.abs(this.getY() - this.proyectil.getY()) < this.proyectil.getHeight())
+                        && (this.proyectil.getX() > this.enemigo.getX())
+                        && (this.proyectil.getX() < this.getX()))
+                { decision = 1; }
+                else
+                { decision = 2; }
+            }
+        }
+        else if(Math.abs(ccentrox - ecentrox) < this.enemigo.getHeight())
+        {
+            if(enemigo.getY() > this.y)
+            { 
+                if(this.proyectil != null
+                        && (Math.abs(this.getX() - this.proyectil.getX()) < this.proyectil.getWidth())
+                        && (this.proyectil.getY() < this.enemigo.getX())
+                        && (this.proyectil.getY() > this.getY()))
+                { decision = 4; }
+                else
+                { decision = 3; } 
+            }
+            else if(enemigo.getY() < this.y)
+            { 
+                if(this.proyectil != null
+                        && (Math.abs(this.getX() - this.proyectil.getX()) < this.proyectil.getWidth())
+                        && (this.proyectil.getY() > this.enemigo.getX())
+                        && (this.proyectil.getY() < this.getY()))
+                { decision = 3; }
+                else
+                { decision = 4; } 
+            }
+        }
+        else*/ if(enemigo.getX() > this.x && enemigo.getY() > this.y)
         { decision = 5; }
         else if(enemigo.getX() > this.x && enemigo.getY() < this.y)
         { decision = 6; }
-        
         else if(enemigo.getX() < this.x && enemigo.getY() > this.y)
         { decision = 7; }
         else if(enemigo.getX() < this.x && enemigo.getY() < this.y)
         { decision = 8; }
+        else if(enemigo.getX() > this.x)
+        { decision = 1; }
+        else if(enemigo.getX() < this.x)
+        { decision = 2; }
+        else if(enemigo.getY() > this.y)
+        { decision = 3; }
+        else if(enemigo.getY() < this.y)
+        { decision = 4; }
     }
     
     
@@ -148,10 +200,9 @@ public class Brutus extends Maquina
             this.y = 0;
             this.perseguir();
         }
-        
-        if(this.y > 800 - 100)
+        else if(this.y > 800 - 105)
         {
-            this.y = 800 - 100;
+            this.y = 800 - 110;
             this.perseguir();
         }
         
@@ -160,12 +211,14 @@ public class Brutus extends Maquina
             this.x = 0;
             this.perseguir();
         }
-        
-        if(this.x > 1000 - 100) 
+        else if(this.x > 1000 - 105) 
         {
-            this.x = 1000 - 100;
+            this.x = 1000 - 110;
             this.perseguir();
         }
+        
+        if(this.fase == 10)
+        { this.perseguir(); }
     }
 
     
@@ -173,49 +226,46 @@ public class Brutus extends Maquina
     public void activarEspecial() 
     {
         this.textura = new Texture(Gdx.files.internal("hunt.png"));
-        enemigo.setVelocidad(enemigo.getVelocidad() / 2);
         proyectil = new ProyectilBrutus(genesis,50,50,enemigo.getX(),enemigo.getY());
+        
+        this.velocidad += 0.1;
+        this.enemigo.setVelocidad(this.enemigo.getVelocidad() - 0.1f);
     }
     @Override
     public void desactivarEspecial() 
     {
         this.textura = new Texture(Gdx.files.internal("brutus.png"));
-        enemigo.setVelocidad(enemigo.getVelocidad() * 2);
         proyectil = null;
+        
         this.perseguir();
     } 
 
     
     @Override
     protected void faseDos()
-    { this.drenarVelocidad(); }
+    {}
     @Override
     protected void faseTres()
-    { this.drenarVelocidad(); }
+    {}
     @Override
     protected void faseCuatro()
-    { this.drenarVelocidad(); }
+    {}
     @Override
     protected void faseCinco()
-    { this.drenarVelocidad(); }
+    {}
     @Override
     protected void faseSeis()
-    { this.drenarVelocidad(); }
+    {}
     @Override
     protected void faseSiete()
-    { this.drenarVelocidad(); }
+    {}
     @Override
     protected void faseOcho()
-    { this.drenarVelocidad(); }
+    {}
     @Override
     protected void faseNueve()
-    { this.drenarVelocidad(); }
+    {}
     @Override
     protected void faseDiez()
-    { this.drenarVelocidad(); }
-    private void drenarVelocidad()
-    {
-        this.velocidad = this.velocidad + (3 * (this.enemigo.getVida() / 1000));
-        this.enemigo.setVelocidad(this.enemigo.getVelocidad() - (3 * ((this.enemigo.getVida() / 1000))));
-    }
+    {}
 }

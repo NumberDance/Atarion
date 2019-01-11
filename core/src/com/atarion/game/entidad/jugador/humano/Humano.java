@@ -5,16 +5,23 @@ import com.atarion.game.entidad.habilidad.Habilidad;
 import com.atarion.game.entidad.objeto.Objeto;
 import com.atarion.game.entidad.jugador.Direccion;
 import com.atarion.game.entidad.jugador.Jugador;
+import com.atarion.game.entidad.objeto.recuperables.memoria.Secuencia;
+import com.atarion.game.entidad.objeto.recuperables.sentido.Sentido;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Getter
+@Setter
 public abstract class Humano extends Jugador
 {    
     private boolean tu = false;
     protected Habilidad habilidad = null;
     protected ClaseHumano clase = null;
+    protected Sentido gusto, oido, olfato, vista, tacto;
+    protected Secuencia secuencia;
 
     
     public Humano(boolean tu)
@@ -206,14 +213,14 @@ public abstract class Humano extends Jugador
         if(this.y < 0) 
         { this.y = 0; }
         
-        if(this.y > 800 - 20)
-        { this.y = 800 - 20; }
+        if(this.y > 800 - 25)
+        { this.y = 800 - 25; }
         
         if(this.x < 0)
         { this.x = 0; }
         
-        if(this.x > 1000 - 80) 
-        { this.x = 1000 - 80; }
+        if(this.x > 1000 - 85) 
+        { this.x = 1000 - 85; }
     }
     
     
@@ -228,12 +235,4 @@ public abstract class Humano extends Jugador
         Gdx.app.log("COLISION",jugador.getIdentificador() + " te ha hecho " + jugador.getFuerza() + " puntos de daño.");
         Gdx.app.log("COLISION","Te quedan " + vida + " vidas.");
     }
-
-    
-    public void setInvertido(boolean invertido) 
-    { this.invertido = invertido; }
-
-    
-    public ClaseHumano getClase()
-    { return clase; } 
 }

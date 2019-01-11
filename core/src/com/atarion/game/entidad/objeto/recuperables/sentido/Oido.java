@@ -1,5 +1,6 @@
 package com.atarion.game.entidad.objeto.recuperables.sentido;
 
-public class Oido {
+public class Oido extends Sentido 
+{
 
 }

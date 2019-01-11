@@ -4,10 +4,14 @@ package com.atarion.game.entidad.objeto;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import lombok.Getter;
+import lombok.Setter;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 
+@Getter
+@Setter
 public abstract class Proyectil extends Objeto
 {
     protected float direccionx, direcciony;
@@ -73,6 +77,4 @@ public abstract class Proyectil extends Objeto
             { this.y -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad; }
         }
     }
-    public boolean isDestino() 
-    { return destino; }
 }

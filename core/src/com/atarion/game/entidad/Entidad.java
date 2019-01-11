@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+
 @Getter
 @Setter
 public abstract class Entidad extends Rectangle
