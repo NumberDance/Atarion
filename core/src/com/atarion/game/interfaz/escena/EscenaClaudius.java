@@ -17,14 +17,14 @@ public class EscenaClaudius extends Escena
     public EscenaClaudius() 
     {
         super();
-        //super.musica("finale.mp3"); 
+        this.batalla = true; 
     }
     
     
     @Override
     public void entrar(ClaseHumano clase)
     {
-        this.maquina = new Claudius();
+        this.maquina = new Claudius(this.batalla);
         
         this.escombros = new LinkedList<>();
         this.colisiones = new LinkedList<>();

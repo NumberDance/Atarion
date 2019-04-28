@@ -6,9 +6,9 @@ import com.atarion.game.entidad.jugador.humano.Humano;
 
 public abstract class Wheel extends Humano
 {
-    public Wheel(boolean tu)
+    public Wheel(boolean tu,boolean batalla)
     {
-        super(tu);
+        super(tu,batalla);
         
         this.velocidad *= 2;
         this.fuerza /= 2;

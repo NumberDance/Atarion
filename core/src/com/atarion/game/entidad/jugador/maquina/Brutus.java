@@ -17,9 +17,9 @@ public class Brutus extends Maquina
     private boolean colisionproyectil = false;
     
     
-    public Brutus() 
+    public Brutus(boolean batalla) 
     {
-        super();
+        super(batalla);
         
         this.textura = new Texture(Gdx.files.internal("brutus.png"));
         this.fuerza *= 4;

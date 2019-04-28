@@ -10,14 +10,14 @@ public class EscenaCrasus extends Escena
     public EscenaCrasus() 
     { 
         super();
-        //super.musica("zombies.mp3"); 
+        this.batalla = true;
     }
     
     
     @Override
     public void entrar(ClaseHumano clase)
     {
-        this.maquina = new Crasus();
+        this.maquina = new Crasus(this.batalla);
         super.entrar(clase);
     }
 }

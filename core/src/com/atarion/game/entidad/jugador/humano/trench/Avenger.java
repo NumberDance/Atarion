@@ -6,9 +6,9 @@ import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 
 public class Avenger extends Trench
 {
-    public Avenger(boolean tu)
+    public Avenger(boolean tu,boolean batalla)
     { 
-        super(tu); 
+        super(tu,batalla); 
         this.clase = ClaseHumano.AVENGER;
     }
 

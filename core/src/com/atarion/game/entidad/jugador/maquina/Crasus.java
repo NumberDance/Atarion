@@ -19,9 +19,9 @@ public class Crasus extends Maquina
     private float temporizador = 0f;
     private HashSet<Entidad> bombas = new HashSet<Entidad>();
     
-    public Crasus() 
+    public Crasus(boolean batalla) 
     {
-        super();
+        super(batalla);
         
         this.vidainicial *= 4;
         this.vida *= this.vidainicial;

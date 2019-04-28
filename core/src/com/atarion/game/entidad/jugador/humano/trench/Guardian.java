@@ -10,9 +10,9 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Guardian extends Trench
 {
-    public Guardian(boolean tu) 
+    public Guardian(boolean tu,boolean batalla)
     {
-        super(tu);
+        super(tu,batalla);
         
         this.clase = ClaseHumano.GUARDIAN;
         this.textura = new Texture(Gdx.files.internal("guardian.png"));

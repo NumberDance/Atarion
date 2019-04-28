@@ -23,9 +23,9 @@ public class Claudius extends Maquina
     private Modo modo = Modo.NINGUNO;
     
     
-    public Claudius() 
+    public Claudius(boolean batalla) 
     {
-        super();
+        super(batalla);
         
         this.velocidad *= 4;
         this.textura = new Texture(Gdx.files.internal("claudius.png"));

@@ -7,9 +7,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Visionary extends Wheel
 {
-    public Visionary(boolean tu)
+    public Visionary(boolean tu,boolean batalla)
     { 
-        super(tu); 
+        super(tu,batalla); 
         this.clase = ClaseHumano.VISIONARY;
     }
 

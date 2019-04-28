@@ -7,9 +7,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Merchant extends Wheel
 {
-    public Merchant(boolean tu)
+    public Merchant(boolean tu,boolean batalla)
     { 
-        super(tu); 
+        super(tu,batalla); 
         this.clase = ClaseHumano.MERCHANT;
     }
 

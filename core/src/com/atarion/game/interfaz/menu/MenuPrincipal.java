@@ -6,6 +6,7 @@ import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.interfaz.escena.EscenaBrutus;
 import com.atarion.game.interfaz.escena.EscenaClaudius;
 import com.atarion.game.interfaz.escena.EscenaCrasus;
+import com.atarion.game.interfaz.escena.mundo.Mundo;
 import com.atarion.game.interfaz.escena.online.cliente.EscenaCliente;
 import com.atarion.game.interfaz.escena.tutorial.TutorialTeclas;
 import com.badlogic.gdx.Gdx;
@@ -48,6 +49,7 @@ public class MenuPrincipal extends Menu
         menu.append("B -> Campaña: Región Central.").append("\n");
         menu.append("C -> Campaña: Región Parietal.").append("\n");
         menu.append("D -> PVP online.").append("\n");
+        menu.append("E -> Mundo").append("\n");
         menu.append("X -> Tutorial.").append("\n");
         
         texto.draw(genesis,menu.toString(),300,550);
@@ -87,6 +89,8 @@ public class MenuPrincipal extends Menu
             Texture analisis = new Texture(Gdx.files.internal("logo.png"));
             Atarion.getInstance().setScreen(new MenuSeleccion(new EscenaCliente(),analisis));
         }
+        else if(Gdx.input.isKeyPressed(Input.Keys.E))
+        { Atarion.getInstance().setScreen(new MenuSeleccion(new Mundo(),null)); }
         else if(Gdx.input.isKeyPressed(Input.Keys.X))
         { new TutorialTeclas().entrar(ClaseHumano.DUMMYGENERIC); }
     }

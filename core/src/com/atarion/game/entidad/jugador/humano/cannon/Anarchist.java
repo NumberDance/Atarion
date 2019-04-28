@@ -18,9 +18,9 @@ public class Anarchist extends Cannon
     private Jugador controlado = null;
     
 
-    public Anarchist(boolean tu)
+    public Anarchist(boolean tu,boolean batalla)
     { 
-        super(tu); 
+        super(tu,batalla); 
         
         this.clase = ClaseHumano.ANARCHIST;
         this.textura = new Texture(Gdx.files.internal("anarchist.png"));

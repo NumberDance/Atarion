@@ -10,9 +10,9 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Templar extends Cannon
 {
-    public Templar(boolean tu) 
+    public Templar(boolean tu,boolean batalla) 
     {
-        super(tu);
+        super(tu,batalla);
         
         this.clase = ClaseHumano.TEMPLAR;
         this.textura = new Texture(Gdx.files.internal("templar.png"));

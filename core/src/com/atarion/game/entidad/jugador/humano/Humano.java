@@ -20,13 +20,13 @@ public abstract class Humano extends Jugador
     private boolean tu = false;
     protected Habilidad habilidad = null;
     protected ClaseHumano clase = null;
-    protected Sentido gusto, oido, olfato, vista, tacto;
     protected Secuencia secuencia;
+    protected boolean gusto, oido, olfato, vista, tacto;
 
     
-    public Humano(boolean tu)
+    public Humano(boolean tu,boolean batalla)
     {
-        super();
+        super(batalla);
         
         this.y = 30;
         this.tu = tu;
@@ -229,7 +229,7 @@ public abstract class Humano extends Jugador
     {}
     @Override
     public void colisionJugador(Jugador jugador) 
-    {
+    { 
         vida -= jugador.getFuerza();
         
         Gdx.app.log("COLISION",jugador.getIdentificador() + " te ha hecho " + jugador.getFuerza() + " puntos de daño.");

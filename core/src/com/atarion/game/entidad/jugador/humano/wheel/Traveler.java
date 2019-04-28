@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Traveler extends Wheel
 {
-    public Traveler(boolean tu) 
+    public Traveler(boolean tu,boolean batalla) 
     {
-        super(tu);
+        super(tu,batalla);
         
         this.clase = ClaseHumano.TRAVELER;
         this.textura = new Texture(Gdx.files.internal("traveler.png"));

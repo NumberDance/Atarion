@@ -28,6 +28,7 @@ public abstract class Escena extends Interfaz
     protected Humano humano = null, humano2 = null;
     protected Maquina maquina = null;
     protected boolean cmaquinahumano = false, chumano2humano = false, cmaquinahumano2 = false;
+    protected boolean batalla;
     
     
     public void entrar(ClaseHumano clase)
@@ -52,46 +53,46 @@ public abstract class Escena extends Interfaz
         switch(clase)
         {
             case ANARCHIST:
-                jugador = new Anarchist(tu);
+                jugador = new Anarchist(tu,this.batalla);
             break;
             case FANATIC:
-                jugador = new Fanatic(tu);
+                jugador = new Fanatic(tu,this.batalla);
             break;
             case TEMPLAR:
-                jugador = new Templar(tu);
+                jugador = new Templar(tu,this.batalla);
             break;
                 
             case AVENGER:
-                jugador = new Avenger(tu);
+                jugador = new Avenger(tu,this.batalla);
             break;
             case BENEFACTOR:
-                jugador = new Benefactor(tu);
+                jugador = new Benefactor(tu,this.batalla);
             break;
             case GUARDIAN:
-                jugador = new Guardian(tu);
+                jugador = new Guardian(tu,this.batalla);
             break;
                 
             case MERCHANT:
-                jugador = new Merchant(tu);
+                jugador = new Merchant(tu,this.batalla);
             break;
             case TRAVELER:
-                jugador = new Traveler(tu);
+                jugador = new Traveler(tu,this.batalla);
             break;
             case VISIONARY:
-                jugador = new Visionary(tu);
+                jugador = new Visionary(tu,this.batalla);
             break;
             
             case DUMMYGENERIC:
-                jugador = new DummyGeneric(tu);
+                jugador = new DummyGeneric();
             break;
             case DUMMYCANNON:
-                jugador = new DummyCannon(tu);
+                jugador = new DummyCannon();
             break;
             case DUMMYWHEEL:
-                jugador = new DummyWheel(tu);
+                jugador = new DummyWheel();
             break;
             case DUMMYTRENCH:
-                jugador = new DummyTrench(tu);
+                jugador = new DummyTrench();
             break;
         } 
         

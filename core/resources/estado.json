@@ -1,0 +1,10 @@
+{
+    "gusto" : false,
+    "oido" : false,
+    "olfato" : false,
+    "vista" : true,
+    "tacto" : false,
+    "historia" : ">IS<",
+    "recuerdos" : [ "IS3", "IS1"],
+    "clase" : "TEMPLAR"
+}

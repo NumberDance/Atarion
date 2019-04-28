@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class DummyCannon extends Cannon
 {
-    public DummyCannon(boolean tu)
+    public DummyCannon()
     {
-        super(tu);
+        super(true,true);
         
         this.clase = ClaseHumano.DUMMYCANNON;
         this.textura = new Texture(Gdx.files.internal("dummycannon.png"));

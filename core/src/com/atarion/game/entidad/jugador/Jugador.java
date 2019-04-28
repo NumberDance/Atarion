@@ -5,6 +5,7 @@ import com.atarion.game.entidad.Entidad;
 import com.atarion.game.entidad.objeto.Objeto;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import lombok.Getter;
 import lombok.Setter;
 import org.json.JSONObject;
@@ -25,15 +26,20 @@ public abstract class Jugador extends Entidad
     
     protected float cronometro = 0f;
     protected int tiempoactivo = 5, activo = 5, tiemporecarga = 10, recarga = 0;
+    protected boolean batalla;
     protected boolean activado = false, inmune = false;
     protected boolean parado = false, controlado = false, invertido = false;
     
+    protected BitmapFont texto;
+    protected String conversacion = "";
     
-    protected Jugador()
+    
+    protected Jugador(boolean batalla)
     {
         this.x = 800 / 2 - 64 / 2;
         this.width = 80;
         this.height = 20;   
+        this.batalla = batalla;
     }
     
     
@@ -102,6 +108,14 @@ public abstract class Jugador extends Entidad
         }
     }
     
+    protected void conversar()
+    {
+        this.texto = new BitmapFont();
+        this.texto.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+        this.texto.getData().setScale(2f);
+        
+        this.texto.draw(genesis, this.conversacion, x, y);
+    }
     
     protected abstract void colisionObjeto(Objeto objeto);
     protected abstract void colisionJugador(Jugador jugador);

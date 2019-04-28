@@ -14,9 +14,9 @@ public abstract class Cannon extends Humano
     protected int rebote = 200;
 
    
-    public Cannon(boolean tu)
+    public Cannon(boolean tu,boolean batalla)
     {
-        super(tu);
+        super(tu,batalla);
         
         this.fuerza *= 2;
         this.vida /= 2;

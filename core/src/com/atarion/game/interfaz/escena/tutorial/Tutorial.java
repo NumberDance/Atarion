@@ -17,7 +17,7 @@ public abstract class Tutorial extends Escena
     protected Tutorial()
     {
         super();
-        //super.musica("pirates.mp3");
+        this.batalla = true;
         
         titulo.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         titulo.getData().setScale(2f);
@@ -33,7 +33,7 @@ public abstract class Tutorial extends Escena
     @Override
     public void entrar(ClaseHumano clase)
     {
-        maquina = new Dummy();
+        maquina = new Dummy(true);
         super.entrar(clase);
     }
     

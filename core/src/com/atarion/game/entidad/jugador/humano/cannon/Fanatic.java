@@ -10,9 +10,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Fanatic extends Cannon
 {
-    public Fanatic(boolean tu)
+    public Fanatic(boolean tu,boolean batalla)
     {
-        super(tu);
+        super(tu,batalla);
         
         this.clase = ClaseHumano.FANATIC;
         this.textura = new Texture(Gdx.files.internal("fanatic.png"));

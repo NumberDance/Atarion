@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class DummyTrench extends Trench
 {
-    public DummyTrench(boolean tu)
+    public DummyTrench()
     {
-        super(tu);
+        super(true,true);
         
         this.clase = ClaseHumano.DUMMYTRENCH;
         this.textura = new Texture(Gdx.files.internal("dummytrench.png"));

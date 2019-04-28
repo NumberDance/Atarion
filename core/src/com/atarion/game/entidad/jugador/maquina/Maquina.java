@@ -14,9 +14,9 @@ public abstract class Maquina extends Jugador
     protected int decision = 0, fase = 1;
     
     
-    public Maquina() 
+    public Maquina(boolean batalla) 
     {
-        super();
+        super(batalla);
         this.y = 600;
         velocidad = 1.5f;
         this.tiemporecarga = 20;

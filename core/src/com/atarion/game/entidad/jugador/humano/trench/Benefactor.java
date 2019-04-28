@@ -6,9 +6,9 @@ import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 
 public class Benefactor extends Trench
 {
-    public Benefactor(boolean tu)
+    public Benefactor(boolean tu,boolean batalla)
     { 
-        super(tu); 
+        super(tu,batalla); 
         this.clase = ClaseHumano.BENEFACTOR;
     }
 
