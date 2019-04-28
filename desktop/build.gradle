@@ -7,6 +7,9 @@ project.ext.mainClassName = "com.atarion.game.desktop.ClientLauncher"
 project.ext.serverExecName = "com.atarion.game.desktop.ServerLauncher"
 project.ext.assetsDir = new File("../core/assets");
 
+task runTest(type: GradleBuild) {
+    tasks = ['runServer','run','run']
+}
 task run(dependsOn: classes, type: JavaExec) {
     main = project.mainClassName
     classpath = sourceSets.main.runtimeClasspath
