@@ -23,21 +23,23 @@ import com.atarion.game.interfaz.menu.MenuVictoria;
 
 public abstract class Escena extends Interfaz {
 
-    protected Humano humano = null, humano2 = null;
+    protected Humano tu = null, humano = null;
     protected Maquina maquina = null;
-    protected boolean cmaquinahumano = false, chumano2humano = false, cmaquinahumano2 = false;
+    protected boolean cmaquinatu = false, 
+            ctuhumano = false, 
+            cmaquinahumano = false;
     protected boolean batalla;
 
     public void entrar(ClaseHumano clase) {
-        this.humano = this.asignarClase(humano, clase, true);
+        this.tu = this.asignarClase(this.tu, clase, true);
 
-        if (this.humano2 != null) {
-            this.humano.agregarEnemigo(this.humano2);
-            this.humano2.agregarEnemigo(this.humano);
+        if (this.humano != null) {
+            this.tu.agregarEnemigo(this.humano);
+            this.humano.agregarEnemigo(this.tu);
         }
         if (this.maquina != null) {
-            humano.agregarEnemigo(maquina);
-            maquina.agregarEnemigo(humano);
+            tu.agregarEnemigo(maquina);
+            maquina.agregarEnemigo(tu);
         }
 
         Atarion.getInstance().setScreen(this);
@@ -96,13 +98,13 @@ public abstract class Escena extends Interfaz {
     public void show() {
         super.show();
 
-        humano.setGenesis(genesis);
+        this.tu.setGenesis(genesis);
 
-        if (humano2 != null) {
-            humano2.setGenesis(genesis);
+        if (this.humano != null) {
+            this.humano.setGenesis(genesis);
         }
-        if (maquina != null) {
-            maquina.setGenesis(genesis);
+        if (this.maquina != null) {
+            this.maquina.setGenesis(genesis);
         }
     }
 
@@ -112,9 +114,9 @@ public abstract class Escena extends Interfaz {
 
         genesis.begin();
 
-        humano.actualizarEstado();
-        if (humano2 != null) {
-            humano2.actualizarEstado();
+        this.tu.actualizarEstado();
+        if (this.humano != null) {
+            this.humano.actualizarEstado();
         }
         if (maquina != null) {
             maquina.actualizarEstado();
@@ -122,9 +124,9 @@ public abstract class Escena extends Interfaz {
 
         genesis.end();
 
-        humano.jugar(camara);
-        if (humano2 != null) {
-            humano2.jugar(camara);
+        this.tu.jugar(camara);
+        if (this.humano != null) {
+            this.humano.jugar(camara);
         }
         if (maquina != null) {
             maquina.jugar(camara);
@@ -136,47 +138,47 @@ public abstract class Escena extends Interfaz {
 
     private void controlColisiones() {
         if (maquina != null) {
-            if (maquina.overlaps(humano)) {
-                if (!cmaquinahumano) {
-                    humano.colisionJugador(maquina);
+            if (maquina.overlaps(this.tu)) {
+                if (!cmaquinatu) {
+                    this.tu.colisionJugador(this.maquina);
+                    maquina.colisionJugador(this.tu);
+
+                    cmaquinatu = true;
+                }
+            } else {
+                cmaquinatu = false;
+            }
+        }
+
+        if (this.humano != null) {
+            if (humano.overlaps(tu)) {
+                if (!this.ctuhumano) {
+                    tu.colisionJugador(humano);
+                    humano.colisionJugador(tu);
+
+                    this.ctuhumano = true;
+                }
+            } else {
+                this.ctuhumano = false;
+            }
+        }
+
+        if (humano != null && maquina != null) {
+            if (humano.overlaps(maquina)) {
+                if (!this.cmaquinahumano) {
                     maquina.colisionJugador(humano);
+                    humano.colisionJugador(maquina);
 
-                    cmaquinahumano = true;
+                    this.cmaquinahumano = true;
                 }
             } else {
-                cmaquinahumano = false;
-            }
-        }
-
-        if (humano2 != null) {
-            if (humano2.overlaps(humano)) {
-                if (!chumano2humano) {
-                    humano.colisionJugador(humano2);
-                    humano2.colisionJugador(humano);
-
-                    chumano2humano = true;
-                }
-            } else {
-                this.chumano2humano = false;
-            }
-        }
-
-        if (humano2 != null && maquina != null) {
-            if (humano2.overlaps(maquina)) {
-                if (!cmaquinahumano2) {
-                    maquina.colisionJugador(humano2);
-                    humano2.colisionJugador(maquina);
-
-                    cmaquinahumano2 = true;
-                }
-            } else {
-                this.cmaquinahumano2 = false;
+                this.cmaquinahumano = false;
             }
         }
     }
 
     private void controlResultado() {
-        if (humano.getVida() <= 0) {
+        if (tu.getVida() <= 0) {
             new MenuDerrota().mostrar();
         } else if (maquina != null && maquina.getVida() <= 0) {
             new MenuVictoria().mostrar();
@@ -185,14 +187,14 @@ public abstract class Escena extends Interfaz {
 
     @Override
     public void dispose() {
-        humano.dispose();
+        tu.dispose();
 
         if (this.maquina != null) {
             this.maquina.dispose();
         }
 
-        if (this.humano2 != null) {
-            this.humano2.dispose();
+        if (this.humano != null) {
+            this.humano.dispose();
         }
     }
 }

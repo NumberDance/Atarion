@@ -2,11 +2,12 @@ package com.atarion.game;
 
 import com.atarion.game.interfaz.menu.MenuPrincipal;
 import com.badlogic.gdx.Game;
+import lombok.Getter;
 
+@Getter
 public class Atarion extends Game
 {   
     private static final Atarion atarion = new Atarion();
-    
     
     public static Atarion getInstance()
     { return atarion;}

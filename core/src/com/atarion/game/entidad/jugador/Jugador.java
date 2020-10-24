@@ -108,15 +108,6 @@ public abstract class Jugador extends Entidad
         }
     }
     
-    protected void conversar()
-    {
-        this.texto = new BitmapFont();
-        this.texto.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-        this.texto.getData().setScale(2f);
-        
-        this.texto.draw(genesis, this.conversacion, x, y);
-    }
-    
     protected abstract void colisionObjeto(Objeto objeto);
     protected abstract void colisionJugador(Jugador jugador);
     

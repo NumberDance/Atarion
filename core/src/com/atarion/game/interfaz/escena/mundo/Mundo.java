@@ -6,7 +6,7 @@ import com.atarion.game.interfaz.escena.Escena;
 public class Mundo extends Escena {
 
     public Mundo() {
-        this.humano = new Templar(true, false);
+        this.humano = new Templar(true,false);
         this.batalla = false;
         
         this.cameraWidth -= 200;

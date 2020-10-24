@@ -1,14 +1,14 @@
 package com.atarion.game.entidad.jugador.humano;
 
 import com.atarion.game.entidad.habilidad.Habilidad;
-import com.atarion.game.entidad.objeto.Objeto;
 import com.atarion.game.entidad.jugador.Direccion;
+import com.atarion.game.entidad.objeto.Objeto;
 import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.objeto.recuperables.memoria.Secuencia;
-import com.atarion.game.entidad.objeto.recuperables.sentido.Sentido;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 public abstract class Humano extends Jugador {
 
-    private boolean tu = false;
+    protected boolean tu;
     protected Habilidad habilidad = null;
     protected ClaseHumano clase = null;
     protected Secuencia secuencia;
@@ -25,8 +25,8 @@ public abstract class Humano extends Jugador {
     public Humano(boolean tu, boolean batalla) {
         super(batalla);
 
-        this.y = 30;
         this.tu = tu;
+        this.y = 30;
     }
 
     @Override
@@ -47,8 +47,10 @@ public abstract class Humano extends Jugador {
     public void jugar(Camera camara) {
         if (tu) {
             super.jugar(camara);
-            this.moverTu(camara);
-            this.controlBordesTu(camara);
+            
+            this.controlEspecial();
+            this.controlMovimientoTu(camara);
+            this.controlBordesTu();
         }
     }
 
@@ -56,10 +58,63 @@ public abstract class Humano extends Jugador {
     protected final void controlMovimiento() {
     }
 
-    private void moverTu(Camera camara) {
+    @Override
+    protected void controlEspecial() {
+        cronometro += Gdx.graphics.getDeltaTime();
+        if (cronometro >= 1.0f) {
+            if (activado) {
+                if (activo == 0) {
+                    this.desactivarEspecial();
+                    this.activo = this.tiempoactivo;
+                    Gdx.app.log("INFO", "El modulo se agoto.");
+                    activado = false;
+                } else if (parado) {
+                    this.desactivarEspecial();
+
+                    this.parado = false;
+                    activado = false;
+                } else {
+                    activo--;
+                    Gdx.app.log("INFO", "El modulo se agotara en " + tiempoactivo + " segundos.");
+                }
+            }
+
+            if (recarga > 0) {
+                recarga--;
+                Gdx.app.log("INFO", "El modulo estara disponible en " + recarga + " segundos.");
+            } else {
+                Gdx.app.log("INFO", "El modulo ya esta disponible.");
+            }
+
+            cronometro = 0.0f;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && !controlado) {
+            if (recarga == 0) {
+                activarEspecial();
+
+                recarga = tiemporecarga;
+                activado = true;
+            }
+        }
+    }
+
+    @Override
+    protected void controlBordes() {
+    }
+
+    @Override
+    public void colisionObjeto(Objeto objeto) {
+    }
+
+    @Override
+    public void colisionJugador(Jugador jugador) {
+    }
+
+    private void controlMovimientoTu(Camera camara) {
         camara.position.x = this.x;
         camara.position.y = this.y;
-                
+
         float movimiento = 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
@@ -163,52 +218,7 @@ public abstract class Humano extends Jugador {
         }
     }
 
-    @Override
-    protected void controlEspecial() {
-        cronometro += Gdx.graphics.getDeltaTime();
-        if (cronometro >= 1.0f) {
-            if (activado) {
-                if (activo == 0) {
-                    this.desactivarEspecial();
-                    this.activo = this.tiempoactivo;
-                    Gdx.app.log("INFO", "El modulo se agoto.");
-                    activado = false;
-                } else if (parado) {
-                    this.desactivarEspecial();
-
-                    this.parado = false;
-                    activado = false;
-                } else {
-                    activo--;
-                    Gdx.app.log("INFO", "El modulo se agotara en " + tiempoactivo + " segundos.");
-                }
-            }
-
-            if (recarga > 0) {
-                recarga--;
-                Gdx.app.log("INFO", "El modulo estara disponible en " + recarga + " segundos.");
-            } else {
-                Gdx.app.log("INFO", "El modulo ya esta disponible.");
-            }
-
-            cronometro = 0.0f;
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && !controlado) {
-            if (recarga == 0) {
-                activarEspecial();
-
-                recarga = tiemporecarga;
-                activado = true;
-            }
-        }
-    }
-
-    @Override
-    protected void controlBordes() {
-    }
-
-    private void controlBordesTu(Camera camara) {
+    private void controlBordesTu() {
         if (this.y < 0) {
             this.y = 0;
         }
@@ -226,15 +236,11 @@ public abstract class Humano extends Jugador {
         }
     }
 
-    @Override
-    public void colisionObjeto(Objeto objeto) {
-    }
+    private void conversarTu(Jugador jugador) {
+        this.texto = new BitmapFont();
+        this.texto.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+        this.texto.getData().setScale(2f);
 
-    @Override
-    public void colisionJugador(Jugador jugador) {
-        vida -= jugador.getFuerza();
-
-        Gdx.app.log("COLISION", jugador.getIdentificador() + " te ha hecho " + jugador.getFuerza() + " puntos de daño.");
-        Gdx.app.log("COLISION", "Te quedan " + vida + " vidas.");
+        this.texto.draw(genesis, jugador.getConversacion(), x, y);
     }
 }

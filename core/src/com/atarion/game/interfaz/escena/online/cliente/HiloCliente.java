@@ -25,8 +25,8 @@ public class HiloCliente extends Thread
         this.cliente = escena.getCliente();
         this.lector = escena.getLector();
             
-        this.jugador = escena.getHumano();
-        this.jugador2 = escena.getHumano2();
+        this.jugador = escena.getTu();
+        this.jugador2 = escena.getHumano();
         this.escena = escena;
             
         this.conversor.setTypeName(null);
@@ -49,7 +49,8 @@ public class HiloCliente extends Thread
                 estados.concatenar(jugador2.enviarEstado(),"estados"); 
                 jugador.setInteraccion(false);
             }
-            Gdx.app.log("INFO: El cliente envia: ",estados.getMensaje());
+            //Ojo: causa problemas de memoria en partidas largas
+            //Gdx.app.log("INFO: El cliente envia: ",estados.getMensaje());
             
             estados.enviar(cliente.getOutputStream());
             escena.actualizarPartida(this.lector.readLine());
