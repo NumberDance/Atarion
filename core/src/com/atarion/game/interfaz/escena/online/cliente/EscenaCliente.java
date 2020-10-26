@@ -1,6 +1,7 @@
 package com.atarion.game.interfaz.escena.online.cliente;
 
 import com.atarion.game.Atarion;
+import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.atarion.game.entidad.jugador.humano.Humano;
 import com.atarion.game.interfaz.escena.Escena;
@@ -10,6 +11,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class EscenaCliente extends Escena {
 
@@ -29,7 +34,7 @@ public class EscenaCliente extends Escena {
 
     @Override
     public void entrar(ClaseHumano clase) {
-        this.tu = this.asignarClase(tu, clase, true);
+        this.tu = this.asignarClase(clase, true);
         this.tu.setIdentificador(new MensajeJSON().recibir(lector).getJson().getString("identificador"));
 
         try {
@@ -41,31 +46,29 @@ public class EscenaCliente extends Escena {
             this.iniciales = new MensajeJSON().recibir(lector);
             Gdx.app.log("INFO", this.iniciales.getMensaje());
 
-            this.iniciales.getJson().getJSONArray("iniciales").forEach(
-                    inicial
-                    -> {
-                MensajeJSON valor = new MensajeJSON().recibir(inicial.toString());
+            this.iniciales.getJson().getJSONArray("iniciales").forEach(inicial -> {
+                MensajeJSON valorEstadoInicial = new MensajeJSON().recibir(inicial.toString());
 
-                if (!valor.getJson().getString("identificador").equals(this.tu.getIdentificador())) {
-                    ClaseHumano clase2 = ClaseHumano.valueOf(valor.getJson().getString("tipo"));
-                    humano = this.asignarClase(this.humano, clase2, false);
-
-                    String identificador2 = valor.getJson().getString("identificador");
-                    humano.setIdentificador(identificador2);
+                if (!valorEstadoInicial.getJson().getString("identificador").equals(this.tu.getIdentificador())) {
+                    Humano enemigo = this.asignarClase(ClaseHumano.valueOf(valorEstadoInicial.getJson().getString("tipo")),
+                            false);
+                    enemigo.setIdentificador(valorEstadoInicial.getJson().getString("identificador"));
+                    
+                    this.humanosEnemigos.add(enemigo);
                 }
-            }
-            );
+            });
         } catch (IOException ex) {
         }
 
-        if (this.humano != null) {
-            this.tu.agregarEnemigo(this.humano);
-            this.humano.agregarEnemigo(this.tu);
-        }
-        if (this.maquina != null) {
+        this.humanosEnemigos.stream().forEach(humano -> {
+            this.tu.agregarEnemigo(humano);
+            humano.agregarEnemigo(this.tu);
+        });
+
+        this.maquinasEnemigas.stream().forEach(maquina -> {
             tu.agregarEnemigo(maquina);
             maquina.agregarEnemigo(tu);
-        }
+        });
 
         Atarion.getInstance().setScreen(this);
     }
@@ -87,18 +90,38 @@ public class EscenaCliente extends Escena {
         mensaje.getJson().getJSONArray("estados").forEach(
                 elemento
                 -> {
-            MensajeJSON valor = new MensajeJSON().recibir(elemento.toString());
-            
-            //Ojo: causa problemas de memoria en partidas largas
-            //Gdx.app.log("INFO", "El server responde: " + valor.getMensaje());
+            MensajeJSON valorEstado = new MensajeJSON().recibir(elemento.toString());
 
-            if (valor.getJson().getString("identificador").equals(this.tu.getIdentificador())) {
-                tu.recibirEstado(valor.getMensaje());
-            } else if (valor.getJson().getString("identificador").equals(this.humano.getIdentificador())) {
-                humano.recibirEstado(valor.getMensaje());
+            //Ojo: causa problemas de memoria en partidas largas
+            //Gdx.app.log("INFO", "El server responde: " + valorEstado.getMensaje());
+            if (valorEstado.getJson().getString("identificador").equals(this.tu.getIdentificador())) {
+                tu.recibirEstado(valorEstado.getMensaje());
+            } else {
+                this.recibirEstadoSiMatch(this.humanosEnemigos.stream()
+                        .map(humano -> (Jugador) humano), valorEstado);
+                this.recibirEstadoSiMatch(this.humanosAliados.stream()
+                        .map(humano -> (Jugador) humano), valorEstado);
+
+                this.recibirEstadoSiMatch(this.maquinasEnemigas.stream()
+                        .map(maquina -> (Jugador) maquina), valorEstado);
+                this.recibirEstadoSiMatch(this.maquinasAliadas.stream()
+                        .map(maquina -> (Jugador) maquina), valorEstado);
             }
         }
         );
+    }
+
+    private void recibirEstadoSiMatch(Stream<Jugador> jugadores, MensajeJSON valorEstado) {
+        List<Jugador> matches = jugadores
+                .filter(jugador -> valorEstado.getJson().getString("identificador")
+                .equals(jugador.getIdentificador()))
+                .collect(Collectors.toList());
+
+        Gdx.app.log("matches:", Arrays.toString(matches.toArray()));
+
+        if (!matches.isEmpty()) {
+            matches.get(0).recibirEstado(valorEstado.getMensaje());
+        }
     }
 
     @Override
@@ -120,9 +143,5 @@ public class EscenaCliente extends Escena {
 
     public BufferedReader getLector() {
         return lector;
-    }
-
-    public Humano getHumano() {
-        return humano;
     }
 }

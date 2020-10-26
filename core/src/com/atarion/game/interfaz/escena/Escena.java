@@ -20,32 +20,48 @@ import com.atarion.game.entidad.jugador.maquina.Maquina;
 import com.atarion.game.interfaz.Interfaz;
 import com.atarion.game.interfaz.menu.MenuDerrota;
 import com.atarion.game.interfaz.menu.MenuVictoria;
+import java.util.LinkedList;
+import java.util.List;
+import lombok.Getter;
 
+@Getter
 public abstract class Escena extends Interfaz {
 
-    protected Humano tu = null, humano = null;
-    protected Maquina maquina = null;
-    protected boolean cmaquinatu = false, 
-            ctuhumano = false, 
-            cmaquinahumano = false;
+    protected Humano tu = null;
+
+    protected List<Humano> humanosAliados = new LinkedList<>(),
+            humanosEnemigos = new LinkedList<>();
+
+    protected List<Maquina> maquinasAliadas = new LinkedList<>(),
+            maquinasEnemigas = new LinkedList<>();
+
+    protected boolean cmaquina = false, chumano = false;
+
     protected boolean batalla;
 
     public void entrar(ClaseHumano clase) {
-        this.tu = this.asignarClase(this.tu, clase, true);
+        this.tu = this.asignarClase(clase, true);
 
-        if (this.humano != null) {
-            this.tu.agregarEnemigo(this.humano);
-            this.humano.agregarEnemigo(this.tu);
-        }
-        if (this.maquina != null) {
-            tu.agregarEnemigo(maquina);
-            maquina.agregarEnemigo(tu);
-        }
+        humanosEnemigos.forEach(humano -> {
+            if (humano != null) {
+                this.tu.agregarEnemigo(humano);
+                humano.agregarEnemigo(this.tu);
+            }
+        });
+
+        maquinasEnemigas.forEach(maquina -> {
+            if (maquina != null) {
+                tu.agregarEnemigo(maquina);
+                maquina.agregarEnemigo(tu);
+            }
+        });
 
         Atarion.getInstance().setScreen(this);
     }
 
-    protected Humano asignarClase(Humano jugador, ClaseHumano clase, boolean tu) {
+    protected Humano asignarClase(ClaseHumano clase, boolean tu) {
+        Humano jugador = null;
+        
         switch (clase) {
             case ANARCHIST:
                 jugador = new Anarchist(tu, this.batalla);
@@ -100,12 +116,11 @@ public abstract class Escena extends Interfaz {
 
         this.tu.setGenesis(genesis);
 
-        if (this.humano != null) {
-            this.humano.setGenesis(genesis);
-        }
-        if (this.maquina != null) {
-            this.maquina.setGenesis(genesis);
-        }
+        this.humanosEnemigos.forEach(humano -> humano.setGenesis(genesis));
+        this.humanosAliados.forEach(humano -> humano.setGenesis(genesis));
+
+        this.maquinasEnemigas.forEach(maquina -> maquina.setGenesis(genesis));
+        this.maquinasAliadas.forEach(maquina -> maquina.setGenesis(genesis));
     }
 
     @Override
@@ -115,73 +130,95 @@ public abstract class Escena extends Interfaz {
         genesis.begin();
 
         this.tu.actualizarEstado();
-        if (this.humano != null) {
-            this.humano.actualizarEstado();
-        }
-        if (maquina != null) {
-            maquina.actualizarEstado();
-        }
+
+        this.humanosEnemigos.forEach(humano -> humano.actualizarEstado());
+        this.humanosAliados.forEach(humano -> humano.actualizarEstado());
+
+        this.maquinasEnemigas.forEach(maquina -> maquina.actualizarEstado());
+        this.maquinasAliadas.forEach(maquina -> maquina.actualizarEstado());
 
         genesis.end();
 
         this.tu.jugar(camara);
-        if (this.humano != null) {
-            this.humano.jugar(camara);
-        }
-        if (maquina != null) {
-            maquina.jugar(camara);
-        }
+
+        this.humanosEnemigos.forEach(humano -> humano.jugar(camara));
+        this.humanosAliados.forEach(humano -> humano.jugar(camara));
+
+        this.maquinasEnemigas.forEach(maquina -> maquina.jugar(camara));
+        this.maquinasAliadas.forEach(maquina -> maquina.jugar(camara));
 
         this.controlColisiones();
         this.controlResultado();
     }
 
     private void controlColisiones() {
-        if (maquina != null) {
+        this.maquinasEnemigas.forEach(maquina -> {
             if (maquina.overlaps(this.tu)) {
-                if (!cmaquinatu) {
-                    this.tu.colisionJugador(this.maquina);
+                if (!cmaquina) {
+                    this.tu.colisionJugador(maquina);
                     maquina.colisionJugador(this.tu);
 
-                    cmaquinatu = true;
+                    cmaquina = true;
                 }
             } else {
-                cmaquinatu = false;
+                cmaquina = false;
             }
-        }
+        });
 
-        if (this.humano != null) {
+        this.maquinasAliadas.forEach(maquina -> {
+            if (maquina.overlaps(this.tu)) {
+                if (!cmaquina) {
+                    this.tu.colisionJugador(maquina);
+                    maquina.colisionJugador(this.tu);
+
+                    cmaquina = true;
+                }
+            } else {
+                cmaquina = false;
+            }
+        });
+
+        this.humanosEnemigos.forEach(humano -> {
             if (humano.overlaps(tu)) {
-                if (!this.ctuhumano) {
+                if (!this.chumano) {
                     tu.colisionJugador(humano);
                     humano.colisionJugador(tu);
 
-                    this.ctuhumano = true;
+                    this.chumano = true;
                 }
             } else {
-                this.ctuhumano = false;
+                this.chumano = false;
             }
-        }
+        });
 
-        if (humano != null && maquina != null) {
-            if (humano.overlaps(maquina)) {
-                if (!this.cmaquinahumano) {
-                    maquina.colisionJugador(humano);
-                    humano.colisionJugador(maquina);
+        this.humanosAliados.forEach(humano -> {
+            if (humano.overlaps(tu)) {
+                if (!this.chumano) {
+                    tu.colisionJugador(humano);
+                    humano.colisionJugador(tu);
 
-                    this.cmaquinahumano = true;
+                    this.chumano = true;
                 }
             } else {
-                this.cmaquinahumano = false;
+                this.chumano = false;
             }
-        }
+        });
     }
 
     private void controlResultado() {
-        if (tu.getVida() <= 0) {
-            new MenuDerrota().mostrar();
-        } else if (maquina != null && maquina.getVida() <= 0) {
-            new MenuVictoria().mostrar();
+        if (this.batalla) {
+            boolean derrota = tu.getVida() <= 0,
+                    victoria = maquinasEnemigas.stream()
+                            .map(maquina -> maquina.getVida())
+                            .reduce(Integer::sum)
+                            .get() <= 0;
+
+            if (derrota) {
+                new MenuDerrota().mostrar();
+            } else if (victoria) {
+                new MenuVictoria().mostrar();
+            } else {
+            }
         }
     }
 
@@ -189,12 +226,10 @@ public abstract class Escena extends Interfaz {
     public void dispose() {
         tu.dispose();
 
-        if (this.maquina != null) {
-            this.maquina.dispose();
-        }
+        this.humanosEnemigos.forEach(humano -> humano.dispose());
+        this.humanosAliados.forEach(humano -> humano.dispose());
 
-        if (this.humano != null) {
-            this.humano.dispose();
-        }
+        this.maquinasEnemigas.forEach(maquina -> maquina.dispose());
+        this.maquinasAliadas.forEach(maquina -> maquina.dispose());
     }
 }

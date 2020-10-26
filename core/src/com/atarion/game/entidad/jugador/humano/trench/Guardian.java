@@ -30,10 +30,10 @@ public class Guardian extends Trench
     @Override
     public void activarEspecial() 
     {
-        if(enemigo.isActivado())
+        if(enemigos.get(0).isActivado())
         { 
-            enemigo.pararEspecial(); 
-            enemigo.setInteraccion(true);
+            enemigos.get(0).pararEspecial(); 
+            enemigos.get(0).setInteraccion(true);
         }
         else
         {

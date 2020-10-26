@@ -2,13 +2,12 @@ package com.atarion.game.entidad.jugador.humano;
 
 import com.atarion.game.entidad.habilidad.Habilidad;
 import com.atarion.game.entidad.jugador.Direccion;
-import com.atarion.game.entidad.objeto.Objeto;
 import com.atarion.game.entidad.jugador.Jugador;
+import com.atarion.game.entidad.objeto.Objeto;
 import com.atarion.game.entidad.objeto.recuperables.memoria.Secuencia;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -40,22 +39,20 @@ public abstract class Humano extends Jugador {
 
     @Override
     public void agregarEnemigo(Jugador jugador) {
-        enemigo = jugador;
+        this.enemigos.add(jugador);
     }
 
+    // Solo se hacen cosas con el jugador activo de cada cliente, el resto
+    // actualiza estados
     @Override
     public void jugar(Camera camara) {
         if (tu) {
             super.jugar(camara);
-            
-            this.controlEspecial();
-            this.controlMovimientoTu(camara);
-            this.controlBordesTu();
-        }
-    }
 
-    @Override
-    protected final void controlMovimiento() {
+            this.controlMovimientoTu(camara);
+            this.controlEspecial();
+            this.controlBordes();
+        }
     }
 
     @Override
@@ -66,7 +63,8 @@ public abstract class Humano extends Jugador {
                 if (activo == 0) {
                     this.desactivarEspecial();
                     this.activo = this.tiempoactivo;
-                    Gdx.app.log("INFO", "El modulo se agoto.");
+                    //Ojo: causa problemas de memoria en partidas largas
+                    //Gdx.app.log("INFO", "El modulo se agoto.");
                     activado = false;
                 } else if (parado) {
                     this.desactivarEspecial();
@@ -75,15 +73,18 @@ public abstract class Humano extends Jugador {
                     activado = false;
                 } else {
                     activo--;
-                    Gdx.app.log("INFO", "El modulo se agotara en " + tiempoactivo + " segundos.");
+                    //Ojo: causa problemas de memoria en partidas largas
+                    //Gdx.app.log("INFO", "El modulo se agotara en " + tiempoactivo + " segundos.");
                 }
             }
 
             if (recarga > 0) {
                 recarga--;
-                Gdx.app.log("INFO", "El modulo estara disponible en " + recarga + " segundos.");
+                //Ojo: causa problemas de memoria en partidas largas
+                //Gdx.app.log("INFO", "El modulo estara disponible en " + recarga + " segundos.");
             } else {
-                Gdx.app.log("INFO", "El modulo ya esta disponible.");
+                //Ojo: causa problemas de memoria en partidas largas
+                //Gdx.app.log("INFO", "El modulo ya esta disponible.");
             }
 
             cronometro = 0.0f;
@@ -97,18 +98,6 @@ public abstract class Humano extends Jugador {
                 activado = true;
             }
         }
-    }
-
-    @Override
-    protected void controlBordes() {
-    }
-
-    @Override
-    public void colisionObjeto(Objeto objeto) {
-    }
-
-    @Override
-    public void colisionJugador(Jugador jugador) {
     }
 
     private void controlMovimientoTu(Camera camara) {
@@ -218,7 +207,8 @@ public abstract class Humano extends Jugador {
         }
     }
 
-    private void controlBordesTu() {
+    @Override
+    protected void controlBordes() {
         if (this.y < 0) {
             this.y = 0;
         }
@@ -236,11 +226,26 @@ public abstract class Humano extends Jugador {
         }
     }
 
-    private void conversarTu(Jugador jugador) {
+    /*private void conversar(Jugador jugador) {
         this.texto = new BitmapFont();
         this.texto.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         this.texto.getData().setScale(2f);
 
         this.texto.draw(genesis, jugador.getConversacion(), x, y);
+    }*/
+
+    // No se hace nada con el control de movimiento y colisiones si 
+    // no se trata del jugador humano activo, el resto de jugadores del online
+    // se encargan de actualizar sus estados a través del hilo cliente.
+    @Override
+    protected void controlMovimiento() {
+    }
+
+    @Override
+    public void colisionJugador(Jugador jugador) {
+    }
+
+    @Override
+    public void colisionObjeto(Objeto objeto) {
     }
 }

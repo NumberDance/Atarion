@@ -26,17 +26,17 @@ public class Traveler extends Wheel
     @Override
     public void activarEspecial() 
     {
-        float xenemigo = enemigo.getX();
-        float yenemigo = enemigo.getY();
+        float xenemigo = enemigos.get(0).getX();
+        float yenemigo = enemigos.get(0).getY();
         
-        enemigo.setX(this.x);
-        enemigo.setY(this.y);
+        enemigos.get(0).setX(this.x);
+        enemigos.get(0).setY(this.y);
         
         this.x = xenemigo;
         this.y = yenemigo;
         
         this.habilidad = new HabilidadTraveler(this.genesis,this);
-        enemigo.setInteraccion(true);
+        enemigos.get(0).setInteraccion(true);
     }
     @Override
     public void desactivarEspecial() 

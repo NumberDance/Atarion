@@ -24,7 +24,7 @@ public class EscenaClaudius extends Escena
     @Override
     public void entrar(ClaseHumano clase)
     {
-        this.maquina = new Claudius(this.batalla);
+        this.maquinasEnemigas.add(new Claudius(this.batalla));
         
         this.escombros = new LinkedList<>();
         this.colisiones = new LinkedList<>();
@@ -65,7 +65,7 @@ public class EscenaClaudius extends Escena
                 else
                 {
                     escombro.caer();
-                    ((Claudius)maquina).esquivar(escombros);
+                    ((Claudius)this.maquinasEnemigas.get(0)).esquivar(escombros);
                 }
             }
             
@@ -73,11 +73,11 @@ public class EscenaClaudius extends Escena
             {
                 Escombro escombro = escombros.get(m);
                 
-                if(escombro.overlaps(humano))
+                if(escombro.overlaps(tu))
                 {
                     if(colisiones.get(m).equals(Boolean.FALSE))
                     {
-                        humano.colisionObjeto(escombro);
+                        tu.colisionObjeto(escombro);
                         colisiones.set(m,Boolean.TRUE);
                     }
                 }

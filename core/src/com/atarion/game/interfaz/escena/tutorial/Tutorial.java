@@ -33,7 +33,7 @@ public abstract class Tutorial extends Escena
     @Override
     public void entrar(ClaseHumano clase)
     {
-        maquina = new Dummy(true);
+        this.maquinasEnemigas.add(new Dummy(true));
         super.entrar(clase);
     }
     
