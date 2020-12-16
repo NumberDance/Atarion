@@ -2,6 +2,7 @@ package com.atarion.game.entidad.jugador;
 
 import com.atarion.game.entidad.Entidad;
 import com.atarion.game.entidad.objeto.Objeto;
+import com.atarion.game.interfaz.escena.Escena;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -32,7 +33,7 @@ public abstract class Jugador extends Entidad {
     protected boolean parado = false, controlado = false, invertido = false;
 
     protected BitmapFont texto;
-    protected String conversacion = "";
+    protected List<String> conversacion = new LinkedList<>();
 
     protected Jugador(boolean batalla) {
         this.x = 800 / 2 - 64 / 2;
@@ -99,11 +100,11 @@ public abstract class Jugador extends Entidad {
 
     public abstract void agregarEnemigo(Jugador jugador);
 
-    protected void jugar(Camera camara) {
+    protected void jugar(Camera camara, Escena escena) {
         if (!controlado) {
             this.controlMovimiento();
             this.controlEspecial();
-            this.controlBordes();
+            this.controlBordes(escena);
         }
     }
 
@@ -113,7 +114,7 @@ public abstract class Jugador extends Entidad {
 
     protected abstract void controlMovimiento();
 
-    protected abstract void controlBordes();
+    protected abstract void controlBordes(Escena escena);
 
     protected abstract void controlEspecial();
 

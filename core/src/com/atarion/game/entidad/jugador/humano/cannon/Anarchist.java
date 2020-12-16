@@ -3,6 +3,7 @@ package com.atarion.game.entidad.jugador.humano.cannon;
 import com.atarion.game.entidad.jugador.Direccion;
 import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.jugador.humano.ClaseHumano;
+import com.atarion.game.interfaz.escena.Escena;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -36,20 +37,20 @@ public class Anarchist extends Cannon {
     }
     
     @Override
-    public void jugar(Camera camara) {
+    public void jugar(Camera camara, Escena escena) {
         if (controlado == null) {
-            super.jugar(camara);
+            super.jugar(camara, escena);
         } else {
-            this.controlarJugador();
+            this.controlarJugador(escena);
             this.enemigos.forEach(enemigo -> {
                 enemigo.setInteraccion(true);
             });
         }
     }
     
-    private void controlarJugador() {
+    private void controlarJugador(Escena escena) {
         this.controlEspecial();
-        this.controlBordes();
+        this.controlBordes(escena);
         
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             this.enemigos.forEach(enemigo -> {

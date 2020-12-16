@@ -3,6 +3,7 @@ package com.atarion.game.entidad.jugador.maquina;
 import com.atarion.game.entidad.objeto.Escombro;
 import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.objeto.Laser;
+import com.atarion.game.interfaz.escena.Escena;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -76,8 +77,8 @@ public class Claudius extends Maquina {
     }
 
     @Override
-    public void jugar(Camera camara) {
-        super.jugar(camara);
+    public void jugar(Camera camara, Escena escena) {
+        super.jugar(camara, escena);
 
         if (laser != null) {
             this.enemigos.stream().forEach(enemigo -> {
@@ -161,20 +162,20 @@ public class Claudius extends Maquina {
     }
 
     @Override
-    protected void controlBordes() {
+    protected void controlBordes(Escena escena) {
         if (this.y < 0) {
-            this.y = 800 - 20;
+            this.y = escena.getTotalHeight() - 20;
         }
 
-        if (this.y > 800 - 20) {
+        if (this.y > escena.getTotalHeight() - 20) {
             this.y = 0;
         }
 
         if (this.x < 0) {
-            this.x = 1000 - 80;
+            this.x = escena.getTotalWidth() - 80;
         }
 
-        if (this.x > 1000 - 80) {
+        if (this.x > escena.getTotalWidth() - 80) {
             this.x = 0;
         }
     }

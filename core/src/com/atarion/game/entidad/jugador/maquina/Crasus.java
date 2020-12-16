@@ -4,6 +4,7 @@ import com.atarion.game.entidad.Entidad;
 import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.jugador.humano.Humano;
 import com.atarion.game.entidad.objeto.Bomba;
+import com.atarion.game.interfaz.escena.Escena;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -55,8 +56,8 @@ public class Crasus extends Maquina {
     }
 
     @Override
-    public void jugar(Camera camara) {
-        super.jugar(camara);
+    public void jugar(Camera camara, Escena escena) {
+        super.jugar(camara, escena);
 
         if (!bombas.isEmpty()) {
             temporizador += Gdx.graphics.getDeltaTime();
@@ -136,20 +137,20 @@ public class Crasus extends Maquina {
     }
 
     @Override
-    public void controlBordes() {
+    public void controlBordes(Escena escena) {
         if (this.y < 0) {
-            this.y = 800 - 150;
+            this.y = escena.getTotalHeight() - 150;
             comprobarColision();
             decision = 5;
-        } else if (this.y > 800 - 100) {
+        } else if (this.y > escena.getTotalHeight() - 100) {
             this.y = 0 + 150;
             comprobarColision();
             decision = 7;
         } else if (this.x < 0) {
-            this.x = 1000 - 150;
+            this.x = escena.getTotalWidth() - 150;
             comprobarColision();
             decision = 8;
-        } else if (this.x > 1000 - 100) {
+        } else if (this.x > escena.getTotalWidth() - 100) {
             this.x = 0 + 150;
             comprobarColision();
             decision = 6;

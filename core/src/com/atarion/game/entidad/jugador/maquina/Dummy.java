@@ -2,6 +2,7 @@ package com.atarion.game.entidad.jugador.maquina;
 
 
 import com.atarion.game.entidad.jugador.Jugador;
+import com.atarion.game.interfaz.escena.Escena;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -26,15 +27,15 @@ public class Dummy extends Maquina
     
 
     @Override
-    protected void controlBordes()
+    protected void controlBordes(Escena escena)
     {
         if(this.y < 0) 
-        { this.y = 800 - 150; } 
-        else if(this.y > 800 - 100)
+        { this.y = escena.getTotalHeight() - 150; } 
+        else if(this.y > escena.getTotalHeight() - 100)
         { this.y = 0 + 150; }
         else if(this.x < 0)
-        { this.x = 1000 - 150; }
-        else if(this.x > 1000 - 100) 
+        { this.x = escena.getTotalWidth() - 150; }
+        else if(this.x > escena.getTotalWidth() - 100) 
         { this.x = 0 + 150; }
     }
 

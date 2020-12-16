@@ -23,8 +23,10 @@ import com.atarion.game.interfaz.menu.MenuVictoria;
 import java.util.LinkedList;
 import java.util.List;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public abstract class Escena extends Interfaz {
 
     protected Humano tu = null;
@@ -139,13 +141,13 @@ public abstract class Escena extends Interfaz {
 
         genesis.end();
 
-        this.tu.jugar(camara);
+        this.tu.jugar(camara, this);
 
-        this.humanosEnemigos.forEach(humano -> humano.jugar(camara));
-        this.humanosAliados.forEach(humano -> humano.jugar(camara));
+        this.humanosEnemigos.forEach(humano -> humano.jugar(camara, this));
+        this.humanosAliados.forEach(humano -> humano.jugar(camara, this));
 
-        this.maquinasEnemigas.forEach(maquina -> maquina.jugar(camara));
-        this.maquinasAliadas.forEach(maquina -> maquina.jugar(camara));
+        this.maquinasEnemigas.forEach(maquina -> maquina.jugar(camara, this));
+        this.maquinasAliadas.forEach(maquina -> maquina.jugar(camara, this));
 
         this.controlColisiones();
         this.controlResultado();

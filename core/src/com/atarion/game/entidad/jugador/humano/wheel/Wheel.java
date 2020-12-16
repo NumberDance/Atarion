@@ -2,6 +2,7 @@ package com.atarion.game.entidad.jugador.humano.wheel;
 
 
 import com.atarion.game.entidad.jugador.humano.Humano;
+import com.atarion.game.interfaz.escena.Escena;
 import com.badlogic.gdx.Gdx;
 
 
@@ -17,18 +18,18 @@ public abstract class Wheel extends Humano
 
     
     @Override
-    protected void controlBordes()
+    protected void controlBordes(Escena escena)
     {
         if(this.y < 0) 
-        { this.y = Gdx.graphics.getHeight() - 20; }
+        { this.y = escena.getTotalHeight() - 20; }
         
-        if(this.y > Gdx.graphics.getHeight() - 20)
+        if(this.y > escena.getTotalHeight() - 20)
         { this.y = 0; }
         
         if(this.x < 0)
-        { this.x = Gdx.graphics.getWidth() - 80; }
+        { this.x = escena.getTotalWidth() - 80; }
         
-        if(this.x > Gdx.graphics.getWidth() - 80) 
+        if(this.x > escena.getTotalWidth() - 80) 
         { this.x = 0; }
     }
     

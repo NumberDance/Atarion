@@ -1,199 +1,180 @@
 package com.atarion.game.entidad.jugador.maquina;
 
-
 import com.atarion.game.entidad.objeto.Objeto;
 import com.atarion.game.entidad.jugador.Direccion;
 import com.atarion.game.entidad.jugador.Jugador;
+import com.atarion.game.interfaz.escena.Escena;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 
+public abstract class Maquina extends Jugador {
 
-public abstract class Maquina extends Jugador
-{
     protected int decision = 0, fase = 1;
-    
-    
-    public Maquina(boolean batalla) 
-    {
+
+    public Maquina(boolean batalla) {
         super(batalla);
         this.y = 600;
         velocidad = 1.5f;
         this.tiemporecarga = 20;
-        
+
         this.width = 100;
         this.height = 100;
     }
-    
-    
+
     @Override
-    public void jugar(Camera camara) 
-    {  
-        super.jugar(camara);
-        
-        if(!controlado)
-        { this.controlMovimiento();}
+    public void jugar(Camera camara, Escena escena) {
+        if (this.batalla) {
+            super.jugar(camara,escena);
+
+            if (!controlado) {
+                this.controlMovimiento();
+            }
+        }
     }
-    
-    
+
     @Override
-    protected final void controlMovimiento()
-    {
-        switch(decision)
-        {
+    protected final void controlMovimiento() {
+        switch (decision) {
             case 0:
                 this.direccion = Direccion.PARADO;
-            break;
+                break;
             case 1:
                 this.x += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
                 this.direccion = Direccion.DERECHA;
-            break;
+                break;
             case 2:
                 this.x -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
                 this.direccion = Direccion.IZQUIERDA;
-            break;
+                break;
             case 3:
                 this.y += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
                 this.direccion = Direccion.ARRIBA;
-            break;
+                break;
             case 4:
                 this.y -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
                 this.direccion = Direccion.ABAJO;
-            break;
+                break;
             case 5:
                 this.x += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
                 this.y += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
                 this.direccion = Direccion.LATERAL_DERECHO_ARRIBA;
-            break;
+                break;
             case 6:
                 this.x += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
                 this.y -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
                 this.direccion = Direccion.LATERAL_DERECHO_ABAJO;
-            break;
+                break;
             case 7:
                 this.x -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
                 this.y += 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
                 this.direccion = Direccion.LATERAL_IZQUIERDO_ARRIBA;
-            break;
+                break;
             case 8:
                 this.x -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
                 this.y -= 200 * Gdx.graphics.getDeltaTime() * this.velocidad;
                 this.direccion = Direccion.LATERAL_IZQUIERDO_ABAJO;
-            break;
+                break;
         }
     }
+
     @Override
-    protected abstract void controlBordes();
+    protected abstract void controlBordes(Escena escena);
+
     @Override
-    protected void controlEspecial()
-    {
+    protected void controlEspecial() {
         cronometro += Gdx.graphics.getDeltaTime();
-        if(cronometro >= 1.0f)
-        {
-            if(activado)
-            {
-                if(activo == 0)
-                {
-                    this.desactivarEspecial();            
+        if (cronometro >= 1.0f) {
+            if (activado) {
+                if (activo == 0) {
+                    this.desactivarEspecial();
                     this.activo = this.tiempoactivo;
                     activado = false;
-                }
-                else if(parado)
-                {
+                } else if (parado) {
                     this.desactivarEspecial();
                     this.parado = false;
                     activado = false;
+                } else {
+                    activo--;
                 }
-                else
-                { activo--; } 
             }
-            
-            if(recarga > 0)
-            { recarga--; }
-            else if(recarga == 0 && !controlado)
-            {
+
+            if (recarga > 0) {
+                recarga--;
+            } else if (recarga == 0 && !controlado) {
                 activarEspecial();
                 recarga = tiemporecarga;
                 activado = true;
             }
-            
+
             cronometro = 0.0f;
         }
     }
-    
-    
+
     @Override
-    public void colisionObjeto(Objeto objeto) 
-    {}
+    public void colisionObjeto(Objeto objeto) {
+    }
+
     @Override
-    public void colisionJugador(Jugador objeto) 
-    {}
-    
+    public void colisionJugador(Jugador objeto) {
+    }
+
     @Override
-    public MensajeJSON enviarEstado()
-    { return super.enviarEstado().escribirAtributo("decision","" + this.decision); }
-    
+    public MensajeJSON enviarEstado() {
+        return super.enviarEstado().escribirAtributo("decision", "" + this.decision);
+    }
+
     @Override
-    public void setVida(int vida)
-    {
+    public void setVida(int vida) {
         super.setVida(vida);
-        
-        if(vida == (vidainicial * 9 / 10))
-        {
+
+        if (vida == (vidainicial * 9 / 10)) {
             this.fase = 2;
-            this.faseDos(); 
-        }
-        else if(vida == (vidainicial * 8 / 10))
-        { 
+            this.faseDos();
+        } else if (vida == (vidainicial * 8 / 10)) {
             this.fase = 3;
-            this.faseTres(); 
-        }
-        else if(vida == (vidainicial * 7 / 10))
-        {
+            this.faseTres();
+        } else if (vida == (vidainicial * 7 / 10)) {
             this.fase = 4;
-            this.faseCuatro(); 
-        }
-        else if(vida == (vidainicial * 6 / 10))
-        { 
+            this.faseCuatro();
+        } else if (vida == (vidainicial * 6 / 10)) {
             this.fase = 5;
-            this.faseCinco(); 
-        }
-        else if(vida == (vidainicial * 5 / 10))
-        {
+            this.faseCinco();
+        } else if (vida == (vidainicial * 5 / 10)) {
             this.fase = 6;
-            this.faseSeis(); 
-        }
-        else if(vida == (vidainicial * 4 / 10))
-        { 
+            this.faseSeis();
+        } else if (vida == (vidainicial * 4 / 10)) {
             this.fase = 7;
-            this.faseSiete(); 
-        }
-        else if(vida == (vidainicial * 3 / 10))
-        { 
+            this.faseSiete();
+        } else if (vida == (vidainicial * 3 / 10)) {
             this.fase = 8;
-            this.faseOcho(); 
-        }
-        else if(vida == (vidainicial * 2 / 10))
-        { 
+            this.faseOcho();
+        } else if (vida == (vidainicial * 2 / 10)) {
             this.fase = 9;
-            this.faseNueve(); 
-        }  
-        else if(vida == (vidainicial * 1 / 10))
-        { 
+            this.faseNueve();
+        } else if (vida == (vidainicial * 1 / 10)) {
             this.fase = 10;
-            this.faseDiez(); 
+            this.faseDiez();
         }
-        
-        Gdx.app.log("FASE","El carcelero esta en fase " + this.fase);
-    }     
-    
+
+        Gdx.app.log("FASE", "El carcelero esta en fase " + this.fase);
+    }
+
     protected abstract void faseDos();
+
     protected abstract void faseTres();
+
     protected abstract void faseCuatro();
+
     protected abstract void faseCinco();
+
     protected abstract void faseSeis();
+
     protected abstract void faseSiete();
+
     protected abstract void faseOcho();
+
     protected abstract void faseNueve();
+
     protected abstract void faseDiez();
 }

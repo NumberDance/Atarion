@@ -2,6 +2,7 @@ package com.atarion.game.entidad.jugador.maquina;
 
 import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.objeto.ProyectilBrutus;
+import com.atarion.game.interfaz.escena.Escena;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -77,8 +78,8 @@ public class Brutus extends Maquina {
     }
 
     @Override
-    public void jugar(Camera camara) {
-        super.jugar(camara);
+    public void jugar(Camera camara, Escena escena) {
+        super.jugar(camara,escena);
 
         this.proyectiles.stream()
                 .forEach(proyectil -> {
@@ -137,7 +138,7 @@ public class Brutus extends Maquina {
     }
 
     @Override
-    public void controlBordes() {
+    public void controlBordes(Escena escena) {
         if (this.y < 0) {
             this.y = 0;
             this.perseguir();

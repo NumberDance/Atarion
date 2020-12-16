@@ -3,6 +3,7 @@ package com.atarion.game.entidad.jugador.humano.trench;
 import com.atarion.game.entidad.jugador.humano.Humano;
 import com.atarion.game.entidad.objeto.Objeto;
 import com.atarion.game.entidad.objeto.ProyectilTrench;
+import com.atarion.game.interfaz.escena.Escena;
 import com.atarion.game.interfaz.escena.online.MensajeJSON;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -62,8 +63,8 @@ public abstract class Trench extends Humano {
     }
 
     @Override
-    public void jugar(Camera camara) {
-        super.jugar(camara);
+    public void jugar(Camera camara, Escena escena) {
+        super.jugar(camara, escena);
 
         if (proyectil != null) {
             proyectil.lanzar();

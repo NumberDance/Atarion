@@ -5,9 +5,12 @@ import com.atarion.game.entidad.jugador.Direccion;
 import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.entidad.objeto.Objeto;
 import com.atarion.game.entidad.objeto.recuperables.memoria.Secuencia;
+import com.atarion.game.interfaz.escena.Escena;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import java.util.Iterator;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +23,7 @@ public abstract class Humano extends Jugador {
     protected ClaseHumano clase = null;
     protected Secuencia secuencia;
     protected boolean gusto, oido, olfato, vista, tacto;
+    protected String dialogo;
 
     public Humano(boolean tu, boolean batalla) {
         super(batalla);
@@ -35,6 +39,9 @@ public abstract class Humano extends Jugador {
         if (habilidad != null) {
             habilidad.actualizarEstado();
         }
+        if (dialogo != null) {
+            this.texto.draw(genesis, dialogo, x, y);
+        }
     }
 
     @Override
@@ -45,13 +52,13 @@ public abstract class Humano extends Jugador {
     // Solo se hacen cosas con el jugador activo de cada cliente, el resto
     // actualiza estados
     @Override
-    public void jugar(Camera camara) {
+    public void jugar(Camera camara, Escena escena) {
         if (tu) {
-            super.jugar(camara);
+            super.jugar(camara, escena);
 
             this.controlMovimientoTu(camara);
             this.controlEspecial();
-            this.controlBordes();
+            this.controlBordes(escena);
         }
     }
 
@@ -208,41 +215,51 @@ public abstract class Humano extends Jugador {
     }
 
     @Override
-    protected void controlBordes() {
+    protected void controlBordes(Escena escena) {
         if (this.y < 0) {
             this.y = 0;
         }
 
-        if (this.y > Gdx.graphics.getHeight() - 25) {
-            this.y = Gdx.graphics.getHeight() - 25;
+        if (this.y > escena.getTotalHeight() - 25) {
+            this.y = escena.getTotalHeight() - 25;
         }
 
         if (this.x < 0) {
             this.x = 0;
         }
 
-        if (this.x > Gdx.graphics.getWidth() - 85) {
-            this.x = Gdx.graphics.getWidth() - 85;
+        if (this.x > escena.getTotalWidth() - 85) {
+            this.x = escena.getTotalWidth() - 85;
         }
     }
 
-    /*private void conversar(Jugador jugador) {
-        this.texto = new BitmapFont();
-        this.texto.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-        this.texto.getData().setScale(2f);
+    @Override
+    public void colisionJugador(Jugador jugador) {
+        if (tu && !this.batalla) {
+            this.texto = new BitmapFont();
+            this.texto.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+            this.texto.getData().setScale(1f);
 
-        this.texto.draw(genesis, jugador.getConversacion(), x, y);
-    }*/
+            Iterator<String> conversaciones = jugador.getConversacion().iterator();
+            if (this.dialogo == null) {
+                this.dialogo = jugador.getConversacion().get(0);
+            } else {
+                while (conversaciones.hasNext()) {
+                    if (conversaciones.next().equals(this.dialogo)) {
+                        this.dialogo = conversaciones.hasNext()
+                                ? conversaciones.next()
+                                : null;
+                    }
+                }
+            }
+        }
+    }
 
     // No se hace nada con el control de movimiento y colisiones si 
     // no se trata del jugador humano activo, el resto de jugadores del online
     // se encargan de actualizar sus estados a través del hilo cliente.
     @Override
     protected void controlMovimiento() {
-    }
-
-    @Override
-    public void colisionJugador(Jugador jugador) {
     }
 
     @Override

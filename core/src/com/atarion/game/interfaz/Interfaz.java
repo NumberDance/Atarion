@@ -7,16 +7,21 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import lombok.Getter;
 
+@Getter
 public abstract class Interfaz implements Screen {
 
     protected OrthographicCamera camara = null;
     protected SpriteBatch genesis = null;
     protected Music tema = null;
     protected Interfaz control = null;
-    protected Texture fondo = new Texture(Gdx.files.internal("fondo.jpg"));
+    protected Texture nuevoFondo = new Texture(Gdx.files.internal("fondo.jpg")),
+            fondoMostrado = new Texture(Gdx.files.internal("fondo.jpg"));
     protected int cameraWidth = Gdx.graphics.getWidth(),
-            cameraHeight = Gdx.graphics.getHeight();
+            cameraHeight = Gdx.graphics.getHeight(),
+            totalWidth = cameraWidth,
+            totalHeight = cameraHeight;
 
     @Override
     public void show() {
@@ -58,7 +63,11 @@ public abstract class Interfaz implements Screen {
         genesis.setProjectionMatrix(camara.combined);
 
         genesis.begin();
-        genesis.draw(fondo, 0, 0, this.cameraWidth, this.cameraHeight);
+        
+        this.fondoMostrado = null;
+        this.fondoMostrado = this.nuevoFondo;
+        genesis.draw(fondoMostrado, 0, 0, this.totalWidth, this.totalHeight);
+        
         genesis.end();
     }
 
