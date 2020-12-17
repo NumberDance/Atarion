@@ -1,0 +1,13 @@
+[
+    {
+        "nombre": "Golden castle of Stromberg",
+        "fondo": "textures/CastleOfStromberg.png",
+        "ruta": 
+        [
+            { "direccion": "ARRIBA" },
+            { "direccion": "ARRIBA" },
+            { "direccion": "ARRIBA" },
+            { "direccion": "ABAJO" }
+        ]
+    }
+]

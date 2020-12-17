@@ -21,7 +21,7 @@ public abstract class Proyectil extends Objeto
     
     public Proyectil(Batch genesis, float x, float y, float direccionx, float direcciony)
     {
-        super(genesis,new Texture(Gdx.files.internal("proyectile.png")),10);
+        super(genesis,new Texture(Gdx.files.internal("textures/proyectile.png")),10);
         
         this.width = 100;
         this.height = 100;
@@ -33,7 +33,7 @@ public abstract class Proyectil extends Objeto
     }
     public Proyectil(Batch genesis, String estado)
     {
-        super(genesis,new Texture(Gdx.files.internal("proyectile.png")),10);
+        super(genesis,new Texture(Gdx.files.internal("textures/proyectile.png")),10);
         
         JSONObject objeto = new JSONObject(new JSONTokener(estado));
         this.x = objeto.getFloat("x");

@@ -15,7 +15,7 @@ public class Escombro extends Objeto
     
     public Escombro(Batch genesis) 
     {       
-        super(genesis,new Texture(Gdx.files.internal("debris.png")),200);
+        super(genesis,new Texture(Gdx.files.internal("textures/debris.png")),200);
         
         this.x = (float) (Math.random() * 1000 + 1);
         this.y = 800 + 100;

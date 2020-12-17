@@ -20,7 +20,7 @@ public class Brutus extends Maquina {
     public Brutus(boolean batalla) {
         super(batalla);
 
-        this.textura = new Texture(Gdx.files.internal("brutus.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/brutus.png"));
         this.fuerza *= 4;
         this.velocidad /= 2;
     }
@@ -162,7 +162,7 @@ public class Brutus extends Maquina {
 
     @Override
     public void activarEspecial() {
-        this.textura = new Texture(Gdx.files.internal("hunt.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/hunt.png"));
 
         this.enemigos.stream().forEach(enemigo -> {
             proyectiles.add(new ProyectilBrutus(genesis, 50, 50, enemigo.getX(), enemigo.getY()));
@@ -177,7 +177,7 @@ public class Brutus extends Maquina {
 
     @Override
     public void desactivarEspecial() {
-        this.textura = new Texture(Gdx.files.internal("brutus.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/brutus.png"));
         this.proyectiles.clear();
 
         this.perseguir();

@@ -12,7 +12,7 @@ public class HabilidadGeneric extends Habilidad
     public HabilidadGeneric(Batch genesis, Jugador jugador)
     {
         super(genesis, jugador);
-        this.textura = new Texture(Gdx.files.internal("genericspecial.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/genericspecial.png"));
     }
     
     

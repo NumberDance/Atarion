@@ -14,7 +14,7 @@ public class Traveler extends Wheel
         super(tu,batalla);
         
         this.clase = ClaseHumano.TRAVELER;
-        this.textura = new Texture(Gdx.files.internal("traveler.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/traveler.png"));
     }
 
     

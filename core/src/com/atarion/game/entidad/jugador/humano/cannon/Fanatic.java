@@ -5,7 +5,6 @@ import com.atarion.game.entidad.habilidad.HabilidadFanatic;
 import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 
 
 public class Fanatic extends Cannon
@@ -15,7 +14,7 @@ public class Fanatic extends Cannon
         super(tu,batalla);
         
         this.clase = ClaseHumano.FANATIC;
-        this.textura = new Texture(Gdx.files.internal("fanatic.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/fanatic.png"));
     }
 
     

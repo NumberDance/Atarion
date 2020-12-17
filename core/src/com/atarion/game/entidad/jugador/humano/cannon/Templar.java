@@ -15,7 +15,7 @@ public class Templar extends Cannon
         super(tu,batalla);
         
         this.clase = ClaseHumano.TEMPLAR;
-        this.textura = new Texture(Gdx.files.internal("templar.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/templar.png"));
     }
     
     

@@ -5,7 +5,6 @@ import com.atarion.game.entidad.jugador.Jugador;
 import com.atarion.game.interfaz.escena.Escena;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 
 
 public class Dummy extends Maquina
@@ -15,7 +14,7 @@ public class Dummy extends Maquina
         super(batalla);
         this.y = 400;
         
-        this.textura = new Texture(Gdx.files.internal("dummy.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/dummy.png"));
         this.vida = 999999999;
         this.fuerza = 0;
     }

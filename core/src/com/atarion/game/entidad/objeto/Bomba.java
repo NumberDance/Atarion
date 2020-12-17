@@ -14,7 +14,7 @@ public class Bomba extends Objeto
     
     public Bomba(Batch genesis, float x, float y) 
     {
-        super(genesis,new Texture(Gdx.files.internal("bomb3.png")),10);
+        super(genesis,new Texture(Gdx.files.internal("textures/bomb3.png")),10);
         
         this.dureza = 0;
         
@@ -41,13 +41,13 @@ public class Bomba extends Objeto
         switch(cuenta)
         {
             case 3:
-                this.textura = new Texture(Gdx.files.internal("bomb3.png"));
+                this.textura = new Texture(Gdx.files.internal("textures/bomb3.png"));
             break;
             case 2:
-                this.textura = new Texture(Gdx.files.internal("bomb2.png"));
+                this.textura = new Texture(Gdx.files.internal("textures/bomb2.png"));
             break;
             case 1:
-                this.textura = new Texture(Gdx.files.internal("bomb1.png"));
+                this.textura = new Texture(Gdx.files.internal("textures/bomb1.png"));
             break;
             case 0:
                 this.x -= 200;
@@ -57,7 +57,7 @@ public class Bomba extends Objeto
                 this.height += 300;
                 
                 this.dureza = 100;        
-                this.textura = new Texture(Gdx.files.internal("bomboff.png"));
+                this.textura = new Texture(Gdx.files.internal("textures/bomboff.png"));
             break;
         }
     }

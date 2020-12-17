@@ -13,7 +13,7 @@ public class DummyWheel extends Wheel
         super(true,true);
         
         this.clase = ClaseHumano.DUMMYWHEEL;
-        this.textura = new Texture(Gdx.files.internal("dummywheel.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/dummywheel.png"));
         
         this.vida = 999999999;
         this.fuerza = 0;

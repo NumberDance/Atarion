@@ -15,7 +15,7 @@ public class Guardian extends Trench
         super(tu,batalla);
         
         this.clase = ClaseHumano.GUARDIAN;
-        this.textura = new Texture(Gdx.files.internal("guardian.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/guardian.png"));
     }
     
     

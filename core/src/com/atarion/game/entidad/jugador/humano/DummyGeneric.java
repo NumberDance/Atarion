@@ -11,7 +11,7 @@ public class DummyGeneric extends Humano
     public DummyGeneric()
     {
         super(true,true);
-        this.textura = new Texture(Gdx.files.internal("dummygeneric.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/dummygeneric.png"));
         
         this.vida = 999999999;
         this.fuerza = 0;

@@ -13,7 +13,7 @@ public class DummyTrench extends Trench
         super(true,true);
         
         this.clase = ClaseHumano.DUMMYTRENCH;
-        this.textura = new Texture(Gdx.files.internal("dummytrench.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/dummytrench.png"));
         
         this.vida = 999999999;
         this.fuerza = 0;

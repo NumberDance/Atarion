@@ -19,7 +19,7 @@ public class ProyectilTrench extends Proyectil
     }
     private void parametrosIniciales()
     {
-        this.textura = new Texture(Gdx.files.internal("proyectiletrench.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/proyectiletrench.png"));
         this.dureza = 5;
         this.velocidad *= 2;
         

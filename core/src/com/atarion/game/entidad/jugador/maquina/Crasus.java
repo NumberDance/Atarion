@@ -16,7 +16,7 @@ public class Crasus extends Maquina {
 
     private boolean colision = false, colisionbomba = false;
     private float temporizador = 0f;
-    private HashSet<Entidad> bombas = new HashSet<Entidad>();
+    private final HashSet<Entidad> bombas = new HashSet<>();
 
     public Crasus(boolean batalla) {
         super(batalla);
@@ -24,7 +24,7 @@ public class Crasus extends Maquina {
         this.vidainicial *= 4;
         this.vida *= this.vidainicial;
 
-        this.textura = new Texture(Gdx.files.internal("crasus.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/crasus.png"));
     }
 
     @Override
@@ -163,7 +163,7 @@ public class Crasus extends Maquina {
 
     @Override
     public void activarEspecial() {
-        this.textura = new Texture(Gdx.files.internal("control.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/control.png"));
 
         //A veces te amaga y no te invierte los controles 
         int probabilidad = (int) (Math.random() * 4 + 1);
@@ -198,7 +198,7 @@ public class Crasus extends Maquina {
 
     @Override
     public void desactivarEspecial() {
-        this.textura = new Texture(Gdx.files.internal("crasus.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/crasus.png"));
 
         this.enemigos.stream().forEach(enemigo -> {
             ((Humano) enemigo).setInvertido(false);

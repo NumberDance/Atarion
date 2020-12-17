@@ -20,7 +20,7 @@ public class Anarchist extends Cannon {
         super(tu, batalla);
         
         this.clase = ClaseHumano.ANARCHIST;
-        this.textura = new Texture(Gdx.files.internal("anarchist.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/anarchist.png"));
     }
     
     @Override

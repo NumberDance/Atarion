@@ -1,22 +1,56 @@
 package com.atarion.game.interfaz.escena.mundo;
 
 import com.atarion.game.Atarion;
+import com.atarion.game.entidad.jugador.Direccion;
 import com.atarion.game.entidad.jugador.humano.Yo;
 import com.atarion.game.entidad.jugador.maquina.Brutus;
 import com.atarion.game.entidad.jugador.maquina.Maquina;
 import com.atarion.game.interfaz.escena.Escena;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.google.gson.Gson;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
+import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Mundo extends Escena {
 
-    Mundo arriba, abajo, izquierda, derecha;
-    boolean moverArriba, moverAbajo, moverIzquierda, moverDerecha;
+    protected Direccion sentidoNavegacion = Direccion.PARADO;
 
-    final int bordeNavegacion = 50;
-    BitmapFont textoNavegacion = new BitmapFont();
+    protected final int bordeNavegacion = 50;
+    protected BitmapFont textoNavegacion = new BitmapFont();
+
+    protected List<Lugar> lugares = new ArrayList<>();
+    protected List<Direccion> navegacion;
+
+    @Getter
+    class Lugar {
+
+        String nombre, fondo;
+        Ruta[] ruta;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    class Ruta {
+
+        Direccion direccion;
+    }
 
     public Mundo() {
         this.batalla = false;
@@ -24,7 +58,13 @@ public class Mundo extends Escena {
         this.totalWidth += 400;
         this.totalHeight += 200;
 
-        this.randomizarMundo();
+        try {
+            File file = Gdx.files.internal("data/lugares.json").file();
+            this.lugares = Arrays.asList(new Gson()
+                    .fromJson(new String(Files.readAllBytes(file.toPath())), Lugar[].class));
+        } catch (IOException ex) {
+            Logger.getLogger(Mundo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void randomizarMundo() {
@@ -36,7 +76,7 @@ public class Mundo extends Escena {
             yo.getConversacion().add("Salgo con el 30% de  probabilidad, soy raro");
             yo.getConversacion().add("Un consejo, no te tomes a ti mismo en serio demasiado. Adios");
             yo.y += 300;
-            
+
             this.humanosAliados.add(yo);
         }
 
@@ -46,7 +86,7 @@ public class Mundo extends Escena {
             brutus.getConversacion().add("Sus via crujir viiivos");
             brutus.getConversacion().add("A toos");
             brutus.x += 300;
-            
+
             this.maquinasEnemigas.add(brutus);
         }
     }
@@ -58,70 +98,83 @@ public class Mundo extends Escena {
         this.genesis.begin();
 
         if (tu.x >= this.totalWidth - bordeNavegacion) {
-            this.moverIzquierda = true;
+            this.sentidoNavegacion = Direccion.IZQUIERDA;
             this.textoNavegacion.draw(genesis,
                     "Pulsa C para ira la zona de la izquierda",
                     tu.getX(),
                     tu.getY());
         } else if (tu.x <= bordeNavegacion) {
-            this.moverDerecha = true;
+            this.sentidoNavegacion = Direccion.DERECHA;
             this.textoNavegacion.draw(genesis,
                     "Pulsa C para ira la zona de la derecha",
                     tu.getX(),
                     tu.getY());
         } else if (tu.y >= this.totalHeight - bordeNavegacion) {
-            this.moverArriba = true;
+            this.sentidoNavegacion = Direccion.ARRIBA;
             this.textoNavegacion.draw(genesis,
                     "Pulsa C para ir a la zona de arriba",
                     tu.getX(),
                     tu.getY());
         } else if (tu.y <= bordeNavegacion) {
-            this.moverAbajo = true;
+            this.sentidoNavegacion = Direccion.ABAJO;
             this.textoNavegacion.draw(genesis,
                     "Pulsa C para ira la zona de abajo",
                     tu.getX(),
                     tu.getY());
         } else {
-            this.moverIzquierda = false;
-            this.moverDerecha = false;
-            this.moverArriba= false;
-            this.moverAbajo = false;
-            
+            this.sentidoNavegacion = null;
             this.textoNavegacion = new BitmapFont();
         }
 
         this.genesis.end();
+        this.navegar();
+    }
 
+    private void navegar() {
         if (Gdx.input.isKeyPressed(Input.Keys.C)) {
-            if (this.moverDerecha) {
-                derecha = new Mundo();
-                derecha.setTu(tu);
-                
-                Atarion.getInstance().setScreen(this.derecha);
-                this.textoNavegacion.dispose();
-                this.dispose();
-            } else if (this.moverIzquierda) {
-                izquierda = new Mundo();
-                izquierda.setTu(tu);
-                
-                Atarion.getInstance().setScreen(this.izquierda);
-                this.textoNavegacion.dispose();
-                this.dispose();
-            } else if (this.moverArriba) {
-                arriba = new Mundo();
-                arriba.setTu(tu);
-                
-                Atarion.getInstance().setScreen(this.arriba);
-                this.textoNavegacion.dispose();
-                this.dispose();
-            } else if (this.moverAbajo) {
-                abajo = new Mundo();
-                abajo.setTu(tu);
-                
-                Atarion.getInstance().setScreen(this.abajo);
-                this.textoNavegacion.dispose();
-                this.dispose();
+            switch (this.sentidoNavegacion) {
+                case DERECHA:
+                case IZQUIERDA:
+                case ARRIBA:
+                case ABAJO:
+                    this.navegarLocalizacion(this.sentidoNavegacion);
+                    break;
             }
         }
+    }
+
+    private void navegarLocalizacion(Direccion direccion) {
+        this.navegacion = navegacion == null
+                ? new ArrayList<>()
+                : navegacion;
+        this.navegacion.add(direccion);
+
+        List<Lugar> triangulado = lugares.stream()
+                .filter(lugar -> {
+                    List<Direccion> direccionesRuta = Arrays.asList(lugar.getRuta()).stream()
+                            .map(ruta -> ruta.getDireccion())
+                            .collect(Collectors.toList());
+
+                    return navegacion.equals(direccionesRuta);
+                })
+                .collect(Collectors.toList());
+
+        if (triangulado.isEmpty()) {
+            Mundo random = new Mundo();
+            random.setTu(tu);
+            random.setNavegacion(navegacion);
+
+            Atarion.getInstance().setScreen(random);
+        } else {
+            Mundo localizacion = new Mundo();
+            localizacion.setTu(tu);
+            localizacion.setNuevoFondo(new Texture(Gdx.files.internal(triangulado.get(0).getFondo())));
+            localizacion.setFondoMostrado(new Texture(Gdx.files.internal(triangulado.get(0).getFondo())));
+
+            Atarion.getInstance().setScreen(localizacion);
+        }
+
+        this.textoNavegacion.dispose();
+        this.dispose();
     }
 }

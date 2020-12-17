@@ -12,7 +12,7 @@ public class HabilidadFanatic extends Habilidad
     public HabilidadFanatic(Batch genesis, Jugador jugador)
     {
         super(genesis, jugador);
-        this.textura = new Texture(Gdx.files.internal("fanaticbomb.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/fanaticbomb.png"));
         
         jugador.setFuerza(150);
     }

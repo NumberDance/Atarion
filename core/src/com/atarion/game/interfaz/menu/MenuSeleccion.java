@@ -1,8 +1,6 @@
 package com.atarion.game.interfaz.menu;
 
-import com.atarion.game.Atarion;
 import com.atarion.game.entidad.jugador.humano.ClaseHumano;
-import com.atarion.game.entidad.jugador.humano.Humano;
 import com.atarion.game.interfaz.escena.Escena;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -29,15 +27,15 @@ public class MenuSeleccion extends Menu
         this.numeros.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         this.numeros.getData().setScale(1.5f);
         
-        this.templar = new Texture(Gdx.files.internal("templar.png"));
-        this.fanatic = new Texture(Gdx.files.internal("fanatic.png"));
-        this.anarchist = new Texture(Gdx.files.internal("anarchist.png"));
-        this.traveler = new Texture(Gdx.files.internal("traveler.png"));
-        this.merchant = new Texture(Gdx.files.internal("merchant.png"));
-        this.visionary = new Texture(Gdx.files.internal("visionary.png"));
-        this.guardian = new Texture(Gdx.files.internal("guardian.png"));
-        this.benefactor = new Texture(Gdx.files.internal("benefactor.png"));
-        this.avenger = new Texture(Gdx.files.internal("avenger.png"));
+        this.templar = new Texture(Gdx.files.internal("textures/templar.png"));
+        this.fanatic = new Texture(Gdx.files.internal("textures/fanatic.png"));
+        this.anarchist = new Texture(Gdx.files.internal("textures/anarchist.png"));
+        this.traveler = new Texture(Gdx.files.internal("textures/traveler.png"));
+        this.merchant = new Texture(Gdx.files.internal("textures/merchant.png"));
+        this.visionary = new Texture(Gdx.files.internal("textures/visionary.png"));
+        this.guardian = new Texture(Gdx.files.internal("textures/guardian.png"));
+        this.benefactor = new Texture(Gdx.files.internal("textures/benefactor.png"));
+        this.avenger = new Texture(Gdx.files.internal("textures/avenger.png"));
     }
     
     

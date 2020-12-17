@@ -26,14 +26,14 @@ public class Claudius extends Maquina {
         super(batalla);
 
         this.velocidad *= 4;
-        this.textura = new Texture(Gdx.files.internal("claudius.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/claudius.png"));
         this.tiempoactivo = 20;
         this.y = 300;
 
-        this.escombros = new Texture(Gdx.files.internal("endurancedebris.png"));
-        this.bordes = new Texture(Gdx.files.internal("enduranceborders.png"));
-        this.el = new Texture(Gdx.files.internal("endurancehimself.png"));
-        this.ninguno = new Texture(Gdx.files.internal("claudius.png"));
+        this.escombros = new Texture(Gdx.files.internal("textures/endurancedebris.png"));
+        this.bordes = new Texture(Gdx.files.internal("textures/enduranceborders.png"));
+        this.el = new Texture(Gdx.files.internal("textures/endurancehimself.png"));
+        this.ninguno = new Texture(Gdx.files.internal("textures/claudius.png"));
     }
 
     @Override
@@ -200,13 +200,13 @@ public class Claudius extends Maquina {
         int probabilidad = (int) (Math.random() * 3 + 1);
         switch (probabilidad) {
             case 1:
-                laser = new Laser(genesis, "laserdebris.png", this);
+                laser = new Laser(genesis, "textures/laserdebris.png", this);
                 break;
             case 2:
-                laser = new Laser(genesis, "laserborder.png", this);
+                laser = new Laser(genesis, "textures/laserborder.png", this);
                 break;
             case 3:
-                laser = new Laser(genesis, "laserhimself.png", this);
+                laser = new Laser(genesis, "textures/laserhimself.png", this);
                 break;
         }
     }

@@ -3,7 +3,6 @@ package com.atarion.game.entidad.jugador.humano.wheel;
 
 import com.atarion.game.entidad.jugador.humano.Humano;
 import com.atarion.game.interfaz.escena.Escena;
-import com.badlogic.gdx.Gdx;
 
 
 public abstract class Wheel extends Humano

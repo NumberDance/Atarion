@@ -8,16 +8,18 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public abstract class Interfaz implements Screen {
 
     protected OrthographicCamera camara = null;
     protected SpriteBatch genesis = null;
     protected Music tema = null;
     protected Interfaz control = null;
-    protected Texture nuevoFondo = new Texture(Gdx.files.internal("fondo.jpg")),
-            fondoMostrado = new Texture(Gdx.files.internal("fondo.jpg"));
+    protected Texture nuevoFondo = new Texture(Gdx.files.internal("textures/fondo.jpg")),
+            fondoMostrado = new Texture(Gdx.files.internal("textures/fondo.jpg"));
     protected int cameraWidth = Gdx.graphics.getWidth(),
             cameraHeight = Gdx.graphics.getHeight(),
             totalWidth = cameraWidth,

@@ -28,7 +28,7 @@ public class MenuPrincipal extends Menu
         tema = null;//Gdx.audio.newMusic(Gdx.files.internal("exploring.mp3"));
         //tema.setLooping(true);
                 
-        logo = new Texture(Gdx.files.internal("logo.png"));
+        logo = new Texture(Gdx.files.internal("textures/logo.png"));
         texto = new BitmapFont();
     }
     
@@ -71,22 +71,22 @@ public class MenuPrincipal extends Menu
     {
         if(Gdx.input.isKeyPressed(Input.Keys.A)) 
         {
-            Texture analisis = new Texture(Gdx.files.internal("crasusanalysis.png"));
+            Texture analisis = new Texture(Gdx.files.internal("textures/crasusanalysis.png"));
             Atarion.getInstance().setScreen(new MenuSeleccion(new EscenaCrasus(),analisis)); 
         }
         else if(Gdx.input.isKeyPressed(Input.Keys.B))
         {
-            Texture analisis = new Texture(Gdx.files.internal("brutusanalysis.png"));
+            Texture analisis = new Texture(Gdx.files.internal("textures/brutusanalysis.png"));
             Atarion.getInstance().setScreen(new MenuSeleccion(new EscenaBrutus(),analisis)); 
         }
         else if(Gdx.input.isKeyPressed(Input.Keys.C))
         {
-            Texture analisis = new Texture(Gdx.files.internal("claudiusanalysis.png"));
+            Texture analisis = new Texture(Gdx.files.internal("textures/claudiusanalysis.png"));
             Atarion.getInstance().setScreen(new MenuSeleccion(new EscenaClaudius(),analisis)); 
         }
         else if(Gdx.input.isKeyPressed(Input.Keys.D))
         { 
-            Texture analisis = new Texture(Gdx.files.internal("logo.png"));
+            Texture analisis = new Texture(Gdx.files.internal("textures/logo.png"));
             Atarion.getInstance().setScreen(new MenuSeleccion(new EscenaCliente(),analisis));
         }
         else if(Gdx.input.isKeyPressed(Input.Keys.E))

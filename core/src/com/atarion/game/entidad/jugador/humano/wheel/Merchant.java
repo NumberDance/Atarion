@@ -2,7 +2,6 @@ package com.atarion.game.entidad.jugador.humano.wheel;
 
 
 import com.atarion.game.entidad.jugador.humano.ClaseHumano;
-import com.badlogic.gdx.graphics.g2d.Batch;
 
 
 public class Merchant extends Wheel

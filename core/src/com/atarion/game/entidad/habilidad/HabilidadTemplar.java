@@ -12,7 +12,7 @@ public class HabilidadTemplar extends Habilidad
     public HabilidadTemplar(Batch genesis, Jugador jugador) 
     {
         super(genesis,jugador);
-        this.textura = new Texture(Gdx.files.internal("templarsword.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/templarsword.png"));
     }
     
     

@@ -63,17 +63,17 @@ public class MenuDerrota extends Menu
     {
         if(Gdx.input.isKeyPressed(Input.Keys.A)) 
         {
-            Texture analisis = new Texture(Gdx.files.internal("crasusanalysis.png"));
+            Texture analisis = new Texture(Gdx.files.internal("textures/crasusanalysis.png"));
             Atarion.getInstance().setScreen(new MenuSeleccion(new EscenaCrasus(),analisis)); 
         }
         else if(Gdx.input.isKeyPressed(Input.Keys.B))
         {
-            Texture analisis = new Texture(Gdx.files.internal("brutusanalysis.png"));
+            Texture analisis = new Texture(Gdx.files.internal("textures/brutusanalysis.png"));
             Atarion.getInstance().setScreen(new MenuSeleccion(new EscenaBrutus(),analisis)); 
         }
         else if(Gdx.input.isKeyPressed(Input.Keys.C))
         {
-            Texture analisis = new Texture(Gdx.files.internal("claudiusanalysis.png"));
+            Texture analisis = new Texture(Gdx.files.internal("textures/claudiusanalysis.png"));
             Atarion.getInstance().setScreen(new MenuSeleccion(new EscenaClaudius(),analisis)); 
         }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))

@@ -4,7 +4,6 @@ package com.atarion.game.entidad.jugador.humano.cannon;
 import com.atarion.game.entidad.jugador.humano.ClaseHumano;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 
 
 public class DummyCannon extends Cannon
@@ -14,7 +13,7 @@ public class DummyCannon extends Cannon
         super(true,true);
         
         this.clase = ClaseHumano.DUMMYCANNON;
-        this.textura = new Texture(Gdx.files.internal("dummycannon.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/dummycannon.png"));
         
         this.vida = 999999999;
         this.fuerza = 0;
