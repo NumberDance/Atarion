@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -43,6 +42,7 @@ public class Mundo extends Escena {
 
         String nombre, fondo;
         Ruta[] ruta;
+        Entidad[] jugadoresAliados;
     }
 
     @Getter
@@ -50,6 +50,17 @@ public class Mundo extends Escena {
     class Ruta {
 
         Direccion direccion;
+    }
+    
+    @Getter
+    @AllArgsConstructor
+    class Entidad {
+
+        Class clase;
+        float x,y;
+        boolean batalla;
+        int ratio;
+        String [] conversacion;
     }
 
     public Mundo() {
@@ -97,16 +108,16 @@ public class Mundo extends Escena {
 
         this.genesis.begin();
 
-        if (tu.x >= this.totalWidth - bordeNavegacion) {
-            this.sentidoNavegacion = Direccion.IZQUIERDA;
-            this.textoNavegacion.draw(genesis,
-                    "Pulsa C para ira la zona de la izquierda",
-                    tu.getX(),
-                    tu.getY());
-        } else if (tu.x <= bordeNavegacion) {
+        if (tu.x >= this.totalWidth - bordeNavegacion - 50) {
             this.sentidoNavegacion = Direccion.DERECHA;
             this.textoNavegacion.draw(genesis,
                     "Pulsa C para ira la zona de la derecha",
+                    tu.getX(),
+                    tu.getY());
+        } else if (tu.x <= bordeNavegacion) {
+            this.sentidoNavegacion = Direccion.IZQUIERDA;
+            this.textoNavegacion.draw(genesis,
+                    "Pulsa C para ira la zona de la izquierda",
                     tu.getX(),
                     tu.getY());
         } else if (tu.y >= this.totalHeight - bordeNavegacion) {
@@ -148,6 +159,8 @@ public class Mundo extends Escena {
                 ? new ArrayList<>()
                 : navegacion;
         this.navegacion.add(direccion);
+        
+        //Gdx.app.log("NAV", Arrays.toString(this.navegacion.toArray()));
 
         List<Lugar> triangulado = lugares.stream()
                 .filter(lugar -> {
@@ -159,15 +172,19 @@ public class Mundo extends Escena {
                 })
                 .collect(Collectors.toList());
 
+        //TODO: El entrar() reemplaza el estado por una copia nueva, cambiarlo.
         if (triangulado.isEmpty()) {
             Mundo random = new Mundo();
             random.setTu(tu);
+            random.entrar(tu.getClase());
             random.setNavegacion(navegacion);
+            random.randomizarMundo();
 
             Atarion.getInstance().setScreen(random);
         } else {
             Mundo localizacion = new Mundo();
             localizacion.setTu(tu);
+            localizacion.entrar(tu.getClase());
             localizacion.setNuevoFondo(new Texture(Gdx.files.internal(triangulado.get(0).getFondo())));
             localizacion.setFondoMostrado(new Texture(Gdx.files.internal(triangulado.get(0).getFondo())));
 

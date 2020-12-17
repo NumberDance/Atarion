@@ -4,10 +4,21 @@
         "fondo": "textures/CastleOfStromberg.png",
         "ruta": 
         [
-            { "direccion": "ARRIBA" },
-            { "direccion": "ARRIBA" },
-            { "direccion": "ARRIBA" },
             { "direccion": "ABAJO" }
+        ],
+        "jugadoresAliados":
+        [
+            {
+                "class": "Yo",
+                "x": "0",
+                "y": "300",
+                "batalla": false,
+                "ratio": "100",
+                "conversacion": [
+                    "Hola, este es el mundo abierto de Atarion",
+                    "Un consejo, no te tomes a ti mismo en serio demasiado. Adios"
+                ]
+            }
         ]
     }
 ]

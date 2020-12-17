@@ -13,6 +13,6 @@ public class Yo extends Templar {
 
     public Yo(boolean tu, boolean batalla) {
         super(tu, batalla);
-        this.textura = new Texture(Gdx.files.internal("me.png"));
+        this.textura = new Texture(Gdx.files.internal("textures/me.png"));
     }
 }
